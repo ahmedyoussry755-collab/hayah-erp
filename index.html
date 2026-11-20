@@ -3,34 +3,37 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<meta name="theme-color" content="#102D40" />
+<meta name="theme-color" content="#181B22" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="حياة ERP" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="icon-192.png" />
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <title>حياة ERP السحابي — المكتب العربي للتشييد والبناء (A.O.B.C)</title>
 <style>
   :root {
-    --navy: #102D40;
-    --navy-mid: #1B435D;
-    --gold: #C39B43;
-    --gold-soft: #FBF5E6;
-    --plum: #722D74;
-    --plum-soft: #F5ECF6;
-    --lime: #9ACA3B;
+    --navy: #181B22;
+    --navy-mid: #2B2F38;
+    --gold: #E28347;
+    --gold-soft: #FDF2EA;
+    --plum: #3B414F;
+    --plum-soft: #ECEEF2;
+    --lime: #8BC34A;
     --lime-soft: #EEF7DC;
-    --bg: #F4F7FA;
+    --bg: #F4F1EC;
     --card: #FFFFFF;
-    --border: #CBD5E1;
-    --text: #0F172A;
-    --muted: #475569;
-    --red: #B91C1C;
+    --border: #DBD5CC;
+    --text: #181B22;
+    --muted: #5A606D;
+    --red: #C53030;
     --red-soft: #FEE2E2;
-    --amber: #B45309;
+    --amber: #C05621;
     --amber-soft: #FEF3C7;
     --green: #15803D;
     --green-soft: #DCFCE7;
-    --shadow: 0 4px 14px rgba(16,45,64,0.08);
+    --shadow: 0 4px 16px rgba(24,27,34,0.09);
     --radius: 12px;
   }
   * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
@@ -538,6 +541,268 @@
     .live-telemetry, .tools-wrap { display: none !important; }
   }
 
+
+  /* ==================== V5.0: GLOBAL SEARCH (CTRL+K), S-CURVE, BUILDING MATRIX & A4 STATEMENT ==================== */
+  .gs-overlay {
+    position: fixed; inset: 0; background: rgba(11,21,33,0.68); backdrop-filter: blur(4px);
+    display: none; align-items: flex-start; justify-content: center; padding: 64px 16px 24px; z-index: 420;
+  }
+  .gs-overlay.open { display: flex; }
+  .gs-box {
+    background: var(--card); color: var(--text); width: 100%; max-width: 640px; border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45); border: 1px solid var(--gold); overflow: hidden;
+  }
+  .gs-head {
+    display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+    border-bottom: 1px solid var(--border); background: var(--bg);
+  }
+  .gs-head input {
+    flex: 1; border: none; outline: none; background: transparent; color: var(--text);
+    font-size: 14.5px; font-weight: 600;
+  }
+  .gs-kbd {
+    font-size: 10.5px; font-family: Consolas, monospace; padding: 2px 6px; border-radius: 5px;
+    background: var(--card); border: 1px solid var(--border); color: var(--muted);
+  }
+  .gs-results { max-height: 410px; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 5px; }
+  .gs-item {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 9px 11px; border-radius: 9px; border: 1px solid var(--border); background: var(--bg);
+    cursor: pointer; transition: all 0.12s;
+  }
+  .gs-item:hover { border-color: var(--gold); background: var(--gold-soft); transform: translateX(-2px); }
+  .gs-item-title { font-weight: 700; font-size: 12.5px; color: var(--text); }
+  .gs-item-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* S-Curve SVG Chart Container */
+  .scurve-wrap { width: 100%; overflow-x: auto; padding: 4px 0; }
+  .scurve-svg { width: 100%; min-width: 580px; height: 255px; display: block; }
+  .scurve-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11.5px; align-items: center; margin-bottom: 8px; }
+  .leg-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-left: 5px; vertical-align: middle; }
+
+  /* Building 5 Visual Progress Matrix */
+  .bm-table th { font-size: 11.5px; padding: 8px 6px; }
+  .bm-floor-cell {
+    text-align: right !important; font-weight: 800; color: var(--navy); white-space: nowrap;
+    background: var(--bg); min-width: 135px;
+  }
+  [data-theme="dark"] .bm-floor-cell { color: #FDE68A; background: #0E1B2A; }
+  .bm-cell {
+    cursor: pointer; border-radius: 7px; padding: 6px 4px; min-width: 82px;
+    transition: transform 0.12s, filter 0.12s; user-select: none; border: 1px solid transparent;
+  }
+  .bm-cell:hover { transform: scale(1.04); filter: brightness(1.06); border-color: var(--gold); }
+  .bm-st-0 { background: #F1F5F9; color: #64748B; }
+  .bm-st-1 { background: var(--amber-soft); color: var(--amber); border-color: rgba(180,83,9,0.28); }
+  .bm-st-2 { background: #DBEAFE; color: #1D4ED8; border-color: rgba(29,78,216,0.28); }
+  .bm-st-3 { background: var(--green-soft); color: var(--green); border-color: rgba(21,128,61,0.3); }
+  [data-theme="dark"] .bm-st-0 { background: #16283D; color: #64748B; }
+  [data-theme="dark"] .bm-st-2 { background: rgba(59,130,246,0.22); color: #93C5FD; border-color: rgba(147,197,253,0.3); }
+  .bm-pct { font-size: 12px; font-weight: 800; display: block; line-height: 1.2; }
+  .bm-lbl { font-size: 10px; font-weight: 600; display: block; opacity: 0.92; margin-top: 1px; }
+  .bm-note-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--plum); margin-right: 3px; vertical-align: middle; }
+
+  /* Dedicated Official A4 Subcontractor Statement Print View */
+  #printStatementArea { display: none; }
+  @media print {
+    body.printing-statement > header,
+    body.printing-statement > nav,
+    body.printing-statement > main,
+    body.printing-statement > .modal-bg,
+    body.printing-statement > .gs-overlay,
+    body.printing-statement > .toast { display: none !important; }
+    body.printing-statement #printStatementArea {
+      display: block !important; background: #fff; color: #0F172A; padding: 10px;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+  }
+  .stmt-hdr {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    border-bottom: 3px solid #E28347; padding-bottom: 10px; margin-bottom: 14px;
+  }
+  .stmt-hdr img { height: 54px; border-radius: 6px; }
+  .stmt-title { text-align: center; flex: 1; }
+  .stmt-title h2 { margin: 0; font-size: 17px; color: #181B22; }
+  .stmt-title p { margin: 3px 0 0; font-size: 12px; color: #475569; font-weight: 600; }
+  .stmt-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px;
+  }
+  .stmt-box {
+    border: 1px solid #CBD5E1; border-radius: 8px; padding: 8px; text-align: center; background: #F8FAFC;
+  }
+  .stmt-box .sl { font-size: 11px; color: #475569; }
+  .stmt-box .sv { font-size: 14px; font-weight: 800; color: #181B22; margin-top: 3px; }
+  .stmt-sigs {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px;
+    border-top: 2px solid #181B22; padding-top: 14px; text-align: center; font-weight: 700; font-size: 12px;
+  }
+
+
+  /* ==================== V5.5: STORAGE RECEIPTS, LIGHTBOX & MULTI-MONTH ATTENDANCE ==================== */
+  .doc-pill {
+    display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 999px;
+    font-size: 10.5px; font-weight: 700; cursor: pointer; border: 1px solid var(--gold);
+    background: var(--gold-soft); color: var(--navy); transition: all 0.14s; white-space: nowrap;
+  }
+  .doc-pill:hover { background: var(--gold); color: var(--navy); transform: scale(1.04); }
+  [data-theme="dark"] .doc-pill { color: #FDE68A; }
+  [data-theme="dark"] .doc-pill:hover { color: #0B1521; }
+
+  .upload-zone {
+    border: 1.5px dashed var(--gold); border-radius: 9px; padding: 9px 10px;
+    background: var(--gold-soft); display: flex; flex-direction: column; gap: 6px;
+  }
+  .upload-zone label { font-size: 12px; font-weight: 700; color: var(--navy); }
+  [data-theme="dark"] .upload-zone label { color: #FDE68A; }
+  .upload-hint { font-size: 10.5px; color: var(--muted); }
+
+  .doc-preview-img {
+    max-width: 100%; max-height: 68vh; object-fit: contain; border-radius: 8px;
+    border: 1px solid var(--border); display: block; margin: 0 auto; background: #0B1521;
+  }
+  .doc-preview-pdf {
+    width: 100%; height: 68vh; border: 1px solid var(--border); border-radius: 8px; background: #fff;
+  }
+
+  .att-wd { display: block; font-size: 9px; font-weight: 600; color: var(--muted); margin-top: 1px; }
+  .att-fri-th { background: var(--gold-soft) !important; color: var(--amber) !important; }
+  .att-month-bar { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+
+
+  /* ==================== V5.6 SIGNATURE THEME: OBSIDIAN CHARCOAL × WARM CREAM × BURNT ORANGE ==================== */
+  .hero {
+    background: linear-gradient(135deg, #12151B 0%, #181B22 52%, #2B2F38 100%) !important;
+    border-bottom: 3px solid #E88A4B !important;
+  }
+  .brand-capsule {
+    background: rgba(43, 47, 56, 0.62) !important;
+    border: 1px solid rgba(232, 138, 75, 0.42) !important;
+  }
+  .brand-text h1 { color: #EBD9C2 !important; }
+  .brand-text .sub { color: #E88A4B !important; }
+  .logo-divider { background: linear-gradient(180deg, transparent, #E88A4B, transparent) !important; }
+  .tele-chip {
+    background: rgba(24, 27, 34, 0.72) !important;
+    border: 1px solid rgba(235, 217, 194, 0.14) !important;
+  }
+  .tele-chip:hover { background: rgba(232, 138, 75, 0.18) !important; border-color: #E88A4B !important; }
+  .tele-chip.good { border-color: rgba(235, 217, 194, 0.24) !important; }
+  .tele-chip.warn { border-color: rgba(248, 113, 113, 0.65) !important; background: rgba(185, 28, 28, 0.24) !important; }
+  .tele-lbl { color: #9BA1AE !important; }
+  .tele-val { color: #EBD9C2 !important; }
+  .tele-time { color: #9BA1AE !important; }
+
+  .btn-gold { background: #E88A4B !important; color: #181B22 !important; font-weight: 800; }
+  .btn-plum { background: #343A46 !important; color: #EBD9C2 !important; border: 1px solid rgba(232,138,75,0.45); }
+  .btn-navy { background: #22262E !important; color: #EBD9C2 !important; border: 1px solid rgba(235,217,194,0.22); }
+  .panel-hdr { background: linear-gradient(90deg, #181B22 0%, #2B2F38 100%) !important; color: #EBD9C2 !important; border-bottom: 2px solid #E88A4B !important; }
+  .panel-hdr.plum { background: linear-gradient(90deg, #241F1F 0%, #3A2A22 100%) !important; color: #EBD9C2 !important; border-bottom: 2px solid #E88A4B !important; }
+  .sc-head { background: linear-gradient(90deg, #181B22 0%, #2B2F38 100%) !important; color: #EBD9C2 !important; border-bottom: 3px solid #E88A4B !important; }
+  .sc-head.plum { background: linear-gradient(90deg, #241F1F 0%, #3A2A22 100%) !important; color: #EBD9C2 !important; }
+  .sc-head h3 { color: #EBD9C2 !important; }
+  .sc-head .sc-person { color: #A6ACB8 !important; }
+  .modal-hdr { background: linear-gradient(90deg, #181B22 0%, #2B2F38 100%) !important; color: #EBD9C2 !important; border-bottom: 3px solid #E88A4B !important; }
+  .toast { background: #2B2F38 !important; color: #EBD9C2 !important; border-right: 4px solid #E88A4B !important; border: 1px solid rgba(232,138,75,0.38); }
+
+  /* Login Overlay matching exact Pinterest Charcoal × Cream × Orange */
+  .auth-overlay { background: radial-gradient(circle at 22% 20%, #2B2F38 0%, #181B22 52%, #111318 100%) !important; }
+  .auth-box { border: 1px solid rgba(232,138,75,0.45) !important; }
+  .auth-head { background: linear-gradient(135deg, #181B22 0%, #2B2F38 100%) !important; border-bottom: 3px solid #E88A4B !important; }
+  .auth-head h2 { color: #EBD9C2 !important; }
+  .auth-head p { color: #E88A4B !important; }
+
+  /* Scrollbars with Burnt Orange signature thumb */
+  .sc-scroll-area::-webkit-scrollbar-thumb,
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #E88A4B 0%, #B85E27 100%) !important;
+  }
+  .sc-progress-bar { background: linear-gradient(90deg, #E88A4B, #EBD9C2) !important; }
+
+  /* DEFAULT DARK MODE: OBSIDIAN CHARCOAL (#181B22) + GRAPHITE (#2B2F38) + CREAM (#EBD9C2) + ORANGE (#E88A4B) */
+  [data-theme="dark"] {
+    --navy: #3C4352;
+    --navy-mid: #4B5366;
+    --bg: #181B22;
+    --card: #22262E;
+    --border: #353A46;
+    --text: #EDE6DC;
+    --muted: #989EA9;
+    --gold: #E88A4B;
+    --gold-soft: rgba(232, 138, 75, 0.14);
+    --plum: #E88A4B;
+    --plum-soft: rgba(232, 138, 75, 0.16);
+    --lime: #9ACA3B;
+    --lime-soft: rgba(154, 202, 59, 0.14);
+    --red: #F87171;
+    --red-soft: rgba(248, 113, 113, 0.16);
+    --amber: #F5B041;
+    --amber-soft: rgba(245, 176, 65, 0.16);
+    --green: #4ADE80;
+    --green-soft: rgba(74, 222, 128, 0.14);
+    --shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+  }
+  [data-theme="dark"] .hero { background: linear-gradient(135deg, #111318 0%, #181B22 50%, #2B2F38 100%) !important; }
+  [data-theme="dark"] .nav-bar { background: #1E2129 !important; border-bottom-color: #323743 !important; }
+  [data-theme="dark"] .tab-btn { background: #2B2F38 !important; color: #C8CDD6 !important; }
+  [data-theme="dark"] .tab-btn:hover { background: #363B47 !important; color: #EBD9C2 !important; }
+  [data-theme="dark"] .tab-btn.active { background: #E88A4B !important; color: #181B22 !important; border-bottom-color: #EBD9C2 !important; }
+  [data-theme="dark"] .tab-btn:not(.active) .tab-badge { background: #181B22 !important; color: #EBD9C2 !important; }
+  [data-theme="dark"] .tab-btn.active .tab-badge { background: rgba(24,27,34,0.22) !important; color: #181B22 !important; }
+  [data-theme="dark"] .kpi-card { background: #22262E !important; border-color: #323743 !important; border-right-color: #E88A4B; }
+  [data-theme="dark"] .kpi-card.gold { border-right-color: #E88A4B; }
+  [data-theme="dark"] .kpi-card.plum { border-right-color: #EBD9C2; }
+  [data-theme="dark"] .kpi-card.lime { border-right-color: #4ADE80; }
+  [data-theme="dark"] .kpi-card.red  { border-right-color: #F87171; }
+  [data-theme="dark"] .panel, [data-theme="dark"] .smart-card { background: #22262E !important; border-color: #323743 !important; }
+  [data-theme="dark"] .kpi-val, [data-theme="dark"] .sc-m .mv, [data-theme="dark"] .sc-foot, [data-theme="dark"] .form-row label { color: #EBD9C2 !important; }
+  [data-theme="dark"] .sc-metrics, [data-theme="dark"] .sc-controls, [data-theme="dark"] .sc-scroll-area { background: #1C1F27 !important; border-color: #323743 !important; }
+  [data-theme="dark"] .sc-m { background: #2B2F38 !important; border-color: #383E4B !important; }
+  [data-theme="dark"] .sc-channels { background: rgba(232,138,75,0.10) !important; border-bottom-color: rgba(232,138,75,0.22) !important; color: #EBD9C2 !important; }
+  [data-theme="dark"] .sc-foot { background: #1A1D24 !important; border-top-color: #323743 !important; }
+  [data-theme="dark"] th, [data-theme="dark"] .sc-scroll-area thead th, [data-theme="dark"] .custom-scroll thead th {
+    background: #2B2F38 !important; color: #EBD9C2 !important; border-bottom-color: #3E4452 !important;
+  }
+  [data-theme="dark"] td { border-bottom-color: #2D323D !important; }
+  [data-theme="dark"] tbody tr:hover { background: #2A2F3A !important; }
+  [data-theme="dark"] .num { color: #F2ECE3 !important; }
+  [data-theme="dark"] .pill-navy { background: #323744 !important; color: #EBD9C2 !important; }
+  [data-theme="dark"] .pill-plum { background: rgba(232,138,75,0.18) !important; color: #F4A26A !important; }
+  [data-theme="dark"] .sc-pos-badge { background: rgba(232,138,75,0.16) !important; color: #F4A26A !important; border-color: rgba(232,138,75,0.35) !important; }
+  [data-theme="dark"] .bar-track, [data-theme="dark"] .prog-track, [data-theme="dark"] .sc-progress-rail { background: #2D323D !important; }
+  [data-theme="dark"] .inp, [data-theme="dark"] select.inp, [data-theme="dark"] .sc-search {
+    background: #181B22 !important; color: #EDE6DC !important; border-color: #3C4250 !important;
+  }
+  [data-theme="dark"] .btn-light { background: #2B2F38 !important; color: #EBD9C2 !important; border-color: #3E4452 !important; }
+  [data-theme="dark"] .modal, [data-theme="dark"] .auth-box, [data-theme="dark"] .gs-box {
+    background: #22262E !important; color: #EDE6DC !important; border: 1px solid #3C4250 !important;
+  }
+  [data-theme="dark"] .modal-foot, [data-theme="dark"] .cfg-details, [data-theme="dark"] .hist-item {
+    background: #1B1E25 !important; border-color: #323743 !important;
+  }
+  [data-theme="dark"] .hist-item div { color: #EDE6DC !important; }
+  [data-theme="dark"] .tools-menu { background: #22262E !important; border-color: #3E4452 !important; }
+  [data-theme="dark"] .tools-item:hover, [data-theme="dark"] .qa-btn:hover { background: rgba(232,138,75,0.18) !important; color: #EBD9C2 !important; border-color: #E88A4B !important; }
+  [data-theme="dark"] .sc-scroll-area::-webkit-scrollbar-track, [data-theme="dark"] .custom-scroll::-webkit-scrollbar-track {
+    background: #181B22 !important; border-right-color: #323743 !important;
+  }
+  [data-theme="dark"] .sc-scroll-area::-webkit-scrollbar-thumb, [data-theme="dark"] .custom-scroll::-webkit-scrollbar-thumb {
+    border-color: #181B22 !important;
+  }
+  [data-theme="dark"] .bm-floor-cell { color: #EBD9C2 !important; background: #1B1E25 !important; }
+  [data-theme="dark"] .bm-st-0 { background: #282C35 !important; color: #7C828E !important; }
+  [data-theme="dark"] .bm-st-1 { background: rgba(232,138,75,0.18) !important; color: #F4A26A !important; border-color: rgba(232,138,75,0.35) !important; }
+  [data-theme="dark"] .doc-pill { background: rgba(232,138,75,0.16) !important; color: #EBD9C2 !important; border-color: #E88A4B !important; }
+  [data-theme="dark"] .doc-pill:hover { background: #E88A4B !important; color: #181B22 !important; }
+  [data-theme="dark"] .upload-zone { background: rgba(232,138,75,0.10) !important; border-color: #E88A4B !important; }
+  [data-theme="dark"] .alert-box p { color: #EDE6DC !important; }
+
+  @media print {
+    [data-theme="dark"] {
+      --navy: #181B22; --bg: #fff; --card: #fff; --text: #181B22; --muted: #5A606D; --border: #CBD5E1;
+      --gold: #E28347; --gold-soft: #FDF2EA; --red: #B91C1C; --green: #15803D;
+    }
+  }
+
 </style>
 </head>
 <body class="locked">
@@ -614,6 +879,7 @@
     </div>
 
     <div class="hero-actions no-print">
+      <button class="btn btn-light" onclick="openGlobalSearch()" title="بحث شامل في كامل المنظومة (Ctrl+K)">🔍 بحث شامل</button>
       <button class="btn btn-gold" onclick="openQuickAddModal()" title="إضافة سريعة لأي حركة من أي شاشة">⚡ إضافة سريعة</button>
       <button class="btn btn-navy" id="themeToggleBtn" onclick="toggleTheme()" title="التبديل بين الوضع الليلي والنهاري">🌙 ليلي</button>
       <div class="tools-wrap">
@@ -624,10 +890,12 @@
             📂 تحديث من Excel / JSON
             <input type="file" id="excelFileInput" accept=".xlsx,.xlsm,.xls,.json" style="display:none" />
           </label>
-          <button class="tools-item" onclick="closeToolsMenu(); exportExcelOrJson()">💾 تصدير Excel / نسخة احتياطية</button>
+          <button class="tools-item" onclick="closeToolsMenu(); exportExcelOrJson()">📊 تصدير Excel شامل (14 شيتاً)</button>
+          <button class="tools-item" onclick="closeToolsMenu(); exportJsonBackup()">💾 حفظ نسخة JSON أرشيفية</button>
           <button class="tools-item" onclick="closeToolsMenu(); window.print()">🖨️ طباعة A4 / PDF</button>
           <div class="tools-sep"></div>
           <button class="tools-item" onclick="closeToolsMenu(); openCloudHistoryModal()">🕒 سجل النسخ السحابية</button>
+          <button class="tools-item" id="pwaInstallBtn" style="display:none; color:var(--green);" onclick="closeToolsMenu(); triggerPwaInstall()">📱 تثبيت التطبيق على الجهاز (PWA)</button>
         </div>
       </div>
       <button class="btn btn-danger" onclick="handleLogout()" title="تسجيل الخروج وقفل الشاشة">🔒 خروج</button>
@@ -668,6 +936,7 @@
   <button class="tab-btn" data-tab="treasury" onclick="switchTab('treasury', this)">🗄️ خزينة الموقع (63 أسبوع) <span class="tab-badge" id="bdgTr">731</span></button>
   <button class="tab-btn" data-tab="inventory" onclick="switchTab('inventory', this)">📦 المخزن والعهد والأخشاب <span class="tab-badge" id="bdgInv">125</span></button>
   <button class="tab-btn" data-tab="plumbing" onclick="switchTab('plumbing', this)">🚰 سباكة عمارة 5 والحضور <span class="tab-badge">22 شقة</span></button>
+  <button class="tab-btn" data-tab="matrix" onclick="switchTab('matrix', this)">🏢 مصفوفة تقدم عمارة 5 <span class="tab-badge" id="bdgMatrix">0%</span></button>
 </nav>
 
 <main class="container">
@@ -703,10 +972,29 @@
       </div>
     </div>
 
+    <!-- Monthly Cashflow & S-Curve Panel -->
     <div class="panel">
       <div class="panel-hdr">
-        <span>🧱 موقف خامات التشوينات الأساسية الموردة فعلياً لموقع حياة (203 أذون استلام)</span>
-        <span style="font-size:11.5px; color:#D9F99D;">مربوط لحظياً مع استهلاك الأسمنت والمخزن</span>
+        <span>📈 منحنى التدفق النقدي الشهري والتكلفة التراكمية (Monthly Burn Rate & S-Curve)</span>
+        <span style="font-size:11.5px; color:#FDE68A;" id="scurveMeta">—</span>
+      </div>
+      <div class="panel-body">
+        <div class="scurve-legend">
+          <span><span class="leg-dot" style="background:#596377;"></span>دفعات المقاولين الشهرية</span>
+          <span><span class="leg-dot" style="background:#C76A33;"></span>صافي خزينة الموقع الشهرية</span>
+          <span><span class="leg-dot" style="background:var(--gold); border-radius:50%;"></span>المنحنى التراكمي (S-Curve)</span>
+        </div>
+        <div class="scurve-wrap" id="scurveContainer"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-hdr">
+        <span id="bulkMatTitle">🧱 موقف خامات التشوينات الأساسية الموردة فعلياً لموقع حياة</span>
+        <div class="no-print" style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="btn btn-lime btn-sm" onclick="openAddGrnModal()">🚚 تسجيل تشوين خامات (رملة/سن/طوب/أسمنت)</button>
+          <button class="btn btn-light btn-sm" onclick="openGrnLogModal()">📋 سجل التشوينات</button>
+        </div>
       </div>
       <div class="panel-body">
         <div class="kpi-grid" id="bulkMaterialsStrip" style="margin-bottom:0;"></div>
@@ -835,6 +1123,7 @@
         <div class="no-print" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
           <select class="inp" id="binCardSelect" onchange="renderBinCard()" style="min-width:260px; font-weight:700;"></select>
           <button class="btn btn-lime btn-sm" onclick="openAddItemModal()">➕ تعريف صنف جديد</button>
+          <button class="btn btn-plum btn-sm" onclick="openAddGrnModal()">🚚 تسجيل تشوين / وارد</button>
           <button class="btn btn-gold btn-sm" onclick="openAddIssueModal()">📤 تسجيل صرف / عهدة جديدة</button>
         </div>
       </div>
@@ -859,12 +1148,15 @@
       <!-- Wood Transfers Summary -->
       <div class="panel">
         <div class="panel-hdr">
-          <span>🪵 تحويلات الأخشاب للمواقع الشقيقة (72 نقلة فعلية)</span>
-          <span style="font-size:11.5px; color:#D9F99D;" id="woodTotBadge"></span>
+          <span id="woodPanelTitle">🪵 تحويلات الأخشاب للمواقع الشقيقة</span>
+          <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+            <span style="font-size:11.5px; color:#D9F99D;" id="woodTotBadge"></span>
+            <button class="btn btn-gold btn-sm no-print" onclick="openAddWoodModal()">➕ تحويل خشب</button>
+          </div>
         </div>
         <div class="panel-body sc-table-wrap custom-scroll" style="max-height:360px; overflow-y:auto;">
           <table>
-            <thead><tr><th>رقم التحويل</th><th>التاريخ</th><th class="right">البيان</th><th>الأبعاد (م)</th><th>العدد</th><th>الحجم (م³)</th><th>الموقع</th></tr></thead>
+            <thead><tr><th>رقم التحويل</th><th>التاريخ</th><th class="right">البيان</th><th>الأبعاد (م)</th><th>العدد</th><th>الحجم (م³)</th><th>الموقع</th><th class="no-print">حذف</th></tr></thead>
             <tbody id="woodBody"></tbody>
           </table>
         </div>
@@ -939,10 +1231,17 @@
 
     <div class="panel">
       <div class="panel-hdr">
-        <span>👔 كشف الحضور والانصراف الفعلي — نوفمبر 2026 (فريق موقع حياة — 4 مهندسين)</span>
-        <span style="font-size:11.5px; color:#D9F99D;">اضغط على أي يوم لتغيير الحالة (ح / غ / ج / م / ن) ويتحدّث الإجمالي لحظياً</span>
+        <span id="attPanelTitle">👔 كشف الحضور والانصراف الفعلي — فريق موقع حياة</span>
+        <div class="att-month-bar no-print">
+          <select class="inp" id="attMonthSelect" onchange="onAttMonthChange()" style="font-weight:700;"></select>
+          <button class="btn btn-lime btn-sm" onclick="openAddAttendanceMonthModal()">📅 فتح شهر جديد</button>
+          <button class="btn btn-gold btn-sm" onclick="openAddEmployeeModal()">👤 إضافة مهندس / مشرف</button>
+        </div>
       </div>
       <div class="panel-body sc-table-wrap">
+        <div style="font-size:11.5px; color:var(--muted); margin-bottom:8px;">
+          💡 اضغط على أي يوم لتبديل الحالة: <strong>ح</strong> (حضور) • <strong>غ</strong> (غياب) • <strong>ج</strong> (جمعة/إجازة) • <strong>م</strong> (مأمورية) • <strong>ن</strong> (نصف يوم) — ويتحدّث الإجمالي والسحابة لحظياً.
+        </div>
         <table>
           <thead id="attHead"></thead>
           <tbody id="attBody"></tbody>
@@ -951,7 +1250,55 @@
     </div>
   </section>
 
+
+  <!-- ==================== TAB 7: BUILDING 5 VISUAL PROGRESS MATRIX ==================== -->
+  <section id="tab-matrix" class="section">
+    <div class="kpi-grid" id="matrixKpis"></div>
+
+    <div class="panel">
+      <div class="panel-hdr">
+        <span>🏢 مصفوفة تقدم تنفيذ عمارة 5 البصرية (الأدوار × البنود التنفيذية)</span>
+        <div class="no-print" style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="btn btn-lime btn-sm" onclick="openAddMatrixTradeModal()">➕ إضافة بند جديد للمصفوفة</button>
+          <button class="btn btn-plum btn-sm" onclick="window.print()">🖨️ طباعة المصفوفة A4</button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px; font-size:11.5px;">
+          <strong>دليل الألوان (اضغط على أي خلية لتحديث النسبة أو الحالة):</strong>
+          <span class="pill pill-navy">⬜ لم يبدأ (0%)</span>
+          <span class="pill pill-amber">🟡 جاري التنفيذ (1–89%)</span>
+          <span class="pill" style="background:#DBEAFE; color:#1D4ED8;">🔵 منتهي بانتظار الاستشاري (90–99%)</span>
+          <span class="pill pill-green">✅ مُسلَّم استشاري (100%)</span>
+        </div>
+        <div class="sc-table-wrap">
+          <table class="bm-table">
+            <thead id="bmHead"></thead>
+            <tbody id="bmBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
+
+<!-- ==================== GLOBAL UNIFIED SEARCH MODAL (CTRL + K) ==================== -->
+<div class="gs-overlay" id="gsOverlay" onclick="if(event.target===this) closeGlobalSearch()">
+  <div class="gs-box">
+    <div class="gs-head">
+      <span style="font-size:16px;">🔍</span>
+      <input type="text" id="gsInput" placeholder="ابحث في كامل المنظومة (مقاول، مبلغ، مصروف، صنف مخزن، شقة، خشب)..." oninput="runGlobalSearch(this.value)" />
+      <span class="gs-kbd">ESC</span>
+      <button class="btn btn-sm btn-light" onclick="closeGlobalSearch()">✕</button>
+    </div>
+    <div class="gs-results custom-scroll" id="gsResults"></div>
+  </div>
+</div>
+
+<!-- ==================== DEDICATED OFFICIAL A4 CONTRACTOR STATEMENT ==================== -->
+<div id="printStatementArea"></div>
+
 
 <!-- ==================== UNIVERSAL LIVE ENTRY MODAL ==================== -->
 <div class="modal-bg" id="modalBg" onclick="if(event.target===this) closeModal()">
@@ -969,6 +1316,7 @@
 </div>
 
 <div class="toast" id="toast"></div>
+<input type="file" id="quickAttachInput" accept="image/*,.pdf" style="display:none" />
 
 <!-- Optional SheetJS CDN for direct .xlsx/.xlsm drag-and-drop import/export (works 100% offline with JSON/CSV fallback!) -->
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" defer></script>
@@ -977,7 +1325,7 @@
 // ============================================================================
 // 1. CLEAN ZERO-DATA CLOUD SHELL (ALL REAL DATA LOADS ONLY FROM SUPABASE AFTER AUTH)
 // ============================================================================
-const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "Chrome Cloud ERP v4.0 (نافذة حية + دارك مود + بنود مفتوحة + تعديل السباكة)", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": []};
+const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "Chrome Cloud ERP v5.6 Obsidian Edition (الهوية الفحمية والبرتقالية الكاملة + PWA + مخزن الفواتير + حضور متعدد الشهور + مصفوفة عمارة 5)", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": []};
 
 // ============================================================================
 // ⚙️ إعدادات الربط السحابي (Supabase) — ضع الرابط والمفتاح هنا مرة واحدة قبل الرفع
@@ -1004,7 +1352,8 @@ const state = {
     sub:    { desc: true, q: '' }
   },
   selectedWeek: DB.weeks[DB.weeks.length - 1]?.wk || 'W-63',
-  selectedBinCode: 'MD-008'
+  selectedBinCode: 'MD-008',
+  selectedAttMonth: '2026-11'
 };
 
 function getCloudConfig() {
@@ -1348,7 +1697,7 @@ function computeStats() {
     else if (pct >= 0.95) { radar = 'NEAR'; radarTxt = '🟡 قارب الـ 100%'; pill = 'pill-amber'; }
     return {
       ...c, pays, count: pays.length, totalPaid, compPaid, sitePaid, prevPaid,
-      ipcNo: ipc ? ipc.no : '-', netIpc, pct, remBefore, retRate, ret5, availAfter, radar, radarTxt, pill
+      ipcNo: ipc ? ipc.no : '-', ipcDoc: ipc?.doc || null, netIpc, pct, remBefore, retRate, ret5, availAfter, radar, radarTxt, pill
     };
   });
 
@@ -1449,8 +1798,12 @@ function renderAll() {
   renderCement();
   renderTreasuryControls();
   renderTreasuryWeek();
+  renderSCurve();
   renderInventory();
   renderPlumbingAndAttendance();
+  renderBuildingMatrix();
+  const bmT = document.getElementById('bulkMatTitle');
+  if (bmT) bmT.textContent = `🧱 موقف خامات التشوينات الأساسية الموردة فعلياً لموقع حياة (${DB.grn.length} أذون استلام)`;
 }
 
 function renderOverview() {
@@ -1540,7 +1893,7 @@ function renderOverview() {
       <div class="bar-row">
         <div style="text-align:right; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${esc(c.cat)}">${esc(c.cat)}</div>
         <div class="bar-track" title="تغطية الفواتير: ${cov}% (${c.n} حركة)">
-          <div class="bar-fill" style="width:${(c.sum/maxTr*100).toFixed(1)}%; background:linear-gradient(90deg, var(--plum), #9D4EDD);"></div>
+          <div class="bar-fill" style="width:${(c.sum/maxTr*100).toFixed(1)}%; background:linear-gradient(90deg, #B85E27, #E88A4B);"></div>
         </div>
         <div class="num" style="text-align:left; font-size:11.5px;">${fmt(c.sum)}</div>
         <div style="font-size:11px; color:var(--muted);">${share}%</div>
@@ -1593,7 +1946,9 @@ function renderSubcontractors() {
     <tr>
       <td><span class="pill pill-plum">${x.code}</span></td>
       <td class="right"><strong>${esc(x.name)}</strong><br><small style="color:var(--muted);">${esc(x.person)}</small></td>
-      <td>${x.ipcNo}</td>
+      <td>${x.ipcNo}${x.ipcDoc?.path
+        ? ` <span class="doc-pill no-print" onclick="openAttachmentPreview('${esc(x.ipcDoc.path)}','مستخلص ${esc(x.name)} (#${x.ipcNo})','${esc(x.ipcDoc.type||'')}')" title="معاينة مرفق المستخلص">📎</span>`
+        : (x.ipcNo !== '-' ? ` <button class="icon-btn no-print" style="padding:1px 4px; font-size:10px;" onclick="triggerQuickAttach('ipc','${x.code}')" title="إرفاق صورة أو PDF المستخلص">📷</button>` : '')}</td>
       <td class="num">${fmt(x.netIpc)}</td>
       <td class="num">${fmt(x.totalPaid)}</td>
       <td>${x.count}</td>
@@ -1653,7 +2008,11 @@ function renderSubSmartCards() {
           <span>🏦 شركة: <strong>${fmt(x.compPaid)}</strong></span>
           <span>💵 عهدة موقع: <strong>${fmt(x.sitePaid)}</strong></span>
           <span>📁 ما قبله: <strong>${fmt(x.prevPaid)}</strong></span>
-          <button class="btn btn-gold btn-sm no-print" onclick="openAddPaymentModal('${x.code}')">➕ دفعة جديدة</button>
+          <div class="no-print" style="display:flex; gap:5px; flex-wrap:wrap;">
+            <button class="btn btn-gold btn-sm" onclick="openAddPaymentModal('${x.code}')">➕ دفعة</button>
+            <button class="btn btn-navy btn-sm" onclick="printContractorStatement('${x.code}')" title="طباعة كشف حساب مقاول رسمي A4">🖨️ كشف حساب</button>
+            <button class="btn btn-lime btn-sm" onclick="copyContractorWhatsApp('${x.code}')" title="نسخ ملخص منسق لإرساله على واتساب">📲 واتساب</button>
+          </div>
         </div>
 
         <div class="sc-controls no-print">
@@ -1995,8 +2354,13 @@ function renderTreasuryWeek() {
       <td class="right">${esc(t.desc)}</td>
       <td class="right" style="font-size:11px; color:var(--muted);">${esc(t.cat)}</td>
       <td>${t.cnt ? '<span class="pill pill-plum">' + esc(t.cnt) + '</span>' : '—'}</td>
-      <td><span class="pill ${t.inv.includes('مرفق')?'pill-green':'pill-amber'}">${esc(t.inv)}</span></td>
+      <td>
+        ${t.doc?.path
+          ? `<span class="doc-pill" onclick="openAttachmentPreview('${esc(t.doc.path)}','فاتورة ${esc(t.id)} — ${esc(t.desc)}','${esc(t.doc.type||'')}')" title="اضغط لمعاينة صورة الفاتورة">📎 معاينة ✅</span>`
+          : `<span class="pill ${t.inv.includes('مرفق')?'pill-green':'pill-amber'}">${esc(t.inv)}</span>`}
+      </td>
       <td class="no-print"><div class="act-btns">
+        <button class="icon-btn" onclick="triggerQuickAttach('treasury','${esc(t.id)}')" title="تصوير أو إرفاق صورة فاتورة / PDF">📷</button>
         <button class="icon-btn" onclick="openEditTreasuryModal('${esc(t.id)}')" title="تعديل المصروف">✏️</button>
         <button class="icon-btn del" onclick="deleteTreasury('${esc(t.id)}')" title="حذف المصروف">🗑️</button>
       </div></td>
@@ -2047,13 +2411,16 @@ function renderInventory() {
   }).join('');
 
   // Wood transfers
+  const wpTitle = document.getElementById('woodPanelTitle');
+  if (wpTitle) wpTitle.textContent = `🪵 تحويلات الأخشاب للمواقع الشقيقة (${DB.wood.length} نقلة)`;
   document.getElementById('woodTotBadge').textContent = `${woodM3.toFixed(2)} م³ | ${fmt(woodPcs)} قطعة`;
-  document.getElementById('woodBody').innerHTML = DB.wood.slice().reverse().map(w => `
+  document.getElementById('woodBody').innerHTML = DB.wood.map((w, idx) => ({ ...w, _idx: idx })).reverse().map(w => `
     <tr>
       <td>${esc(w.id)}</td><td>${w.date}</td><td class="right">${esc(w.desc)}</td>
       <td style="font-size:11px;">${w.L}×${w.T}×${w.W}</td><td class="num">${fmt(w.pcs)}</td>
       <td class="num">${(w.L*w.T*w.W*w.pcs).toFixed(3)}</td>
       <td><span class="pill ${w.site.includes('مارسيليا')?'pill-navy':'pill-plum'}">${esc(w.site)}</span></td>
+      <td class="no-print"><button class="icon-btn del" onclick="deleteWoodTransfer(${w._idx})" title="حذف نقلة الخشب">🗑️</button></td>
     </tr>
   `).join('');
 
@@ -2063,7 +2430,7 @@ function renderInventory() {
 function renderBinCard() {
   state.selectedBinCode = document.getElementById('binCardSelect').value || state.selectedBinCode;
   const it = S.invStats.find(x => x.code === state.selectedBinCode) || S.invStats[0];
-  const mvs = DB.moves.filter(m => m.code === it.code).slice().reverse();
+  const mvs = DB.moves.map((m, idx) => ({ ...m, _idx: idx })).filter(m => m.code === it.code).reverse();
   document.getElementById('binCardBody').innerHTML = `
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin-bottom:10px;">
       <div class="sc-m"><div class="ml">الصنف والكود</div><div class="mv">${esc(it.name)} <small>(${it.code})</small></div></div>
@@ -2076,8 +2443,8 @@ function renderBinCard() {
     ${mvs.length ? `
       <div class="sc-table-wrap">
         <table>
-          <thead><tr><th>الإذن</th><th>التاريخ</th><th>الكمية</th><th>المستلم</th><th class="right">مكان الاستخدام</th><th>نوع الصرف</th><th>الحالة</th></tr></thead>
-          <tbody>${mvs.slice(0,8).map(m => `<tr><td>${esc(m.id)}</td><td>${m.date}</td><td class="num">${m.qty}</td><td>${esc(m.recvr)}</td><td class="right">${esc(m.loc)}</td><td>${esc(m.type)}</td><td><span class="pill ${m.cstate.includes('بالخارج')?'pill-amber':(m.cstate.includes('تم الرد')?'pill-green':'pill-navy')}">${esc(m.cstate)}</span></td></tr>`).join('')}</tbody>
+          <thead><tr><th>الإذن</th><th>التاريخ</th><th>الكمية</th><th>المستلم</th><th class="right">مكان الاستخدام</th><th>نوع الصرف</th><th>الحالة</th><th class="no-print">حذف</th></tr></thead>
+          <tbody>${mvs.slice(0,12).map(m => `<tr><td>${esc(m.id)}</td><td>${m.date}</td><td class="num">${m.qty}</td><td>${esc(m.recvr)}</td><td class="right">${esc(m.loc)}</td><td>${esc(m.type)}</td><td><span class="pill ${m.cstate.includes('بالخارج')?'pill-amber':(m.cstate.includes('تم الرد')?'pill-green':'pill-navy')}">${esc(m.cstate)}</span></td><td class="no-print"><button class="icon-btn del" onclick="deleteMove(${m._idx})" title="حذف إذن الصرف">🗑️</button></td></tr>`).join('')}</tbody>
         </table>
       </div>
     ` : '<div style="font-size:12px; color:var(--muted); text-align:center;">لا توجد حركات صرف مسجلة لهذا الصنف في سجل الرقابة.</div>'}
@@ -2161,23 +2528,7 @@ function renderPlumbingAndAttendance() {
 
   renderAptsTable();
 
-  // Attendance table (30 days of Nov 2026)
-  document.getElementById('attHead').innerHTML = `<tr><th class="right">المهندس</th>${Array.from({length:30}, (_,i)=>`<th>${i+1}</th>`).join('')}<th>حضور</th><th>غياب</th></tr>`;
-  document.getElementById('attBody').innerHTML = DB.attendance.map((e, ei) => {
-    const pres = e.days.reduce((s, d) => s + (d==='ح'||d==='م'?1:(d==='ن'?0.5:0)), 0);
-    const abs = e.days.filter(d => d==='غ').length;
-    return `
-      <tr>
-        <td class="right" style="white-space:nowrap;"><strong>${esc(e.name)}</strong><br><small style="color:var(--muted);">${esc(e.role)}</small></td>
-        ${e.days.map((d, di) => {
-          const cls = d==='ح'?'att-h':(d==='غ'?'att-g':(d==='ج'?'att-j':(d==='م'?'att-m':(d==='ن'?'att-n':''))));
-          return `<td class="att-cell ${cls}" onclick="cycleAttendance(${ei},${di})" title="اضغط للتعديل">${d||'·'}</td>`;
-        }).join('')}
-        <td class="num pos" style="background:var(--gold-soft);">${pres}</td>
-        <td class="num ${abs>0?'neg':''}">${abs}</td>
-      </tr>
-    `;
-  }).join('');
+  renderAttendanceMonth();
 }
 
 function renderAptsTable() {
@@ -2198,10 +2549,15 @@ function renderAptsTable() {
 }
 
 function cycleAttendance(ei, di) {
+  ensureAttendanceMonths();
+  const ym = state.selectedAttMonth;
+  const list = DB.attendanceMonths[ym] || [];
+  if (!list[ei]) return;
   const seq = ['', 'ح', 'غ', 'ج', 'م', 'ن'];
-  const cur = DB.attendance[ei].days[di] || '';
-  DB.attendance[ei].days[di] = seq[(seq.indexOf(cur) + 1) % seq.length];
-  saveDB('تم تحديث يوم الحضور وحساب الإجمالي لحظياً.');
+  const cur = list[ei].days[di] || '';
+  list[ei].days[di] = seq[(seq.indexOf(cur) + 1) % seq.length];
+  if (ym === '2026-11') DB.attendance = list;
+  saveDB(`تم تحديث حضور (${list[ei].name} — يوم ${di+1} / ${ym}) لحظياً.`);
 }
 
 // ============================================================================
@@ -2249,16 +2605,30 @@ function openUpdateIpcModal() {
     <div class="form-row"><label>رقم المستخلص الجاري</label><input type="number" class="inp" id="m_ino" value="1" /></div>
     <div class="form-row"><label>إجمالي الأعمال التراكمي (ج.م)</label><input type="number" min="0" class="inp" id="m_igross" placeholder="أدخل القيمة التراكمية" /></div>
     <div class="form-row"><label>خصم خامات / عهدة (ج.م)</label><input type="number" min="0" class="inp" id="m_ided" value="0" /></div>
-  `, () => {
+    <div class="upload-zone">
+      <label>📎 إرفاق صورة أو ملف PDF المستخلص المعتمد (اختياري)</label>
+      <input type="file" id="m_idoc" accept="image/*,.pdf" class="inp" />
+      <span class="upload-hint">يُحفظ مشفّراً داخل مخزن السحابة الخاص بك (Supabase Storage).</span>
+    </div>
+  `, async () => {
     const cnt = document.getElementById('m_icnt').value;
     const gross = Number(document.getElementById('m_igross').value);
     const ded = Number(document.getElementById('m_ided').value || 0);
     if (isNaN(gross) || gross < 0) return alert('أدخل قيمة صحيحة.');
+    const btn = document.getElementById('modalSaveBtn');
+    const file = document.getElementById('m_idoc')?.files?.[0];
     const idx = DB.ipcs.findIndex(x => x.cnt === cnt);
-    const rec = { id: `IPC-2026-${String(DB.ipcs.length+1).padStart(4,'0')}`, cnt, no: Number(document.getElementById('m_ino').value||1), date: todayISO(), desc: 'تحديث مستخلص جاري', gross, matDed: ded, custDed: 0, status: 'معتمد', pdf: '' };
+    let docObj = idx >= 0 ? (DB.ipcs[idx].doc || null) : null;
+    if (file) {
+      btn.disabled = true; btn.textContent = '⏳ جاري ضغط ورفع المرفق...';
+      try { docObj = await uploadReceiptFile(file, 'ipcs/' + cnt); }
+      catch (err) { btn.disabled = false; btn.textContent = '💾 حفظ وتحديث لحظي'; return alert(err.message); }
+      btn.disabled = false; btn.textContent = '💾 حفظ وتحديث لحظي';
+    }
+    const rec = { id: `IPC-2026-${String(DB.ipcs.length+1).padStart(4,'0')}`, cnt, no: Number(document.getElementById('m_ino').value||1), date: todayISO(), desc: 'تحديث مستخلص جاري', gross, matDed: ded, custDed: 0, status: 'معتمد', pdf: docObj?.name || '', doc: docObj };
     if (idx >= 0) DB.ipcs[idx] = rec; else DB.ipcs.push(rec);
     closeModal();
-    saveDB(`✅ تم تحديث مستخلص عقد ${cnt} وإعادة حساب الرادار والتأمين لحظياً!`);
+    saveDB(`✅ تم تحديث مستخلص عقد ${cnt}${docObj ? ' وإرفاق المستند السحابي' : ''} لحظياً!`);
   });
 }
 
@@ -2322,21 +2692,68 @@ function openAddTreasuryModal() {
     '📎 مصاريف إدارية ومكتبية وانتقالات وعمولات', '☕ بوفيه وضيافة ونظافة وإعاشة', '⚖️ تسوية عجز عهدة سابقة'
   ];
   openModal(`➕ إضافة مصروف خزينة (${state.selectedWeek})`, `
-    <div class="form-row"><label>الأسبوع</label><input class="inp" id="m_twk" value="${state.selectedWeek}" readonly /></div>
-    <div class="form-row"><label>التاريخ</label><input type="date" class="inp" id="m_tdt" value="${todayISO()}" /></div>
-    <div class="form-row"><label>المبلغ (ج.م)</label><input type="number" min="1" class="inp" id="m_tamt" placeholder="مثال: 500" /></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="form-row"><label>الأسبوع</label><input class="inp" id="m_twk" value="${state.selectedWeek}" readonly /></div>
+      <div class="form-row"><label>التاريخ</label><input type="date" class="inp" id="m_tdt" value="${todayISO()}" /></div>
+    </div>
+    <div class="form-row"><label>المبلغ (ج.م)</label><input type="number" min="1" class="inp" id="m_tamt" placeholder="مثال: 1500" /></div>
     <div class="form-row"><label>بيان المصروف التفصيلي</label><input type="text" class="inp" id="m_tdesc" placeholder="تفاصيل المصروف..." /></div>
-    <div class="form-row"><label>التصنيف المحاسبي</label><select class="inp" id="m_tcat">${cats.map(c=>`<option>${c}</option>`).join('')}</select></div>
+    <div class="form-row"><label>التصنيف المحاسبي</label>
+      <select class="inp" id="m_tcat" onchange="if(this.value.includes('مقاولين')) document.getElementById('m_tcnt_box').style.borderColor='var(--gold)'">${cats.map(c=>`<option>${c}</option>`).join('')}</select>
+    </div>
+    <div id="m_tcnt_box" style="background:var(--gold-soft); border:1px dashed var(--gold); border-radius:9px; padding:9px 10px; display:flex; flex-direction:column; gap:7px;">
+      <div class="form-row"><label>👷 ربط بمقاول باطن (اختياري — للدفعات أو الخصومات من العهدة)</label>
+        <select class="inp" id="m_tcnt" onchange="const hasC=!!this.value; document.getElementById('m_tautopost').checked=hasC; if(hasC) document.getElementById('m_tcat').value='👷 دفعات ومشتريات مقاولين';">
+          <option value="">— مصروف موقع عام (غير مرتبط بمقاول) —</option>
+          ${DB.contracts.map(c => `<option value="${esc(c.code)}">${esc(c.code)} — ${esc(c.name)}</option>`).join('')}
+        </select>
+      </div>
+      <label style="font-size:12px; font-weight:700; color:var(--navy); display:flex; align-items:center; gap:6px; cursor:pointer;">
+        <input type="checkbox" id="m_tautopost" />
+        ⚡ ترحيل تلقائي كدفعة «عهدة الموقع» بحساب المقاول (يمنع الإدخال المكرر)
+      </label>
+    </div>
     <div class="form-row"><label>حالة الفاتورة</label><select class="inp" id="m_tinv"><option>مرفق فاتورة ✅</option><option>بدون فاتورة ⚠️</option></select></div>
-  `, () => {
+    <div class="upload-zone">
+      <label>📷 تصوير / إرفاق الفاتورة أو الإيصال (صورة أو PDF — اختياري)</label>
+      <input type="file" id="m_tdoc" accept="image/*,.pdf" class="inp" onchange="if(this.files?.length) document.getElementById('m_tinv').value='مرفق فاتورة ✅';" />
+      <span class="upload-hint">تُضغط الصور تلقائياً لتوفير المساحة السحابية وتُحفظ مشفّرة.</span>
+    </div>
+  `, async () => {
     const amt = Number(document.getElementById('m_tamt').value);
     const desc = document.getElementById('m_tdesc').value.trim();
     if (!amt || amt <= 0 || !desc) return alert('أدخل المبلغ والبيان.');
     const wk = state.selectedWeek;
+    const dt = document.getElementById('m_tdt').value || todayISO();
     const seq = DB.treasury.filter(t => t.wk === wk).length + 1;
-    DB.treasury.push({ id: `${wk}-${seq}`, wk, date: document.getElementById('m_tdt').value || todayISO(), seq, amt, desc, cat: document.getElementById('m_tcat').value, cnt: '', inv: document.getElementById('m_tinv').value });
+    const trId = `${wk}-${seq}`;
+    const cnt = document.getElementById('m_tcnt').value;
+    const autoPost = document.getElementById('m_tautopost').checked && !!cnt;
+    let invSt = document.getElementById('m_tinv').value;
+    let docObj = null;
+    const file = document.getElementById('m_tdoc')?.files?.[0];
+    if (file) {
+      const btn = document.getElementById('modalSaveBtn');
+      btn.disabled = true; btn.textContent = '⏳ جاري ضغط ورفع الفاتورة...';
+      try { docObj = await uploadReceiptFile(file, 'treasury/' + wk); invSt = 'مرفق فاتورة ✅'; }
+      catch (err) { btn.disabled = false; btn.textContent = '💾 حفظ وتحديث لحظي'; return alert(err.message); }
+      btn.disabled = false; btn.textContent = '💾 حفظ وتحديث لحظي';
+    }
+
+    DB.treasury.push({ id: trId, wk, date: dt, seq, amt, desc, cat: document.getElementById('m_tcat').value, cnt, inv: invSt, doc: docObj });
+
+    if (autoPost) {
+      DB.payments.push({
+        id: `PAY-${dt.slice(0,4)}-${String(DB.payments.length+1).padStart(4,'0')}`,
+        date: dt, cnt, amt, ch: 'عهدة الموقع',
+        note: `${desc} (ترحيل تلقائي من خزينة ${wk})`,
+        linkedTrId: trId
+      });
+    }
     closeModal();
-    saveDB(`✅ تم قيد مصروف ${fmt(amt)} ج.م على أسبوع ${wk} وتحديث رصيد الخزينة لحظياً!`);
+    saveDB(autoPost
+      ? `⚡ تم قيد ${fmt(amt)} ج.م بخزينة ${wk} وترحيلها تلقائياً لحساب المقاول (${cnt})!`
+      : `✅ تم قيد مصروف ${fmt(amt)} ج.م على أسبوع ${wk} وتحديث رصيد الخزينة لحظياً!`);
   });
 }
 
@@ -2454,24 +2871,61 @@ document.getElementById('excelFileInput').addEventListener('change', async (e) =
   e.target.value = '';
 });
 
+function exportJsonBackup() {
+  const blob = new Blob([JSON.stringify(DB, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Hayah_AOBC_FullBackup_${todayISO()}.json`;
+  a.click();
+  showToast('💾 تم تحميل نسخة احتياطية كاملة (JSON) لحفظها على OneDrive.');
+}
+
 function exportExcelOrJson() {
   if (typeof XLSX !== 'undefined') {
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(DB.payments), 'دفعات_المقاولين');
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(DB.treasury), 'حركات_الخزينة');
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(DB.cement),   'استهلاك_الأسمنت');
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(DB.moves),    'المنصرف_والعهد');
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(DB.contracts), 'عقود_المقاولين');
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(DB.plumbing),  'سباكة_عمارة_5');
-    XLSX.writeFile(wb, `Hayah_ERP_Export_${todayISO()}.xlsx`);
-    showToast('💾 تم تصدير البيانات المحدّثة إلى ملف Excel (.xlsx) بنجاح!');
+    const safeSheet = (arr, name) => {
+      const ws = XLSX.utils.json_to_sheet(arr && arr.length ? arr : [{ 'ملاحظة': 'لا توجد بيانات' }]);
+      XLSX.utils.book_append_sheet(wb, ws, name.slice(0, 31));
+    };
+
+    safeSheet(DB.contracts, 'عقود_المقاولين');
+    safeSheet(DB.ipcs,      'المستخلصات');
+    safeSheet(DB.payments,  'دفعات_المقاولين');
+    safeSheet(S ? S.weekStats.map(w => ({ الأسبوع: w.wk, التاريخ: w.date, سابق: w.prev, تسوية_عجز: w.defSettle, تمويل_وارد: w.fund, منصرف: w.spent, متبقي: w.rem, عدد_الحركات: w.count })) : DB.weeks, 'ملخص_الأسابيع');
+    safeSheet(DB.treasury,  'حركات_الخزينة');
+    safeSheet(DB.cement,    'استهلاك_الأسمنت');
+    safeSheet(S ? S.invStats.map(i => ({ الكود: i.code, الصنف: i.name, التصنيف: i.cat, الوحدة: i.unit, أول_مدة: i.open, وارد_شراء: i.prIn, وارد_تشوين: i.grnIn, منصرف: i.out, الرصيد_المتاح: i.bal, بالعهدة: i.custOut, الحالة: i.status })) : DB.items, 'أرصدة_المخزن_125');
+    safeSheet(DB.grn,       'تشوينات_الخامات');
+    safeSheet(DB.moves,     'المنصرف_والعهد');
+    safeSheet(DB.wood.map(w => ({ ...w, الحجم_م3: Number((w.L*w.T*w.W*w.pcs).toFixed(3)) })), 'تحويلات_الأخشاب');
+    safeSheet(DB.plumbing.map(p => ({ ...p, المنفذ_22_شقة: getPlumbingActual(p), المتبقي_مخزن: Number((p.inQ - p.outQ).toFixed(2)), الانحراف: Number((p.outQ - getPlumbingActual(p)).toFixed(2)) })), 'سباكة_عمارة_5');
+    safeSheet(DB.apts.map(a => ({ م: a.seq, الدور: a.floor, الشقة: a.apt, التكوين: a.layout, شبك_25: a.p25, شبك_32: a.p32, كوع_25: a.f[0], كوع_بسن: a.f[1], مشترك_T: a.f[2], كرنك: a.f[3], محبس_32: a.f[4], شاسيه_25: a.f[5], طبة_25: a.f[6] })), 'حصر_22_شقة');
+    ensureAttendanceMonths();
+    const attExpRows = [];
+    Object.keys(DB.attendanceMonths).sort().forEach(ym => {
+      (DB.attendanceMonths[ym] || []).forEach(e => {
+        const row = { الشهر: ym, المهندس: e.name, الوظيفة: e.role };
+        (e.days || []).forEach((d, idx) => row['يوم_' + (idx + 1)] = d);
+        attExpRows.push(row);
+      });
+    });
+    safeSheet(attExpRows, 'الحضور_والانصراف');
+
+    ensureBuildingMatrix();
+    const bmRows = DB.buildingMatrix.floors.map(fl => {
+      const r = { الدور: fl.label };
+      DB.buildingMatrix.trades.forEach(tr => {
+        const cell = (DB.buildingMatrix.cells[fl.id] || {})[tr.id] || { pct: 0 };
+        r[tr.label] = cell.pct + '%' + (cell.note ? ` (${cell.note})` : '');
+      });
+      return r;
+    });
+    safeSheet(bmRows, 'مصفوفة_عمارة_5');
+
+    XLSX.writeFile(wb, `Hayah_AOBC_Complete_ERP_${todayISO()}.xlsx`);
+    showToast('📊 تم تصدير ملف Excel الأرشيفي الشامل (14 شيتاً كاملاً) لحفظه على OneDrive!');
   } else {
-    const blob = new Blob([JSON.stringify(DB, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `Hayah_ERP_Backup_${todayISO()}.json`;
-    a.click();
-    showToast('💾 تم حفظ نسخة احتياطية JSON (تعمل بدون إنترنت).');
+    exportJsonBackup();
   }
 }
 
@@ -2479,14 +2933,14 @@ function exportExcelOrJson() {
 // ============================================================================
 // 11. V4 ENHANCEMENTS: DARK MODE, LIVE TELEMETRY, NEW ITEMS, EDIT/DELETE & PLUMBING
 // ============================================================================
-const THEME_KEY = 'hayah_erp_theme_v4';
+const THEME_KEY = 'hayah_erp_theme_v56';
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const btn = document.getElementById('themeToggleBtn');
   if (btn) btn.textContent = theme === 'dark' ? '☀️ نهاري' : '🌙 ليلي';
   const metaTheme = document.querySelector('meta[name="theme-color"]');
-  if (metaTheme) metaTheme.setAttribute('content', theme === 'dark' ? '#07111B' : '#102D40');
+  if (metaTheme) metaTheme.setAttribute('content', theme === 'dark' ? '#181B22' : '#2B2F38');
 }
 
 function toggleTheme() {
@@ -2496,10 +2950,10 @@ function toggleTheme() {
   applyTheme(next);
 }
 
-// Initialize saved theme immediately
+// Initialize Obsidian Charcoal & Burnt Orange Dark Mode as the signature default
 (function initTheme() {
-  let saved = 'light';
-  try { saved = localStorage.getItem(THEME_KEY) || 'light'; } catch (e) {}
+  let saved = 'dark';
+  try { saved = localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) {}
   applyTheme(saved);
 })();
 
@@ -2571,8 +3025,14 @@ function openQuickAddModal() {
       <button class="qa-btn" onclick="closeModal(); openAddItemModal()">
         <span class="qa-ico">🏷️</span>تعريف صنف مخزن جديد
       </button>
+      <button class="qa-btn" onclick="closeModal(); openAddGrnModal()">
+        <span class="qa-ico">🚚</span>تشوين خامات (رملة/سن/طوب)
+      </button>
       <button class="qa-btn" onclick="closeModal(); openUpdateIpcModal()">
         <span class="qa-ico">📑</span>تحديث قيمة مستخلص
+      </button>
+      <button class="qa-btn" onclick="closeModal(); openAddWoodModal()">
+        <span class="qa-ico">🪵</span>تحويل أخشاب جديد
       </button>
     </div>
   `, closeModal);
@@ -2733,10 +3193,32 @@ function openEditTreasuryModal(trId) {
         <option ${!t.inv.includes('مرفق')?'selected':''}>بدون فاتورة ⚠️</option>
       </select>
     </div>
-  `, () => {
+    <div class="upload-zone">
+      <label>📷 مرفق الفاتورة / الإيصال</label>
+      ${t.doc?.path ? `<div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+        <button type="button" class="btn btn-navy btn-sm" onclick="openAttachmentPreview('${esc(t.doc.path)}','فاتورة ${esc(t.id)}','${esc(t.doc.type||'')}')">📎 معاينة الفاتورة الحالية</button>
+        <button type="button" class="btn btn-danger btn-sm" onclick="removeTreasuryDoc('${esc(t.id)}')">🗑️ حذف المرفق</button>
+      </div>` : ''}
+      <input type="file" id="m_etr_doc" accept="image/*,.pdf" class="inp" onchange="if(this.files?.length) document.getElementById('m_etr_inv').value='مرفق فاتورة ✅';" />
+    </div>
+  `, async () => {
     const amt = Number(document.getElementById('m_etr_amt').value);
     const desc = document.getElementById('m_etr_desc').value.trim();
     if (isNaN(amt) || amt < 0 || !desc) return alert('أدخل مبلغاً وبياناً صحيحين.');
+    const file = document.getElementById('m_etr_doc')?.files?.[0];
+    if (file) {
+      const btn = document.getElementById('modalSaveBtn');
+      btn.disabled = true; btn.textContent = '⏳ جاري رفع الفاتورة...';
+      try {
+        if (t.doc?.path) await deleteReceiptFile(t.doc.path);
+        t.doc = await uploadReceiptFile(file, 'treasury/' + t.wk);
+        document.getElementById('m_etr_inv').value = 'مرفق فاتورة ✅';
+      } catch (err) {
+        btn.disabled = false; btn.textContent = '💾 حفظ وتحديث لحظي';
+        return alert(err.message);
+      }
+      btn.disabled = false; btn.textContent = '💾 حفظ وتحديث لحظي';
+    }
     t.date = document.getElementById('m_etr_dt').value || t.date;
     t.amt = amt; t.desc = desc;
     t.cat = document.getElementById('m_etr_cat').value;
@@ -2949,6 +3431,930 @@ function openEditAptModal(idx) {
     closeModal();
     saveDB(`✅ تم تحديث حصر شقة (${a.apt}) وإعادة حساب مطابقة السباكة لحظياً!`);
   });
+}
+
+
+// ============================================================================
+// 12. V5.0 ENGINES: S-CURVE, BUILDING MATRIX, GLOBAL SEARCH, A4 STATEMENT, WHATSAPP & BULK GRN
+// ============================================================================
+const getBrandLogos = () => { const imgs = document.querySelectorAll('.brand-logos-pair img'); return { aobc: imgs[0]?.src || '', hayat: imgs[1]?.src || '' }; };
+
+// --- A) GLOBAL UNIFIED SEARCH (CTRL + K) ---
+function openGlobalSearch() {
+  const ov = document.getElementById('gsOverlay');
+  ov.classList.add('open');
+  const inp = document.getElementById('gsInput');
+  inp.value = '';
+  runGlobalSearch('');
+  setTimeout(() => inp.focus(), 40);
+}
+function closeGlobalSearch() {
+  document.getElementById('gsOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    if (!document.body.classList.contains('locked')) openGlobalSearch();
+  } else if (e.key === 'Escape') {
+    closeGlobalSearch();
+    closeModal();
+    closeToolsMenu();
+  }
+});
+
+function runGlobalSearch(rawQ) {
+  const q = (rawQ || '').trim().toLowerCase();
+  const box = document.getElementById('gsResults');
+  if (!q) {
+    box.innerHTML = `<div style="text-align:center; padding:24px 12px; color:var(--muted); font-size:12.5px;">
+      اكتب أي كلمة للبحث اللحظي في كامل المنظومة (مقاول، مبلغ، بيان خزينة، صنف مخزن، شقة، أو كود)...
+    </div>`;
+    return;
+  }
+
+  const hits = [];
+  // 1) Contracts
+  (S?.subStats || []).forEach(c => {
+    if (c.code.toLowerCase().includes(q) || c.name.toLowerCase().includes(q) || c.person.toLowerCase().includes(q) || c.trade.toLowerCase().includes(q)) {
+      hits.push({ tag: '👷 مقاول', pill: 'pill-plum', title: `${c.code} — ${c.name}`, sub: `مدفوع: ${fmt(c.totalPaid)} ج.م • متبقي قبل 5%: ${fmt(c.remBefore)} ج.م`, go: () => { switchTab('subcontractors'); setTimeout(() => document.getElementById('card-sub-'+c.code)?.scrollIntoView({behavior:'smooth', block:'center'}), 80); } });
+    }
+  });
+  // 2) Subcontractor Payments
+  DB.payments.slice().reverse().forEach(p => {
+    if (hits.length > 40) return;
+    if (p.id.toLowerCase().includes(q) || p.date.includes(q) || String(p.amt).includes(q) || (p.note||'').toLowerCase().includes(q)) {
+      hits.push({ tag: '💸 دفعة', pill: 'pill-amber', title: `${fmt(p.amt)} ج.م — عقد ${p.cnt} (${p.date})`, sub: `${p.ch}${p.note ? ' • ' + p.note : ''}`, go: () => { switchTab('subcontractors'); state.subCards[p.cnt] = { newest: true, q: String(p.amt) }; renderSubSmartCards(); setTimeout(() => document.getElementById('card-sub-'+p.cnt)?.scrollIntoView({behavior:'smooth', block:'center'}), 80); } });
+    }
+  });
+  // 3) Treasury
+  DB.treasury.slice().reverse().forEach(t => {
+    if (hits.length > 55) return;
+    if (t.desc.toLowerCase().includes(q) || t.wk.toLowerCase().includes(q) || t.cat.toLowerCase().includes(q) || String(t.amt).includes(q) || t.date.includes(q)) {
+      hits.push({ tag: '🗄️ خزينة ' + t.wk, pill: 'pill-navy', title: `${t.desc} — ${fmt(t.amt)} ج.م`, sub: `${t.date} • ${t.cat} • ${t.inv}`, go: () => { switchTab('treasury'); state.selectedWeek = t.wk; document.getElementById('weekSelector').value = t.wk; document.getElementById('trSearchAll').checked = false; document.getElementById('trSearch').value = ''; renderTreasuryWeek(); } });
+    }
+  });
+  // 4) Inventory Items
+  (S?.invStats || []).forEach(i => {
+    if (hits.length > 70) return;
+    if (i.name.toLowerCase().includes(q) || i.code.toLowerCase().includes(q) || i.trade.toLowerCase().includes(q)) {
+      hits.push({ tag: '📦 مخزن', pill: i.pill, title: `${i.code} — ${i.name}`, sub: `رصيد متاح: ${fmt(i.bal,1)} ${i.unit} • ${i.status}`, go: () => { switchTab('inventory'); state.selectedBinCode = i.code; document.getElementById('binCardSelect').value = i.code; renderBinCard(); } });
+    }
+  });
+  // 5) Plumbing & Apts
+  DB.plumbing.forEach((p, idx) => {
+    if (p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q)) {
+      hits.push({ tag: '🚰 سباكة', pill: 'pill-plum', title: `${p.code} — ${p.name}`, sub: `وارد: ${fmt(p.inQ,2)} • منصرف: ${fmt(p.outQ,2)} ${p.unit}`, go: () => { switchTab('plumbing'); openEditPlumbingModal(idx); } });
+    }
+  });
+  DB.apts.forEach(a => {
+    if (a.apt.toLowerCase().includes(q) || a.floor.toLowerCase().includes(q)) {
+      hits.push({ tag: '🏢 شقة', pill: 'pill-green', title: `${a.apt} — ${a.floor} (${a.layout})`, sub: `شبك 25: ${a.p25} م.ط • شبك 32: ${a.p32} م.ط`, go: () => { switchTab('plumbing'); document.getElementById('aptSearch').value = a.apt; renderAptsTable(); } });
+    }
+  });
+
+  window.__gsActions = hits.slice(0, 35);
+  if (!window.__gsActions.length) {
+    box.innerHTML = `<div style="text-align:center; padding:24px; color:var(--muted);">لم يتم العثور على نتائج مطابقة لـ «${esc(rawQ)}».</div>`;
+    return;
+  }
+  box.innerHTML = window.__gsActions.map((h, idx) => `
+    <div class="gs-item" onclick="closeGlobalSearch(); window.__gsActions[${idx}].go();">
+      <div>
+        <div class="gs-item-title">${esc(h.title)}</div>
+        <div class="gs-item-sub">${esc(h.sub)}</div>
+      </div>
+      <span class="pill ${h.pill}">${esc(h.tag)}</span>
+    </div>
+  `).join('');
+}
+
+// --- B) OFFICIAL A4 SUBCONTRACTOR STATEMENT & WHATSAPP SUMMARY ---
+function printContractorStatement(code) {
+  const x = S.subStats.find(c => c.code === code);
+  if (!x) return;
+  const ipc = DB.ipcs.find(ip => ip.cnt === code);
+  const rows = x.pays.slice().sort((a,b) => (a.date || '').localeCompare(b.date || ''));
+  let running = 0;
+
+  document.getElementById('printStatementArea').innerHTML = `
+    <div class="stmt-hdr">
+      <img src="${getBrandLogos().aobc}" alt="A.O.B.C" />
+      <div class="stmt-title">
+        <h2>المكتب العربي للتشييد والبناء (A.O.B.C)</h2>
+        <p>كشف حساب مقاول باطن رسمي — مشروع حياة مرسيليا (عمارة 5)</p>
+        <p style="font-size:11px; color:#64748B;">تاريخ الإصدار: ${todayISO()} • كود العقد: ${esc(x.code)}</p>
+      </div>
+      <img src="${getBrandLogos().hayat}" alt="حياة مرسيليا" />
+    </div>
+
+    <div style="border:1px solid #CBD5E1; border-radius:8px; padding:10px 12px; margin-bottom:12px; background:#FDF2EA; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:12.5px;">
+      <div><strong>البند والعقد:</strong> ${esc(x.name)}</div>
+      <div><strong>المقاول / المسؤول:</strong> ${esc(x.person)}</div>
+      <div><strong>آخر مستخلص:</strong> رقم (${x.ipcNo}) ${ipc ? 'بتاريخ ' + ipc.date : '— بدون مستخلص'}</div>
+    </div>
+
+    <div class="stmt-grid">
+      <div class="stmt-box"><div class="sl">صافي المستخلص المعتمد</div><div class="sv">${fmt(x.netIpc)} ج.م</div></div>
+      <div class="stmt-box"><div class="sl">إجمالي المدفوع (${x.count} دفعة)</div><div class="sv" style="color:#C05621;">${fmt(x.totalPaid)} ج.م</div></div>
+      <div class="stmt-box"><div class="sl">تأمين الأعمال (${x.retRate}%)</div><div class="sv">${fmt(x.ret5)} ج.م</div></div>
+      <div class="stmt-box"><div class="sl">المتاح للصرف بعد التأمين</div><div class="sv" style="color:${x.availAfter<0?'#B91C1C':'#15803D'};">${fmt(x.availAfter)} ج.م</div></div>
+    </div>
+
+    <div style="font-size:11.5px; color:#475569; margin-bottom:10px; display:flex; gap:18px; flex-wrap:wrap;">
+      <span>• تحويلات الشركة: <strong>${fmt(x.compPaid)} ج.م</strong></span>
+      <span>• دفعات عهدة الموقع: <strong>${fmt(x.sitePaid)} ج.م</strong></span>
+      <span>• رصيد ما قبله: <strong>${fmt(x.prevPaid)} ج.م</strong></span>
+      <span>• نسبة السحب: <strong>${x.netIpc>0?(x.pct*100).toFixed(1)+'%':'—'}</strong></span>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>م</th><th>التاريخ</th><th>المبلغ (ج.م)</th><th>التراكمي (ج.م)</th><th>قناة الصرف</th><th class="right">البيان / الملاحظات</th></tr>
+      </thead>
+      <tbody>
+        ${rows.map((r, i) => {
+          running += r.amt;
+          return `<tr><td>${i+1}</td><td>${r.date}</td><td class="num">${fmt(r.amt)}</td><td class="num">${fmt(running)}</td><td>${esc(r.ch)}</td><td class="right">${esc(r.note || 'دفعة تحت الحساب')}</td></tr>`;
+        }).join('')}
+        <tr style="background:#181B22; color:#fff; font-weight:800;">
+          <td colspan="2">الإجمالي التراكمي</td>
+          <td>${fmt(x.totalPaid)}</td>
+          <td>${fmt(running)}</td>
+          <td colspan="2" class="right">المتبقي قبل التأمين: ${fmt(x.remBefore)} ج.م | بعد التأمين: ${fmt(x.availAfter)} ج.م</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="stmt-sigs">
+      <div>المكتب الفني وحسابات الموقع<br><small>م / أحمد يسري</small><br><br>التوقيع: ....................</div>
+      <div>استلام ومراجعة المقاول<br><small>${esc(x.person)}</small><br><br>التوقيع: ....................</div>
+      <div>اعتماد مدير المشروع<br><small>م / محمد السيد</small><br><br>التوقيع والختم: ................</div>
+    </div>
+  `;
+
+  document.body.classList.add('printing-statement');
+  const cleanup = () => {
+    document.body.classList.remove('printing-statement');
+    window.removeEventListener('afterprint', cleanup);
+  };
+  window.addEventListener('afterprint', cleanup);
+  setTimeout(() => {
+    window.print();
+    setTimeout(cleanup, 1200);
+  }, 120);
+}
+
+function copyContractorWhatsApp(code) {
+  const x = S.subStats.find(c => c.code === code);
+  if (!x) return;
+  const last3 = x.pays.slice().sort((a,b) => (a.date || '').localeCompare(b.date || '')).slice(-3).reverse();
+  const lines = [
+    `*المكتب العربي للتشييد والبناء (A.O.B.C)*`,
+    `*ملخص حساب مقاول — مشروع حياة مرسيليا (عمارة 5)*`,
+    `━━━━━━━━━━━━━━━━━━`,
+    `👷 *البند:* ${x.name} (${x.code})`,
+    `👤 *المسؤول:* ${x.person}`,
+    `📑 *صافي المستخلص (#${x.ipcNo}):* ${fmt(x.netIpc)} ج.م`,
+    `💸 *إجمالي المسحوب (${x.count} دفعة):* ${fmt(x.totalPaid)} ج.م (${x.netIpc>0?(x.pct*100).toFixed(1)+'%':'بدون مستخلص'})`,
+    `🏦 *شركة:* ${fmt(x.compPaid)} | 💵 *عهدة موقع:* ${fmt(x.sitePaid)}`,
+    `🛡️ *تأمين الأعمال (${x.retRate}%):* ${fmt(x.ret5)} ج.م`,
+    `💰 *المتبقي قبل التأمين:* ${fmt(x.remBefore)} ج.م`,
+    `✅ *المتاح للصرف بعد التأمين:* ${fmt(x.availAfter)} ج.م`,
+    `📊 *الحالة:* ${x.radarTxt}`
+  ];
+  if (last3.length) {
+    lines.push(`━━━━━━━━━━━━━━━━━━`, `🕒 *آخر ${last3.length} دفعات:*`);
+    last3.forEach(p => lines.push(`• ${p.date}: ${fmt(p.amt)} ج.م (${p.ch})`));
+  }
+  lines.push(`📅 بتاريخ: ${todayISO()}`);
+  const txt = lines.join('\n');
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(() => {
+      showToast('📲 تم نسخ ملخص المقاول — الصقه مباشرة في واتساب!');
+    }).catch(() => showWhatsAppFallbackModal(txt));
+  } else {
+    showWhatsAppFallbackModal(txt);
+  }
+}
+
+function showWhatsAppFallbackModal(txt) {
+  openModal('📲 ملخص واتساب جاهز للنسخ', `<textarea class="inp" rows="12" style="width:100%; font-size:12px;" readonly onclick="this.select()">${esc(txt)}</textarea>`, closeModal);
+  document.getElementById('modalSaveBtn').style.display = 'none';
+}
+
+// --- C) MONTHLY CASHFLOW & CUMULATIVE S-CURVE (PURE INLINE SVG) ---
+function renderSCurve() {
+  const container = document.getElementById('scurveContainer');
+  const metaEl = document.getElementById('scurveMeta');
+  if (!container) return;
+
+  const monthly = {};
+  const addM = (dt, key, val) => {
+    const ym = String(dt || '').slice(0, 7);
+    if (!/^20\d\d-\d\d$/.test(ym)) return;
+    if (!monthly[ym]) monthly[ym] = { ym, sub: 0, tr: 0 };
+    monthly[ym][key] += Number(val || 0);
+  };
+  DB.payments.forEach(p => addM(p.date, 'sub', p.amt));
+  DB.treasury.forEach(t => {
+    if (!String(t.cat || '').includes('مقاولين')) addM(t.date, 'tr', t.amt);
+  });
+
+  const arr = Object.values(monthly).sort((a,b) => a.ym.localeCompare(b.ym));
+  if (!arr.length) {
+    container.innerHTML = '<div style="text-align:center; padding:18px; color:var(--muted);">لا توجد بيانات زمنية كافية لرسم المنحنى.</div>';
+    return;
+  }
+
+  let cum = 0, peak = arr[0];
+  arr.forEach(m => {
+    m.tot = m.sub + m.tr;
+    cum += m.tot;
+    m.cum = cum;
+    if (m.tot > peak.tot) peak = m;
+  });
+  const avgBurn = cum / arr.length;
+  if (metaEl) metaEl.textContent = `متوسط الصرف الشهري: ${fmt(avgBurn)} ج.م • أعلى شهر: ${peak.ym} (${fmt(peak.tot)} ج.م) • ${arr.length} شهراً`;
+
+  const W = Math.max(680, arr.length * 36 + 90), H = 240;
+  const padL = 56, padR = 56, padT = 22, padB = 42;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const maxBar = Math.max(...arr.map(m => m.tot), 1);
+  const maxCum = Math.max(cum, 1);
+  const stepX = plotW / arr.length;
+  const barW = Math.max(10, Math.min(24, stepX * 0.62));
+
+  const gridLines = [0, 0.25, 0.5, 0.75, 1].map(f => {
+    const y = padT + plotH * (1 - f);
+    return `
+      <line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="var(--border)" stroke-dasharray="3,3" opacity="0.65" />
+      <text x="${padL - 6}" y="${(y + 3).toFixed(1)}" text-anchor="end" font-size="9.5" fill="var(--muted)">${fmt(maxBar * f / 1000, 0)}k</text>
+      <text x="${W - padR + 6}" y="${(y + 3).toFixed(1)}" text-anchor="start" font-size="9.5" fill="var(--gold)">${(maxCum * f / 1e6).toFixed(1)}M</text>
+    `;
+  }).join('');
+
+  const bars = arr.map((m, i) => {
+    const cx = padL + i * stepX + stepX / 2;
+    const hSub = (m.sub / maxBar) * plotH;
+    const hTr  = (m.tr / maxBar) * plotH;
+    const ySub = padT + plotH - hSub;
+    const yTr  = ySub - hTr;
+    const showLbl = arr.length <= 18 || i % 2 === 0 || i === arr.length - 1;
+    return `
+      <g>
+        <title>${m.ym}&#10;مقاولين: ${fmt(m.sub)} ج.م&#10;صافي خزينة: ${fmt(m.tr)} ج.م&#10;إجمالي الشهر: ${fmt(m.tot)} ج.م&#10;التراكمي: ${fmt(m.cum)} ج.م</title>
+        <rect x="${(cx - barW/2).toFixed(1)}" y="${ySub.toFixed(1)}" width="${barW.toFixed(1)}" height="${hSub.toFixed(1)}" rx="3" fill="#596377" opacity="0.92" />
+        <rect x="${(cx - barW/2).toFixed(1)}" y="${yTr.toFixed(1)}" width="${barW.toFixed(1)}" height="${hTr.toFixed(1)}" rx="2" fill="#C76A33" opacity="0.92" />
+        ${showLbl ? `<text x="${cx.toFixed(1)}" y="${H - 12}" text-anchor="middle" font-size="9" fill="var(--muted)" transform="rotate(-28 ${cx.toFixed(1)} ${H - 12})">${m.ym.slice(2)}</text>` : ''}
+      </g>
+    `;
+  }).join('');
+
+  const pts = arr.map((m, i) => {
+    const cx = padL + i * stepX + stepX / 2;
+    const cy = padT + plotH * (1 - m.cum / maxCum);
+    return { cx, cy, m };
+  });
+  const poly = pts.map(p => `${p.cx.toFixed(1)},${p.cy.toFixed(1)}`).join(' ');
+  const dots = pts.map(p => `
+    <circle cx="${p.cx.toFixed(1)}" cy="${p.cy.toFixed(1)}" r="3.4" fill="#EBD9C2" stroke="#E88A4B" stroke-width="1.6">
+      <title>${p.m.ym} — التراكمي: ${fmt(p.m.cum)} ج.م</title>
+    </circle>
+  `).join('');
+
+  container.innerHTML = `
+    <svg class="scurve-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+      ${gridLines}
+      ${bars}
+      <polyline fill="none" stroke="#E88A4B" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" points="${poly}" />
+      ${dots}
+    </svg>
+  `;
+}
+
+// --- D) BUILDING 5 VISUAL PROGRESS MATRIX (الأدوار × البنود) ---
+function ensureBuildingMatrix() {
+  if (DB.buildingMatrix && Array.isArray(DB.buildingMatrix.floors) && Array.isArray(DB.buildingMatrix.trades)) return;
+  const floors = [
+    { id: 'F-ROOF', label: 'السطح والطبانات' },
+    { id: 'F-FAC',  label: 'الواجهات الخارجية' },
+    { id: 'F-09',   label: 'الدور التاسع' },
+    { id: 'F-08',   label: 'الدور الثامن' },
+    { id: 'F-07',   label: 'الدور السابع' },
+    { id: 'F-06',   label: 'الدور السادس' },
+    { id: 'F-05',   label: 'الدور الخامس' },
+    { id: 'F-04',   label: 'الدور الرابع' },
+    { id: 'F-03',   label: 'الدور الثالث' },
+    { id: 'F-02',   label: 'الدور الثاني' },
+    { id: 'F-01',   label: 'الدور الأول' },
+    { id: 'F-BSM',  label: 'البدروم / المخازن' }
+  ];
+  const trades = [
+    { id: 'T-MAS', label: 'مباني' },
+    { id: 'T-ELC', label: 'كهرباء' },
+    { id: 'T-PLM', label: 'سباكة' },
+    { id: 'T-PLS', label: 'بياض' },
+    { id: 'T-GYP', label: 'جبس وكرانيش' },
+    { id: 'T-PNT', label: 'دهانات' },
+    { id: 'T-ALU', label: 'ألوميتال' },
+    { id: 'T-CER', label: 'سيراميك' }
+  ];
+  const cells = {};
+  const hasIpc = cnt => DB.ipcs.some(ip => ip.cnt === cnt && ip.gross > 0);
+  floors.forEach(fl => {
+    cells[fl.id] = {};
+    trades.forEach(tr => {
+      let pct = 0;
+      const nFloor = fl.id.startsWith('F-0') ? Number(fl.id.slice(2)) : 0;
+      if (tr.id === 'T-MAS' && hasIpc('CNT-03') && (nFloor >= 1 || fl.id === 'F-ROOF' || fl.id === 'F-BSM')) pct = 100;
+      else if (tr.id === 'T-ELC' && hasIpc('CNT-05') && nFloor >= 1 && nFloor <= 8) pct = 100;
+      else if (tr.id === 'T-ELC' && hasIpc('CNT-05') && nFloor === 9) pct = 50;
+      else if (tr.id === 'T-PLS' && hasIpc('CNT-04') && ((nFloor >= 1 && nFloor <= 8) || fl.id === 'F-FAC')) pct = 100;
+      else if (tr.id === 'T-PLM' && hasIpc('CNT-07') && nFloor >= 1 && nFloor <= 4) pct = 30;
+      cells[fl.id][tr.id] = { pct, note: '' };
+    });
+  });
+  DB.buildingMatrix = { floors, trades, cells };
+}
+
+function renderBuildingMatrix() {
+  ensureBuildingMatrix();
+  const bm = DB.buildingMatrix;
+  let totalSum = 0, totalCells = 0, doneCells = 0, progCells = 0;
+
+  bm.floors.forEach(fl => {
+    bm.trades.forEach(tr => {
+      const pct = Number(((bm.cells[fl.id] || {})[tr.id] || { pct: 0 }).pct || 0);
+      totalSum += pct; totalCells++;
+      if (pct >= 100) doneCells++;
+      else if (pct > 0) progCells++;
+    });
+  });
+  const overall = totalCells ? (totalSum / totalCells) : 0;
+  const bdg = document.getElementById('bdgMatrix');
+  if (bdg) bdg.textContent = overall.toFixed(0) + '%';
+
+  const kpisEl = document.getElementById('matrixKpis');
+  if (kpisEl) {
+    kpisEl.innerHTML = `
+      <div class="kpi-card gold"><div class="kpi-label">🏢 نسبة الإنجاز الكلية لعمارة 5</div><div class="kpi-val">${overall.toFixed(1)}%</div><div class="prog-track"><div class="prog-fill" style="width:${overall.toFixed(1)}%; background:var(--gold);"></div></div></div>
+      <div class="kpi-card lime"><div class="kpi-label">✅ بنود مُسلَّمة استشاري (100%)</div><div class="kpi-val pos">${doneCells} <small style="font-size:12px;">من ${totalCells}</small></div><div class="kpi-sub">نسبة التسليم النهائي: ${(totalCells?doneCells/totalCells*100:0).toFixed(1)}%</div></div>
+      <div class="kpi-card plum"><div class="kpi-label">🟡 بنود جاري تنفيذها حالياً</div><div class="kpi-val" style="color:var(--plum);">${progCells}</div><div class="kpi-sub">⬜ لم تبدأ بعد: ${totalCells - doneCells - progCells} بند</div></div>
+      <div class="kpi-card"><div class="kpi-label">📐 أبعاد المصفوفة الحالية</div><div class="kpi-val">${bm.floors.length} × ${bm.trades.length}</div><div class="kpi-sub">${bm.floors.length} نطاقات تنفيذية × ${bm.trades.length} بنود أعمال</div></div>
+    `;
+  }
+
+  const headEl = document.getElementById('bmHead');
+  const bodyEl = document.getElementById('bmBody');
+  if (!headEl || !bodyEl) return;
+
+  headEl.innerHTML = `<tr><th class="right">الدور / النطاق</th>${bm.trades.map(tr => `<th>${esc(tr.label)}</th>`).join('')}<th>إنجاز الدور</th></tr>`;
+
+  const rowsHtml = bm.floors.map(fl => {
+    let flSum = 0;
+    const tds = bm.trades.map(tr => {
+      const cell = (bm.cells[fl.id] && bm.cells[fl.id][tr.id]) ? bm.cells[fl.id][tr.id] : { pct: 0, note: '' };
+      const pct = Number(cell.pct || 0);
+      flSum += pct;
+      const cls = pct >= 100 ? 'bm-st-3' : (pct >= 90 ? 'bm-st-2' : (pct > 0 ? 'bm-st-1' : 'bm-st-0'));
+      const lbl = pct >= 100 ? 'مُسلَّم ✅' : (pct >= 90 ? 'بانتظار استشاري' : (pct > 0 ? 'جاري' : 'لم يبدأ'));
+      return `<td style="padding:4px;"><div class="bm-cell ${cls}" onclick="openEditMatrixCell('${fl.id}','${tr.id}')" title="${esc(cell.note || 'اضغط لتحديث الحالة')}"><span class="bm-pct">${pct}%</span><span class="bm-lbl">${cell.note ? '<span class=bm-note-dot></span>' : ''}${lbl}</span></div></td>`;
+    }).join('');
+    const flPct = bm.trades.length ? (flSum / bm.trades.length) : 0;
+    return `<tr><td class="bm-floor-cell">${esc(fl.label)}</td>${tds}<td class="num" style="background:var(--gold-soft);">${flPct.toFixed(0)}%</td></tr>`;
+  }).join('');
+
+  // Trade totals footer row
+  const tradeAvgRow = `<tr style="background:var(--navy); color:#fff; font-weight:800;">
+    <td class="right">📊 متوسط إنجاز البند</td>
+    ${bm.trades.map(tr => {
+      const s = bm.floors.reduce((acc, fl) => acc + Number(((bm.cells[fl.id]||{})[tr.id]||{pct:0}).pct||0), 0);
+      return `<td>${(bm.floors.length ? s/bm.floors.length : 0).toFixed(0)}%</td>`;
+    }).join('')}
+    <td style="background:var(--gold); color:var(--navy);">${overall.toFixed(0)}%</td>
+  </tr>`;
+
+  bodyEl.innerHTML = rowsHtml + tradeAvgRow;
+}
+
+function openEditMatrixCell(flId, trId) {
+  ensureBuildingMatrix();
+  const bm = DB.buildingMatrix;
+  const fl = bm.floors.find(x => x.id === flId);
+  const tr = bm.trades.find(x => x.id === trId);
+  if (!bm.cells[flId]) bm.cells[flId] = {};
+  const cell = bm.cells[flId][trId] || { pct: 0, note: '' };
+
+  openModal(`🏢 تحديث تقدم: ${tr.label} — ${fl.label}`, `
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:6px;">
+      <button type="button" class="btn btn-light btn-sm" style="justify-content:center;" onclick="document.getElementById('m_bm_pct').value=0">⬜ لم يبدأ (0%)</button>
+      <button type="button" class="btn btn-gold btn-sm" style="justify-content:center;" onclick="document.getElementById('m_bm_pct').value=50">🟡 جاري (50%)</button>
+      <button type="button" class="btn btn-navy btn-sm" style="justify-content:center;" onclick="document.getElementById('m_bm_pct').value=90">🔵 بانتظار استشاري (90%)</button>
+      <button type="button" class="btn btn-lime btn-sm" style="justify-content:center;" onclick="document.getElementById('m_bm_pct').value=100">✅ مُسلَّم استشاري (100%)</button>
+    </div>
+    <div class="form-row"><label>نسبة الإنجاز الدقيقة (%)</label><input type="number" min="0" max="100" step="5" class="inp" id="m_bm_pct" value="${cell.pct}" /></div>
+    <div class="form-row"><label>ملاحظة هندسية / رقم طلب الاستلام (IR)</label><input class="inp" id="m_bm_note" value="${esc(cell.note||'')}" placeholder="مثال: تم التسليم للمهندس وليد IR-045..." /></div>
+  `, () => {
+    const pct = Math.max(0, Math.min(100, Number(document.getElementById('m_bm_pct').value || 0)));
+    bm.cells[flId][trId] = { pct, note: (document.getElementById('m_bm_note').value || '').trim() };
+    closeModal();
+    saveDB(`🏢 تم تحديث (${tr.label} — ${fl.label}) إلى ${pct}% وحفظها سحابياً!`);
+  });
+}
+
+function openAddMatrixTradeModal() {
+  ensureBuildingMatrix();
+  openModal('➕ إضافة بند أعمال جديد لمصفوفة عمارة 5', `
+    <div class="form-row"><label>اسم البند الجديد</label><input class="inp" id="m_bmt_lbl" placeholder="مثال: عزل حمامات / رخام سلم / مصاعد..." /></div>
+  `, () => {
+    const lbl = (document.getElementById('m_bmt_lbl').value || '').trim();
+    if (!lbl) return alert('أدخل اسم البند.');
+    const id = 'T-C' + (DB.buildingMatrix.trades.length + 1);
+    DB.buildingMatrix.trades.push({ id, label: lbl });
+    DB.buildingMatrix.floors.forEach(fl => {
+      if (!DB.buildingMatrix.cells[fl.id]) DB.buildingMatrix.cells[fl.id] = {};
+      DB.buildingMatrix.cells[fl.id][id] = { pct: 0, note: '' };
+    });
+    closeModal();
+    saveDB(`🏢 تم إضافة بند (${lbl}) إلى مصفوفة عمارة 5!`);
+  });
+}
+
+// --- E) BULK MATERIALS GRN ENTRY & LOG + WOOD & MOVE MANAGEMENT ---
+function openAddGrnModal() {
+  const presets = [
+    { code: 'MW-020', label: '⛰️ رملة صفراء (م³)', unit: 'م³' },
+    { code: 'MW-025', label: '🪨 سن خرساني (م³)', unit: 'م³' },
+    { code: 'MW-035', label: '🧱 طوب طفلي 20×12×10 (طوبة)', unit: 'طوبة' },
+    { code: 'MW-034', label: '🧱 طوب أسمنتي مصمت (طوبة)', unit: 'طوبة' },
+    { code: 'MW-006', label: '🧱 أسمنت أسود 42.5 (طن × 20 شكارة)', unit: 'طن' }
+  ];
+  const otherItems = DB.items.filter(i => !presets.some(p => p.code === i.code));
+
+  openModal('🚚 تسجيل نقلة تشوين / وارد خامات للموقع', `
+    <div class="form-row"><label>الصنف المورد</label>
+      <select class="inp" id="m_grn_code" onchange="const opt=this.selectedOptions[0]; document.getElementById('m_grn_unit').value=opt.dataset.unit||'عدد';">
+        <optgroup label="الخامات الأساسية (التشوينات)">
+          ${presets.map(p => `<option value="${p.code}" data-unit="${p.unit}">${p.label}</option>`).join('')}
+        </optgroup>
+        <optgroup label="باقي أصناف المخزن">
+          ${otherItems.map(i => `<option value="${esc(i.code)}" data-unit="${esc(i.unit)}">${esc(i.code)} — ${esc(i.name)} (${esc(i.unit)})</option>`).join('')}
+        </optgroup>
+      </select>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="form-row"><label>الكمية</label><input type="number" min="0.1" step="0.5" class="inp" id="m_grn_qty" placeholder="مثال: 18" /></div>
+      <div class="form-row"><label>الوحدة</label><input class="inp" id="m_grn_unit" value="م³" /></div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="form-row"><label>تاريخ التوريد</label><input type="date" class="inp" id="m_grn_dt" value="${todayISO()}" /></div>
+      <div class="form-row"><label>المورد</label><input class="inp" id="m_grn_sup" value="عيسى / مورد الموقع" /></div>
+    </div>
+    <div class="upload-zone">
+      <label>📷 صورة بون التوريد / تذكرة الميزان (اختياري)</label>
+      <input type="file" id="m_grn_doc" accept="image/*,.pdf" class="inp" />
+    </div>
+  `, async () => {
+    const code = document.getElementById('m_grn_code').value;
+    const qty = Number(document.getElementById('m_grn_qty').value);
+    const unit = (document.getElementById('m_grn_unit').value || 'عدد').trim();
+    const dt = document.getElementById('m_grn_dt').value || todayISO();
+    const sup = (document.getElementById('m_grn_sup').value || '').trim();
+    if (!qty || qty <= 0) return alert('أدخل كمية صحيحة أكبر من الصفر.');
+    let docObj = null;
+    const file = document.getElementById('m_grn_doc')?.files?.[0];
+    if (file) {
+      const btn = document.getElementById('modalSaveBtn');
+      btn.disabled = true; btn.textContent = '⏳ جاري رفع صورة البون...';
+      try { docObj = await uploadReceiptFile(file, 'grn/' + code); }
+      catch (err) { btn.disabled = false; btn.textContent = '💾 حفظ وتحديث لحظي'; return alert(err.message); }
+      btn.disabled = false; btn.textContent = '💾 حفظ وتحديث لحظي';
+    }
+    DB.grn.push({ date: dt, code, qty, unit, sup, doc: docObj });
+    closeModal();
+    saveDB(`🚚 تم قيد توريد ${fmt(qty,1)} ${unit} (${code})${docObj ? ' مع إرفاق البون' : ''} لحظياً!`);
+  });
+}
+
+function openGrnLogModal() {
+  const nameMap = Object.fromEntries(DB.items.map(i => [i.code, i.name]));
+  const recent = DB.grn.map((g, idx) => ({ ...g, _idx: idx })).reverse().slice(0, 40);
+  openModal(`📋 أحدث أذون التشوين والوارد (آخر 40 من ${DB.grn.length})`, `
+    <div class="custom-scroll" style="max-height:380px; overflow-y:auto;">
+      <table>
+        <thead><tr><th>التاريخ</th><th class="right">الصنف</th><th>الكمية</th><th>المورد</th><th>البون</th><th>حذف</th></tr></thead>
+        <tbody>
+          ${recent.map(g => `<tr>
+            <td>${g.date}</td>
+            <td class="right"><strong>${esc(nameMap[g.code] || g.code)}</strong></td>
+            <td class="num">${fmt(g.qty,1)} ${esc(g.unit)}</td>
+            <td>${esc(g.sup || '—')}</td>
+            <td>${g.doc?.path
+              ? `<span class="doc-pill" onclick="openAttachmentPreview('${esc(g.doc.path)}','بون توريد ${esc(nameMap[g.code]||g.code)} (${g.date})','${esc(g.doc.type||'')}')">📎</span>`
+              : `<button class="icon-btn" onclick="triggerQuickAttach('grn',${g._idx})" title="إرفاق صورة البون">📷</button>`}</td>
+            <td><button class="icon-btn del" onclick="deleteGrn(${g._idx})">🗑️</button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  `, closeModal);
+  document.getElementById('modalSaveBtn').style.display = 'none';
+}
+
+function deleteGrn(idx) {
+  const g = DB.grn[idx];
+  if (!g) return;
+  if (!confirm(`هل تريد حذف إذن التشوين (${g.code} — ${g.qty} ${g.unit} بتاريخ ${g.date})؟`)) return;
+  DB.grn.splice(idx, 1);
+  closeModal();
+  saveDB('🗑️ تم حذف إذن التشوين وتحديث الأرصدة لحظياً.');
+}
+
+function openAddWoodModal() {
+  const nxtId = 'WD-' + String(DB.wood.length + 1).padStart(3, '0');
+  openModal(`🪵 تسجيل نقلة تحويل أخشاب جديدة (${nxtId})`, `
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="form-row"><label>رقم التحويل</label><input class="inp ltr-inp" id="m_wd_id" value="${nxtId}" /></div>
+      <div class="form-row"><label>التاريخ</label><input type="date" class="inp" id="m_wd_dt" value="${todayISO()}" /></div>
+    </div>
+    <div class="form-row"><label>البيان / نوع الخشب</label><input class="inp" id="m_wd_desc" placeholder="مثال: ألواح لتزانة / عروق فليري..." /></div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px;">
+      <div class="form-row"><label>الطول (م)</label><input type="number" step="0.1" class="inp" id="m_wd_L" value="3" /></div>
+      <div class="form-row"><label>السُمك (م)</label><input type="number" step="0.005" class="inp" id="m_wd_T" value="0.025" /></div>
+      <div class="form-row"><label>العرض (م)</label><input type="number" step="0.01" class="inp" id="m_wd_W" value="0.10" /></div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="form-row"><label>العدد (قطعة)</label><input type="number" min="1" class="inp" id="m_wd_pcs" value="50" /></div>
+      <div class="form-row"><label>الموقع المستلم</label><input class="inp" id="m_wd_site" value="مارسيليا 5" /></div>
+    </div>
+  `, () => {
+    const desc = (document.getElementById('m_wd_desc').value || '').trim();
+    const pcs = Number(document.getElementById('m_wd_pcs').value);
+    if (!desc || !pcs || pcs <= 0) return alert('أدخل البيان والعدد.');
+    DB.wood.push({
+      id: (document.getElementById('m_wd_id').value || nxtId).trim(),
+      date: document.getElementById('m_wd_dt').value || todayISO(),
+      desc,
+      L: Number(document.getElementById('m_wd_L').value || 0),
+      T: Number(document.getElementById('m_wd_T').value || 0),
+      W: Number(document.getElementById('m_wd_W').value || 0),
+      pcs,
+      site: (document.getElementById('m_wd_site').value || 'موقع شقيق').trim()
+    });
+    closeModal();
+    saveDB('🪵 تم قيد نقلة تحويل الأخشاب وحساب الحجم (م³) لحظياً!');
+  });
+}
+
+function deleteWoodTransfer(idx) {
+  const w = DB.wood[idx];
+  if (!w) return;
+  if (!confirm(`هل تريد حذف تحويل الخشب (${w.id} — ${w.desc})؟`)) return;
+  DB.wood.splice(idx, 1);
+  saveDB('🗑️ تم حذف نقلة تحويل الخشب.');
+}
+
+function deleteMove(idx) {
+  const m = DB.moves[idx];
+  if (!m) return;
+  if (!confirm(`هل تريد حذف إذن الصرف (${m.id} — الكمية ${m.qty}) وإعادة الرصيد للمخزن؟`)) return;
+  DB.moves.splice(idx, 1);
+  saveDB('🗑️ تم حذف إذن الصرف وإعادة الكمية لرصيد المخزن.');
+}
+
+
+// ============================================================================
+// 13. V5.5 FINAL ENGINES: SUPABASE STORAGE RECEIPTS, MULTI-MONTH ATTENDANCE & PWA
+// ============================================================================
+const STORAGE_BUCKET = 'hayah-docs';
+let quickAttachTarget = null;
+let deferredPwaPrompt = null;
+
+// --- A) PWA SERVICE WORKER & INSTALL PROMPT ---
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPwaPrompt = e;
+  const btn = document.getElementById('pwaInstallBtn');
+  if (btn) btn.style.display = 'flex';
+});
+
+async function triggerPwaInstall() {
+  if (!deferredPwaPrompt) return showToast('يمكنك التثبيت من قائمة المتصفح (⋮) ← الإضافة إلى الشاشة الرئيسية.');
+  deferredPwaPrompt.prompt();
+  const choice = await deferredPwaPrompt.userChoice;
+  if (choice?.outcome === 'accepted') showToast('📱 تم تثبيت تطبيق «حياة ERP» بنجاح!');
+  deferredPwaPrompt = null;
+  const btn = document.getElementById('pwaInstallBtn');
+  if (btn) btn.style.display = 'none';
+}
+
+// --- B) SUPABASE STORAGE RECEIPT / DOCUMENT ENGINE (CLIENT-SIDE COMPRESSION) ---
+function compressImageIfNeeded(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) return reject(new Error('لم يتم اختيار ملف.'));
+    if (file.size > 10 * 1024 * 1024) return reject(new Error('حجم الملف أكبر من الحد المسموح (10 ميجابايت).'));
+    if (!file.type || !file.type.startsWith('image/')) return resolve(file);
+
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const maxDim = 1400;
+      let w = img.width, h = img.height;
+      if (w > maxDim || h > maxDim) {
+        const r = Math.min(maxDim / w, maxDim / h);
+        w = Math.round(w * r); h = Math.round(h * r);
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      canvas.toBlob((blob) => {
+        if (!blob) return resolve(file);
+        const outName = (file.name || 'receipt').replace(/\.[^.]+$/, '') + '.jpg';
+        resolve(new File([blob], outName, { type: 'image/jpeg' }));
+      }, 'image/jpeg', 0.78);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+async function uploadReceiptFile(rawFile, folder) {
+  if (!sbClient || !currentUser) throw new Error('يرجى تسجيل الدخول السحابي أولاً لرفع المرفقات.');
+  const file = await compressImageIfNeeded(rawFile);
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+  const path = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2,7)}.${ext}`;
+
+  const { error } = await sbClient.storage
+    .from(STORAGE_BUCKET)
+    .upload(path, file, { cacheControl: '3600', upsert: false, contentType: file.type || 'application/octet-stream' });
+
+  if (error) {
+    const msg = String(error.message || '');
+    if (msg.includes('Bucket not found') || msg.includes('not found') || msg.includes('policy')) {
+      throw new Error('⚠️ مخزن الفواتير (hayah-docs) غير مُفعّل بعد في Supabase — يرجى تنفيذ ملف supabase_storage_setup.sql مرة واحدة في SQL Editor داخل Supabase.');
+    }
+    throw new Error('تعذر رفع المرفق: ' + msg);
+  }
+  return { path, name: file.name, type: file.type || '', uploadedAt: new Date().toISOString() };
+}
+
+async function deleteReceiptFile(path) {
+  if (!sbClient || !path) return;
+  try { await sbClient.storage.from(STORAGE_BUCKET).remove([path]); } catch (e) {}
+}
+
+async function openAttachmentPreview(path, title, fileType) {
+  if (!sbClient || !currentUser) return alert('يرجى تسجيل الدخول أولاً.');
+  openModal(`📎 معاينة المستند: ${title || ''}`, '<div style="text-align:center; padding:26px; color:var(--muted);">⏳ جاري فتح المستند المشفّر من السحابة...</div>', closeModal);
+  document.getElementById('modalSaveBtn').style.display = 'none';
+  try {
+    const { data, error } = await sbClient.storage.from(STORAGE_BUCKET).createSignedUrl(path, 3600);
+    if (error || !data?.signedUrl) throw error || new Error('تعذر توليد رابط المعاينة.');
+    const url = data.signedUrl;
+    const isPdf = (fileType || '').includes('pdf') || path.toLowerCase().endsWith('.pdf');
+    document.getElementById('modalBody').innerHTML = `
+      ${isPdf
+        ? `<iframe class="doc-preview-pdf" src="${esc(url)}"></iframe>`
+        : `<img class="doc-preview-img" src="${esc(url)}" alt="معاينة الفاتورة" />`}
+      <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:4px;">
+        <a class="btn btn-gold btn-sm" href="${esc(url)}" target="_blank" rel="noopener" style="text-decoration:none;">🔗 فتح بحجم كامل / تحميل</a>
+      </div>
+    `;
+  } catch (err) {
+    document.getElementById('modalBody').innerHTML = `<div style="color:var(--red); padding:14px; font-size:12.5px;">❌ تعذر عرض المرفق: ${esc(err?.message || err)}</div>`;
+  }
+}
+
+function triggerQuickAttach(kind, ref) {
+  quickAttachTarget = { kind, ref };
+  const inp = document.getElementById('quickAttachInput');
+  inp.value = '';
+  inp.click();
+}
+
+document.getElementById('quickAttachInput').addEventListener('change', async (e) => {
+  const file = e.target.files?.[0];
+  if (!file || !quickAttachTarget) return;
+  const { kind, ref } = quickAttachTarget;
+  quickAttachTarget = null;
+  e.target.value = '';
+
+  showToast('⏳ جاري ضغط ورفع المستند إلى السحابة...');
+  try {
+    if (kind === 'treasury') {
+      const t = DB.treasury.find(x => x.id === ref);
+      if (!t) return;
+      if (t.doc?.path) await deleteReceiptFile(t.doc.path);
+      t.doc = await uploadReceiptFile(file, 'treasury/' + t.wk);
+      t.inv = 'مرفق فاتورة ✅';
+      saveDB(`📎 تم إرفاق فاتورة الحركة (${t.id}) وتحديث حالة الفاتورة تلقائياً!`);
+    } else if (kind === 'grn') {
+      const g = DB.grn[ref];
+      if (!g) return;
+      if (g.doc?.path) await deleteReceiptFile(g.doc.path);
+      g.doc = await uploadReceiptFile(file, 'grn/' + g.code);
+      closeModal();
+      saveDB(`📎 تم إرفاق بون التوريد (${g.code} — ${g.date}) بنجاح!`);
+    } else if (kind === 'ipc') {
+      const ip = DB.ipcs.find(x => x.cnt === ref);
+      if (!ip) return;
+      if (ip.doc?.path) await deleteReceiptFile(ip.doc.path);
+      ip.doc = await uploadReceiptFile(file, 'ipcs/' + ref);
+      ip.pdf = ip.doc.name;
+      saveDB(`📎 تم إرفاق المستند المعتمد لمستخلص (${ref}) بنجاح!`);
+    }
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+async function removeTreasuryDoc(trId) {
+  const t = DB.treasury.find(x => x.id === trId);
+  if (!t || !t.doc?.path) return;
+  if (!confirm('هل تريد حذف صورة الفاتورة المرفقة من السحابة؟')) return;
+  await deleteReceiptFile(t.doc.path);
+  t.doc = null;
+  closeModal();
+  saveDB(`🗑️ تم حذف المرفق من الحركة (${t.id}).`);
+}
+
+// --- C) DYNAMIC MULTI-MONTH ATTENDANCE MANAGER & TEAM ROSTER ---
+const AR_MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const AR_WDAYS  = ['أح','إث','ثل','أر','خم','جم','سب'];
+
+function formatArMonth(ym) {
+  const [y, m] = String(ym || '2026-11').split('-').map(Number);
+  return `${AR_MONTHS[(m || 1) - 1] || m} ${y}`;
+}
+
+function getDaysInMonth(ym) {
+  const [y, m] = String(ym || '2026-11').split('-').map(Number);
+  return new Date(y, m, 0).getDate();
+}
+
+function buildMonthBlankDays(ym) {
+  const [y, m] = String(ym || '2026-11').split('-').map(Number);
+  const cnt = new Date(y, m, 0).getDate();
+  return Array.from({ length: cnt }, (_, i) => {
+    const dow = new Date(y, m - 1, i + 1).getDay(); // 5 = Friday
+    return dow === 5 ? 'ج' : '';
+  });
+}
+
+function ensureAttendanceMonths() {
+  if (!DB.attendanceMonths || typeof DB.attendanceMonths !== 'object' || !Object.keys(DB.attendanceMonths).length) {
+    DB.attendanceMonths = { '2026-11': JSON.parse(JSON.stringify(DB.attendance || [])) };
+  }
+  const keys = Object.keys(DB.attendanceMonths).sort();
+  if (!state.selectedAttMonth || !DB.attendanceMonths[state.selectedAttMonth]) {
+    state.selectedAttMonth = keys[keys.length - 1] || '2026-11';
+  }
+}
+
+function onAttMonthChange() {
+  state.selectedAttMonth = document.getElementById('attMonthSelect').value;
+  renderAttendanceMonth();
+}
+
+function renderAttendanceMonth() {
+  ensureAttendanceMonths();
+  const keys = Object.keys(DB.attendanceMonths).sort();
+  const ym = state.selectedAttMonth;
+  const list = DB.attendanceMonths[ym] || [];
+  const [y, m] = ym.split('-').map(Number);
+  const daysCnt = getDaysInMonth(ym);
+
+  const sel = document.getElementById('attMonthSelect');
+  if (sel) {
+    sel.innerHTML = keys.map(k => `<option value="${k}" ${k===ym?'selected':''}>${formatArMonth(k)} (${k})</option>`).join('');
+  }
+  const titleEl = document.getElementById('attPanelTitle');
+  if (titleEl) {
+    titleEl.textContent = `👔 كشف الحضور والانصراف الفعلي — ${formatArMonth(ym)} (فريق موقع حياة — ${list.length} أفراد)`;
+  }
+
+  const dayThs = Array.from({ length: daysCnt }, (_, i) => {
+    const dow = new Date(y, m - 1, i + 1).getDay();
+    const isFri = dow === 5;
+    return `<th class="${isFri ? 'att-fri-th' : ''}">${i + 1}<span class="att-wd">${AR_WDAYS[dow]}</span></th>`;
+  }).join('');
+
+  document.getElementById('attHead').innerHTML = `<tr><th class="right">المهندس / المشرف</th>${dayThs}<th>حضور</th><th>غياب</th><th class="no-print">إدارة</th></tr>`;
+
+  document.getElementById('attBody').innerHTML = list.length ? list.map((e, ei) => {
+    if (!Array.isArray(e.days) || e.days.length !== daysCnt) {
+      const def = buildMonthBlankDays(ym);
+      e.days = def.map((v, i) => (e.days && e.days[i] !== undefined) ? e.days[i] : v);
+    }
+    const pres = e.days.reduce((s, d) => s + (d==='ح'||d==='م'?1:(d==='ن'?0.5:0)), 0);
+    const abs  = e.days.filter(d => d==='غ').length;
+    return `
+      <tr>
+        <td class="right" style="white-space:nowrap;"><strong>${esc(e.name)}</strong><br><small style="color:var(--muted);">${esc(e.role)}</small></td>
+        ${e.days.map((d, di) => {
+          const cls = d==='ح'?'att-h':(d==='غ'?'att-g':(d==='ج'?'att-j':(d==='م'?'att-m':(d==='ن'?'att-n':''))));
+          return `<td class="att-cell ${cls}" onclick="cycleAttendance(${ei},${di})" title="اضغط للتعديل">${d||'·'}</td>`;
+        }).join('')}
+        <td class="num pos" style="background:var(--gold-soft);">${pres}</td>
+        <td class="num ${abs>0?'neg':''}">${abs}</td>
+        <td class="no-print"><div class="act-btns">
+          <button class="icon-btn" onclick="openEditEmployeeModal(${ei})" title="تعديل الاسم/الوظيفة">✏️</button>
+          <button class="icon-btn del" onclick="deleteEmployee(${ei})" title="حذف من هذا الشهر">🗑️</button>
+        </div></td>
+      </tr>
+    `;
+  }).join('') : `<tr><td colspan="${daysCnt + 4}" style="padding:18px; color:var(--muted);">لا يوجد أفراد مسجلون بهذا الشهر — اضغط «👤 إضافة مهندس / مشرف».</td></tr>`;
+}
+
+function openAddAttendanceMonthModal() {
+  ensureAttendanceMonths();
+  const keys = Object.keys(DB.attendanceMonths).sort();
+  const lastYm = keys[keys.length - 1] || '2026-11';
+  let [ly, lm] = lastYm.split('-').map(Number);
+  lm++; if (lm > 12) { lm = 1; ly++; }
+  const nextYm = `${ly}-${String(lm).padStart(2,'0')}`;
+
+  openModal('📅 فتح شهر حضور وانصراف جديد', `
+    <div class="form-row"><label>اختر الشهر الجديد</label><input type="month" class="inp ltr-inp" id="m_att_ym" value="${nextYm}" /></div>
+    <div style="font-size:12px; color:var(--muted); background:var(--gold-soft); padding:9px 11px; border-radius:8px;">
+      ✨ سيتم تلقائياً ترحيل نفس فريق الموقع الحالي (${(DB.attendanceMonths[lastYm]||[]).length} أفراد)، وضبط عدد أيام الشهر (28–31 يوماً)، وتحديد جميع أيام الجمعة تلقائياً كـ <strong>«ج»</strong>.
+    </div>
+  `, () => {
+    const ym = (document.getElementById('m_att_ym').value || '').trim();
+    if (!/^\d{4}-\d{2}$/.test(ym)) return alert('اختر شهراً صحيحاً.');
+    if (DB.attendanceMonths[ym]) {
+      state.selectedAttMonth = ym;
+      closeModal();
+      renderAttendanceMonth();
+      return showToast(`الشهر ${formatArMonth(ym)} مفتوح بالفعل — تم الانتقال إليه.`);
+    }
+    const baseRoster = DB.attendanceMonths[lastYm] || DB.attendance || [];
+    DB.attendanceMonths[ym] = baseRoster.map(emp => ({
+      name: emp.name, role: emp.role, dept: emp.dept || 'الإدارة الهندسية',
+      days: buildMonthBlankDays(ym)
+    }));
+    state.selectedAttMonth = ym;
+    closeModal();
+    saveDB(`📅 تم فتح كشف حضور ${formatArMonth(ym)} وترحيل الفريق وأيام الجمعة تلقائياً!`);
+  });
+}
+
+function openAddEmployeeModal() {
+  ensureAttendanceMonths();
+  const ym = state.selectedAttMonth;
+  openModal(`👤 إضافة مهندس / مشرف إلى (${formatArMonth(ym)})`, `
+    <div class="form-row"><label>الاسم</label><input class="inp" id="m_emp_name" placeholder="مثال: م / ... أو مشرف ..." /></div>
+    <div class="form-row"><label>المسمى الوظيفي</label><input class="inp" id="m_emp_role" placeholder="مثال: مهندس تنفيذ / مساح / مشرف موقع" /></div>
+    <div class="form-row"><label>القسم</label><input class="inp" id="m_emp_dept" value="الإدارة الهندسية" /></div>
+  `, () => {
+    const name = (document.getElementById('m_emp_name').value || '').trim();
+    if (!name) return alert('أدخل اسم المهندس أو المشرف.');
+    const role = (document.getElementById('m_emp_role').value || 'فريق الموقع').trim();
+    const dept = (document.getElementById('m_emp_dept').value || 'الإدارة الهندسية').trim();
+    DB.attendanceMonths[ym].push({ name, role, dept, days: buildMonthBlankDays(ym) });
+    if (ym === '2026-11') DB.attendance = DB.attendanceMonths[ym];
+    closeModal();
+    saveDB(`👤 تم إضافة (${name}) إلى كشف حضور ${formatArMonth(ym)}!`);
+  });
+}
+
+function openEditEmployeeModal(ei) {
+  ensureAttendanceMonths();
+  const ym = state.selectedAttMonth;
+  const emp = (DB.attendanceMonths[ym] || [])[ei];
+  if (!emp) return;
+  openModal('✏️ تعديل بيانات عضو الفريق', `
+    <div class="form-row"><label>الاسم</label><input class="inp" id="m_eemp_name" value="${esc(emp.name)}" /></div>
+    <div class="form-row"><label>المسمى الوظيفي</label><input class="inp" id="m_eemp_role" value="${esc(emp.role)}" /></div>
+  `, () => {
+    const name = (document.getElementById('m_eemp_name').value || '').trim();
+    if (!name) return alert('الاسم مطلوب.');
+    emp.name = name;
+    emp.role = (document.getElementById('m_eemp_role').value || emp.role).trim();
+    closeModal();
+    saveDB(`✅ تم تحديث بيانات (${name}).`);
+  });
+}
+
+function deleteEmployee(ei) {
+  ensureAttendanceMonths();
+  const ym = state.selectedAttMonth;
+  const list = DB.attendanceMonths[ym] || [];
+  const emp = list[ei];
+  if (!emp) return;
+  if (!confirm(`هل تريد حذف (${emp.name}) من كشف حضور ${formatArMonth(ym)}؟`)) return;
+  list.splice(ei, 1);
+  if (ym === '2026-11') DB.attendance = list;
+  saveDB(`🗑️ تم حذف (${emp.name}) من كشف ${formatArMonth(ym)}.`);
 }
 
 // Cloud Auth Bootstrap on Page Load
