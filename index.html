@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#181B22" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -803,6 +803,107 @@
     }
   }
 
+
+
+  /* ==================== HAYAH UX UPDATE: RESPONSIVE MATRIX V2 ==================== */
+  .bm-actions { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .bm-toolbar { display:flex; gap:7px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  .bm-search { min-width:210px; flex:1; }
+  .bm-guidance { border:1px solid rgba(226,131,71,.30); background:rgba(226,131,71,.08); color:var(--text); border-radius:9px; padding:9px 11px; margin:0 0 12px; font-size:11.5px; }
+  .bm-footnote { color:var(--muted); font-size:11px; line-height:1.7; padding-top:10px; }
+  .bm-matrix-scroll { overflow:auto; max-width:100%; border-radius:8px; }
+  .bm-table { min-width:900px; table-layout:auto; }
+  .bm-table th:first-child, .bm-table td:first-child { position:sticky; right:0; z-index:3; }
+  .bm-table thead th:first-child { z-index:5; }
+  .bm-table .bm-floor-cell { min-width:145px; }
+  .bm-cell { width:100%; min-width:88px; min-height:48px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; font-family:inherit; }
+  .bm-cell .bm-pct { font-size:12px; }
+  .bm-cell .bm-sub { font-size:9.5px; opacity:.88; }
+  .bm-st-na { background:#E7E9EE; color:#687386; border:1px dashed #98A2B3; }
+  [data-theme="dark"] .bm-st-na { background:#252B36 !important; color:#AAB4C2 !important; border-color:#596273 !important; }
+  [data-theme="dark"] .bm-guidance { background:rgba(232,138,75,.09); color:#EDE6DC; border-color:rgba(232,138,75,.25); }
+  [data-theme="dark"] .bm-footnote { color:#AAB4C2; }
+  [data-theme="dark"] .bm-table td { background-color:transparent; }
+  [data-theme="dark"] .bm-table .bm-floor-cell { background:#252B36 !important; color:#F1D3B6 !important; }
+  .bm-stage-list { display:flex; flex-direction:column; gap:9px; max-height:48vh; overflow:auto; padding:2px; }
+  .bm-stage-card { border:1px solid var(--border); border-radius:10px; padding:10px; background:var(--bg); display:grid; grid-template-columns:minmax(0,1fr) 78px 110px 76px; gap:7px; align-items:end; }
+  .bm-stage-card .form-row { min-width:0; }
+  .bm-stage-card .inp { width:100%; min-width:0; }
+  .bm-stage-meta { color:var(--muted); font-size:10.5px; grid-column:1/-1; }
+  .bm-stage-actions { display:flex; gap:5px; align-items:center; flex-wrap:wrap; grid-column:1/-1; }
+  .bm-metric-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+  .bm-metric { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px; text-align:center; }
+  .bm-metric small { display:block; color:var(--muted); font-size:10px; }
+  .bm-metric strong { display:block; font-size:15px; margin-top:3px; }
+  .bm-history { max-height:210px; overflow:auto; display:flex; flex-direction:column; gap:6px; }
+  .bm-history-item { border:1px solid var(--border); border-radius:8px; padding:8px 10px; font-size:11px; background:var(--card); }
+  .bm-history-item strong { color:var(--gold); }
+  @media (max-width:760px) {
+    .bm-actions { width:100%; }
+    .bm-actions .btn { flex:1 1 calc(50% - 6px); justify-content:center; }
+    .bm-toolbar { align-items:stretch; }
+    .bm-search { flex:1 1 100%; min-width:100%; }
+    .bm-table { min-width:760px; }
+    .bm-table th { font-size:10px; padding:7px 5px; }
+    .bm-table .bm-floor-cell { min-width:115px; font-size:11px; }
+    .bm-cell { min-width:70px; min-height:44px; padding:5px 3px; }
+    .bm-cell .bm-pct { font-size:11px; }
+    .bm-cell .bm-sub { font-size:8.5px; }
+    .bm-stage-card { grid-template-columns:minmax(0,1fr) 70px; }
+    .bm-stage-card .form-row:nth-child(n+3) { grid-column:auto; }
+    .bm-metric-grid { grid-template-columns:1fr; }
+    .modal-bg { padding:7px; align-items:flex-end; }
+    .modal { max-height:94dvh; display:flex; flex-direction:column; border-radius:14px 14px 8px 8px; }
+    .modal-body { overflow:auto; -webkit-overflow-scrolling:touch; }
+    .modal-foot { position:sticky; bottom:0; }
+    .container { padding:12px 10px 30px; }
+    .panel-body { padding:10px; }
+    .nav-bar { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); overflow:visible; padding:7px; gap:6px; }
+    .tab-btn { white-space:normal; justify-content:flex-start; text-align:right; min-height:42px; padding:7px 9px; font-size:11px; }
+  }
+  @media (max-width:390px) {
+    .bm-actions .btn { flex-basis:100%; }
+    .nav-bar { grid-template-columns:1fr 1fr; }
+    .tab-btn { font-size:10.5px; }
+  }
+
+
+  /* App-wide responsive improvements: avoid page-level horizontal navigation scrolling. */
+  .nav-bar { flex-wrap:wrap; overflow:visible; align-items:center; }
+  .nav-bar .tab-btn { flex:0 0 auto; }
+  body { overflow-x:hidden; }
+  .container, .panel-body { min-width:0; }
+  .sc-table-wrap, .custom-scroll { max-width:100%; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; }
+  .bm-mobile-cards { display:none; }
+  .bm-mobile-floor { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:10px; box-shadow:var(--shadow); }
+  .bm-mobile-floor-head { display:flex; justify-content:space-between; align-items:center; gap:8px; font-weight:800; margin-bottom:9px; }
+  .bm-mobile-trades { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+  .bm-mobile-trade { min-width:0; width:100%; border:1px solid var(--border); border-radius:8px; padding:8px; background:var(--bg); color:var(--text); text-align:right; cursor:pointer; }
+  .bm-mobile-trade-name { display:block; font-size:11px; font-weight:800; margin-bottom:4px; }
+  .bm-mobile-trade-pct { display:flex; justify-content:space-between; gap:4px; font-size:11px; font-weight:800; }
+  .bm-mobile-trade-sub { display:block; color:var(--muted); font-size:9.5px; margin-top:3px; }
+  .bm-mobile-trade .prog-track { height:5px; margin-top:5px; }
+  .bm-mobile-trade.bm-st-0 { background:#F1F5F9; border-color:#CBD5E1; color:#475569; }
+  .bm-mobile-trade.bm-st-1 { background:var(--amber-soft); border-color:rgba(192,86,33,0.42); color:var(--amber); }
+  .bm-mobile-trade.bm-st-2 { background:#DBEAFE; border-color:rgba(29,78,216,0.38); color:#1D4ED8; }
+  .bm-mobile-trade.bm-st-3 { background:var(--green-soft); border-color:rgba(21,128,61,0.40); color:var(--green); }
+  .bm-mobile-trade.bm-st-na { background:#E7E9EE; border:1px dashed #98A2B3; color:#687386; }
+  [data-theme="dark"] .bm-mobile-floor { background:#22262E; border-color:#323743; }
+  [data-theme="dark"] .bm-mobile-trade { background:#2B2F38; border-color:#3E4452; color:#EDE6DC; }
+  [data-theme="dark"] .bm-mobile-trade.bm-st-0 { background:#282C35 !important; border-color:#3E4452 !important; color:#B4BAC6 !important; }
+  [data-theme="dark"] .bm-mobile-trade.bm-st-1 { background:rgba(232,138,75,0.18) !important; border-color:rgba(232,138,75,0.48) !important; color:#F4A26A !important; }
+  [data-theme="dark"] .bm-mobile-trade.bm-st-2 { background:rgba(59,130,246,0.20) !important; border-color:rgba(147,197,253,0.42) !important; color:#93C5FD !important; }
+  [data-theme="dark"] .bm-mobile-trade.bm-st-3 { background:rgba(74,222,128,0.16) !important; border-color:rgba(74,222,128,0.42) !important; color:#4ADE80 !important; }
+  [data-theme="dark"] .bm-mobile-trade.bm-st-na { background:#252B36 !important; border:1px dashed #596273 !important; color:#AAB4C2 !important; }
+  [data-theme="dark"] .bm-mobile-trade .bm-mobile-trade-sub { color:inherit; opacity:0.84; }
+  @media (max-width:760px) {
+    .bm-matrix-scroll { display:none !important; }
+    .bm-mobile-cards { display:grid; grid-template-columns:1fr; gap:9px; }
+    .nav-bar { position:relative; top:auto; }
+    .hero { position:relative; }
+    .btn, .tab-btn, .icon-btn { min-height:36px; }
+  }
+
 </style>
 </head>
 <body class="locked">
@@ -890,7 +991,7 @@
             📂 تحديث من Excel / JSON
             <input type="file" id="excelFileInput" accept=".xlsx,.xlsm,.xls,.json" style="display:none" />
           </label>
-          <button class="tools-item" onclick="closeToolsMenu(); exportExcelOrJson()">📊 تصدير Excel شامل (14 شيتاً)</button>
+          <button class="tools-item" onclick="closeToolsMenu(); exportExcelOrJson()">📊 تصدير Excel شامل (16 شيتاً)</button>
           <button class="tools-item" onclick="closeToolsMenu(); exportJsonBackup()">💾 حفظ نسخة JSON أرشيفية</button>
           <button class="tools-item" onclick="closeToolsMenu(); window.print()">🖨️ طباعة A4 / PDF</button>
           <div class="tools-sep"></div>
@@ -1251,32 +1352,40 @@
   </section>
 
 
-  <!-- ==================== TAB 7: BUILDING 5 VISUAL PROGRESS MATRIX ==================== -->
+  <!-- ==================== TAB 7: BUILDING 5 MULTI-STAGE CUMULATIVE PROGRESS MATRIX ==================== -->
   <section id="tab-matrix" class="section">
     <div class="kpi-grid" id="matrixKpis"></div>
 
     <div class="panel">
       <div class="panel-hdr">
-        <span>🏢 مصفوفة تقدم تنفيذ عمارة 5 البصرية (الأدوار × البنود التنفيذية)</span>
-        <div class="no-print" style="display:flex; gap:6px; flex-wrap:wrap;">
-          <button class="btn btn-lime btn-sm" onclick="openAddMatrixTradeModal()">➕ إضافة بند جديد للمصفوفة</button>
-          <button class="btn btn-plum btn-sm" onclick="window.print()">🖨️ طباعة المصفوفة A4</button>
+        <span>🏢 متابعة تنفيذ عمارة 5 — مصفوفة تراكمية متعددة المراحل</span>
+        <div class="no-print bm-actions">
+          <button class="btn btn-lime btn-sm" onclick="openAddMatrixScopeModal()">➕ إضافة دور / نطاق</button>
+          <button class="btn btn-gold btn-sm" onclick="openAddMatrixTradeModal()">➕ إضافة تخصص</button>
+          <button class="btn btn-navy btn-sm" onclick="openMatrixTradeTemplateModal()">⚙️ قوالب المراحل</button>
+          <button class="btn btn-plum btn-sm" onclick="window.print()">🖨️ طباعة A4</button>
         </div>
       </div>
       <div class="panel-body">
-        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px; font-size:11.5px;">
-          <strong>دليل الألوان (اضغط على أي خلية لتحديث النسبة أو الحالة):</strong>
-          <span class="pill pill-navy">⬜ لم يبدأ (0%)</span>
-          <span class="pill pill-amber">🟡 جاري التنفيذ (1–89%)</span>
-          <span class="pill" style="background:#DBEAFE; color:#1D4ED8;">🔵 منتهي بانتظار الاستشاري (90–99%)</span>
-          <span class="pill pill-green">✅ مُسلَّم استشاري (100%)</span>
+        <div class="bm-toolbar no-print">
+          <input class="inp bm-search" id="matrixSearch" placeholder="🔎 ابحث عن دور أو نطاق..." oninput="renderBuildingMatrix()" />
+          <span class="pill pill-navy">⬜ لم يبدأ</span>
+          <span class="pill pill-amber">🟡 جاري التنفيذ</span>
+          <span class="pill" style="background:#DBEAFE;color:#1D4ED8;">🔵 منفذ وينتظر الاستلام</span>
+          <span class="pill pill-green">✅ مستلم</span>
+          <span class="pill pill-plum">— غير مطلوب</span>
         </div>
-        <div class="sc-table-wrap">
+        <div class="bm-guidance">
+          <strong>طريقة الاستخدام:</strong> اضغط على خلية التخصص لفتح مراحله، ثم سجّل كميات التنفيذ اليومية. التقدم تراكمي ولا يستبدل سجل الأيام السابقة. يمكن تعديل نطاق العمل المستهدف عند إضافة كميات أو أعمال جديدة.
+        </div>
+        <div class="sc-table-wrap bm-matrix-scroll">
           <table class="bm-table">
             <thead id="bmHead"></thead>
             <tbody id="bmBody"></tbody>
           </table>
         </div>
+        <div id="bmMobileCards" class="bm-mobile-cards"></div>
+        <div class="bm-footnote">مؤشر الإنجاز العام متوسط مرجعي للخلايا المطلوبة وبأوزان متساوية افتراضيًا؛ لا يمثل نسبة تكلفة المشروع أو وزنه التعاقدي إلا بعد ضبط أوزان الأعمال. التنفيذ والاستلام والمحاسبة مؤشرات منفصلة.</div>
       </div>
     </div>
   </section>
@@ -1325,7 +1434,7 @@
 // ============================================================================
 // 1. CLEAN ZERO-DATA CLOUD SHELL (ALL REAL DATA LOADS ONLY FROM SUPABASE AFTER AUTH)
 // ============================================================================
-const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "Chrome Cloud ERP v5.6 Obsidian Edition (الهوية الفحمية والبرتقالية الكاملة + PWA + مخزن الفواتير + حضور متعدد الشهور + مصفوفة عمارة 5)", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": []};
+const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "Chrome Cloud ERP v5.7.1 Obsidian Edition (مصفوفة تنفيذ تراكمية متعددة المراحل + Responsive UX + PWA)", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": []};
 
 // ============================================================================
 // ⚙️ إعدادات الربط السحابي (Supabase) — ضع الرابط والمفتاح هنا مرة واحدة قبل الرفع
@@ -1342,6 +1451,7 @@ let sbClient = null;
 let currentUser = null;
 let realtimeChannel = null;
 let lastLocalSaveTs = 0;
+let cloudDataLoaded = false;
 
 let DB = loadDB();
 const state = {
@@ -1445,6 +1555,8 @@ async function handleLogout() {
     try { await sbClient.auth.signOut(); } catch (e) {}
   }
   currentUser = null;
+  cloudDataLoaded = false;
+  matrixV2PersistScheduled = false;
   document.body.classList.add('locked');
   document.getElementById('authOverlay').classList.remove('hidden');
   document.getElementById('loginPass').value = '';
@@ -1470,6 +1582,8 @@ async function syncDownFromCloud() {
     if (pendingNote && navigator.onLine) {
       await pushToCloud('مزامنة تعديل محفوظ بدون إنترنت: ' + pendingNote);
       localStorage.removeItem(PENDING_KEY);
+      cloudDataLoaded = true;
+      renderAll();
       return;
     }
 
@@ -1486,6 +1600,7 @@ async function syncDownFromCloud() {
       showToast('⚠️ لم يتم العثور على بيانات في Supabase — يمكنك استيراد ملف Excel أو النسخة الاحتياطية.');
     } else if (data.data && Array.isArray(data.data.payments)) {
       DB = data.data;
+      cloudDataLoaded = true;
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); } catch (e) {}
       state.selectedWeek = DB.weeks[DB.weeks.length - 1]?.wk || 'W-63';
       const tStr = new Date(data.updated_at).toLocaleTimeString('ar-EG', { hour:'2-digit', minute:'2-digit' });
@@ -2566,7 +2681,10 @@ function cycleAttendance(ei, di) {
 function openModal(title, bodyHtml, onSave) {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML = bodyHtml;
-  const btn = document.getElementById('modalSaveBtn'); btn.style.display = 'inline-flex';
+  const btn = document.getElementById('modalSaveBtn');
+  btn.style.display = 'inline-flex';
+  btn.disabled = false;
+  btn.textContent = '💾 حفظ وتحديث لحظي';
   btn.onclick = onSave;
   document.getElementById('modalBg').classList.add('open');
 }
@@ -2912,18 +3030,32 @@ function exportExcelOrJson() {
     safeSheet(attExpRows, 'الحضور_والانصراف');
 
     ensureBuildingMatrix();
-    const bmRows = DB.buildingMatrix.floors.map(fl => {
-      const r = { الدور: fl.label };
-      DB.buildingMatrix.trades.forEach(tr => {
-        const cell = (DB.buildingMatrix.cells[fl.id] || {})[tr.id] || { pct: 0 };
-        r[tr.label] = cell.pct + '%' + (cell.note ? ` (${cell.note})` : '');
+    const bm = DB.buildingMatrix;
+    const bmRows = bm.floors.map(fl => {
+      const r = { الدور_النطاق: fl.label };
+      bm.trades.forEach(tr => {
+        const cell = (bm.cells[fl.id] || {})[tr.id] || { applicable: false, stages: [] };
+        r[tr.label] = cell.applicable === false ? 'غير مطلوب' : `${(matrixCellPct(cell,'executed') || 0).toFixed(1)}% تنفيذ | ${(matrixCellPct(cell,'accepted') || 0).toFixed(1)}% استلام | ${(matrixCellPct(cell,'billed') || 0).toFixed(1)}% محاسبة`;
       });
       return r;
     });
     safeSheet(bmRows, 'مصفوفة_عمارة_5');
+    const bmStageRows = [];
+    const bmHistoryRows = [];
+    bm.floors.forEach(fl => bm.trades.forEach(tr => {
+      const cell = (bm.cells[fl.id] || {})[tr.id];
+      if (!cell || cell.applicable === false) return;
+      (cell.stages || []).forEach(st => {
+        bmStageRows.push({ الدور_النطاق: fl.label, التخصص: tr.label, المرحلة: st.name, الوزن_بالمئة: st.weight, الوحدة: st.unit, المستهدف: st.targetQty, المنفذ_التراكمي: st.executedQty, المستلم_التراكمي: st.acceptedQty, المحاسب_عليه: st.billedQty, نسبة_التنفيذ: matrixStagePct(st,'executed'), نسبة_الاستلام: matrixStagePct(st,'accepted'), نسبة_المحاسبة: matrixStagePct(st,'billed') });
+        (st.history || []).forEach(h => bmHistoryRows.push({ الدور_النطاق: fl.label, التخصص: tr.label, المرحلة: st.name, التاريخ: h.date, نوع_التسجيل: h.mode, كمية_التنفيذ_اليومي: h.executedDelta ?? '', كمية_الاستلام_اليومي: h.acceptedDelta ?? '', كمية_المحاسبة: h.billedDelta ?? '', التفاصيل: h.note || '' }));
+        (st.targetHistory || []).forEach(h => bmHistoryRows.push({ الدور_النطاق: fl.label, التخصص: tr.label, المرحلة: st.name, التاريخ: h.date, نوع_التسجيل: 'تعديل مستهدف', كمية_التنفيذ_اليومي: '', كمية_الاستلام_اليومي: '', كمية_المحاسبة: '', التفاصيل: `${h.from ?? 'غير محدد'} ← ${h.to ?? 'غير محدد'} ${st.unit || ''} | ${h.note || ''}` }));
+      });
+    }));
+    safeSheet(bmStageRows, 'مراحل_التنفيذ');
+    safeSheet(bmHistoryRows, 'سجل_حركات_التنفيذ');
 
     XLSX.writeFile(wb, `Hayah_AOBC_Complete_ERP_${todayISO()}.xlsx`);
-    showToast('📊 تم تصدير ملف Excel الأرشيفي الشامل (14 شيتاً كاملاً) لحفظه على OneDrive!');
+    showToast('📊 تم تصدير ملف Excel الأرشيفي الشامل (16 شيتاً كاملاً) لحفظه على OneDrive!');
   } else {
     exportJsonBackup();
   }
@@ -3733,152 +3865,601 @@ function renderSCurve() {
   `;
 }
 
-// --- D) BUILDING 5 VISUAL PROGRESS MATRIX (الأدوار × البنود) ---
+// --- D) BUILDING 5 MULTI-STAGE CUMULATIVE PROGRESS MATRIX ---
+let matrixV2PersistScheduled = false;
+// v2 principles:
+// 1) execution is cumulative and every update is appended to history;
+// 2) stages are configurable per trade and per scope;
+// 3) executed, consultant-accepted and billed quantities stay separate;
+// 4) non-applicable cells are excluded from progress denominators;
+// 5) legacy v5.6 percentages are preserved as a legacy phase, never discarded.
+
+function matrixMakeId(prefix='BM') {
+  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,7)}`;
+}
+
+function matrixDefaultStages(trade) {
+  const id = String(trade?.id || '').toUpperCase();
+  const label = String(trade?.label || '').trim();
+  let defs = null;
+  if (id === 'T-PNT' || /دهان|نقاش/.test(label)) defs = [
+    ['السكينة الأولى', 35], ['السكينة الثانية', 35], ['التشطيب النهائي', 30]
+  ];
+  else if (id === 'T-ELC' || /كهرب/.test(label)) defs = [
+    ['التأسيس والمواسير', 30], ['سحب الأسلاك والكابلات', 30], ['تركيب المفاتيح والوشوش', 25], ['الاختبار والتسليم', 15]
+  ];
+  else if (id === 'T-PLM' || /سباك/.test(label)) defs = [
+    ['التأسيس والتمديدات', 30], ['اختبار الضغط والعزل', 25], ['التركيب النهائي', 30], ['الاختبار والتشغيل', 15]
+  ];
+  else if (id === 'T-PLS' || /بياض|محار/.test(label)) defs = [
+    ['تجهيز الأسطح والطرطشة', 20], ['البؤج والأوتار', 20], ['المحارة', 45], ['المعالجة والاستلام', 15]
+  ];
+  else if (id === 'T-GYP' || /جبس|كرانيش/.test(label)) defs = [
+    ['التأسيس والتجهيز', 20], ['التركيب والتشكيل', 45], ['المعالجة', 20], ['التشطيب والاستلام', 15]
+  ];
+  else if (id === 'T-CER' || /سيراميك|رخام/.test(label)) defs = [
+    ['تجهيز واستواء الأسطح', 20], ['التركيب', 55], ['الترويب', 15], ['التشطيب والاستلام', 10]
+  ];
+  else if (id === 'T-MAS' || /مبان/.test(label)) defs = [
+    ['التحديد والتجهيز', 10], ['أعمال البناء', 70], ['الأعتاب والربط', 10], ['المراجعة والاستلام', 10]
+  ];
+  else if (id === 'T-ALU' || /ألوميتال|الوميتال/.test(label)) defs = [
+    ['المعاينة وأخذ المقاسات', 15], ['التصنيع والتجهيز', 45], ['التركيب', 30], ['الضبط والاستلام', 10]
+  ];
+  else defs = [['تنفيذ الأعمال', 80], ['المراجعة والاستلام', 20]];
+  return defs.map(([name, weight]) => ({ id: matrixMakeId('ST'), name, weight, unit: '', targetQty: null }));
+}
+
+function matrixCloneStages(stages) {
+  return (Array.isArray(stages) ? stages : []).map(st => ({
+    id: matrixMakeId('ST'), name: st.name || 'مرحلة جديدة', weight: Number(st.weight ?? 0), unit: st.unit || '', targetQty: st.targetQty === '' || st.targetQty == null ? null : Number(st.targetQty),
+    executedQty: 0, acceptedQty: 0, billedQty: 0,
+    manualExecutedPct: 0, manualAcceptedPct: 0, manualBilledPct: 0,
+    history: [], targetHistory: []
+  }));
+}
+
+function matrixNewCell(trade, overrides={}) {
+  const template = Array.isArray(trade?.stages) && trade.stages.length ? trade.stages : matrixDefaultStages(trade);
+  return {
+    applicable: true,
+    weight: 1,
+    note: '',
+    stages: matrixCloneStages(template),
+    history: [],
+    ...overrides
+  };
+}
+
+function matrixNormaliseStage(stage) {
+  const st = { ...stage };
+  st.id = st.id || matrixMakeId('ST');
+  st.name = st.name || 'مرحلة تنفيذ';
+  st.weight = Math.max(0, Number(st.weight ?? 0));
+  st.unit = st.unit || '';
+  st.targetQty = st.targetQty === '' || st.targetQty == null || !Number.isFinite(Number(st.targetQty)) ? null : Math.max(0, Number(st.targetQty));
+  st.executedQty = Math.max(0, Number(st.executedQty || 0));
+  st.acceptedQty = Math.max(0, Number(st.acceptedQty || 0));
+  st.billedQty = Math.max(0, Number(st.billedQty || 0));
+  st.manualExecutedPct = Math.max(0, Math.min(100, Number(st.manualExecutedPct ?? st.pct ?? 0)));
+  st.manualAcceptedPct = Math.max(0, Math.min(100, Number(st.manualAcceptedPct || 0)));
+  st.manualBilledPct = Math.max(0, Math.min(100, Number(st.manualBilledPct || 0)));
+  st.history = Array.isArray(st.history) ? st.history : [];
+  st.targetHistory = Array.isArray(st.targetHistory) ? st.targetHistory : [];
+  return st;
+}
+
 function ensureBuildingMatrix() {
-  if (DB.buildingMatrix && Array.isArray(DB.buildingMatrix.floors) && Array.isArray(DB.buildingMatrix.trades)) return;
-  const floors = [
-    { id: 'F-ROOF', label: 'السطح والطبانات' },
-    { id: 'F-FAC',  label: 'الواجهات الخارجية' },
-    { id: 'F-09',   label: 'الدور التاسع' },
-    { id: 'F-08',   label: 'الدور الثامن' },
-    { id: 'F-07',   label: 'الدور السابع' },
-    { id: 'F-06',   label: 'الدور السادس' },
-    { id: 'F-05',   label: 'الدور الخامس' },
-    { id: 'F-04',   label: 'الدور الرابع' },
-    { id: 'F-03',   label: 'الدور الثالث' },
-    { id: 'F-02',   label: 'الدور الثاني' },
-    { id: 'F-01',   label: 'الدور الأول' },
-    { id: 'F-BSM',  label: 'البدروم / المخازن' }
-  ];
-  const trades = [
-    { id: 'T-MAS', label: 'مباني' },
-    { id: 'T-ELC', label: 'كهرباء' },
-    { id: 'T-PLM', label: 'سباكة' },
-    { id: 'T-PLS', label: 'بياض' },
-    { id: 'T-GYP', label: 'جبس وكرانيش' },
-    { id: 'T-PNT', label: 'دهانات' },
-    { id: 'T-ALU', label: 'ألوميتال' },
-    { id: 'T-CER', label: 'سيراميك' }
-  ];
-  const cells = {};
-  const hasIpc = cnt => DB.ipcs.some(ip => ip.cnt === cnt && ip.gross > 0);
-  floors.forEach(fl => {
-    cells[fl.id] = {};
-    trades.forEach(tr => {
-      let pct = 0;
-      const nFloor = fl.id.startsWith('F-0') ? Number(fl.id.slice(2)) : 0;
-      if (tr.id === 'T-MAS' && hasIpc('CNT-03') && (nFloor >= 1 || fl.id === 'F-ROOF' || fl.id === 'F-BSM')) pct = 100;
-      else if (tr.id === 'T-ELC' && hasIpc('CNT-05') && nFloor >= 1 && nFloor <= 8) pct = 100;
-      else if (tr.id === 'T-ELC' && hasIpc('CNT-05') && nFloor === 9) pct = 50;
-      else if (tr.id === 'T-PLS' && hasIpc('CNT-04') && ((nFloor >= 1 && nFloor <= 8) || fl.id === 'F-FAC')) pct = 100;
-      else if (tr.id === 'T-PLM' && hasIpc('CNT-07') && nFloor >= 1 && nFloor <= 4) pct = 30;
-      cells[fl.id][tr.id] = { pct, note: '' };
+  const existing = DB.buildingMatrix;
+  let schemaChanged = false;
+  if (!existing || !Array.isArray(existing.floors) || !Array.isArray(existing.trades)) {
+    schemaChanged = true;
+    const floors = [
+      { id: 'F-ROOF', label: 'السطح والطبانات' },
+      { id: 'F-FAC', label: 'الواجهات الخارجية' },
+      { id: 'F-09', label: 'الدور التاسع' },
+      { id: 'F-08', label: 'الدور الثامن' },
+      { id: 'F-07', label: 'الدور السابع' },
+      { id: 'F-06', label: 'الدور السادس' },
+      { id: 'F-05', label: 'الدور الخامس' },
+      { id: 'F-04', label: 'الدور الرابع' },
+      { id: 'F-03', label: 'الدور الثالث' },
+      { id: 'F-02', label: 'الدور الثاني' },
+      { id: 'F-01', label: 'الدور الأول' },
+      { id: 'F-BSM', label: 'البدروم / المخازن' }
+    ];
+    const trades = [
+      { id: 'T-MAS', label: 'مباني' }, { id: 'T-ELC', label: 'كهرباء' },
+      { id: 'T-PLM', label: 'سباكة' }, { id: 'T-PLS', label: 'بياض' },
+      { id: 'T-GYP', label: 'جبس وكرانيش' }, { id: 'T-PNT', label: 'دهانات' },
+      { id: 'T-ALU', label: 'ألوميتال' }, { id: 'T-CER', label: 'سيراميك' }
+    ];
+    trades.forEach(tr => tr.stages = matrixDefaultStages(tr));
+    const cells = {};
+    floors.forEach(fl => {
+      cells[fl.id] = {};
+      trades.forEach(tr => { cells[fl.id][tr.id] = matrixNewCell(tr); });
+    });
+    DB.buildingMatrix = { version: 2, floors, trades, cells, updatedAt: new Date().toISOString() };
+    const hasRealData = (DB.payments?.length || DB.treasury?.length || DB.contracts?.length || DB.items?.length) > 0;
+    if (cloudDataLoaded && hasRealData && !matrixV2PersistScheduled) {
+      matrixV2PersistScheduled = true;
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); } catch (e) {}
+      if (currentUser && navigator.onLine) setTimeout(() => pushToCloud('إنشاء مصفوفة التنفيذ التراكمية متعددة المراحل'), 150);
+    }
+    return;
+  }
+
+  const bm = existing;
+  if (!bm.cells || typeof bm.cells !== 'object') { bm.cells = {}; schemaChanged = true; }
+  if (bm.version !== 2) schemaChanged = true;
+  bm.version = 2;
+  bm.trades.forEach(tr => {
+    if (!Array.isArray(tr.stages) || !tr.stages.length) { tr.stages = matrixDefaultStages(tr); schemaChanged = true; }
+  });
+  bm.floors.forEach(fl => {
+    if (!bm.cells[fl.id] || typeof bm.cells[fl.id] !== 'object') bm.cells[fl.id] = {};
+    bm.trades.forEach(tr => {
+      let cell = bm.cells[fl.id][tr.id];
+      if (!cell) {
+        bm.cells[fl.id][tr.id] = matrixNewCell(tr);
+        schemaChanged = true;
+        return;
+      }
+      // One-time v5.6 migration: keep old percentage and note as a historical single phase.
+      if (!Array.isArray(cell.stages)) {
+        schemaChanged = true;
+        const oldPct = Math.max(0, Math.min(100, Number(cell.pct || 0)));
+        if (oldPct > 0 || cell.note) {
+          cell.stages = [{
+            id: matrixMakeId('LEG'), name: 'نسبة محفوظة من الإصدار السابق v5.6', weight: 100, unit: '', targetQty: null,
+            executedQty: 0, acceptedQty: 0, billedQty: 0,
+            manualExecutedPct: oldPct, manualAcceptedPct: 0, manualBilledPct: 0,
+            history: [{ date: new Date().toISOString().slice(0,10), type: 'legacy_migration', note: 'تم الحفاظ على النسبة القديمة كمرجع تنفيذ فقط. لم تُرحّل كاستلام استشاري؛ يلزم التحقق الميداني لأن وجود مستخلص مالي وحده لا يثبت الإنجاز أو الاستلام.' }],
+            targetHistory: []
+          }];
+          cell.note = cell.note || 'مرجع تاريخي من v5.6؛ التنفيذ محفوظ لكن الاستلام غير مثبت حتى تسجيله.';
+        } else {
+          cell.stages = matrixCloneStages(tr.stages);
+        }
+      }
+      cell.stages = cell.stages.map(matrixNormaliseStage);
+      cell.applicable = cell.applicable !== false;
+      cell.weight = Math.max(0, Number(cell.weight ?? 1));
+      cell.note = cell.note || '';
+      cell.history = Array.isArray(cell.history) ? cell.history : [];
+      delete cell.pct;
     });
   });
-  DB.buildingMatrix = { floors, trades, cells };
+  const hasRealData = (DB.payments?.length || DB.treasury?.length || DB.contracts?.length || DB.items?.length) > 0;
+  if (schemaChanged && cloudDataLoaded && hasRealData && !matrixV2PersistScheduled) {
+    matrixV2PersistScheduled = true;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); } catch (e) {}
+    if (currentUser && navigator.onLine) setTimeout(() => pushToCloud('ترقية مصفوفة التنفيذ إلى الإصدار v2 مع الحفاظ على البيانات السابقة'), 150);
+  }
+}
+
+function matrixStagePct(stage, metric='executed') {
+  const target = Number(stage.targetQty || 0);
+  const qtyKey = metric === 'accepted' ? 'acceptedQty' : (metric === 'billed' ? 'billedQty' : 'executedQty');
+  const manualKey = metric === 'accepted' ? 'manualAcceptedPct' : (metric === 'billed' ? 'manualBilledPct' : 'manualExecutedPct');
+  if (target > 0) return Math.max(0, Math.min(100, Number(stage[qtyKey] || 0) / target * 100));
+  return Math.max(0, Math.min(100, Number(stage[manualKey] || 0)));
+}
+
+function matrixCellPct(cell, metric='executed') {
+  if (!cell || cell.applicable === false) return null;
+  const stages = (cell.stages || []).map(matrixNormaliseStage);
+  if (!stages.length) return 0;
+  let sumW = stages.reduce((a, st) => a + Math.max(0, Number(st.weight || 0)), 0);
+  if (sumW <= 0) sumW = stages.length;
+  const weighted = stages.reduce((a, st) => {
+    const w = Number(st.weight || 0) > 0 ? Number(st.weight) : (sumW === stages.length ? 1 : 0);
+    return a + matrixStagePct(st, metric) * w;
+  }, 0);
+  return sumW ? weighted / sumW : 0;
+}
+
+function matrixAverage(cells, metric='executed') {
+  const relevant = cells.filter(c => c && c.applicable !== false);
+  const weightSum = relevant.reduce((a,c) => a + Math.max(0, Number(c.weight ?? 1)), 0);
+  if (!weightSum) return 0;
+  return relevant.reduce((a,c) => a + (matrixCellPct(c, metric) || 0) * Math.max(0, Number(c.weight ?? 1)), 0) / weightSum;
+}
+
+function matrixStatus(cell) {
+  if (!cell || cell.applicable === false) return { cls: 'bm-st-na', label: 'غير مطلوب' };
+  const exec = matrixCellPct(cell, 'executed') || 0;
+  const accepted = matrixCellPct(cell, 'accepted') || 0;
+  if (exec <= 0) return { cls: 'bm-st-0', label: 'لم يبدأ' };
+  if (accepted >= 99.99) return { cls: 'bm-st-3', label: 'مستلم بالكامل' };
+  if (exec >= 99.99) return { cls: 'bm-st-2', label: 'منفذ — ينتظر الاستلام' };
+  return { cls: 'bm-st-1', label: 'جاري التنفيذ' };
 }
 
 function renderBuildingMatrix() {
   ensureBuildingMatrix();
   const bm = DB.buildingMatrix;
-  let totalSum = 0, totalCells = 0, doneCells = 0, progCells = 0;
-
-  bm.floors.forEach(fl => {
-    bm.trades.forEach(tr => {
-      const pct = Number(((bm.cells[fl.id] || {})[tr.id] || { pct: 0 }).pct || 0);
-      totalSum += pct; totalCells++;
-      if (pct >= 100) doneCells++;
-      else if (pct > 0) progCells++;
-    });
-  });
-  const overall = totalCells ? (totalSum / totalCells) : 0;
+  const allCells = [];
+  bm.floors.forEach(fl => bm.trades.forEach(tr => allCells.push((bm.cells[fl.id] || {})[tr.id])));
+  const applicable = allCells.filter(c => c && c.applicable !== false);
+  const overall = matrixAverage(applicable, 'executed');
+  const acceptedOverall = matrixAverage(applicable, 'accepted');
+  const activeCount = applicable.filter(c => (matrixCellPct(c,'executed') || 0) > 0 && (matrixCellPct(c,'accepted') || 0) < 99.99).length;
+  const doneCount = applicable.filter(c => (matrixCellPct(c,'accepted') || 0) >= 99.99).length;
+  const notStarted = applicable.filter(c => (matrixCellPct(c,'executed') || 0) <= 0).length;
+  const naCount = allCells.length - applicable.length;
   const bdg = document.getElementById('bdgMatrix');
   if (bdg) bdg.textContent = overall.toFixed(0) + '%';
-
   const kpisEl = document.getElementById('matrixKpis');
   if (kpisEl) {
     kpisEl.innerHTML = `
-      <div class="kpi-card gold"><div class="kpi-label">🏢 نسبة الإنجاز الكلية لعمارة 5</div><div class="kpi-val">${overall.toFixed(1)}%</div><div class="prog-track"><div class="prog-fill" style="width:${overall.toFixed(1)}%; background:var(--gold);"></div></div></div>
-      <div class="kpi-card lime"><div class="kpi-label">✅ بنود مُسلَّمة استشاري (100%)</div><div class="kpi-val pos">${doneCells} <small style="font-size:12px;">من ${totalCells}</small></div><div class="kpi-sub">نسبة التسليم النهائي: ${(totalCells?doneCells/totalCells*100:0).toFixed(1)}%</div></div>
-      <div class="kpi-card plum"><div class="kpi-label">🟡 بنود جاري تنفيذها حالياً</div><div class="kpi-val" style="color:var(--plum);">${progCells}</div><div class="kpi-sub">⬜ لم تبدأ بعد: ${totalCells - doneCells - progCells} بند</div></div>
-      <div class="kpi-card"><div class="kpi-label">📐 أبعاد المصفوفة الحالية</div><div class="kpi-val">${bm.floors.length} × ${bm.trades.length}</div><div class="kpi-sub">${bm.floors.length} نطاقات تنفيذية × ${bm.trades.length} بنود أعمال</div></div>
-    `;
+      <div class="kpi-card gold"><div class="kpi-label">📐 متوسط التنفيذ الفعلي للخلايا المطلوبة</div><div class="kpi-val">${overall.toFixed(1)}%</div><div class="prog-track"><div class="prog-fill" style="width:${overall.toFixed(1)}%;background:var(--gold);"></div></div><div class="kpi-sub">متوسط مرجعي بأوزان متساوية افتراضيًا</div></div>
+      <div class="kpi-card lime"><div class="kpi-label">✅ متوسط الكميات المستلمة</div><div class="kpi-val pos">${acceptedOverall.toFixed(1)}%</div><div class="kpi-sub">${doneCount} تخصص/نطاق مستلم بالكامل من ${applicable.length}</div></div>
+      <div class="kpi-card plum"><div class="kpi-label">🟡 نطاقات تحت التنفيذ أو تنتظر الاستلام</div><div class="kpi-val" style="color:var(--plum);">${activeCount}</div><div class="kpi-sub">لم تبدأ بعد: ${notStarted} • غير مطلوبة: ${naCount}</div></div>
+      <div class="kpi-card"><div class="kpi-label">🏢 حجم المصفوفة</div><div class="kpi-val">${bm.floors.length} × ${bm.trades.length}</div><div class="kpi-sub">${bm.floors.length} دور/نطاق × ${bm.trades.length} تخصصات</div></div>`;
   }
 
   const headEl = document.getElementById('bmHead');
   const bodyEl = document.getElementById('bmBody');
   if (!headEl || !bodyEl) return;
-
-  headEl.innerHTML = `<tr><th class="right">الدور / النطاق</th>${bm.trades.map(tr => `<th>${esc(tr.label)}</th>`).join('')}<th>إنجاز الدور</th></tr>`;
-
-  const rowsHtml = bm.floors.map(fl => {
-    let flSum = 0;
+  headEl.innerHTML = `<tr><th class="right">الدور / النطاق</th>${bm.trades.map(tr => `<th>${esc(tr.label)}</th>`).join('')}<th>متوسط التنفيذ</th></tr>`;
+  const q = (document.getElementById('matrixSearch')?.value || '').trim().toLowerCase();
+  const visibleFloors = bm.floors.filter(fl => !q || String(fl.label).toLowerCase().includes(q));
+  const rowsHtml = visibleFloors.map(fl => {
+    const rowCells = bm.trades.map(tr => (bm.cells[fl.id] || {})[tr.id]);
+    const rowAvg = matrixAverage(rowCells, 'executed');
     const tds = bm.trades.map(tr => {
-      const cell = (bm.cells[fl.id] && bm.cells[fl.id][tr.id]) ? bm.cells[fl.id][tr.id] : { pct: 0, note: '' };
-      const pct = Number(cell.pct || 0);
-      flSum += pct;
-      const cls = pct >= 100 ? 'bm-st-3' : (pct >= 90 ? 'bm-st-2' : (pct > 0 ? 'bm-st-1' : 'bm-st-0'));
-      const lbl = pct >= 100 ? 'مُسلَّم ✅' : (pct >= 90 ? 'بانتظار استشاري' : (pct > 0 ? 'جاري' : 'لم يبدأ'));
-      return `<td style="padding:4px;"><div class="bm-cell ${cls}" onclick="openEditMatrixCell('${fl.id}','${tr.id}')" title="${esc(cell.note || 'اضغط لتحديث الحالة')}"><span class="bm-pct">${pct}%</span><span class="bm-lbl">${cell.note ? '<span class=bm-note-dot></span>' : ''}${lbl}</span></div></td>`;
+      const cell = (bm.cells[fl.id] || {})[tr.id];
+      const status = matrixStatus(cell);
+      if (!cell || cell.applicable === false) {
+        return `<td style="padding:4px;"><button type="button" class="bm-cell ${status.cls}" onclick="openEditMatrixCell('${esc(fl.id)}','${esc(tr.id)}')"><span class="bm-pct">—</span><span class="bm-lbl">غير مطلوب</span></button></td>`;
+      }
+      const exec = matrixCellPct(cell,'executed') || 0;
+      const accepted = matrixCellPct(cell,'accepted') || 0;
+      const billed = matrixCellPct(cell,'billed') || 0;
+      const noteTitle = cell.note || 'اضغط لعرض مراحل التخصص وتسجيل حركة تنفيذ جديدة';
+      return `<td style="padding:4px;"><button type="button" class="bm-cell ${status.cls}" onclick="openEditMatrixCell('${esc(fl.id)}','${esc(tr.id)}')" title="${esc(noteTitle)}"><span class="bm-pct">${exec.toFixed(0)}%</span><span class="bm-lbl">تنفيذ</span><span class="bm-sub">استلام ${accepted.toFixed(0)}% • محاسبة ${billed.toFixed(0)}%</span></button></td>`;
     }).join('');
-    const flPct = bm.trades.length ? (flSum / bm.trades.length) : 0;
-    return `<tr><td class="bm-floor-cell">${esc(fl.label)}</td>${tds}<td class="num" style="background:var(--gold-soft);">${flPct.toFixed(0)}%</td></tr>`;
+    return `<tr><td class="bm-floor-cell">${esc(fl.label)}</td>${tds}<td class="num" style="background:var(--gold-soft);">${rowAvg.toFixed(1)}%</td></tr>`;
   }).join('');
-
-  // Trade totals footer row
-  const tradeAvgRow = `<tr style="background:var(--navy); color:#fff; font-weight:800;">
-    <td class="right">📊 متوسط إنجاز البند</td>
-    ${bm.trades.map(tr => {
-      const s = bm.floors.reduce((acc, fl) => acc + Number(((bm.cells[fl.id]||{})[tr.id]||{pct:0}).pct||0), 0);
-      return `<td>${(bm.floors.length ? s/bm.floors.length : 0).toFixed(0)}%</td>`;
-    }).join('')}
-    <td style="background:var(--gold); color:var(--navy);">${overall.toFixed(0)}%</td>
-  </tr>`;
-
-  bodyEl.innerHTML = rowsHtml + tradeAvgRow;
+  const footer = `<tr class="bm-average-row" style="background:var(--navy);color:#fff;font-weight:800;"><td class="right">📊 متوسط التخصص</td>${bm.trades.map(tr => {
+    const colCells = bm.floors.map(fl => (bm.cells[fl.id] || {})[tr.id]);
+    return `<td>${matrixAverage(colCells,'executed').toFixed(1)}%</td>`;
+  }).join('')}<td style="background:var(--gold);color:var(--navy);">${overall.toFixed(1)}%</td></tr>`;
+  bodyEl.innerHTML = rowsHtml + footer;
+  const mobileEl = document.getElementById('bmMobileCards');
+  if (mobileEl) {
+    mobileEl.innerHTML = visibleFloors.map(fl => {
+      const rowCells = bm.trades.map(tr => (bm.cells[fl.id] || {})[tr.id]);
+      const rowAvg = matrixAverage(rowCells, 'executed');
+      const tradeCards = bm.trades.map(tr => {
+        const cell = (bm.cells[fl.id] || {})[tr.id];
+        const st = matrixStatus(cell);
+        const ex = cell && cell.applicable !== false ? (matrixCellPct(cell,'executed') || 0) : 0;
+        const ac = cell && cell.applicable !== false ? (matrixCellPct(cell,'accepted') || 0) : 0;
+        return `<button type="button" class="bm-mobile-trade ${st.cls}" onclick="openEditMatrixCell('${esc(fl.id)}','${esc(tr.id)}')"><span class="bm-mobile-trade-name">${esc(tr.label)}</span><span class="bm-mobile-trade-pct"><span>${cell && cell.applicable !== false ? ex.toFixed(0)+'% تنفيذ' : '— غير مطلوب'}</span><span>${cell && cell.applicable !== false ? 'استلام '+ac.toFixed(0)+'%' : ''}</span></span>${cell && cell.applicable !== false ? `<span class="prog-track"><span class="prog-fill" style="display:block;width:${ex}%;background:var(--gold);"></span></span>` : ''}<span class="bm-mobile-trade-sub">${st.label} • اضغط للتفاصيل</span></button>`;
+      }).join('');
+      return `<article class="bm-mobile-floor"><div class="bm-mobile-floor-head"><span>${esc(fl.label)}</span><span>${rowAvg.toFixed(1)}% إنجاز</span></div><div class="bm-mobile-trades">${tradeCards}</div></article>`;
+    }).join('');
+  }
 }
+
+let bmResizeTimer = null;
+window.addEventListener('resize', () => {
+  if (bmResizeTimer) clearTimeout(bmResizeTimer);
+  bmResizeTimer = setTimeout(() => {
+    if (document.getElementById('tab-matrix')?.classList.contains('active')) renderBuildingMatrix();
+  }, 180);
+});
 
 function openEditMatrixCell(flId, trId) {
   ensureBuildingMatrix();
   const bm = DB.buildingMatrix;
   const fl = bm.floors.find(x => x.id === flId);
   const tr = bm.trades.find(x => x.id === trId);
+  if (!fl || !tr) return;
   if (!bm.cells[flId]) bm.cells[flId] = {};
-  const cell = bm.cells[flId][trId] || { pct: 0, note: '' };
-
-  openModal(`🏢 تحديث تقدم: ${tr.label} — ${fl.label}`, `
-    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:6px;">
-      <button type="button" class="btn btn-light btn-sm" style="justify-content:center;" onclick="document.getElementById('m_bm_pct').value=0">⬜ لم يبدأ (0%)</button>
-      <button type="button" class="btn btn-gold btn-sm" style="justify-content:center;" onclick="document.getElementById('m_bm_pct').value=50">🟡 جاري (50%)</button>
-      <button type="button" class="btn btn-navy btn-sm" style="justify-content:center;" onclick="document.getElementById('m_bm_pct').value=90">🔵 بانتظار استشاري (90%)</button>
-      <button type="button" class="btn btn-lime btn-sm" style="justify-content:center;" onclick="document.getElementById('m_bm_pct').value=100">✅ مُسلَّم استشاري (100%)</button>
+  if (!bm.cells[flId][trId]) bm.cells[flId][trId] = matrixNewCell(tr);
+  const cell = bm.cells[flId][trId];
+  const stageRows = (cell.stages || []).map(st => {
+    const exec = matrixStagePct(st,'executed').toFixed(1);
+    const accepted = matrixStagePct(st,'accepted').toFixed(1);
+    const billed = matrixStagePct(st,'billed').toFixed(1);
+    const overrun = Number(st.targetQty || 0) > 0 && Number(st.executedQty || 0) > Number(st.targetQty || 0) ? ` • <span style="color:var(--red);font-weight:800;">تجاوز المستهدف بـ ${fmt(Number(st.executedQty)-Number(st.targetQty),2)} ${esc(st.unit)}</span>` : '';
+    return `<div class="bm-stage-card" data-bm-stage-row="${esc(st.id)}">
+      <div class="form-row"><label>اسم المرحلة</label><input class="inp" data-field="name" value="${esc(st.name)}" /></div>
+      <div class="form-row"><label>الوزن %</label><input class="inp" data-field="weight" type="number" min="0" max="100" step="1" value="${Number(st.weight || 0)}" /></div>
+      <div class="form-row"><label>المستهدف</label><input class="inp" data-field="targetQty" type="number" min="0" step="0.01" value="${st.targetQty == null ? '' : Number(st.targetQty)}" placeholder="غير محدد" /></div>
+      <div class="form-row"><label>الوحدة</label><input class="inp" data-field="unit" value="${esc(st.unit || '')}" placeholder="م² / م.ط" /></div>
+      <div class="bm-stage-meta">التنفيذ: ${exec}% • الاستلام: ${accepted}% • المحاسبة: ${billed}% ${st.targetQty > 0 ? ` | منفذ ${fmt(st.executedQty,2)} من ${fmt(st.targetQty,2)} ${esc(st.unit)}` : '| إدخال بالنسب حتى تحديد المستهدف'}${overrun}</div>
+      <div class="bm-stage-actions"><button type="button" class="btn btn-gold btn-sm" onclick="openMatrixStageProgress('${esc(flId)}','${esc(trId)}','${esc(st.id)}')">＋ تسجيل تقدم اليوم</button><button type="button" class="btn btn-light btn-sm" onclick="showMatrixStageHistory('${esc(flId)}','${esc(trId)}','${esc(st.id)}')">📜 سجل الحركة</button><button type="button" class="btn btn-danger btn-sm" onclick="removeMatrixStage('${esc(flId)}','${esc(trId)}','${esc(st.id)}')">حذف المرحلة</button></div>
+    </div>`;
+  }).join('');
+  const cellExec = matrixCellPct(cell,'executed') || 0;
+  const cellAccepted = matrixCellPct(cell,'accepted') || 0;
+  const cellBilled = matrixCellPct(cell,'billed') || 0;
+  const hasLegacyStage = (cell.stages || []).some(st => String(st.id || '').startsWith('LEG-'));
+  openModal(`🏢 ${esc(tr.label)} — ${esc(fl.label)}`, `
+    <div class="bm-metric-grid">
+      <div class="bm-metric"><small>التنفيذ الفعلي</small><strong>${cellExec.toFixed(1)}%</strong></div>
+      <div class="bm-metric"><small>الاستلام الهندسي</small><strong>${cellAccepted.toFixed(1)}%</strong></div>
+      <div class="bm-metric"><small>المحاسبة المالية</small><strong>${cellBilled.toFixed(1)}%</strong></div>
     </div>
-    <div class="form-row"><label>نسبة الإنجاز الدقيقة (%)</label><input type="number" min="0" max="100" step="5" class="inp" id="m_bm_pct" value="${cell.pct}" /></div>
-    <div class="form-row"><label>ملاحظة هندسية / رقم طلب الاستلام (IR)</label><input class="inp" id="m_bm_note" value="${esc(cell.note||'')}" placeholder="مثال: تم التسليم للمهندس وليد IR-045..." /></div>
+    <div class="form-row"><label><input type="checkbox" id="m_bm_applicable" ${cell.applicable !== false ? 'checked' : ''} /> هذا التخصص مطلوب في هذا الدور / النطاق</label></div>
+    <div class="form-row"><label>وزن هذا التخصص في متوسط المشروع (1 = الوزن الافتراضي)</label><input class="inp" type="number" min="0" step="0.1" id="m_bm_cell_weight" value="${Number(cell.weight ?? 1)}" /></div>
+    <div class="bm-guidance">أدخل الكمية المستهدفة ووحدتها لكل مرحلة. بعد ذلك سجّل المنفذ اليوم كإضافة تراكمية. تعديل المستهدف لا يمحو المنفذ السابق، ويتم تسجيل التغيير في سجل المرحلة.</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;"><strong>مراحل التخصص</strong><div style="display:flex;gap:5px;flex-wrap:wrap;"><button type="button" class="btn btn-lime btn-sm" onclick="addMatrixStage('${esc(flId)}','${esc(trId)}')">＋ إضافة مرحلة</button>${hasLegacyStage ? `<button type="button" class="btn btn-plum btn-sm" onclick="applyMatrixTradeTemplateToCell('${esc(flId)}','${esc(trId)}')">بدء مراحل القالب الجديد</button>` : ''}</div></div>
+    ${hasLegacyStage ? '<div class="bm-guidance">تحتوي هذه الخلية على نسبة تاريخية من v5.6. يمكنك الاحتفاظ بها في الأرشيف وبدء مراحل التخصص الجديدة؛ لن تُحذف النسبة القديمة.</div>' : ''}
+    <div class="bm-stage-list">${stageRows || '<div class="bm-footnote">لا توجد مراحل. أضف مرحلة للبدء.</div>'}</div>
+    <div class="form-row"><label>ملاحظة هندسية عامة</label><textarea class="inp" id="m_bm_note" rows="2" style="width:100%;">${esc(cell.note || '')}</textarea></div>
   `, () => {
-    const pct = Math.max(0, Math.min(100, Number(document.getElementById('m_bm_pct').value || 0)));
-    bm.cells[flId][trId] = { pct, note: (document.getElementById('m_bm_note').value || '').trim() };
+    const app = document.getElementById('m_bm_applicable')?.checked !== false;
+    const w = Math.max(0, Number(document.getElementById('m_bm_cell_weight')?.value || 1));
+    const note = (document.getElementById('m_bm_note')?.value || '').trim();
+    const rows = [...document.querySelectorAll('[data-bm-stage-row]')];
+    const nextStages = rows.map(row => {
+      const st = cell.stages.find(x => x.id === row.dataset.bmStageRow);
+      if (!st) return null;
+      const get = name => row.querySelector(`[data-field="${name}"]`)?.value;
+      const targetRaw = get('targetQty');
+      const newTarget = targetRaw === '' ? null : Math.max(0, Number(targetRaw));
+      if (newTarget !== st.targetQty) {
+        const oldTarget = st.targetQty;
+        // Preserve legacy/manual percentage when a quantity target is first assigned.
+        if (!(Number(oldTarget) > 0) && Number(newTarget) > 0) {
+          st.executedQty = Number(newTarget) * Number(st.manualExecutedPct || 0) / 100;
+          st.acceptedQty = Number(newTarget) * Number(st.manualAcceptedPct || 0) / 100;
+          st.billedQty = Number(newTarget) * Number(st.manualBilledPct || 0) / 100;
+          st.manualExecutedPct = 0; st.manualAcceptedPct = 0; st.manualBilledPct = 0;
+        } else if (Number(oldTarget) > 0 && !(Number(newTarget) > 0)) {
+          st.manualExecutedPct = Math.max(0, Math.min(100, Number(st.executedQty || 0) / Number(oldTarget) * 100));
+          st.manualAcceptedPct = Math.max(0, Math.min(100, Number(st.acceptedQty || 0) / Number(oldTarget) * 100));
+          st.manualBilledPct = Math.max(0, Math.min(100, Number(st.billedQty || 0) / Number(oldTarget) * 100));
+        }
+        st.targetHistory.push({ date: todayISO(), from: oldTarget, to: newTarget, note: 'تعديل مستهدف المرحلة من إعدادات الخلية مع الحفاظ على الإنجاز السابق' });
+      }
+      st.name = String(get('name') || '').trim() || st.name;
+      st.weight = Math.max(0, Number(get('weight') || 0));
+      st.targetQty = newTarget;
+      st.unit = String(get('unit') || '').trim();
+      return matrixNormaliseStage(st);
+    }).filter(Boolean);
+    if (nextStages.length && nextStages.every(x => x.weight === 0)) { alert('يجب أن يكون وزن مرحلة واحدة على الأقل أكبر من صفر.'); return; }
+    cell.applicable = app;
+    cell.weight = w;
+    cell.note = note;
+    cell.stages = nextStages;
+    cell.updatedAt = new Date().toISOString();
     closeModal();
-    saveDB(`🏢 تم تحديث (${tr.label} — ${fl.label}) إلى ${pct}% وحفظها سحابياً!`);
+    saveDB(`🏢 تم تحديث مراحل ${tr.label} — ${fl.label} مع الحفاظ على سجل التنفيذ.`);
+  });
+}
+
+function applyMatrixTradeTemplateToCell(flId, trId) {
+  const bm = DB.buildingMatrix;
+  const tr = bm?.trades?.find(x => x.id === trId);
+  const cell = bm?.cells?.[flId]?.[trId];
+  if (!tr || !cell) return;
+  if (!confirm('سيتم أرشفة المرحلة/النسبة القديمة كما هي، ثم إنشاء مراحل القالب الحالي لهذه الخلية. لن تُحذف البيانات التاريخية. هل تريد المتابعة؟')) return;
+  if (!cell.archivedStages) cell.archivedStages = [];
+  (cell.stages || []).forEach(st => cell.archivedStages.push({ ...st, archivedAt: new Date().toISOString(), archiveReason: 'التحويل إلى مراحل قالب التخصص' }));
+  cell.stages = matrixCloneStages(tr.stages || matrixDefaultStages(tr));
+  cell.history.push({ type: 'template_applied', date: todayISO(), note: 'تم أرشفة النسبة/المراحل السابقة وبدء مراحل قالب التخصص.' });
+  openEditMatrixCell(flId, trId);
+}
+
+function syncMatrixCellInputsFromModal(cell, recordTargetHistory = false) {
+  if (!cell) return;
+  const appEl = document.getElementById('m_bm_applicable');
+  if (appEl) cell.applicable = appEl.checked !== false;
+  const wEl = document.getElementById('m_bm_cell_weight');
+  if (wEl) cell.weight = Math.max(0, Number(wEl.value || 1));
+  const noteEl = document.getElementById('m_bm_note');
+  if (noteEl) cell.note = (noteEl.value || '').trim();
+  const rows = [...document.querySelectorAll('[data-bm-stage-row]')];
+  if (!rows.length) return;
+  cell.stages = rows.map(row => {
+    const st = cell.stages.find(x => x.id === row.dataset.bmStageRow);
+    if (!st) return null;
+    const get = name => row.querySelector(`[data-field="${name}"]`)?.value;
+    const targetRaw = get('targetQty');
+    const newTarget = targetRaw === '' ? null : Math.max(0, Number(targetRaw));
+    if (newTarget !== st.targetQty) {
+      const oldTarget = st.targetQty;
+      if (!(Number(oldTarget) > 0) && Number(newTarget) > 0) {
+        st.executedQty = Number(newTarget) * Number(st.manualExecutedPct || 0) / 100;
+        st.acceptedQty = Number(newTarget) * Number(st.manualAcceptedPct || 0) / 100;
+        st.billedQty = Number(newTarget) * Number(st.manualBilledPct || 0) / 100;
+        st.manualExecutedPct = 0; st.manualAcceptedPct = 0; st.manualBilledPct = 0;
+      } else if (Number(oldTarget) > 0 && !(Number(newTarget) > 0)) {
+        st.manualExecutedPct = Math.max(0, Math.min(100, Number(st.executedQty || 0) / Number(oldTarget) * 100));
+        st.manualAcceptedPct = Math.max(0, Math.min(100, Number(st.acceptedQty || 0) / Number(oldTarget) * 100));
+        st.manualBilledPct = Math.max(0, Math.min(100, Number(st.billedQty || 0) / Number(oldTarget) * 100));
+      }
+      if (recordTargetHistory) {
+        st.targetHistory.push({ date: todayISO(), from: oldTarget, to: newTarget, note: 'تعديل مستهدف المرحلة من إعدادات الخلية مع الحفاظ على الإنجاز السابق' });
+      }
+    }
+    st.name = String(get('name') || '').trim() || st.name;
+    st.weight = Math.max(0, Number(get('weight') || 0));
+    st.targetQty = newTarget;
+    st.unit = String(get('unit') || '').trim();
+    return matrixNormaliseStage(st);
+  }).filter(Boolean);
+}
+
+function addMatrixStage(flId, trId) {
+  const cell = DB.buildingMatrix?.cells?.[flId]?.[trId];
+  if (!cell) return;
+  syncMatrixCellInputsFromModal(cell, false);
+  const total = (cell.stages || []).reduce((a, st) => a + Number(st.weight || 0), 0);
+  if (total > 0) cell.stages.forEach(st => st.weight = Number((Number(st.weight || 0) * 0.9).toFixed(1)));
+  cell.stages.push({ id: matrixMakeId('ST'), name: 'مرحلة جديدة', weight: total > 0 ? 10 : 100, unit: '', targetQty: null, executedQty: 0, acceptedQty: 0, billedQty: 0, manualExecutedPct: 0, manualAcceptedPct: 0, manualBilledPct: 0, history: [], targetHistory: [] });
+  openEditMatrixCell(flId, trId);
+}
+
+function removeMatrixStage(flId, trId, stageId) {
+  const cell = DB.buildingMatrix?.cells?.[flId]?.[trId];
+  if (!cell) return;
+  syncMatrixCellInputsFromModal(cell, false);
+  const st = cell.stages?.find(x => x.id === stageId);
+  if (!st) return;
+  if ((st.history || []).length && !confirm('هذه المرحلة لها سجل تنفيذ. حذفها سيؤدي إلى استبعادها من النسبة الحالية مع الاحتفاظ بنسخة احتياطية في سجل الخلية. هل تريد المتابعة؟')) return;
+  if (!cell.archivedStages) cell.archivedStages = [];
+  cell.archivedStages.push({ ...st, archivedAt: new Date().toISOString() });
+  cell.stages = cell.stages.filter(x => x.id !== stageId);
+  openEditMatrixCell(flId, trId);
+}
+
+function openMatrixStageProgress(flId, trId, stageId) {
+  const fl = DB.buildingMatrix?.floors?.find(x => x.id === flId);
+  const tr = DB.buildingMatrix?.trades?.find(x => x.id === trId);
+  const cell = DB.buildingMatrix?.cells?.[flId]?.[trId];
+  if (cell) syncMatrixCellInputsFromModal(cell, true);
+  const st = cell?.stages?.find(x => x.id === stageId);
+  if (!fl || !tr || !st) return;
+  const qtyMode = Number(st.targetQty || 0) > 0;
+  openModal(`＋ تسجيل تقدم: ${st.name} — ${fl.label}`, qtyMode ? `
+    <div class="bm-guidance">هذه الحركة إضافة إلى الكميات السابقة وليست استبدالًا لها. المستهدف الحالي: ${fmt(st.targetQty,2)} ${esc(st.unit)}.</div>
+    <div class="form-row"><label>تاريخ التنفيذ</label><input class="inp" type="date" id="m_bmp_date" value="${todayISO()}" /></div>
+    <div class="form-row"><label>الكمية المنفذة اليوم (${esc(st.unit)})</label><input class="inp" type="number" min="0" step="0.01" id="m_bmp_exec" value="0" /></div>
+    <div class="form-row"><label>الكمية المستلمة اليوم (${esc(st.unit)})</label><input class="inp" type="number" min="0" step="0.01" id="m_bmp_acc" value="0" /></div>
+    <div class="form-row"><label>الكمية المدرجة بالمستخلص / المحاسبة (${esc(st.unit)})</label><input class="inp" type="number" min="0" step="0.01" id="m_bmp_bill" value="0" /></div>
+    <div class="form-row"><label>ملاحظات / رقم طلب الاستلام</label><textarea class="inp" id="m_bmp_note" rows="2" style="width:100%;"></textarea></div>
+  ` : `
+    <div class="bm-guidance">لم يتم تحديد كمية مستهدفة لهذه المرحلة. أدخل النسب التراكمية الحالية. لتسجيل تقدم يومي بالكميات، ارجع إلى إعداد المرحلة وحدد المستهدف والوحدة أولًا.</div>
+    <div class="form-row"><label>تاريخ التحديث</label><input class="inp" type="date" id="m_bmp_date" value="${todayISO()}" /></div>
+    <div class="form-row"><label>نسبة التنفيذ الحالية (%)</label><input class="inp" type="number" min="0" max="100" step="0.1" id="m_bmp_exec_pct" value="${matrixStagePct(st,'executed').toFixed(1)}" /></div>
+    <div class="form-row"><label>نسبة الاستلام الحالية (%)</label><input class="inp" type="number" min="0" max="100" step="0.1" id="m_bmp_acc_pct" value="${matrixStagePct(st,'accepted').toFixed(1)}" /></div>
+    <div class="form-row"><label>نسبة المحاسبة الحالية (%)</label><input class="inp" type="number" min="0" max="100" step="0.1" id="m_bmp_bill_pct" value="${matrixStagePct(st,'billed').toFixed(1)}" /></div>
+    <div class="form-row"><label>ملاحظات</label><textarea class="inp" id="m_bmp_note" rows="2" style="width:100%;"></textarea></div>
+  `, () => {
+    const date = document.getElementById('m_bmp_date')?.value || todayISO();
+    const note = (document.getElementById('m_bmp_note')?.value || '').trim();
+    if (qtyMode) {
+      const exec = Math.max(0, Number(document.getElementById('m_bmp_exec')?.value || 0));
+      const acc = Math.max(0, Number(document.getElementById('m_bmp_acc')?.value || 0));
+      const bill = Math.max(0, Number(document.getElementById('m_bmp_bill')?.value || 0));
+      if (exec === 0 && acc === 0 && bill === 0) { alert('أدخل كمية واحدة على الأقل.'); return; }
+      if (st.executedQty + exec + 0.000001 < st.acceptedQty + acc) { alert('لا يمكن أن تتجاوز الكمية المستلمة إجمالي الكمية المنفذة.'); return; }
+      st.executedQty += exec;
+      st.acceptedQty += acc;
+      st.billedQty += bill;
+      st.history.push({ id: matrixMakeId('LOG'), date, mode: 'quantity', executedDelta: exec, acceptedDelta: acc, billedDelta: bill, note, createdAt: new Date().toISOString() });
+    } else {
+      const readPct = id => Math.max(0, Math.min(100, Number(document.getElementById(id)?.value || 0)));
+      const exec = readPct('m_bmp_exec_pct'), acc = readPct('m_bmp_acc_pct'), bill = readPct('m_bmp_bill_pct');
+      if (acc > exec) { alert('نسبة الاستلام لا يمكن أن تتجاوز نسبة التنفيذ.'); return; }
+      const before = { executed: st.manualExecutedPct, accepted: st.manualAcceptedPct, billed: st.manualBilledPct };
+      st.manualExecutedPct = exec; st.manualAcceptedPct = acc; st.manualBilledPct = bill;
+      st.history.push({ id: matrixMakeId('LOG'), date, mode: 'percent', before, after: { executed: exec, accepted: acc, billed: bill }, note, createdAt: new Date().toISOString() });
+    }
+    cell.history.push({ stageId, stageName: st.name, date, note, createdAt: new Date().toISOString() });
+    cell.updatedAt = new Date().toISOString();
+    closeModal();
+    saveDB(`📈 تم تسجيل تقدم ${st.name} — ${fl.label} بحركة تراكمية جديدة.`);
+  });
+}
+
+function showMatrixStageHistory(flId, trId, stageId) {
+  const cell = DB.buildingMatrix?.cells?.[flId]?.[trId];
+  const st = cell?.stages?.find(x => x.id === stageId);
+  if (!st) return;
+  const history = [...(st.history || [])].reverse();
+  const targetHistory = [...(st.targetHistory || [])].reverse();
+  const rows = history.map(h => `<div class="bm-history-item"><strong>${esc(h.date || '')}</strong> — ${h.mode === 'quantity' ? `تنفيذ +${fmt(h.executedDelta,2)} • استلام +${fmt(h.acceptedDelta,2)} • محاسبة +${fmt(h.billedDelta,2)}` : `نسب التنفيذ: ${h.before?.executed ?? '—'}% ← ${h.after?.executed ?? '—'}% • الاستلام ${h.after?.accepted ?? '—'}% • المحاسبة ${h.after?.billed ?? '—'}%`}<div>${esc(h.note || '')}</div></div>`).join('');
+  const targets = targetHistory.map(h => `<div class="bm-history-item"><strong>تعديل مستهدف — ${esc(h.date || '')}</strong><div>${h.from ?? 'غير محدد'} ← ${h.to ?? 'غير محدد'} ${esc(st.unit || '')} — ${esc(h.note || '')}</div></div>`).join('');
+  openModal(`📜 سجل ${st.name}`, `<div class="bm-metric-grid"><div class="bm-metric"><small>التنفيذ التراكمي</small><strong>${matrixStagePct(st,'executed').toFixed(1)}%</strong></div><div class="bm-metric"><small>الاستلام</small><strong>${matrixStagePct(st,'accepted').toFixed(1)}%</strong></div><div class="bm-metric"><small>المحاسبة</small><strong>${matrixStagePct(st,'billed').toFixed(1)}%</strong></div></div><div class="bm-history">${rows || '<div class="bm-footnote">لا توجد حركات مسجلة لهذه المرحلة بعد.</div>'}${targets}</div>`, () => closeModal());
+  const saveBtn = document.getElementById('modalSaveBtn');
+  if (saveBtn) saveBtn.textContent = 'إغلاق';
+}
+
+function openAddMatrixScopeModal() {
+  ensureBuildingMatrix();
+  openModal('➕ إضافة دور / نطاق تنفيذ جديد', `
+    <div class="form-row"><label>اسم النطاق</label><input class="inp" id="m_bm_scope_label" placeholder="مثال: الدور العاشر / شقة 1001 / السلم / الواجهة الشرقية" /></div>
+    <div class="form-row"><label>نوع النطاق</label><select class="inp" id="m_bm_scope_type"><option value="floor">دور</option><option value="apartment">شقة / وحدة</option><option value="area">منطقة / واجهة / سلم</option><option value="other">نطاق آخر</option></select></div>
+    <div class="bm-guidance">سيُنشأ النطاق لكل التخصصات الحالية، مع نسخ قوالب المراحل فقط دون نسخ أي نسب أو كميات تنفيذ سابقة.</div>
+  `, () => {
+    const label = (document.getElementById('m_bm_scope_label')?.value || '').trim();
+    if (!label) { alert('أدخل اسم النطاق.'); return; }
+    const type = document.getElementById('m_bm_scope_type')?.value || 'other';
+    const id = matrixMakeId(type === 'floor' ? 'F' : 'S');
+    const bm = DB.buildingMatrix;
+    bm.floors.push({ id, label, type, createdAt: new Date().toISOString() });
+    bm.cells[id] = {};
+    bm.trades.forEach(tr => bm.cells[id][tr.id] = matrixNewCell(tr));
+    closeModal();
+    saveDB(`🏢 تمت إضافة نطاق التنفيذ (${label}) مع جميع التخصصات الحالية.`);
   });
 }
 
 function openAddMatrixTradeModal() {
   ensureBuildingMatrix();
-  openModal('➕ إضافة بند أعمال جديد لمصفوفة عمارة 5', `
-    <div class="form-row"><label>اسم البند الجديد</label><input class="inp" id="m_bmt_lbl" placeholder="مثال: عزل حمامات / رخام سلم / مصاعد..." /></div>
+  openModal('➕ إضافة تخصص جديد للمصفوفة', `
+    <div class="form-row"><label>اسم التخصص</label><input class="inp" id="m_bmt_lbl" placeholder="مثال: عزل / رخام / واجهات / مصاعد" /></div>
+    <div class="bm-guidance">سيتم إنشاء قالب مراحل تلقائي مبدئي حسب اسم التخصص إن أمكن، ويمكنك تعديله من قوالب المراحل. كل نطاق جديد سيأخذ نسخة من القالب.</div>
   `, () => {
-    const lbl = (document.getElementById('m_bmt_lbl').value || '').trim();
-    if (!lbl) return alert('أدخل اسم البند.');
-    const id = 'T-C' + (DB.buildingMatrix.trades.length + 1);
-    DB.buildingMatrix.trades.push({ id, label: lbl });
-    DB.buildingMatrix.floors.forEach(fl => {
-      if (!DB.buildingMatrix.cells[fl.id]) DB.buildingMatrix.cells[fl.id] = {};
-      DB.buildingMatrix.cells[fl.id][id] = { pct: 0, note: '' };
+    const lbl = (document.getElementById('m_bmt_lbl')?.value || '').trim();
+    if (!lbl) { alert('أدخل اسم التخصص.'); return; }
+    const id = matrixMakeId('T');
+    const tr = { id, label: lbl };
+    tr.stages = matrixDefaultStages(tr);
+    const bm = DB.buildingMatrix;
+    bm.trades.push(tr);
+    bm.floors.forEach(fl => {
+      if (!bm.cells[fl.id]) bm.cells[fl.id] = {};
+      bm.cells[fl.id][id] = matrixNewCell(tr);
     });
     closeModal();
-    saveDB(`🏢 تم إضافة بند (${lbl}) إلى مصفوفة عمارة 5!`);
+    saveDB(`🏢 تمت إضافة التخصص (${lbl}) إلى جميع النطاقات.`);
   });
+}
+
+function openMatrixTradeTemplateModal() {
+  ensureBuildingMatrix();
+  const bm = DB.buildingMatrix;
+  const opts = bm.trades.map(t => `<option value="${esc(t.id)}">${esc(t.label)}</option>`).join('');
+  openModal('⚙️ إدارة قوالب مراحل التخصصات', `
+    <div class="form-row"><label>اختر التخصص</label><select class="inp" id="m_bmt_trade" onchange="renderMatrixTemplateEditor()">${opts}</select></div>
+    <div class="bm-guidance">تعديل القالب يؤثر على النطاقات الجديدة فقط. المراحل الموجودة وسجلات تنفيذها لا تتغير.</div>
+    <div id="m_bmt_template_editor" class="bm-stage-list"></div>
+    <button type="button" class="btn btn-lime btn-sm" onclick="addMatrixTemplateStage()">＋ إضافة مرحلة للقالب</button>
+  `, () => {
+    const tr = bm.trades.find(t => t.id === document.getElementById('m_bmt_trade')?.value);
+    if (!tr) return;
+    const rows = [...document.querySelectorAll('[data-bm-template-row]')];
+    const stages = rows.map(row => ({
+      id: matrixMakeId('ST'),
+      name: (row.querySelector('[data-field="name"]')?.value || '').trim(),
+      weight: Math.max(0, Number(row.querySelector('[data-field="weight"]')?.value || 0)),
+      unit: (row.querySelector('[data-field="unit"]')?.value || '').trim(),
+      targetQty: null
+    })).filter(st => st.name);
+    if (!stages.length || stages.every(st => st.weight === 0)) { alert('أضف مرحلة واحدة على الأقل بوزن أكبر من صفر.'); return; }
+    tr.stages = stages;
+    closeModal();
+    saveDB(`⚙️ تم تحديث قالب مراحل تخصص (${tr.label}) للنطاقات الجديدة.`);
+  });
+  setTimeout(renderMatrixTemplateEditor, 0);
+}
+
+function renderMatrixTemplateEditor() {
+  const bm = DB.buildingMatrix;
+  const tr = bm?.trades?.find(t => t.id === document.getElementById('m_bmt_trade')?.value);
+  const editor = document.getElementById('m_bmt_template_editor');
+  if (!tr || !editor) return;
+  editor.innerHTML = (tr.stages || matrixDefaultStages(tr)).map(st => `<div class="bm-stage-card" data-bm-template-row="${esc(st.id)}"><div class="form-row"><label>اسم المرحلة</label><input class="inp" data-field="name" value="${esc(st.name)}" /></div><div class="form-row"><label>الوزن %</label><input class="inp" data-field="weight" type="number" min="0" max="100" value="${Number(st.weight || 0)}" /></div><div class="form-row"><label>الوحدة الافتراضية</label><input class="inp" data-field="unit" value="${esc(st.unit || '')}" placeholder="تحدد عند النطاق" /></div><div class="bm-stage-actions"><button type="button" class="btn btn-danger btn-sm" onclick="this.closest('[data-bm-template-row]').remove()">حذف من القالب</button></div></div>`).join('');
+}
+
+function addMatrixTemplateStage() {
+  const editor = document.getElementById('m_bmt_template_editor');
+  if (!editor) return;
+  const row = document.createElement('div');
+  row.className = 'bm-stage-card'; row.dataset.bmTemplateRow = matrixMakeId('ST');
+  row.innerHTML = `<div class="form-row"><label>اسم المرحلة</label><input class="inp" data-field="name" value="مرحلة جديدة" /></div><div class="form-row"><label>الوزن %</label><input class="inp" data-field="weight" type="number" min="0" max="100" value="10" /></div><div class="form-row"><label>الوحدة الافتراضية</label><input class="inp" data-field="unit" placeholder="تحدد عند النطاق" /></div><div class="bm-stage-actions"><button type="button" class="btn btn-danger btn-sm" onclick="this.closest('[data-bm-template-row]').remove()">حذف</button></div>`;
+  editor.appendChild(row);
 }
 
 // --- E) BULK MATERIALS GRN ENTRY & LOG + WOOD & MOVE MANAGEMENT ---
