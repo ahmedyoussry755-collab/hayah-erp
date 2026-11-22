@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="حياة ERP" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
 <link rel="apple-touch-icon" href="icon-192.png" />
@@ -1735,6 +1735,328 @@
     .stmt-sigs { border-top: 2px solid #0E4D4E !important; }
   }
 
+
+  /* ============================================================================
+     V7.1 INTEGRATED DAILY SITE REPORT (DSR) — HAYAH BRAND + 2-PAGE A4 PRINT
+     ============================================================================ */
+  .dsr-toolbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 14px; margin-bottom: 14px;
+  }
+  .dsr-toolbar-grp { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+
+  .dsr-sheet {
+    background: var(--card); border: 1px solid var(--border); border-top: 4px solid var(--brand);
+    border-radius: 12px; padding: 16px; margin-bottom: 16px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .dsr-sheet-label {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    font-size: 11.5px; font-weight: 700; color: var(--muted);
+    padding-bottom: 6px; border-bottom: 1px dashed var(--border);
+  }
+
+  /* 3-Party Balanced Header — Solves Consultant Name Width Permanently! */
+  .dsr-header-box {
+    border: 1.5px solid var(--brand); border-radius: 10px; overflow: hidden; background: var(--card);
+  }
+  .dsr-parties-row {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-bottom: 1px solid var(--border); background: var(--card);
+  }
+  .dsr-party-card {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px; min-width: 0;
+    border-left: 1px solid var(--border);
+  }
+  .dsr-party-card:last-child { border-left: none; }
+  .dsr-logo-slot {
+    width: 56px; height: 56px; flex-shrink: 0; border-radius: 10px;
+    border: 1px solid var(--border-strong); background: #FFFFFF; padding: 4px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; cursor: pointer; overflow: hidden; transition: border-color 150ms ease;
+  }
+  .dsr-logo-slot:hover { border-color: var(--brand); }
+  .dsr-logo-slot img, .dsr-logo-slot svg { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .dsr-logo-slot .dsr-up-ov {
+    position: absolute; inset: 0; background: rgba(14, 77, 78, 0.86); color: #FFFFFF;
+    font-size: 9.5px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 2px; opacity: 0; transition: opacity 150ms ease;
+  }
+  .dsr-logo-slot:hover .dsr-up-ov { opacity: 1; }
+  .dsr-party-info { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .dsr-role-tag {
+    display: inline-block; align-self: flex-start; font-size: 10px; font-weight: 700;
+    padding: 1px 7px; border-radius: 999px; background: var(--brand-soft); color: var(--brand);
+    margin-bottom: 2px;
+  }
+  [data-theme="dark"] .dsr-role-tag { color: var(--brand-2); }
+  .dsr-party-name {
+    width: 100%; border: 1px solid transparent; background: transparent; color: var(--text);
+    font-size: 12.5px; font-weight: 700; line-height: 1.35; padding: 2px 4px; border-radius: 5px;
+    resize: none; overflow: hidden; font-family: inherit;
+  }
+  .dsr-party-sub {
+    width: 100%; border: 1px solid transparent; background: transparent; color: var(--muted);
+    font-size: 10.5px; font-weight: 500; line-height: 1.3; padding: 1px 4px; border-radius: 5px;
+    font-family: inherit;
+  }
+  .dsr-party-name:hover, .dsr-party-sub:hover { border-color: var(--border); background: var(--surface-2); }
+  .dsr-party-name:focus, .dsr-party-sub:focus { outline: none; border-color: var(--brand); background: var(--card); }
+
+  /* Document Title & Meta Strip */
+  .dsr-title-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    padding: 10px 14px; background: var(--brand); color: #FFFFFF;
+  }
+  .dsr-title-main { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 220px; }
+  .dsr-doc-badge {
+    background: rgba(255,255,255,0.16); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.28);
+    padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap;
+  }
+  .dsr-proj-inp {
+    flex: 1; min-width: 180px; background: transparent; border: 1px solid transparent;
+    color: #FFFFFF; font-size: 15px; font-weight: 700; padding: 2px 6px; border-radius: 6px; font-family: inherit;
+  }
+  .dsr-proj-inp:hover, .dsr-proj-inp:focus { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.35); outline: none; }
+  .dsr-meta-pills { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .dsr-meta-inp {
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); color: #FFFFFF;
+    border-radius: 6px; padding: 3px 7px; font-size: 11.5px; font-weight: 700; text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .dsr-meta-inp:focus { outline: none; border-color: #FFFFFF; background: rgba(255,255,255,0.22); }
+
+  /* Calendar & Weather Strip */
+  .dsr-cal-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    padding: 8px 14px; background: var(--surface-2); border-bottom: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .dsr-cal-grp { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .dsr-day-pill {
+    background: var(--brand); color: #FFFFFF; padding: 2px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 700;
+  }
+  .dsr-hijri { color: var(--brand); font-weight: 700; font-size: 11.5px; }
+  [data-theme="dark"] .dsr-hijri { color: var(--brand-2); }
+  .dsr-weather-inp {
+    background: var(--card); border: 1px solid var(--border); color: var(--text);
+    border-radius: 6px; padding: 3px 6px; font-size: 11.5px; font-weight: 600; text-align: center;
+  }
+
+  /* 4 Executive KPIs inside Header */
+  .dsr-kpi-strip {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    background: var(--card);
+  }
+  .dsr-kpi-cell {
+    padding: 10px 12px; border-left: 1px solid var(--border); display: flex; flex-direction: column; gap: 2px;
+  }
+  .dsr-kpi-cell:last-child { border-left: none; }
+  .dsr-kpi-cell.focal { background: var(--brand-soft); }
+  .dsr-kpi-cell small { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .dsr-kpi-cell strong { font-size: 13.5px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+  .dsr-kpi-cell.focal strong { color: var(--brand); }
+  [data-theme="dark"] .dsr-kpi-cell.focal strong { color: var(--brand-2); }
+
+  /* Section Block inside DSR */
+  .dsr-sec { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--card); }
+  .dsr-sec-hdr {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+    padding: 8px 12px; background: var(--surface-2); border-bottom: 1px solid var(--border);
+  }
+  .dsr-sec-hdr h3 {
+    margin: 0; font-size: 13px; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 7px;
+  }
+  .dsr-sec-num {
+    display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px;
+    border-radius: 6px; background: var(--brand); color: #FFFFFF; font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+
+  .dsr-tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .dsr-tbl th {
+    background: var(--surface-2) !important; color: var(--text-2) !important;
+    font-weight: 700; font-size: 11.5px; padding: 7px 6px !important;
+    border-bottom: 1px solid var(--border) !important; border-left: 1px solid var(--border);
+    text-align: center;
+  }
+  .dsr-tbl th:last-child, .dsr-tbl td:last-child { border-left: none; }
+  .dsr-tbl td {
+    padding: 5px 6px !important; border-bottom: 1px solid var(--border) !important;
+    border-left: 1px solid var(--border); vertical-align: middle;
+  }
+  .dsr-cell-inp {
+    width: 100%; background: transparent; border: 1px solid transparent; border-radius: 5px;
+    padding: 3px 5px; font-size: 12px; color: var(--text); font-family: inherit;
+  }
+  .dsr-cell-inp:hover { border-color: var(--border); background: var(--surface-2); }
+  .dsr-cell-inp:focus { outline: none; border-color: var(--brand); background: var(--card); }
+
+  /* Inline Progress Bar in Today Works */
+  .dsr-prog-wrap { display: flex; flex-direction: column; gap: 3px; min-width: 78px; }
+  .dsr-prog-top { display: flex; align-items: center; justify-content: center; gap: 2px; font-weight: 700; font-size: 11.5px; }
+  .dsr-prog-track { height: 5px; background: var(--surface-2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+  .dsr-prog-fill { height: 100%; border-radius: 999px; transition: width 150ms ease; }
+
+  /* Two-Column Grid inside DSR */
+  .dsr-two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .dsr-split-mp { display: grid; grid-template-columns: 5fr 7fr; gap: 12px; }
+  .dsr-split-hse { display: grid; grid-template-columns: 5fr 7fr; gap: 12px; }
+
+  /* Supervision Attendance Grid */
+  .dsr-sup-grid {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 10px;
+  }
+  .dsr-sup-card {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    padding: 7px 9px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); transition: border-color 150ms ease, opacity 150ms ease;
+  }
+  .dsr-sup-card.is-present { border-color: var(--brand); background: var(--brand-soft); }
+  .dsr-sup-card.is-absent { opacity: 0.62; background: var(--surface-2); }
+
+  /* Workforce Distribution Strip */
+  .dsr-wf-bar-wrap {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 8px 12px; background: var(--surface-2); border-bottom: 1px solid var(--border);
+    font-size: 11.5px; font-weight: 600;
+  }
+  .dsr-wf-track {
+    flex: 1; min-width: 140px; height: 9px; border-radius: 999px; overflow: hidden;
+    background: var(--border); display: flex;
+  }
+
+  /* IR Status Row Semantic Tints (DC Standard Codes A/B/C/D/UR) */
+  .dsr-ir-sel {
+    font-size: 11px; font-weight: 700; border-radius: 999px; padding: 3px 8px;
+    border: 1px solid var(--border); cursor: pointer; width: 100%; font-family: inherit;
+  }
+  .dsr-ir-A { background: var(--green-soft); color: var(--green); border-color: var(--green-bd); }
+  .dsr-ir-B { background: var(--blue-soft); color: var(--blue); border-color: var(--blue-bd); }
+  .dsr-ir-C { background: var(--amber-soft); color: var(--amber); border-color: var(--amber-bd); }
+  .dsr-ir-D { background: var(--red-soft); color: var(--red); border-color: var(--red-bd); }
+  .dsr-ir-UR { background: var(--surface-2); color: var(--text-2); border-color: var(--border); }
+  tr.dsr-ir-row-C td { background: rgba(255, 250, 235, 0.55) !important; }
+  tr.dsr-ir-row-D td { background: rgba(254, 243, 242, 0.62) !important; }
+  [data-theme="dark"] tr.dsr-ir-row-C td { background: rgba(251, 191, 36, 0.08) !important; }
+  [data-theme="dark"] tr.dsr-ir-row-D td { background: rgba(248, 113, 113, 0.09) !important; }
+
+  /* Signatures Row (Aref Ruqaa Calligraphy) */
+  .dsr-sigs-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+    padding: 12px; border: 1.5px solid var(--brand); border-radius: 10px; background: var(--card);
+    text-align: center;
+  }
+  .dsr-sig-card {
+    border: 1px solid var(--border); border-radius: 8px; padding: 10px 10px 8px;
+    background: var(--surface-2); display: flex; flex-direction: column; justify-content: space-between; gap: 6px;
+  }
+  .dsr-sig-card.primary { border-color: var(--brand); background: var(--brand-soft); }
+  .dsr-sig-title {
+    font-size: 11.5px; font-weight: 700; color: var(--brand); padding: 2px 6px; border-radius: 5px;
+  }
+  [data-theme="dark"] .dsr-sig-title { color: var(--brand-2); }
+  .dsr-sig-name {
+    font-family: 'Aref Ruqaa', 'IBM Plex Sans Arabic', cursive !important;
+    font-size: 22px; font-weight: 700; text-align: center; color: var(--text);
+    background: transparent; border: 1px solid transparent; border-radius: 6px; width: 100%; padding: 2px;
+  }
+  .dsr-sig-name:hover, .dsr-sig-name:focus { border-color: var(--brand); background: var(--card); outline: none; }
+  .dsr-sig-line { font-size: 10px; color: var(--muted); border-top: 1px dashed var(--border-strong); padding-top: 4px; }
+
+  /* Page 2 Compact Header */
+  .dsr-p2-hdr {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    padding: 8px 12px; border: 1.5px solid var(--brand); border-radius: 10px; background: var(--card);
+  }
+  .dsr-p2-logos { display: flex; align-items: center; gap: 8px; }
+  .dsr-p2-logos .dsr-logo-slot { width: 40px; height: 40px; padding: 3px; border-radius: 8px; }
+
+  @media (max-width: 960px) {
+    .dsr-parties-row { grid-template-columns: 1fr; }
+    .dsr-party-card { border-left: none; border-bottom: 1px solid var(--border); }
+    .dsr-party-card:last-child { border-bottom: none; }
+    .dsr-kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .dsr-kpi-cell { border-bottom: 1px solid var(--border); }
+    .dsr-two-col, .dsr-split-mp, .dsr-split-hse, .dsr-sigs-grid { grid-template-columns: 1fr; }
+    .dsr-sup-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .dsr-sup-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ==================== STRICT 2-PAGE A4 PRINT FOR DAILY REPORT ==================== */
+  .dsr-print-page {
+    width: 100%;
+    background: #FFFFFF;
+    color: #101828;
+    font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+  }
+  @media print {
+    @page { size: A4 portrait; margin: 5mm; }
+    body.printing-daily-report {
+      background: #FFFFFF !important;
+      color: #101828 !important;
+    }
+    body.printing-daily-report #printDailyReportArea {
+      display: block !important;
+      padding: 0 !important;
+      background: #FFFFFF !important;
+      color: #101828 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .dsr-print-page {
+      height: 285mm;
+      max-height: 285mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-top: 3.5px solid #0E4D4E;
+      padding-top: 3mm;
+      overflow: hidden;
+      page-break-inside: avoid;
+    }
+    .dsr-print-page.page-break {
+      page-break-after: always !important;
+      break-after: page !important;
+    }
+    .dsr-p-box {
+      border: 1px solid #D0D5DD; border-radius: 6px; overflow: hidden; margin-bottom: 2.5mm;
+    }
+    .dsr-p-hdr {
+      background: #0E4D4E; color: #FFFFFF; padding: 3.5px 8px; font-size: 10.5px; font-weight: 700;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .dsr-p-tbl { width: 100%; border-collapse: collapse; font-size: 9.8px; }
+    .dsr-p-tbl th {
+      background: #F1F3F5 !important; color: #101828 !important; font-weight: 700; font-size: 9.5px;
+      padding: 3.5px 5px !important; border: 1px solid #D0D5DD !important; text-align: center;
+    }
+    .dsr-p-tbl td {
+      padding: 3px 5px !important; border: 1px solid #D0D5DD !important; color: #101828 !important;
+      font-size: 9.6px !important; line-height: 1.25;
+    }
+    .dsr-p-parties {
+      display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid #D0D5DD;
+    }
+    .dsr-p-party {
+      display: flex; align-items: center; gap: 7px; padding: 6px 8px; border-left: 1px solid #D0D5DD;
+    }
+    .dsr-p-party:last-child { border-left: none; }
+    .dsr-p-party-logo {
+      width: 44px; height: 44px; flex-shrink: 0; border: 1px solid #D0D5DD; border-radius: 6px;
+      padding: 2px; display: flex; align-items: center; justify-content: center; background: #FFFFFF;
+    }
+    .dsr-p-party-logo img, .dsr-p-party-logo svg { width: 100%; height: 100%; object-fit: contain; }
+    .dsr-p-foot {
+      border-top: 1px solid #D0D5DD; padding-top: 2mm; display: flex; justify-content: space-between;
+      font-size: 9px; color: #475467; font-weight: 600;
+    }
+  }
+
 </style>
 </head>
 <body class="locked">
@@ -2353,122 +2675,417 @@
     </div>
   </section>
 
-  <!-- ==================== 6. التقرير اليومي (DAILY SITE REPORT GENERATOR) ==================== -->
+  <!-- ==================== 6. التقرير اليومي (V7.1 INTEGRATED 2-PAGE A4 SITE REPORT) ==================== -->
   <section id="tab-daily-report" class="section">
+    <input type="file" id="dsrLogoInputOwner" accept="image/*" style="display:none" onchange="handleDsrLogoUpload('owner', this)" />
+    <input type="file" id="dsrLogoInputConsultant" accept="image/*" style="display:none" onchange="handleDsrLogoUpload('consultant', this)" />
+    <input type="file" id="dsrLogoInputContractor" accept="image/*" style="display:none" onchange="handleDsrLogoUpload('contractor', this)" />
+
     <div class="v7-page-head">
       <div class="v7-page-title">
-        <h2>إعداد التقرير اليومي للموقع</h2>
-        <p>توليد وحفظ التقرير التنفيذي اليومي تلقائياً من بيانات الموقع مع طباعة A4 وملخص واتساب لمدير المشروع</p>
+        <h2>التقرير اليومي التنفيذي للموقع</h2>
+        <p>نموذج هندسي متكامل (ورقتين A4) بشعارات الجهات الثلاث وطقس الإسكندرية وأكواد اعتماد الاستشاري مع مزامنة Supabase</p>
       </div>
-      <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn btn-light btn-sm" onclick="autoPullDailyReportData()">⚡ سحب بيانات اليوم تلقائياً</button>
-        <button class="btn btn-lime btn-sm" onclick="copyDailyReportWhatsApp()">📲 نسخ لواتساب</button>
-        <button class="btn btn-light btn-sm" onclick="printDailyReport()">🖨️ طباعة A4 رسمي</button>
-        <button class="btn btn-gold btn-sm" onclick="saveCurrentDailyReport()">💾 حفظ التقرير بالسحابة</button>
+      <div class="no-print" style="display:flex; gap:7px; flex-wrap:wrap;">
+        <button type="button" class="btn btn-light btn-sm" onclick="fetchDsrWeather(true)">🌤️ تحديث الطقس</button>
+        <button type="button" class="btn btn-light btn-sm" onclick="autoPullDailyReportData()">⚡ سحب بيانات اليوم</button>
+        <button type="button" class="btn btn-light btn-sm" onclick="clonePreviousDailyReport()">📋 نسخ آخر تقرير</button>
+        <button type="button" class="btn btn-lime btn-sm" onclick="copyDailyReportWhatsApp()">📲 واتساب</button>
+        <button type="button" class="btn btn-light btn-sm" onclick="printDailyReport()">🖨️ طباعة A4 (ورقتين)</button>
+        <button type="button" class="btn btn-gold btn-sm" onclick="saveCurrentDailyReport()">💾 حفظ بالسحابة</button>
       </div>
     </div>
 
-    <!-- Date & Archive Selector Bar -->
-    <div class="dr-top-bar no-print">
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <label style="font-size:12.5px; font-weight:700; color:var(--text-2);">تاريخ التقرير:</label>
-          <input type="date" class="inp" id="drDateInput" onchange="loadDailyReportForDate(this.value)" />
-        </div>
-        <div style="display:flex; align-items:center; gap:6px;">
-          <label style="font-size:12.5px; font-weight:700; color:var(--text-2);">حالة الطقس:</label>
-          <select class="inp" id="drWeather">
-            <option value="مشمس معتدل">مشمس معتدل</option>
-            <option value="غائم جزئياً">غائم جزئياً</option>
-            <option value="حار">حار</option>
-            <option value="رياح / أتربة">رياح / أتربة</option>
-            <option value="ممطر (تأثير جزئي)">ممطر (تأثير جزئي)</option>
-          </select>
-        </div>
-        <div style="display:flex; align-items:center; gap:6px;">
-          <label style="font-size:12.5px; font-weight:700; color:var(--text-2);">معد التقرير:</label>
-          <input type="text" class="inp" id="drAuthor" value="م / أحمد يسري" style="width:155px;" />
-        </div>
-      </div>
-      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-        <select class="inp" id="drArchiveSelect" onchange="if(this.value) loadDailyReportForDate(this.value)" style="min-width:210px;">
+    <!-- Top Control & Archive Bar -->
+    <div class="dsr-toolbar no-print">
+      <div class="dsr-toolbar-grp">
+        <label style="font-size:12px; font-weight:700; color:var(--text-2);">تاريخ التقرير:</label>
+        <input type="date" class="inp" id="drDateInput" onchange="loadDailyReportForDate(this.value)" />
+        <button type="button" class="btn btn-light btn-sm" onclick="setDsrToday()">اليوم</button>
+        <select class="inp" id="drArchiveSelect" onchange="if(this.value) loadDailyReportForDate(this.value)" style="min-width:215px;">
           <option value="">— أرشيف التقارير المحفوظة —</option>
         </select>
-        <span class="pill pill-navy" id="drSaveBadge">مسودة غير محفوظة</span>
+        <span class="pill pill-navy" id="drSaveBadge">مسودة جديدة</span>
+      </div>
+      <div class="dsr-toolbar-grp">
+        <button type="button" class="btn btn-light btn-sm" onclick="loadDsrSampleReport()">📄 تحميل عينة استرشادية</button>
+        <button type="button" class="btn btn-light btn-sm" onclick="resetDsrLogos()">🖼️ استعادة الشعارات الافتراضية</button>
       </div>
     </div>
 
-    <!-- Live Auto-Pulled Daily Snapshot Strip -->
-    <div class="dr-auto-strip" id="drLiveSnapshot"></div>
+    <!-- Live ERP Data Pulse for Selected Date -->
+    <div class="dr-auto-strip no-print" id="drLiveSnapshot"></div>
 
-    <!-- Block 1: Manpower & Attendance -->
-    <div class="panel">
-      <div class="panel-hdr">
-        <span><span class="dr-section-badge">1</span>طاقم الإشراف والعمالة بالموقع</span>
-        <span style="font-size:12px; color:var(--muted);" id="drEngPresentSummary">—</span>
+    <!-- ==================== PAGE 1 WORKSPACE: HEADER + WORKS + EQUIP + MATERIALS + SUPERVISION ==================== -->
+    <div class="dsr-sheet" id="dsrPage1">
+      <div class="dsr-sheet-label no-print">
+        <span>ورقة 1 من 2 — الترويسة الثلاثية، الأعمال المنفذة والمخططة، المعدات، الخامات، وطاقم الإشراف</span>
+        <span>اضغط على أي شعار لرفع اللوجو الرسمي وحفظه سحابياً</span>
       </div>
-      <div class="panel-body">
-        <div class="dr-grid-2" style="margin-bottom:0;">
-          <div class="form-row">
-            <label>إجمالي عدد العمالة والصنايعية اليوم (مقاولي الباطن + يوميات)</label>
-            <input type="number" min="0" class="inp" id="drLaborCount" value="0" placeholder="مثال: 18" />
+
+      <!-- Balanced 3-Party Header (Full-Width Equal Columns — No Clipped Consultant Name!) -->
+      <div class="dsr-header-box">
+        <div class="dsr-parties-row">
+          <!-- Party 1: Owner (Marseilia) -->
+          <div class="dsr-party-card">
+            <div class="dsr-logo-slot" onclick="triggerDsrLogoUpload('owner')" title="اضغط لرفع شعار المالك">
+              <div id="dsrLogoOwnerP1" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div>
+              <div class="dsr-up-ov no-print">تغيير<br>الشعار</div>
+            </div>
+            <div class="dsr-party-info">
+              <span class="dsr-role-tag">المالك</span>
+              <textarea id="dsrOwnerName" rows="2" class="dsr-party-name" oninput="syncDsrHeaderText()">مرسيليا للاستثمار العقاري</textarea>
+              <input id="dsrOwnerSub" type="text" class="dsr-party-sub" value="شركة مرسيليا للاستثمار العقاري ش.م.م" oninput="syncDsrHeaderText()" />
+            </div>
           </div>
-          <div class="form-row">
-            <label>توزيع العمالة حسب التخصص</label>
-            <input type="text" class="inp" id="drLaborDetails" placeholder="مثال: مباني: 6 | بياض: 5 | سباكة: 3 | كهرباء: 2 | عمالة يومية: 2" />
+
+          <!-- Party 2: Consultant (African Consulting Office — Wide Multiline!) -->
+          <div class="dsr-party-card">
+            <div class="dsr-logo-slot" onclick="triggerDsrLogoUpload('consultant')" title="اضغط لرفع شعار الاستشاري">
+              <div id="dsrLogoConsultantP1" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div>
+              <div class="dsr-up-ov no-print">تغيير<br>الشعار</div>
+            </div>
+            <div class="dsr-party-info">
+              <span class="dsr-role-tag">الاستشاري العام</span>
+              <textarea id="dsrConsultantName" rows="2" class="dsr-party-name" oninput="syncDsrHeaderText()">المكتب الاستشاري الأفريقي</textarea>
+              <input id="dsrConsultantSub" type="text" class="dsr-party-sub" value="إشراف ومراجعة فنية (A.C.O)" oninput="syncDsrHeaderText()" />
+            </div>
+          </div>
+
+          <!-- Party 3: General Contractor (A.O.B.C) -->
+          <div class="dsr-party-card">
+            <div class="dsr-logo-slot" onclick="triggerDsrLogoUpload('contractor')" title="اضغط لرفع شعار المقاول العام">
+              <div id="dsrLogoContractorP1" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div>
+              <div class="dsr-up-ov no-print">تغيير<br>الشعار</div>
+            </div>
+            <div class="dsr-party-info">
+              <span class="dsr-role-tag">المقاول العام (الشركة المنفذة)</span>
+              <textarea id="dsrContractorName" rows="2" class="dsr-party-name" oninput="syncDsrHeaderText()">المكتب العربي للتشييد والبناء</textarea>
+              <input id="dsrContractorSub" type="text" class="dsr-party-sub" value="The Arab Office (A.O.B.C)" dir="ltr" style="text-align:right;" oninput="syncDsrHeaderText()" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Title & Document Code Strip -->
+        <div class="dsr-title-bar">
+          <div class="dsr-title-main">
+            <span class="dsr-doc-badge">التقرير اليومي للموقع</span>
+            <input id="dsrProjectName" type="text" class="dsr-proj-inp" value="مشروع حياة أليكس بارك 1 — عمارة رقم 5" oninput="syncDsrHeaderText()" />
+          </div>
+          <div class="dsr-meta-pills">
+            <span style="font-size:11.5px; opacity:0.88;">تقرير رقم:</span>
+            <input id="dsrReportNum" type="text" class="dsr-meta-inp" style="width:62px;" value="230" oninput="onDsrReportNumChange()" />
+            <input id="dsrReportCode" type="text" class="dsr-meta-inp" dir="ltr" style="width:104px;" value="DR-26-230" oninput="syncDsrHeaderText()" />
+          </div>
+        </div>
+
+        <!-- Automatic Gregorian / Day / Hijri Calendar & Live Weather Strip -->
+        <div class="dsr-cal-bar">
+          <div class="dsr-cal-grp">
+            <span style="font-weight:700; color:var(--text-2);">التاريخ:</span>
+            <strong id="dsrDateDisplay" class="num" style="color:var(--text);">—</strong>
+            <span class="dsr-day-pill" id="dsrArabicDay">—</span>
+            <span class="dsr-hijri" id="dsrHijriDate">—</span>
+          </div>
+          <div class="dsr-cal-grp">
+            <span style="font-weight:700; color:var(--text-2);">طقس الإسكندرية:</span>
+            <input id="dsrWeatherCond" type="text" class="dsr-weather-inp" style="width:92px;" value="مشمس" placeholder="الحالة" />
+            <input id="dsrWeatherTemp" type="text" class="dsr-weather-inp num" style="width:58px;" value="26°C" placeholder="حرارة" dir="ltr" />
+            <input id="dsrWeatherWind" type="text" class="dsr-weather-inp num" style="width:74px;" value="14 كم/س" placeholder="رياح" />
+            <input id="dsrWeatherHum" type="text" class="dsr-weather-inp num" style="width:52px;" value="55%" placeholder="رطوبة" dir="ltr" />
+          </div>
+        </div>
+
+        <!-- 4 Dynamic Executive KPIs (Single Petrol Focus) -->
+        <div class="dsr-kpi-strip">
+          <div class="dsr-kpi-cell focal">
+            <small>متوسط إنجاز أعمال اليوم</small>
+            <strong id="dsrKpiProgress">0% (0 بنود)</strong>
+          </div>
+          <div class="dsr-kpi-cell">
+            <small>إجمالي القوى العاملة بالموقع</small>
+            <strong id="dsrKpiWorkforce">0 فرد (0 هندسي • 0 عمالة)</strong>
+          </div>
+          <div class="dsr-kpi-cell">
+            <small>المعدات المشغلة بالموقع</small>
+            <strong id="dsrKpiEquip">0 معدات</strong>
+          </div>
+          <div class="dsr-kpi-cell">
+            <small>وردية العمل وحالة الموقع</small>
+            <input id="dsrShiftStatus" type="text" class="dsr-cell-inp" style="font-weight:700; color:var(--green); padding:0;" value="08:00 ص - 04:30 م (منتظم)" />
           </div>
         </div>
       </div>
+
+      <!-- Section 1: Today's Works -->
+      <div class="dsr-sec">
+        <div class="dsr-sec-hdr">
+          <h3><span class="dsr-sec-num">1</span>أولاً: الأعمال التي تمت اليوم أو جاري تنفيذها بالموقع</h3>
+          <button type="button" class="btn btn-gold btn-sm no-print" onclick="addDsrRow('todayWorks')">+ إضافة بند عمل</button>
+        </div>
+        <div class="sc-table-wrap">
+          <table class="dsr-tbl">
+            <thead>
+              <tr>
+                <th style="width:36px;">م</th>
+                <th class="right">بيان الأعمال المنفذة / الجارية</th>
+                <th style="width:125px;">المبنى / الدور</th>
+                <th style="width:105px;">التخصص</th>
+                <th style="width:110px;">نسبة الإنجاز %</th>
+                <th class="right" style="width:185px;">ملاحظات التنفيذ والاستلام</th>
+                <th class="no-print" style="width:36px;"></th>
+              </tr>
+            </thead>
+            <tbody id="dsrTodayWorksBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section 2: Tomorrow's Plan -->
+      <div class="dsr-sec">
+        <div class="dsr-sec-hdr">
+          <h3><span class="dsr-sec-num">2</span>ثانياً: الأعمال المخطط تنفيذها غداً (خطة العمل اليومية)</h3>
+          <button type="button" class="btn btn-light btn-sm no-print" onclick="addDsrRow('tomorrowWorks')">+ إضافة بند لغداً</button>
+        </div>
+        <div class="sc-table-wrap">
+          <table class="dsr-tbl">
+            <thead>
+              <tr>
+                <th style="width:36px;">م</th>
+                <th class="right">بيان الأعمال المخططة لغداً</th>
+                <th style="width:125px;">الموقع / العمارة</th>
+                <th style="width:130px;">القسم المسئول</th>
+                <th style="width:115px;">الأولوية / الموقف</th>
+                <th class="no-print" style="width:36px;"></th>
+              </tr>
+            </thead>
+            <tbody id="dsrTomorrowWorksBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Sections 3 & 4: Equipment & Incoming Materials -->
+      <div class="dsr-two-col">
+        <div class="dsr-sec">
+          <div class="dsr-sec-hdr">
+            <h3><span class="dsr-sec-num">3</span>ثالثاً: المعدات الوافدة والمشغلة</h3>
+            <button type="button" class="btn btn-light btn-sm no-print" onclick="addDsrRow('equipment')">+ معدة</button>
+          </div>
+          <div class="sc-table-wrap">
+            <table class="dsr-tbl">
+              <thead>
+                <tr><th class="right">المعدة</th><th style="width:62px;">العدد</th><th style="width:105px;">مكان التشغيل</th><th style="width:72px;">الحالة</th><th class="no-print" style="width:32px;"></th></tr>
+              </thead>
+              <tbody id="dsrEquipBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="dsr-sec">
+          <div class="dsr-sec-hdr">
+            <h3><span class="dsr-sec-num">4</span>رابعاً: المواد والخامات الواردة</h3>
+            <button type="button" class="btn btn-light btn-sm no-print" onclick="addDsrRow('materials')">+ خامة</button>
+          </div>
+          <div class="sc-table-wrap">
+            <table class="dsr-tbl">
+              <thead>
+                <tr><th class="right">المادة / الخامة</th><th style="width:100px;">المورد</th><th style="width:82px;">الكمية</th><th style="width:72px;">الفحص</th><th class="no-print" style="width:32px;"></th></tr>
+              </thead>
+              <tbody id="dsrMatBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Supervision Attendance Checklist -->
+      <div class="dsr-sec">
+        <div class="dsr-sec-hdr">
+          <h3><span class="dsr-sec-num">5</span>خامساً: الأفراد المتواجدون بموقع المشروع اليوم (المقاول العام — المكتب العربي)</h3>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="pill pill-plum" id="dsrSupSummary">متواجد: 0 / 0</span>
+            <button type="button" class="btn btn-light btn-sm no-print" onclick="addDsrRow('supervisionStaff')">+ إضافة صفة</button>
+          </div>
+        </div>
+        <div class="dsr-sup-grid" id="dsrSupGrid"></div>
+      </div>
     </div>
 
-    <!-- Block 2: Completed & Ongoing Works -->
-    <div class="panel">
-      <div class="panel-hdr">
-        <span><span class="dr-section-badge">2</span>الأعمال المنفذة والجارية اليوم</span>
-        <button type="button" class="btn btn-gold btn-sm no-print" onclick="addDailyWorkRow()">+ إضافة بند عمل</button>
+    <!-- ==================== PAGE 2 WORKSPACE: MANPOWER + IR/QC + HSE + NOTES + SIGNATURES ==================== -->
+    <div class="dsr-sheet" id="dsrPage2">
+      <div class="dsr-sheet-label no-print">
+        <span>ورقة 2 من 2 — القوى العاملة (هندسي / فني / مساعد)، موقف طلبات الفحص IR، السلامة المهنية، الملاحظات، والاعتماد</span>
+        <span>تُطبع تلقائياً كصفحة ثانية مستقلة ومضبوطة على A4</span>
       </div>
-      <div class="panel-body">
-        <div id="drWorkItemsList"></div>
+
+      <!-- Compact Page 2 Header Mirror -->
+      <div class="dsr-p2-hdr">
+        <div class="dsr-p2-logos">
+          <div class="dsr-logo-slot" onclick="triggerDsrLogoUpload('owner')" title="شعار المالك"><div id="dsrLogoOwnerP2" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div></div>
+          <div class="dsr-logo-slot" onclick="triggerDsrLogoUpload('consultant')" title="شعار الاستشاري"><div id="dsrLogoConsultantP2" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div></div>
+          <div class="dsr-logo-slot" onclick="triggerDsrLogoUpload('contractor')" title="شعار المقاول العام"><div id="dsrLogoContractorP2" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div></div>
+          <div>
+            <div style="font-size:11px; color:var(--muted); font-weight:600;">تابع التقرير اليومي للموقع • بيان القوى العاملة والجودة والاعتماد</div>
+            <strong id="dsrP2Project" style="font-size:14px; color:var(--text);">مشروع حياة أليكس بارك 1 — عمارة رقم 5</strong>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span class="pill pill-navy num" id="dsrP2Date">—</span>
+          <span class="pill pill-plum num" dir="ltr" id="dsrP2Code">DR-26-230</span>
+        </div>
+      </div>
+
+      <!-- Section 6: Split Manpower + Visual Distribution Bar -->
+      <div class="dsr-sec">
+        <div class="dsr-sec-hdr">
+          <h3><span class="dsr-sec-num">6</span>سادساً: الطاقم الهندسي والإداري والعمالة التنفيذية بالموقع</h3>
+          <span class="pill pill-green num" id="dsrGrandManpowerBadge">الإجمالي العام: 0 فرد</span>
+        </div>
+
+        <div class="dsr-wf-bar-wrap">
+          <span>توزيع القوى العاملة:</span>
+          <div class="dsr-wf-track">
+            <div id="dsrBarEng" style="background:#0E4D4E; width:0%;"></div>
+            <div id="dsrBarSkilled" style="background:#1F7A7B; width:0%;"></div>
+            <div id="dsrBarHelper" style="background:#38B2AC; width:0%;"></div>
+          </div>
+          <span style="display:inline-flex; gap:10px; flex-wrap:wrap; font-size:11px;">
+            <span>■ هندسي/إداري: <strong id="dsrCntEng" class="num">0</strong></span>
+            <span>■ فنيين: <strong id="dsrCntSkilled" class="num">0</strong></span>
+            <span>■ مساعدين: <strong id="dsrCntHelper" class="num">0</strong></span>
+          </span>
+        </div>
+
+        <div style="padding:12px;" class="dsr-split-mp">
+          <!-- Sub-Table A: Engineering & Admin -->
+          <div class="dsr-sec">
+            <div class="dsr-sec-hdr">
+              <h3 style="font-size:12px;">أولاً: الطاقم الهندسي والإشرافي والإداري</h3>
+              <button type="button" class="btn btn-light btn-sm no-print" onclick="addDsrRow('engAdminList')">+ تخصص</button>
+            </div>
+            <div class="sc-table-wrap">
+              <table class="dsr-tbl">
+                <thead>
+                  <tr><th class="right">التخصص / المسمى الوظيفي</th><th style="width:58px;">العدد</th><th class="right" style="width:105px;">القطاع / ملاحظات</th><th class="no-print" style="width:30px;"></th></tr>
+                </thead>
+                <tbody id="dsrEngAdminBody"></tbody>
+                <tfoot>
+                  <tr style="background:var(--brand-soft); font-weight:700;">
+                    <td class="right">إجمالي الطاقم الهندسي والإداري</td>
+                    <td class="num" id="dsrEngSubTotal">0</td>
+                    <td colspan="2" style="font-size:11px; color:var(--muted);">مهندسين / مشرفين / إداريين</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- Sub-Table B: Execution Workers (Skilled / Helper) -->
+          <div class="dsr-sec">
+            <div class="dsr-sec-hdr">
+              <h3 style="font-size:12px;">ثانياً: العمالة التنفيذية (مقسمة فني ومساعد)</h3>
+              <button type="button" class="btn btn-light btn-sm no-print" onclick="addDsrRow('workersSplitList')">+ حرفة</button>
+            </div>
+            <div class="sc-table-wrap">
+              <table class="dsr-tbl">
+                <thead>
+                  <tr><th class="right">الحرفة / التخصص</th><th style="width:64px;">فني</th><th style="width:64px;">مساعد</th><th style="width:60px;">المجموع</th><th style="width:110px;">موقع العمل</th><th class="no-print" style="width:30px;"></th></tr>
+                </thead>
+                <tbody id="dsrWorkersBody"></tbody>
+                <tfoot>
+                  <tr style="background:var(--brand-soft); font-weight:700;">
+                    <td class="right">إجمالي العمالة التنفيذية</td>
+                    <td class="num" id="dsrSkilledSubTotal">0</td>
+                    <td class="num" id="dsrHelperSubTotal">0</td>
+                    <td class="num" id="dsrWorkersSubTotal">0</td>
+                    <td colspan="2" style="font-size:11px; color:var(--muted);">فني + مساعد</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 7: IR / QC Inspections Log (Official DC Codes A/B/C/D/UR — Replaces Broken Red Zone) -->
+      <div class="dsr-sec">
+        <div class="dsr-sec-hdr">
+          <h3>
+            <span class="dsr-sec-num">7</span>سابعاً: موقف طلبات الفحص والاستلام الهندسي (IR / QC)
+            <span class="pill pill-navy" id="dsrIrSummaryPill">0 طلب</span>
+          </h3>
+          <div class="no-print" style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-light btn-sm" onclick="clearDsrInspections()">مسح الكل (لا يوجد IR)</button>
+            <button type="button" class="btn btn-gold btn-sm" onclick="addDsrRow('inspections')">+ إضافة طلب فحص (IR)</button>
+          </div>
+        </div>
+        <div class="sc-table-wrap" id="dsrIrTableWrap">
+          <table class="dsr-tbl">
+            <thead>
+              <tr>
+                <th style="width:115px;">رقم الطلب (IR)</th>
+                <th class="right">بيان الاستلام / الفحص الهندسي</th>
+                <th style="width:115px;">المبنى / الدور</th>
+                <th style="width:92px;">التخصص</th>
+                <th style="width:145px;">كود الاعتماد (DC)</th>
+                <th class="right" style="width:170px;">ملاحظات الاستشاري / الإجراء</th>
+                <th class="no-print" style="width:32px;"></th>
+              </tr>
+            </thead>
+            <tbody id="dsrIrBody"></tbody>
+          </table>
+        </div>
+        <div id="dsrIrEmpty" style="display:none; padding:14px; text-align:center; font-size:12.5px; color:var(--muted);">
+          لا توجد طلبات فحص واستلام (IR) مسجلة لهذا اليوم — اضغط «+ إضافة طلب فحص (IR)» لإضافة طلب جديد.
+        </div>
+      </div>
+
+      <!-- Sections 8 & 9: HSE Safety & General Consultant Notes -->
+      <div class="dsr-split-hse">
+        <div class="dsr-sec">
+          <div class="dsr-sec-hdr">
+            <h3><span class="dsr-sec-num">8</span>ثامناً: السلامة والصحة المهنية (HSE)</h3>
+            <select id="dsrSafetyStatus" class="inp no-print" style="padding:3px 8px; font-size:11.5px;" onchange="onDsrSafetyChange()">
+              <option value="safe">آمن (0 حوادث)</option>
+              <option value="alert">تسجيل ملاحظة سلامة</option>
+            </select>
+          </div>
+          <div style="padding:12px; display:flex; flex-direction:column; gap:8px;">
+            <div id="dsrSafetyBadgeWrap"></div>
+            <textarea id="dsrSafetyNotes" rows="3" class="inp" style="width:100%;" placeholder="ملاحظات الأمن الصناعي والوقاية الشخصية..."></textarea>
+          </div>
+        </div>
+
+        <div class="dsr-sec">
+          <div class="dsr-sec-hdr">
+            <h3><span class="dsr-sec-num">9</span>تاسعاً: ملاحظات عامة وتوجيهات الاستشاري وإدارة المشروع</h3>
+          </div>
+          <div style="padding:12px;">
+            <textarea id="dsrGeneralNotes" rows="4" class="inp" style="width:100%;" placeholder="توجيهات الاستشاري، ملاحظات التنفيذ، المعوقات والقرارات المطلوبة..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Official Editable Signatures (Aref Ruqaa Calligraphy) -->
+      <div class="dsr-sigs-grid">
+        <div class="dsr-sig-card">
+          <div id="dsrSigTitle1" class="dsr-sig-title" contenteditable="true" title="اضغط لتعديل المسمى">تم إعداد التقرير بواسطة</div>
+          <input id="dsrSigName1" type="text" class="dsr-sig-name" value="م / أحمد يسري" />
+          <div class="dsr-sig-line">التوقيع</div>
+        </div>
+        <div class="dsr-sig-card">
+          <div id="dsrSigTitle2" class="dsr-sig-title" contenteditable="true" title="اضغط لتعديل المسمى">توقيع مهندس الاستشاري</div>
+          <input id="dsrSigName2" type="text" class="dsr-sig-name" value="م / عمرو فاروق" />
+          <div class="dsr-sig-line">التوقيع</div>
+        </div>
+        <div class="dsr-sig-card primary">
+          <div id="dsrSigTitle3" class="dsr-sig-title" contenteditable="true" title="اضغط لتعديل المسمى">اعتماد مدير المشروع</div>
+          <input id="dsrSigName3" type="text" class="dsr-sig-name" value="م / محمد السيد" />
+          <div class="dsr-sig-line">التوقيع والاعتماد</div>
+        </div>
       </div>
     </div>
 
-    <!-- Block 3 & 4: Materials & DC Status -->
-    <div class="dr-grid-2">
-      <div class="panel" style="margin-bottom:0;">
-        <div class="panel-hdr">
-          <span><span class="dr-section-badge">3</span>التوريدات والخامات وحركة المخزن</span>
-        </div>
-        <div class="panel-body">
-          <textarea class="inp" id="drMaterialsNote" rows="5" style="width:100%;" placeholder="الأسمنت المنصرف، التشوينات الواردة، أو أي خامات أوشكت على النفاد..."></textarea>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-bottom:0;">
-        <div class="panel-hdr">
-          <span><span class="dr-section-badge">4</span>الموقف الفني والاستلامات (DC / الاستشاري)</span>
-        </div>
-        <div class="panel-body">
-          <textarea class="inp" id="drDcStatus" rows="5" style="width:100%;" placeholder="طلبات الفحص IR، اعتماد الخامات MIR، اللوحات SD، تكسير المكعبات، أو ملاحظات الاستشاري..."></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- Block 5: Blockers & Tomorrow Plan -->
-    <div class="panel" style="margin-top:14px;">
-      <div class="panel-hdr">
-        <span><span class="dr-section-badge">5</span>المعوقات والقرارات المطلوبة (مرتبة بالأولوية)</span>
-        <button type="button" class="btn btn-light btn-sm no-print" onclick="addDailyBlockerRow()">+ إضافة معوّق / قرار مطلوب</button>
-      </div>
-      <div class="panel-body">
-        <div id="drBlockersList"></div>
-        <div class="form-row" style="margin-top:12px;">
-          <label>خطة العمل المستهدفة ليوم الغد</label>
-          <textarea class="inp" id="drTomorrowPlan" rows="3" style="width:100%;" placeholder="البنود المخطط تنفيذها أو تسليمها غداً والتوريدات المطلوبة..."></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- Saved Daily Reports Archive -->
+    <!-- Saved Cloud Daily Reports Archive -->
     <div class="panel no-print">
       <div class="panel-hdr">
         <span>أرشيف التقارير اليومية المحفوظة بالسحابة</span>
@@ -2477,7 +3094,7 @@
       <div class="panel-body sc-table-wrap">
         <table>
           <thead>
-            <tr><th>التاريخ</th><th>الطقس</th><th>العمالة</th><th>بنود الأعمال</th><th>المعوقات</th><th class="right">معد التقرير</th><th>إجراءات</th></tr>
+            <tr><th>الكود</th><th>التاريخ</th><th>الطقس</th><th>القوى العاملة</th><th>متوسط الإنجاز</th><th>طلبات IR</th><th class="right">معد التقرير</th><th>إجراءات</th></tr>
           </thead>
           <tbody id="drArchiveBody"></tbody>
         </table>
@@ -2485,7 +3102,7 @@
     </div>
   </section>
 
-  <!-- ==================== 7. مصفوفة التقدم (BUILDING 5 MATRIX) ==================== -->
+<!-- ==================== 7. مصفوفة التقدم (BUILDING 5 MATRIX) ==================== -->
   <section id="tab-matrix" class="section">
     <div class="v7-page-head">
       <div class="v7-page-title">
@@ -2687,7 +3304,7 @@
 // ============================================================================
 // 1. CLEAN ZERO-DATA CLOUD SHELL (ALL REAL DATA LOADS ONLY FROM SUPABASE AFTER AUTH)
 // ============================================================================
-const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.0 — الهوية المعتمدة + 8 تبويبات رئيسية + التقرير اليومي", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
+const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.1 — الهوية المعتمدة + التقرير اليومي الهندسي المتكامل (ورقتين A4)", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
 
 // ============================================================================
 // ⚙️ إعدادات الربط السحابي (Supabase) — ضع الرابط والمفتاح هنا مرة واحدة قبل الرفع
@@ -4338,12 +4955,26 @@ function exportExcelOrJson() {
     })), 'المهام_والتذكيرات');
 
     ensureDailyReports();
-    safeSheet(DB.dailyReports.map(r => ({
-      التاريخ: r.date, الطقس: r.weather, معد_التقرير: r.author, عدد_العمالة: r.laborCount,
-      توزيع_العمالة: r.laborDetails, عدد_بنود_الأعمال: (r.workItems||[]).length,
-      التوريدات_والخامات: r.materialsNote, الموقف_الفني_DC: r.dcStatus,
-      عدد_المعوقات: (r.blockers||[]).length, خطة_الغد: r.tomorrowPlan
-    })), 'التقارير_اليومية');
+    safeSheet(DB.dailyReports.map(r => {
+      const m = computeDsrMetrics(r);
+      return {
+        كود_التقرير: r.header?.reportCode || r.id || '',
+        التاريخ: r.date,
+        الطقس: r.weather?.condition ? `${r.weather.condition} (${r.weather.temp||''})` : (r.weather || ''),
+        متوسط_الإنجاز: m.avgProgress + '%',
+        بنود_اليوم: (r.todayWorks||[]).length,
+        بنود_الغد: (r.tomorrowWorks||[]).length,
+        طاقم_هندسي_وإداري: m.engSub,
+        عمالة_فنية: m.skTotal,
+        عمالة_مساعدة: m.hlTotal,
+        إجمالي_القوى_العاملة: m.grandTotal,
+        عدد_المعدات: m.equipSum,
+        طلبات_الفحص_IR: (r.inspections||[]).length,
+        حالة_السلامة_HSE: r.safetyStatus === 'alert' ? 'ملاحظة' : 'آمن (0 حوادث)',
+        معد_التقرير: r.signatures?.name1 || r.author || '',
+        ملاحظات_وتوجيهات: r.generalNotes || ''
+      };
+    }), 'التقارير_اليومية');
     XLSX.writeFile(wb, `Hayah_AOBC_Complete_ERP_${todayISO()}.xlsx`);
     showToast('📊 تم تصدير ملف Excel الأرشيفي الشامل (18 شيتاً كاملاً) لحفظه على OneDrive!');
   } else {
@@ -7197,9 +7828,277 @@ renderAttendanceMonth = function() {
   }
 };
 
-// --- D) DAILY SITE REPORT ENGINE (SITE OPERATIONS MGMT + CLOUD ARCHIVE + A4 + WHATSAPP) ---
+// --- D) V7.1 INTEGRATED 2-PAGE DAILY SITE REPORT ENGINE (CLOUD + WEATHER + A4 + WHATSAPP) ---
+const DSR_DEFAULT_LOGOS = {
+  owner: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="شعار مرسيليا للاستثمار العقاري">
+    <rect x="2" y="2" width="96" height="96" rx="16" fill="#0E4D4E"/>
+    <circle cx="80" cy="19" r="6.8" fill="#ffffff"/>
+    <path d="M11 63 C18 46, 22 25, 26 13 C38 35, 58 56, 70 48 C75 44, 74 32, 70 23 C78 32, 86 42, 93 47 C84 43, 77 39, 75 37 C80 48, 79 61, 67 65 C53 70, 36 51, 26 29 C23 42, 18 55, 11 63 Z" fill="#ffffff"/>
+    <path d="M15 86 C35 73, 62 66, 89 66 C64 72, 39 78, 15 86 Z" fill="#ffffff"/>
+  </svg>`,
+  consultant: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="شعار المكتب الاستشاري الأفريقي">
+    <rect x="4" y="4" width="92" height="92" rx="14" fill="#F7F8F9" stroke="#0E4D4E" stroke-width="4"/>
+    <polygon points="50,14 82,42 74,42 50,21 26,42 18,42" fill="#1F7A7B"/>
+    <rect x="28" y="44" width="10" height="34" rx="1.5" fill="#0E4D4E"/>
+    <rect x="45" y="34" width="10" height="44" rx="1.5" fill="#1F7A7B"/>
+    <rect x="62" y="44" width="10" height="34" rx="1.5" fill="#0E4D4E"/>
+    <rect x="20" y="81" width="60" height="5" rx="2" fill="#0E4D4E"/>
+  </svg>`
+};
+
+const DSR_AR_DAYS = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const DSR_IR_CODES = [
+  { code: 'A',  label: 'Code A — معتمد' },
+  { code: 'B',  label: 'Code B — معتمد بملاحظات' },
+  { code: 'C',  label: 'Code C — إعادة تقديم بعد التعديل' },
+  { code: 'D',  label: 'Code D — مرفوض' },
+  { code: 'UR', label: 'UR — تحت المراجعة' }
+];
+
 function ensureDailyReports() {
   if (!Array.isArray(DB.dailyReports)) DB.dailyReports = [];
+  if (!DB.reportLogos || typeof DB.reportLogos !== 'object') {
+    DB.reportLogos = { owner: null, consultant: null, contractor: null };
+  }
+}
+
+function getDsrLogoHtml(key) {
+  ensureDailyReports();
+  const custom = DB.reportLogos[key];
+  if (custom) return `<img src="${custom}" alt="${key}" />`;
+  if (key === 'contractor') {
+    const aobc = getBrandLogos().aobc;
+    if (aobc) return `<img src="${aobc}" alt="A.O.B.C" />`;
+  }
+  return DSR_DEFAULT_LOGOS[key] || DSR_DEFAULT_LOGOS.consultant;
+}
+
+function renderDsrLogos() {
+  ['owner', 'consultant', 'contractor'].forEach(k => {
+    const html = getDsrLogoHtml(k);
+    const cap = k.charAt(0).toUpperCase() + k.slice(1);
+    const el1 = document.getElementById(`dsrLogo${cap}P1`);
+    const el2 = document.getElementById(`dsrLogo${cap}P2`);
+    if (el1) el1.innerHTML = html;
+    if (el2) el2.innerHTML = html;
+  });
+}
+
+function triggerDsrLogoUpload(key) {
+  const cap = key.charAt(0).toUpperCase() + key.slice(1);
+  document.getElementById(`dsrLogoInput${cap}`)?.click();
+}
+
+async function handleDsrLogoUpload(key, inputEl) {
+  const file = inputEl?.files?.[0];
+  if (!file) return;
+  try {
+    // Resize logo to crisp lightweight 240x240 PNG/WebP so Supabase JSON stays fast
+    const dataUrl = await new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const maxD = 240;
+        let w = img.width, h = img.height;
+        if (w > maxD || h > maxD) {
+          const r = Math.min(maxD / w, maxD / h);
+          w = Math.round(w * r); h = Math.round(h * r);
+        }
+        const c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(c.toDataURL('image/png'));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('تعذر قراءة الصورة.')); };
+      img.src = url;
+    });
+    ensureDailyReports();
+    DB.reportLogos[key] = dataUrl;
+    renderDsrLogos();
+    const lbls = { owner: 'المالك', consultant: 'الاستشاري', contractor: 'المقاول العام' };
+    saveDB(`🖼️ تم تحديث وحفظ شعار ${lbls[key]} في السحابة!`);
+  } catch (err) {
+    alert(err.message);
+  }
+  inputEl.value = '';
+}
+
+function resetDsrLogos() {
+  if (!confirm('هل تريد استعادة الشعارات الافتراضية للمالك والاستشاري والمقاول العام؟')) return;
+  ensureDailyReports();
+  DB.reportLogos = { owner: null, consultant: null, contractor: null };
+  renderDsrLogos();
+  saveDB('🖼️ تم استعادة الشعارات الافتراضية بنجاح.');
+}
+
+function nextDsrReportNumber() {
+  ensureDailyReports();
+  const nums = DB.dailyReports.map(r => parseInt(r.header?.reportNumber, 10)).filter(n => !isNaN(n));
+  return String((nums.length ? Math.max(...nums) : 229) + 1);
+}
+
+function createBlankDailyReport(dt) {
+  const repNo = nextDsrReportNumber();
+  const shortYr = String(dt || todayISO()).slice(2, 4);
+  return {
+    id: 'DR-' + dt,
+    date: dt,
+    version: 2,
+    header: {
+      ownerName: 'مرسيليا للاستثمار العقاري',
+      ownerSub: 'شركة مرسيليا للاستثمار العقاري ش.م.م',
+      consultantName: 'المكتب الاستشاري الأفريقي',
+      consultantSub: 'إشراف ومراجعة فنية (A.C.O)',
+      contractorName: 'المكتب العربي للتشييد والبناء',
+      contractorSub: 'The Arab Office (A.O.B.C)',
+      projectName: 'مشروع حياة أليكس بارك 1 — عمارة رقم 5',
+      reportNumber: repNo,
+      reportCode: `DR-${shortYr}-${repNo}`,
+      shiftStatus: '08:00 ص - 04:30 م (منتظم)'
+    },
+    weather: { condition: 'مشمس', temp: '26°C', wind: '14 كم/س', humidity: '55%' },
+    todayWorks: [
+      { desc: '', location: 'عمارة رقم 5', discipline: 'معماري', progress: 0, notes: '' }
+    ],
+    tomorrowWorks: [
+      { desc: '', location: 'عمارة رقم 5', dept: 'قسم التنفيذ', priority: 'مجدول' }
+    ],
+    equipment: [
+      { name: 'ونش رفع تشوينات', qty: '1', location: 'عمارة رقم 5', status: 'عامل' }
+    ],
+    materials: [],
+    supervisionStaff: [
+      { role: 'مدير المشروع', present: true, entity: 'المكتب العربي للتشييد' },
+      { role: 'مهندس التنفيذ', present: true, entity: 'المكتب العربي للتشييد' },
+      { role: 'مهندس المكتب الفني', present: true, entity: 'المكتب العربي للتشييد' },
+      { role: 'منسق مستندات (DC)', present: true, entity: 'المكتب العربي للتشييد' },
+      { role: 'مهندس المساحة', present: true, entity: 'المكتب العربي للتشييد' },
+      { role: 'مهندس ضبط الجودة', present: false, entity: 'المكتب العربي للتشييد' },
+      { role: 'مسئول السلامة (HSE)', present: false, entity: 'المكتب العربي للتشييد' },
+      { role: 'أمين المخزن والعهدة', present: true, entity: 'المكتب العربي للتشييد' }
+    ],
+    engAdminList: [
+      { role: 'مهندس مدني', count: 1, notes: 'تنفيذ وإشراف' },
+      { role: 'مهندس معماري', count: 1, notes: 'مباني وتشطيبات' },
+      { role: 'مهندس مكتب فني / DC', count: 1, notes: 'حصر واعتمادات' },
+      { role: 'مساح / مساعد مساح', count: 1, notes: 'ضبط مناسيب' },
+      { role: 'مشرفين تنفيذ', count: 0, notes: 'عمارة رقم 5' },
+      { role: 'إداريين وأمناء مخازن', count: 0, notes: 'إدارة الموقع' },
+      { role: 'مشغلي معدات (ونش)', count: 1, notes: 'تشغيل الونش' }
+    ],
+    workersSplitList: [
+      { trade: 'بنائين', skilled: 0, helper: 0, loc: 'عمارة رقم 5' },
+      { trade: 'مبيضين محارة', skilled: 0, helper: 0, loc: 'عمارة رقم 5' },
+      { trade: 'فنيين كهرباء', skilled: 0, helper: 0, loc: 'عمارة رقم 5' },
+      { trade: 'سباكين / صحي', skilled: 0, helper: 0, loc: 'عمارة رقم 5' },
+      { trade: 'نجارين مسلح', skilled: 0, helper: 0, loc: 'عمارة رقم 5' },
+      { trade: 'حدادين مسلح', skilled: 0, helper: 0, loc: 'عمارة رقم 5' },
+      { trade: 'عمالة عادية وتشوين', skilled: 0, helper: 0, loc: 'الموقع العام' }
+    ],
+    inspections: [],
+    safetyStatus: 'safe',
+    safetyNotes: 'تم الالتزام بارتداء مهمات الوقاية الشخصية (PPE) وتأمين السقالات والفتحات بعمارة رقم 5.',
+    generalNotes: '',
+    signatures: {
+      title1: 'تم إعداد التقرير بواسطة', name1: 'م / أحمد يسري',
+      title2: 'توقيع مهندس الاستشاري', name2: 'م / وليد',
+      title3: 'اعتماد مدير المشروع', name3: 'م / محمد السيد'
+    },
+    updatedAt: ''
+  };
+}
+
+function createSampleDsrReport(dt) {
+  const base = createBlankDailyReport(dt || '2026-10-17');
+  base.header.reportNumber = '230';
+  base.header.reportCode = `DR-${String(base.date).slice(2,4)}-230`;
+  base.weather = { condition: 'مشمس', temp: '30°C', wind: '14 كم/س', humidity: '55%' };
+  base.todayWorks = [
+    { desc: 'أعمال مباني الدور التاسع', location: 'عمارة رقم 5', discipline: 'معماري', progress: 85, notes: 'جاري الاستكمال ومطابق للمخططات' },
+    { desc: 'أعمال محارة الدور التاسع + الواجهات', location: 'عمارة رقم 5', discipline: 'تشطيبات', progress: 75, notes: 'بؤج وأوتار وطرطشة مسمارية' },
+    { desc: 'أعمال كهرباء الدور التاسع (تأسيس)', location: 'عمارة رقم 5', discipline: 'كهرباء MEP', progress: 90, notes: 'تمديد خراطيم وتركيب علب' },
+    { desc: 'تجهيز واستلام منسوب تشطيب دروة السطح', location: 'عمارة رقم 5', discipline: 'مساحة / مدني', progress: 100, notes: 'تم مراجعة المناسيب والروبير' },
+    { desc: 'أعمال نظافة وتشوين خامات الأسمنت والطوب', location: 'عمارة رقم 5', discipline: 'تشوينات', progress: 80, notes: 'رفع التشوينات بالونش للدور التاسع' }
+  ];
+  base.tomorrowWorks = [
+    { desc: 'استكمال مباني الدور التاسع عمارة رقم 5', location: 'عمارة رقم 5', dept: 'قسم المباني', priority: 'أولوية قصوى' },
+    { desc: 'محارة الدور الثامن + الواجهات عمارة رقم 5', location: 'عمارة رقم 5', dept: 'قسم المحارة', priority: 'عاجل' },
+    { desc: 'نجارة وحدادة دروة الدور التاسع', location: 'عمارة رقم 5', dept: 'الأعمال الإنشائية', priority: 'مجدول' },
+    { desc: 'استكمال تأسيس كهرباء الدور التاسع', location: 'عمارة رقم 5', dept: 'الأعمال الكهروميكانيكية', priority: 'مجدول' },
+    { desc: 'تشوين خامات المباني والمحارة بالونش', location: 'عمارة رقم 5', dept: 'الخدمات والتشوين', priority: 'مستمر' }
+  ];
+  base.equipment = [
+    { name: 'ونش رفع تشوينات', qty: '2', location: 'عمارة رقم 5', status: 'عامل' },
+    { name: 'مقص حديد كهربائي', qty: '1', location: 'ورشة الحدادة', status: 'عامل' },
+    { name: 'تناية حديد تسليح', qty: '1', location: 'ورشة الحدادة', status: 'عامل' },
+    { name: 'خلاطة مونة / نحلة', qty: '1', location: 'عمارة رقم 5', status: 'عامل' },
+    { name: 'سقالات معدنية خارجية', qty: '1 طقم', location: 'واجهات عمارة 5', status: 'مؤمن' }
+  ];
+  base.materials = [
+    { name: 'أسمنت بورتلاندي عادي 42.5', supplier: 'شركة العامرية', qty: '15 طن', status: 'مقبول' },
+    { name: 'طوب أسمنتي مصمت / طفلي', supplier: 'مصنع النصر', qty: '5000 طوبة', status: 'مقبول' },
+    { name: 'رمل حرش للمباني والمحارة', supplier: 'مورد معتمد', qty: '24 م³', status: 'مقبول' },
+    { name: 'خراطيم وعلب كهرباء PVC', supplier: 'بيت الهندسة', qty: '250 متر', status: 'مقبول' }
+  ];
+  base.workersSplitList = [
+    { trade: 'نجارين مسلح', skilled: 2, helper: 1, loc: 'عمارة رقم 5' },
+    { trade: 'حدادين مسلح', skilled: 0, helper: 0, loc: 'ورشة الحدادة' },
+    { trade: 'بنائين', skilled: 3, helper: 1, loc: 'الدور التاسع' },
+    { trade: 'مبيضين محارة', skilled: 3, helper: 1, loc: 'التاسع + الواجهات' },
+    { trade: 'فنيين كهرباء', skilled: 1, helper: 0, loc: 'الدور التاسع' },
+    { trade: 'سباكين / صحي', skilled: 1, helper: 1, loc: 'عمارة رقم 5' },
+    { trade: 'عمالة عادية وتشوين', skilled: 0, helper: 2, loc: 'الموقع العام' }
+  ];
+  base.inspections = [
+    { irCode: 'IR-ARC-26-230', desc: 'فحص واستلام مباني الدور التاسع', location: 'عمارة 5 - دور 9', discipline: 'معماري', status: 'B', notes: 'معتمد مع ضبط استقامة عراميس الحائط الغربي' },
+    { irCode: 'IR-ARC-26-231', desc: 'فحص بؤج وأوتار محارة الواجهات', location: 'عمارة 5 - واجهة', discipline: 'تشطيبات', status: 'C', notes: 'يُعاد التقديم بعد مراجعة استواء بؤج المحور 3' }
+  ];
+  base.generalNotes = '1. الالتزام بالبرنامج الزمني لأعمال مباني ومحارة الدور التاسع عمارة رقم 5 مع ضبط الاستوائية والمناسيب.\n2. استيفاء ملاحظة طلب الفحص (IR-ARC-26-231) وإعادة التقديم للاستشاري قبل البدء في الملو.\n3. استمرار رش ومعالجة الخرسانات والمحارة بالمياه صباحاً ومساءً.';
+  return base;
+}
+
+// Upgrade any legacy v7.0 daily report cleanly to v7.1 schema without data loss
+function normalizeDailyReport(r) {
+  if (!r) return createBlankDailyReport(todayISO());
+  const blank = createBlankDailyReport(r.date || todayISO());
+  if (r.version === 2 && r.header) {
+    return {
+      ...blank,
+      ...r,
+      header: { ...blank.header, ...(r.header || {}) },
+      weather: { ...blank.weather, ...(typeof r.weather === 'object' && r.weather ? r.weather : { condition: String(r.weather || 'مشمس') }) },
+      signatures: { ...blank.signatures, ...(r.signatures || {}) },
+      todayWorks: Array.isArray(r.todayWorks) ? r.todayWorks : blank.todayWorks,
+      tomorrowWorks: Array.isArray(r.tomorrowWorks) ? r.tomorrowWorks : blank.tomorrowWorks,
+      equipment: Array.isArray(r.equipment) ? r.equipment : blank.equipment,
+      materials: Array.isArray(r.materials) ? r.materials : [],
+      supervisionStaff: Array.isArray(r.supervisionStaff) ? r.supervisionStaff : blank.supervisionStaff,
+      engAdminList: Array.isArray(r.engAdminList) ? r.engAdminList : blank.engAdminList,
+      workersSplitList: Array.isArray(r.workersSplitList) ? r.workersSplitList : blank.workersSplitList,
+      inspections: Array.isArray(r.inspections) ? r.inspections : []
+    };
+  }
+  // Migrate v7.0 simple record
+  blank.weather.condition = typeof r.weather === 'string' ? r.weather : 'مشمس';
+  if (r.author) blank.signatures.name1 = r.author;
+  if (Array.isArray(r.workItems) && r.workItems.length) {
+    blank.todayWorks = r.workItems.map(w => ({
+      desc: w.desc || '', location: w.floor || 'عمارة رقم 5', discipline: w.trade || 'معماري',
+      progress: parseInt(String(w.qty || '').replace(/[^0-9]/g,''), 10) || 50,
+      notes: [w.qty, w.contractor].filter(Boolean).join(' — ')
+    }));
+  }
+  const notesArr = [];
+  if (r.materialsNote) notesArr.push('حركة الخامات: ' + r.materialsNote);
+  if (r.dcStatus) notesArr.push('الموقف الفني (DC): ' + r.dcStatus);
+  if (Array.isArray(r.blockers) && r.blockers.length) {
+    notesArr.push('المعوقات:\n' + r.blockers.map(b => `- [${b.priority}] ${b.text}`).join('\n'));
+  }
+  blank.generalNotes = notesArr.join('\n');
+  if (r.tomorrowPlan) blank.tomorrowWorks = [{ desc: r.tomorrowPlan, location: 'عمارة رقم 5', dept: 'التنفيذ', priority: 'مجدول' }];
+  blank.updatedAt = r.updatedAt || '';
+  return blank;
 }
 
 function getDailyLiveStatsForDate(dt) {
@@ -7208,11 +8107,14 @@ function getDailyLiveStatsForDate(dt) {
   ensureAttendanceMonths();
   const roster = DB.attendanceMonths[ym] || [];
   const presentEng = [];
+  const presentList = [];
   const absentEng = [];
   roster.forEach(e => {
     const code = (e.days || [])[dayIdx] || '';
-    if (code === 'ح' || code === 'م' || code === 'ن') presentEng.push(`${e.name} (${code})`);
-    else if (code === 'غ') absentEng.push(e.name);
+    if (code === 'ح' || code === 'م' || code === 'ن') {
+      presentEng.push(`${e.name} (${code})`);
+      presentList.push({ name: e.name, role: e.role, code });
+    } else if (code === 'غ') absentEng.push(e.name);
   });
 
   const cemToday = DB.cement.filter(c => c.date === dt);
@@ -7233,13 +8135,13 @@ function getDailyLiveStatsForDate(dt) {
       (cell.stages || []).forEach(st => {
         (st.history || []).forEach(h => {
           if (h.date === dt && Number(h.executedDelta || 0) > 0) {
+            const pct = Math.round(matrixStagePct(st, 'executed') || 0);
             matrixWorksToday.push({
-              trade: tr.label,
-              floor: fl.label,
-              desc: `${st.name}${h.note ? ' — ' + h.note : ''}`,
-              qty: `+${h.executedDelta} ${st.unit || ''}`,
-              contractor: '',
-              workers: ''
+              desc: `${st.name} (+${h.executedDelta} ${st.unit || ''})${h.note ? ' — ' + h.note : ''}`,
+              location: fl.label,
+              discipline: tr.label,
+              progress: pct,
+              notes: 'مسحوب من مصفوفة التقدم'
             });
           }
         });
@@ -7247,24 +8149,33 @@ function getDailyLiveStatsForDate(dt) {
     });
   });
 
-  return { presentEng, absentEng, rosterCount: roster.length, cemToday, cemBagsToday, grnToday, trToday, trSumToday, payToday, paySumToday, matrixWorksToday };
+  return { presentEng, presentList, absentEng, rosterCount: roster.length, cemToday, cemBagsToday, grnToday, trToday, trSumToday, payToday, paySumToday, matrixWorksToday };
 }
 
-function createBlankDailyReport(dt) {
-  return {
-    id: 'DR-' + dt,
-    date: dt,
-    weather: 'مشمس معتدل',
-    author: 'م / أحمد يسري',
-    laborCount: 0,
-    laborDetails: '',
-    workItems: [{ trade: 'مباني', floor: '', desc: '', qty: '', contractor: '', workers: '' }],
-    materialsNote: '',
-    dcStatus: '',
-    blockers: [],
-    tomorrowPlan: '',
-    updatedAt: ''
-  };
+function computeDsrMetrics(r) {
+  const tw = (r?.todayWorks || []).filter(w => (w.desc || '').trim());
+  const avgProgress = tw.length ? Math.round(tw.reduce((s, w) => s + (Number(w.progress) || 0), 0) / tw.length) : 0;
+  const engSub = (r?.engAdminList || []).reduce((s, x) => s + Math.max(0, Number(x.count) || 0), 0);
+  const skTotal = (r?.workersSplitList || []).reduce((s, x) => s + Math.max(0, Number(x.skilled) || 0), 0);
+  const hlTotal = (r?.workersSplitList || []).reduce((s, x) => s + Math.max(0, Number(x.helper) || 0), 0);
+  const workersSub = skTotal + hlTotal;
+  const grandTotal = engSub + workersSub;
+  const equipSum = (r?.equipment || []).filter(e => (e.name || '').trim()).reduce((s, e) => s + (parseInt(e.qty, 10) || 1), 0);
+  const supPresent = (r?.supervisionStaff || []).filter(x => x.present).length;
+  const supTotal = (r?.supervisionStaff || []).length;
+  return { worksCount: tw.length, avgProgress, engSub, skTotal, hlTotal, workersSub, grandTotal, equipSum, supPresent, supTotal };
+}
+
+function formatDsrCalendarMeta(dt) {
+  if (!dt || !/^\d{4}-\d{2}-\d{2}$/.test(dt)) return { dmy: dt || '—', dayName: '—', hijri: '' };
+  const [y, m, d] = dt.split('-').map(Number);
+  const dObj = new Date(y, m - 1, d, 12, 0, 0);
+  const dayName = DSR_AR_DAYS[dObj.getDay()] || '';
+  let hijri = '';
+  try {
+    hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' }).format(dObj);
+  } catch (e) {}
+  return { dmy: `${String(d).padStart(2,'0')}/${String(m).padStart(2,'0')}/${y}`, dayName, hijri };
 }
 
 function renderDailyReportPage() {
@@ -7278,10 +8189,8 @@ function renderDailyReportPage() {
   const activeDt = (currentDailyReport && currentDailyReport.date) || (dtInp && dtInp.value) || todayISO();
   if (!currentDailyReport) {
     const saved = DB.dailyReports.find(r => r.date === activeDt);
-    currentDailyReport = saved ? JSON.parse(JSON.stringify(saved)) : createBlankDailyReport(activeDt);
+    currentDailyReport = saved ? normalizeDailyReport(JSON.parse(JSON.stringify(saved))) : createBlankDailyReport(activeDt);
   }
-  if (dtInp) dtInp.value = currentDailyReport.date;
-
   populateDailyReportForm();
   renderDailyReportArchive();
 }
@@ -7290,152 +8199,464 @@ function loadDailyReportForDate(dt) {
   if (!dt) return;
   ensureDailyReports();
   const saved = DB.dailyReports.find(r => r.date === dt);
-  currentDailyReport = saved ? JSON.parse(JSON.stringify(saved)) : createBlankDailyReport(dt);
+  currentDailyReport = saved ? normalizeDailyReport(JSON.parse(JSON.stringify(saved))) : createBlankDailyReport(dt);
   populateDailyReportForm();
+  renderDailyReportArchive();
+}
+
+function setDsrToday() {
+  const iso = todayISO();
+  loadDailyReportForDate(iso);
+  fetchDsrWeather(true);
+}
+
+function loadDsrSampleReport() {
+  const dt = document.getElementById('drDateInput')?.value || '2026-10-17';
+  currentDailyReport = createSampleDsrReport(dt);
+  populateDailyReportForm();
+  showToast('📄 تم تحميل بيانات العينة الاسترشادية (تقرير 230) — يمكنك التعديل والحفظ.');
+}
+
+function clonePreviousDailyReport() {
+  ensureDailyReports();
+  if (!DB.dailyReports.length) return showToast('لا يوجد تقرير محفوظ سابقاً للنسخ منه — يمكنك تجربة العينة الاسترشادية.');
+  const targetDate = document.getElementById('drDateInput')?.value || todayISO();
+  const latest = normalizeDailyReport(JSON.parse(JSON.stringify(DB.dailyReports[0])));
+  const newNo = nextDsrReportNumber();
+  const shortYr = String(targetDate).slice(2, 4);
+  latest.date = targetDate;
+  latest.id = 'DR-' + targetDate;
+  latest.header.reportNumber = newNo;
+  latest.header.reportCode = `DR-${shortYr}-${newNo}`;
+  latest.updatedAt = '';
+  // Carry tomorrow's planned works into today's works if helpful
+  if (Array.isArray(latest.tomorrowWorks) && latest.tomorrowWorks.some(w => (w.desc || '').trim())) {
+    latest.todayWorks = latest.tomorrowWorks.filter(w => (w.desc || '').trim()).map(w => ({
+      desc: w.desc, location: w.location || 'عمارة رقم 5', discipline: w.dept || 'تنفيذ', progress: 50, notes: ''
+    }));
+  }
+  latest.inspections = [];
+  currentDailyReport = latest;
+  populateDailyReportForm();
+  showToast(`📋 تم نسخ هيكل آخر تقرير وتجهيز تقرير رقم (${newNo}) لتاريخ ${targetDate}!`);
+}
+
+function syncDsrHeaderText() {
+  if (!currentDailyReport) return;
+  const g = id => document.getElementById(id)?.value ?? '';
+  currentDailyReport.header.ownerName = g('dsrOwnerName');
+  currentDailyReport.header.ownerSub = g('dsrOwnerSub');
+  currentDailyReport.header.consultantName = g('dsrConsultantName');
+  currentDailyReport.header.consultantSub = g('dsrConsultantSub');
+  currentDailyReport.header.contractorName = g('dsrContractorName');
+  currentDailyReport.header.contractorSub = g('dsrContractorSub');
+  currentDailyReport.header.projectName = g('dsrProjectName');
+  currentDailyReport.header.reportNumber = g('dsrReportNum');
+  currentDailyReport.header.reportCode = g('dsrReportCode');
+  currentDailyReport.header.shiftStatus = g('dsrShiftStatus');
+  const p2p = document.getElementById('dsrP2Project'); if (p2p) p2p.textContent = currentDailyReport.header.projectName;
+  const p2c = document.getElementById('dsrP2Code'); if (p2c) p2c.textContent = currentDailyReport.header.reportCode;
+}
+
+function onDsrReportNumChange() {
+  if (!currentDailyReport) return;
+  const num = (document.getElementById('dsrReportNum')?.value || '').trim() || '230';
+  const shortYr = String(currentDailyReport.date || todayISO()).slice(2, 4);
+  const codeEl = document.getElementById('dsrReportCode');
+  if (codeEl) codeEl.value = `DR-${shortYr}-${num}`;
+  syncDsrHeaderText();
+}
+
+function syncDailyReportFromInputs() {
+  if (!currentDailyReport) return;
+  syncDsrHeaderText();
+  const g = id => document.getElementById(id)?.value ?? '';
+  currentDailyReport.date = g('drDateInput') || todayISO();
+  currentDailyReport.id = 'DR-' + currentDailyReport.date;
+  currentDailyReport.weather = {
+    condition: g('dsrWeatherCond').trim() || 'مشمس',
+    temp: g('dsrWeatherTemp').trim() || '26°C',
+    wind: g('dsrWeatherWind').trim() || '14 كم/س',
+    humidity: g('dsrWeatherHum').trim() || '55%'
+  };
+  currentDailyReport.safetyStatus = g('dsrSafetyStatus') || 'safe';
+  currentDailyReport.safetyNotes = g('dsrSafetyNotes').trim();
+  currentDailyReport.generalNotes = g('dsrGeneralNotes').trim();
+  currentDailyReport.signatures = {
+    title1: (document.getElementById('dsrSigTitle1')?.innerText || 'تم إعداد التقرير بواسطة').trim(),
+    name1: g('dsrSigName1').trim() || 'م / أحمد يسري',
+    title2: (document.getElementById('dsrSigTitle2')?.innerText || 'توقيع مهندس الاستشاري').trim(),
+    name2: g('dsrSigName2').trim(),
+    title3: (document.getElementById('dsrSigTitle3')?.innerText || 'اعتماد مدير المشروع').trim(),
+    name3: g('dsrSigName3').trim()
+  };
 }
 
 function populateDailyReportForm() {
   if (!currentDailyReport) return;
   const r = currentDailyReport;
   const isSaved = DB.dailyReports.some(x => x.date === r.date);
+  renderDsrLogos();
 
   const badge = document.getElementById('drSaveBadge');
   if (badge) {
     badge.className = 'pill ' + (isSaved ? 'pill-green' : 'pill-amber');
     badge.textContent = isSaved ? 'محفوظ بالسحابة ✓' : 'مسودة جديدة';
   }
-  const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v ?? ''; };
-  setVal('drDateInput', r.date);
-  setVal('drWeather', r.weather || 'مشمس معتدل');
-  setVal('drAuthor', r.author || 'م / أحمد يسري');
-  setVal('drLaborCount', r.laborCount ?? 0);
-  setVal('drLaborDetails', r.laborDetails || '');
-  setVal('drMaterialsNote', r.materialsNote || '');
-  setVal('drDcStatus', r.dcStatus || '');
-  setVal('drTomorrowPlan', r.tomorrowPlan || '');
+  const setV = (id, v) => { const el = document.getElementById(id); if (el) el.value = v ?? ''; };
+  setV('drDateInput', r.date);
+  setV('dsrOwnerName', r.header.ownerName);
+  setV('dsrOwnerSub', r.header.ownerSub);
+  setV('dsrConsultantName', r.header.consultantName);
+  setV('dsrConsultantSub', r.header.consultantSub);
+  setV('dsrContractorName', r.header.contractorName);
+  setV('dsrContractorSub', r.header.contractorSub);
+  setV('dsrProjectName', r.header.projectName);
+  setV('dsrReportNum', r.header.reportNumber);
+  setV('dsrReportCode', r.header.reportCode);
+  setV('dsrShiftStatus', r.header.shiftStatus);
 
+  setV('dsrWeatherCond', r.weather.condition);
+  setV('dsrWeatherTemp', r.weather.temp);
+  setV('dsrWeatherWind', r.weather.wind);
+  setV('dsrWeatherHum', r.weather.humidity);
+
+  setV('dsrSafetyStatus', r.safetyStatus || 'safe');
+  setV('dsrSafetyNotes', r.safetyNotes || '');
+  setV('dsrGeneralNotes', r.generalNotes || '');
+
+  const setT = (id, v) => { const el = document.getElementById(id); if (el) el.innerText = v ?? ''; };
+  setT('dsrSigTitle1', r.signatures.title1); setV('dsrSigName1', r.signatures.name1);
+  setT('dsrSigTitle2', r.signatures.title2); setV('dsrSigName2', r.signatures.name2);
+  setT('dsrSigTitle3', r.signatures.title3); setV('dsrSigName3', r.signatures.name3);
+
+  const cal = formatDsrCalendarMeta(r.date);
+  setT('dsrDateDisplay', cal.dmy);
+  setT('dsrArabicDay', cal.dayName);
+  setT('dsrHijriDate', cal.hijri);
+  setT('dsrP2Project', r.header.projectName);
+  setT('dsrP2Date', `${cal.dmy} (${cal.dayName})`);
+  setT('dsrP2Code', r.header.reportCode);
+
+  // Live ERP Data Pulse Strip for selected date
   const live = getDailyLiveStatsForDate(r.date);
-  const engSum = document.getElementById('drEngPresentSummary');
-  if (engSum) {
-    engSum.textContent = live.presentEng.length
-      ? `الحضور المسجل بالكشف: ${live.presentEng.join('، ')}`
-      : `لم يُسجّل حضور بعد ليوم ${r.date} في كشف الموظفين`;
-  }
   const snap = document.getElementById('drLiveSnapshot');
   if (snap) {
     snap.innerHTML = `
       <div class="dr-mini-stat"><small>حضور طاقم الإشراف (${r.date})</small><strong>${live.presentEng.length} / ${live.rosterCount}</strong></div>
       <div class="dr-mini-stat"><small>أسمنت منصرف اليوم</small><strong>${fmt(live.cemBagsToday)} شكارة (${(live.cemBagsToday/20).toFixed(2)} طن)</strong></div>
-      <div class="dr-mini-stat"><small>توريدات وتشوينات اليوم</small><strong>${live.grnToday.length} نقلة</strong></div>
+      <div class="dr-mini-stat"><small>تشوينات وتوريدات اليوم</small><strong>${live.grnToday.length} نقلة</strong></div>
       <div class="dr-mini-stat"><small>منصرف الخزينة اليوم</small><strong>${fmt(live.trSumToday)} ج.م (${live.trToday.length})</strong></div>
       <div class="dr-mini-stat"><small>دفعات المقاولين اليوم</small><strong>${fmt(live.paySumToday)} ج.م (${live.payToday.length})</strong></div>
     `;
   }
 
-  renderDailyWorkItems();
-  renderDailyBlockers();
+  onDsrSafetyChange(false);
+  renderDsrTodayWorks();
+  renderDsrTomorrowWorks();
+  renderDsrEquip();
+  renderDsrMaterials();
+  renderDsrSupervision();
+  renderDsrEngAdmin();
+  renderDsrWorkers();
+  renderDsrInspections();
+  updateDsrKPIs();
 }
 
-function syncDailyReportFromInputs() {
+function updateDsrKPIs() {
   if (!currentDailyReport) return;
-  const g = id => document.getElementById(id)?.value ?? '';
-  currentDailyReport.date = g('drDateInput') || todayISO();
-  currentDailyReport.id = 'DR-' + currentDailyReport.date;
-  currentDailyReport.weather = g('drWeather');
-  currentDailyReport.author = g('drAuthor').trim() || 'م / أحمد يسري';
-  currentDailyReport.laborCount = Number(g('drLaborCount') || 0);
-  currentDailyReport.laborDetails = g('drLaborDetails').trim();
-  currentDailyReport.materialsNote = g('drMaterialsNote').trim();
-  currentDailyReport.dcStatus = g('drDcStatus').trim();
-  currentDailyReport.tomorrowPlan = g('drTomorrowPlan').trim();
+  const m = computeDsrMetrics(currentDailyReport);
+  const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  setT('dsrKpiProgress', `${m.avgProgress}% (${m.worksCount} بنود جارية)`);
+  setT('dsrKpiWorkforce', `${m.grandTotal} فرد (${m.engSub} هندسي • ${m.workersSub} عمالة)`);
+  setT('dsrKpiEquip', `${m.equipSum} معدات عاملة بالموقع`);
+  setT('dsrSupSummary', `متواجد: ${m.supPresent} / ${m.supTotal}`);
 
-  const wRows = [];
-  document.querySelectorAll('#drWorkItemsList .dr-row-item').forEach(el => {
-    wRows.push({
-      trade: el.querySelector('.dw-trade')?.value || '',
-      floor: el.querySelector('.dw-floor')?.value || '',
-      desc: el.querySelector('.dw-desc')?.value || '',
-      qty: el.querySelector('.dw-qty')?.value || '',
-      contractor: el.querySelector('.dw-con')?.value || '',
-      workers: el.querySelector('.dw-wrk')?.value || ''
-    });
-  });
-  currentDailyReport.workItems = wRows;
+  setT('dsrEngSubTotal', m.engSub);
+  setT('dsrSkilledSubTotal', m.skTotal);
+  setT('dsrHelperSubTotal', m.hlTotal);
+  setT('dsrWorkersSubTotal', m.workersSub);
+  setT('dsrGrandManpowerBadge', `الإجمالي العام: ${m.grandTotal} فرد`);
+  setT('dsrCntEng', m.engSub);
+  setT('dsrCntSkilled', m.skTotal);
+  setT('dsrCntHelper', m.hlTotal);
 
-  const bRows = [];
-  document.querySelectorAll('#drBlockersList .dr-blocker-item').forEach(el => {
-    bRows.push({
-      priority: el.querySelector('.db-prio')?.value || 'P1',
-      text: el.querySelector('.db-text')?.value || '',
-      owner: el.querySelector('.db-owner')?.value || '',
-      targetDate: el.querySelector('.db-date')?.value || ''
-    });
-  });
-  currentDailyReport.blockers = bRows;
+  const safeTot = Math.max(1, m.grandTotal);
+  const b1 = document.getElementById('dsrBarEng');
+  const b2 = document.getElementById('dsrBarSkilled');
+  const b3 = document.getElementById('dsrBarHelper');
+  if (b1) b1.style.width = Math.round((m.engSub / safeTot) * 100) + '%';
+  if (b2) b2.style.width = Math.round((m.skTotal / safeTot) * 100) + '%';
+  if (b3) b3.style.width = Math.round((m.hlTotal / safeTot) * 100) + '%';
 }
 
-function renderDailyWorkItems() {
-  const wrap = document.getElementById('drWorkItemsList');
-  if (!wrap || !currentDailyReport) return;
-  const items = currentDailyReport.workItems || [];
-  const trades = ['مباني', 'بياض ومحارة', 'سباكة وتغذية', 'كهرباء', 'نجارة وخرسانات', 'سيراميك ورخام', 'عزل', 'ألوميتال', 'دهانات', 'أعمال عامة'];
-  wrap.innerHTML = items.length ? items.map((w, idx) => `
-    <div class="dr-row-item">
-      <select class="inp dw-trade">
-        ${trades.map(t => `<option ${w.trade===t?'selected':''}>${t}</option>`).join('')}
-        ${w.trade && !trades.includes(w.trade) ? `<option selected>${esc(w.trade)}</option>` : ''}
-      </select>
-      <input class="inp dw-floor" placeholder="الدور / النطاق" value="${esc(w.floor)}" />
-      <input class="inp dw-desc dr-span2" placeholder="وصف الأعمال المنفذة بالتفصيل..." value="${esc(w.desc)}" />
-      <input class="inp dw-qty" placeholder="الكمية / %" value="${esc(w.qty)}" />
-      <input class="inp dw-con" placeholder="المقاول" value="${esc(w.contractor)}" />
-      <input class="inp dw-wrk" type="number" min="0" placeholder="عمالة" value="${esc(w.workers)}" />
-      <button type="button" class="icon-btn del no-print" onclick="removeDailyWorkRow(${idx})" title="حذف البند">🗑️</button>
+function renderDsrTodayWorks() {
+  const tb = document.getElementById('dsrTodayWorksBody');
+  if (!tb || !currentDailyReport) return;
+  tb.innerHTML = currentDailyReport.todayWorks.map((w, i) => {
+    const pct = Math.min(100, Math.max(0, Number(w.progress) || 0));
+    const col = pct >= 85 ? 'var(--green)' : (pct >= 50 ? 'var(--brand)' : 'var(--amber)');
+    return `
+      <tr>
+        <td class="num" style="font-weight:700; color:var(--muted);">${i + 1}</td>
+        <td class="right"><input class="dsr-cell-inp" style="font-weight:600;" value="${esc(w.desc)}" oninput="currentDailyReport.todayWorks[${i}].desc=this.value; updateDsrKPIs();" placeholder="وصف العمل المنفذ..." /></td>
+        <td><input class="dsr-cell-inp" style="text-align:center;" value="${esc(w.location)}" oninput="currentDailyReport.todayWorks[${i}].location=this.value" placeholder="عمارة / دور" /></td>
+        <td><input class="dsr-cell-inp" style="text-align:center;" value="${esc(w.discipline)}" oninput="currentDailyReport.todayWorks[${i}].discipline=this.value" placeholder="التخصص" /></td>
+        <td>
+          <div class="dsr-prog-wrap">
+            <div class="dsr-prog-top">
+              <input type="number" min="0" max="100" class="dsr-cell-inp num" style="width:48px; text-align:center; padding:1px;" value="${pct}" oninput="currentDailyReport.todayWorks[${i}].progress=Math.min(100,Math.max(0,Number(this.value)||0)); document.getElementById('dsrTwFill-${i}').style.width=currentDailyReport.todayWorks[${i}].progress+'%'; updateDsrKPIs();" />
+              <span>%</span>
+            </div>
+            <div class="dsr-prog-track"><div id="dsrTwFill-${i}" class="dsr-prog-fill" style="width:${pct}%; background:${col};"></div></div>
+          </div>
+        </td>
+        <td class="right"><input class="dsr-cell-inp" value="${esc(w.notes)}" oninput="currentDailyReport.todayWorks[${i}].notes=this.value" placeholder="ملاحظات التنفيذ..." /></td>
+        <td class="no-print"><button type="button" class="icon-btn del" onclick="removeDsrRow('todayWorks',${i})">✕</button></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function renderDsrTomorrowWorks() {
+  const tb = document.getElementById('dsrTomorrowWorksBody');
+  if (!tb || !currentDailyReport) return;
+  tb.innerHTML = currentDailyReport.tomorrowWorks.map((w, i) => `
+    <tr>
+      <td class="num" style="font-weight:700; color:var(--muted);">${i + 1}</td>
+      <td class="right"><input class="dsr-cell-inp" style="font-weight:600;" value="${esc(w.desc)}" oninput="currentDailyReport.tomorrowWorks[${i}].desc=this.value" placeholder="بيان العمل المخطط غداً..." /></td>
+      <td><input class="dsr-cell-inp" style="text-align:center;" value="${esc(w.location)}" oninput="currentDailyReport.tomorrowWorks[${i}].location=this.value" /></td>
+      <td><input class="dsr-cell-inp" style="text-align:center;" value="${esc(w.dept)}" oninput="currentDailyReport.tomorrowWorks[${i}].dept=this.value" /></td>
+      <td><input class="dsr-cell-inp" style="text-align:center; font-weight:700; color:var(--brand);" value="${esc(w.priority)}" oninput="currentDailyReport.tomorrowWorks[${i}].priority=this.value" /></td>
+      <td class="no-print"><button type="button" class="icon-btn del" onclick="removeDsrRow('tomorrowWorks',${i})">✕</button></td>
+    </tr>
+  `).join('');
+}
+
+function renderDsrEquip() {
+  const tb = document.getElementById('dsrEquipBody');
+  if (!tb || !currentDailyReport) return;
+  tb.innerHTML = currentDailyReport.equipment.map((e, i) => `
+    <tr>
+      <td class="right"><input class="dsr-cell-inp" style="font-weight:600;" value="${esc(e.name)}" oninput="currentDailyReport.equipment[${i}].name=this.value; updateDsrKPIs();" placeholder="اسم المعدة..." /></td>
+      <td><input class="dsr-cell-inp num" style="text-align:center; font-weight:700;" value="${esc(e.qty)}" oninput="currentDailyReport.equipment[${i}].qty=this.value; updateDsrKPIs();" /></td>
+      <td><input class="dsr-cell-inp" style="text-align:center;" value="${esc(e.location)}" oninput="currentDailyReport.equipment[${i}].location=this.value" /></td>
+      <td><input class="dsr-cell-inp" style="text-align:center; font-weight:700; color:var(--green);" value="${esc(e.status)}" oninput="currentDailyReport.equipment[${i}].status=this.value" /></td>
+      <td class="no-print"><button type="button" class="icon-btn del" onclick="removeDsrRow('equipment',${i})">✕</button></td>
+    </tr>
+  `).join('');
+}
+
+function renderDsrMaterials() {
+  const tb = document.getElementById('dsrMatBody');
+  if (!tb || !currentDailyReport) return;
+  tb.innerHTML = currentDailyReport.materials.length ? currentDailyReport.materials.map((m, i) => `
+    <tr>
+      <td class="right"><input class="dsr-cell-inp" style="font-weight:600;" value="${esc(m.name)}" oninput="currentDailyReport.materials[${i}].name=this.value" placeholder="اسم الخامة..." /></td>
+      <td><input class="dsr-cell-inp" style="text-align:center;" value="${esc(m.supplier)}" oninput="currentDailyReport.materials[${i}].supplier=this.value" /></td>
+      <td><input class="dsr-cell-inp num" style="text-align:center; font-weight:700;" value="${esc(m.qty)}" oninput="currentDailyReport.materials[${i}].qty=this.value" /></td>
+      <td><input class="dsr-cell-inp" style="text-align:center; font-weight:700; color:var(--green);" value="${esc(m.status)}" oninput="currentDailyReport.materials[${i}].status=this.value" /></td>
+      <td class="no-print"><button type="button" class="icon-btn del" onclick="removeDsrRow('materials',${i})">✕</button></td>
+    </tr>
+  `).join('') : '<tr><td colspan="5" style="padding:12px; color:var(--muted); font-size:12px;">لا توجد خامات واردة مسجلة اليوم — اضغط «+ خامة» أو «⚡ سحب بيانات اليوم».</td></tr>';
+}
+
+function renderDsrSupervision() {
+  const grid = document.getElementById('dsrSupGrid');
+  if (!grid || !currentDailyReport) return;
+  grid.innerHTML = currentDailyReport.supervisionStaff.map((s, i) => `
+    <div class="dsr-sup-card ${s.present ? 'is-present' : 'is-absent'}">
+      <div style="display:flex; align-items:center; gap:7px; min-width:0; flex:1;">
+        <input type="checkbox" ${s.present ? 'checked' : ''} onchange="currentDailyReport.supervisionStaff[${i}].present=this.checked; renderDsrSupervision(); updateDsrKPIs();" style="width:16px;height:16px;accent-color:var(--brand);cursor:pointer;flex-shrink:0;" />
+        <div style="min-width:0; flex:1;">
+          <input class="dsr-cell-inp" style="font-weight:700; font-size:11.5px; padding:1px 3px;" value="${esc(s.role)}" oninput="currentDailyReport.supervisionStaff[${i}].role=this.value" />
+          <input class="dsr-cell-inp" style="font-size:10px; color:var(--muted); padding:0 3px;" value="${esc(s.entity)}" oninput="currentDailyReport.supervisionStaff[${i}].entity=this.value" />
+        </div>
+      </div>
+      <button type="button" class="icon-btn del no-print" style="padding:1px 4px; font-size:10px;" onclick="removeDsrRow('supervisionStaff',${i})">✕</button>
     </div>
-  `).join('') : '<div style="font-size:12.5px; color:var(--muted); padding:10px 0;">لا توجد بنود أعمال مضافة بعد — اضغط «+ إضافة بند عمل» أو «⚡ سحب بيانات اليوم تلقائياً».</div>';
+  `).join('');
 }
 
-function addDailyWorkRow(preset = null) {
-  syncDailyReportFromInputs();
-  currentDailyReport.workItems.push(preset || { trade: 'مباني', floor: '', desc: '', qty: '', contractor: '', workers: '' });
-  renderDailyWorkItems();
+function renderDsrEngAdmin() {
+  const tb = document.getElementById('dsrEngAdminBody');
+  if (!tb || !currentDailyReport) return;
+  tb.innerHTML = currentDailyReport.engAdminList.map((e, i) => `
+    <tr>
+      <td class="right"><input class="dsr-cell-inp" style="font-weight:600;" value="${esc(e.role)}" oninput="currentDailyReport.engAdminList[${i}].role=this.value" /></td>
+      <td><input type="number" min="0" class="dsr-cell-inp num" style="text-align:center; font-weight:700;" value="${Math.max(0, Number(e.count)||0)}" oninput="currentDailyReport.engAdminList[${i}].count=Math.max(0,parseInt(this.value,10)||0); updateDsrKPIs();" /></td>
+      <td class="right"><input class="dsr-cell-inp" style="font-size:11px; color:var(--muted);" value="${esc(e.notes)}" oninput="currentDailyReport.engAdminList[${i}].notes=this.value" /></td>
+      <td class="no-print"><button type="button" class="icon-btn del" onclick="removeDsrRow('engAdminList',${i})">✕</button></td>
+    </tr>
+  `).join('');
 }
 
-function removeDailyWorkRow(idx) {
-  syncDailyReportFromInputs();
-  currentDailyReport.workItems.splice(idx, 1);
-  renderDailyWorkItems();
+function renderDsrWorkers() {
+  const tb = document.getElementById('dsrWorkersBody');
+  if (!tb || !currentDailyReport) return;
+  tb.innerHTML = currentDailyReport.workersSplitList.map((w, i) => {
+    const sk = Math.max(0, Number(w.skilled) || 0);
+    const hl = Math.max(0, Number(w.helper) || 0);
+    return `
+      <tr>
+        <td class="right"><input class="dsr-cell-inp" style="font-weight:600;" value="${esc(w.trade)}" oninput="currentDailyReport.workersSplitList[${i}].trade=this.value" /></td>
+        <td><input type="number" min="0" class="dsr-cell-inp num" style="text-align:center; font-weight:700;" value="${sk}" oninput="currentDailyReport.workersSplitList[${i}].skilled=Math.max(0,parseInt(this.value,10)||0); document.getElementById('dsrWkTot-${i}').textContent=(currentDailyReport.workersSplitList[${i}].skilled+currentDailyReport.workersSplitList[${i}].helper); updateDsrKPIs();" /></td>
+        <td><input type="number" min="0" class="dsr-cell-inp num" style="text-align:center; font-weight:700;" value="${hl}" oninput="currentDailyReport.workersSplitList[${i}].helper=Math.max(0,parseInt(this.value,10)||0); document.getElementById('dsrWkTot-${i}').textContent=(currentDailyReport.workersSplitList[${i}].skilled+currentDailyReport.workersSplitList[${i}].helper); updateDsrKPIs();" /></td>
+        <td class="num" style="font-weight:700; background:var(--surface-2);" id="dsrWkTot-${i}">${sk + hl}</td>
+        <td><input class="dsr-cell-inp" style="text-align:center; font-size:11px;" value="${esc(w.loc)}" oninput="currentDailyReport.workersSplitList[${i}].loc=this.value" /></td>
+        <td class="no-print"><button type="button" class="icon-btn del" onclick="removeDsrRow('workersSplitList',${i})">✕</button></td>
+      </tr>
+    `;
+  }).join('');
 }
 
-function renderDailyBlockers() {
-  const wrap = document.getElementById('drBlockersList');
-  if (!wrap || !currentDailyReport) return;
-  const list = currentDailyReport.blockers || [];
-  wrap.innerHTML = list.length ? list.map((b, idx) => `
-    <div class="dr-blocker-item">
-      <select class="inp db-prio">
-        <option value="P1" ${b.priority==='P1'?'selected':''}>P1 عاجل</option>
-        <option value="P2" ${b.priority==='P2'?'selected':''}>P2 خلال 48س</option>
-        <option value="P3" ${b.priority==='P3'?'selected':''}>P3 متابعة</option>
-      </select>
-      <input class="inp db-text dr-span2" placeholder="وصف المعوّق أو القرار المطلوب من مدير المشروع / الاستشاري..." value="${esc(b.text)}" />
-      <input class="inp db-owner" placeholder="المسؤول (م/محمد...)" value="${esc(b.owner)}" />
-      <input type="date" class="inp db-date" value="${esc(b.targetDate || currentDailyReport.date)}" />
-      <button type="button" class="icon-btn del no-print" onclick="removeDailyBlockerRow(${idx})" title="حذف">🗑️</button>
-    </div>
-  `).join('') : '<div style="font-size:12.5px; color:var(--muted); padding:6px 0;">لا توجد معوقات مسجلة — اضغط «+ إضافة معوّق» عند وجود أي عائق تنفيذي أو قرار مطلوب.</div>';
+function renderDsrInspections() {
+  const tb = document.getElementById('dsrIrBody');
+  const wrap = document.getElementById('dsrIrTableWrap');
+  const empty = document.getElementById('dsrIrEmpty');
+  const pill = document.getElementById('dsrIrSummaryPill');
+  if (!tb || !currentDailyReport) return;
+
+  const list = currentDailyReport.inspections || [];
+  if (pill) {
+    const ok = list.filter(x => x.status === 'A' || x.status === 'B').length;
+    const rev = list.filter(x => x.status === 'C' || x.status === 'D').length;
+    pill.textContent = list.length ? `${list.length} طلب • معتمد: ${ok} | تعديل/رفض: ${rev}` : 'لا يوجد IR اليوم';
+    pill.className = 'pill ' + (rev > 0 ? 'pill-amber' : (ok > 0 ? 'pill-green' : 'pill-navy'));
+  }
+
+  if (!list.length) {
+    if (wrap) wrap.style.display = 'none';
+    if (empty) empty.style.display = 'block';
+    tb.innerHTML = '';
+    return;
+  }
+  if (wrap) wrap.style.display = 'block';
+  if (empty) empty.style.display = 'none';
+
+  tb.innerHTML = list.map((ir, i) => {
+    const st = ['A','B','C','D','UR'].includes(ir.status) ? ir.status : 'UR';
+    return `
+      <tr class="dsr-ir-row-${st}">
+        <td><input class="dsr-cell-inp num" dir="ltr" style="text-align:center; font-weight:700;" value="${esc(ir.irCode)}" oninput="currentDailyReport.inspections[${i}].irCode=this.value" /></td>
+        <td class="right"><input class="dsr-cell-inp" style="font-weight:600;" value="${esc(ir.desc)}" oninput="currentDailyReport.inspections[${i}].desc=this.value" placeholder="بيان طلب الفحص..." /></td>
+        <td><input class="dsr-cell-inp" style="text-align:center;" value="${esc(ir.location)}" oninput="currentDailyReport.inspections[${i}].location=this.value" /></td>
+        <td><input class="dsr-cell-inp" style="text-align:center;" value="${esc(ir.discipline)}" oninput="currentDailyReport.inspections[${i}].discipline=this.value" /></td>
+        <td>
+          <select class="dsr-ir-sel dsr-ir-${st}" onchange="currentDailyReport.inspections[${i}].status=this.value; renderDsrInspections();">
+            ${DSR_IR_CODES.map(c => `<option value="${c.code}" ${st===c.code?'selected':''}>${c.label}</option>`).join('')}
+          </select>
+        </td>
+        <td class="right"><input class="dsr-cell-inp" value="${esc(ir.notes || ir.defect || '')}" oninput="currentDailyReport.inspections[${i}].notes=this.value" placeholder="ملاحظات الاستشاري..." /></td>
+        <td class="no-print"><button type="button" class="icon-btn del" onclick="removeDsrRow('inspections',${i})">✕</button></td>
+      </tr>
+    `;
+  }).join('');
 }
 
-function addDailyBlockerRow(preset = null) {
-  syncDailyReportFromInputs();
-  currentDailyReport.blockers.push(preset || { priority: 'P1', text: '', owner: 'م / محمد السيد', targetDate: currentDailyReport.date });
-  renderDailyBlockers();
+function addDsrRow(key) {
+  if (!currentDailyReport) return;
+  const repNo = currentDailyReport.header?.reportNumber || '230';
+  const shortYr = String(currentDailyReport.date || todayISO()).slice(2, 4);
+  const defaults = {
+    todayWorks:       { desc: '', location: 'عمارة رقم 5', discipline: 'معماري', progress: 60, notes: '' },
+    tomorrowWorks:    { desc: '', location: 'عمارة رقم 5', dept: 'قسم التنفيذ', priority: 'مجدول' },
+    equipment:        { name: '', qty: '1', location: 'عمارة رقم 5', status: 'عامل' },
+    materials:        { name: '', supplier: '', qty: '', status: 'مقبول' },
+    supervisionStaff: { role: 'مهندس إشراف', present: true, entity: 'المكتب العربي للتشييد' },
+    engAdminList:     { role: 'تخصص هندسي / إداري', count: 1, notes: '' },
+    workersSplitList: { trade: 'حرفة جديدة', skilled: 1, helper: 1, loc: 'عمارة رقم 5' },
+    inspections:      { irCode: `IR-ARC-${shortYr}-${repNo}`, desc: 'فحص واستلام أعمال بالموقع', location: 'عمارة رقم 5', discipline: 'معماري', status: 'UR', notes: '' }
+  };
+  currentDailyReport[key].push(defaults[key]);
+  const map = {
+    todayWorks: renderDsrTodayWorks, tomorrowWorks: renderDsrTomorrowWorks, equipment: renderDsrEquip,
+    materials: renderDsrMaterials, supervisionStaff: renderDsrSupervision, engAdminList: renderDsrEngAdmin,
+    workersSplitList: renderDsrWorkers, inspections: renderDsrInspections
+  };
+  map[key]?.();
+  updateDsrKPIs();
 }
 
-function removeDailyBlockerRow(idx) {
-  syncDailyReportFromInputs();
-  currentDailyReport.blockers.splice(idx, 1);
-  renderDailyBlockers();
+function removeDsrRow(key, idx) {
+  if (!currentDailyReport || !Array.isArray(currentDailyReport[key])) return;
+  currentDailyReport[key].splice(idx, 1);
+  const map = {
+    todayWorks: renderDsrTodayWorks, tomorrowWorks: renderDsrTomorrowWorks, equipment: renderDsrEquip,
+    materials: renderDsrMaterials, supervisionStaff: renderDsrSupervision, engAdminList: renderDsrEngAdmin,
+    workersSplitList: renderDsrWorkers, inspections: renderDsrInspections
+  };
+  map[key]?.();
+  updateDsrKPIs();
+}
+
+function clearDsrInspections() {
+  if (!currentDailyReport) return;
+  currentDailyReport.inspections = [];
+  renderDsrInspections();
+  showToast('تم مسح جميع طلبات الفحص IR لعدم وجودها اليوم.');
+}
+
+function onDsrSafetyChange(syncState = true) {
+  const st = document.getElementById('dsrSafetyStatus')?.value || 'safe';
+  if (syncState && currentDailyReport) currentDailyReport.safetyStatus = st;
+  const wrap = document.getElementById('dsrSafetyBadgeWrap');
+  if (!wrap) return;
+  wrap.innerHTML = st === 'safe'
+    ? '<span class="pill pill-green">✓ لا توجد إصابات أو حوادث اليوم — مهمات الوقاية PPE مطبّقة</span>'
+    : '<span class="pill pill-red">⚠ تنبيه سلامة مهنية — يرجى توضيح الملاحظة والإجراء التصحيحي بالأسفل</span>';
+}
+
+function mapDsrWeatherCode(code) {
+  if (code === 0) return 'مشمس';
+  if (code === 1 || code === 2) return 'غائم جزئياً';
+  if (code === 3) return 'غائم';
+  if (code === 45 || code === 48) return 'شبورة / ضباب';
+  if ([51, 53, 55, 61, 80].includes(code)) return 'أمطار خفيفة';
+  if ([63, 65, 81, 82].includes(code)) return 'أمطار غزيرة';
+  if ([95, 96, 99].includes(code)) return 'عواصف رعدية';
+  return 'معتدل';
+}
+
+async function fetchDsrWeather(notify = false) {
+  const dateVal = document.getElementById('drDateInput')?.value || todayISO();
+  const todayStr = todayISO();
+  const isToday = dateVal === todayStr;
+  const lat = 31.2001, lon = 29.9187;
+  try {
+    let url;
+    if (isToday) {
+      url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Africa%2FCairo`;
+    } else {
+      const diffDays = Math.floor((new Date(dateVal + 'T12:00:00') - new Date()) / 86400000);
+      const base = diffDays < -2 ? 'https://archive-api.open-meteo.com/v1/archive' : 'https://api.open-meteo.com/v1/forecast';
+      url = `${base}?latitude=${lat}&longitude=${lon}&start_date=${dateVal}&end_date=${dateVal}&daily=weather_code,temperature_2m_max,wind_speed_10m_max&hourly=relative_humidity_2m&timezone=Africa%2FCairo`;
+    }
+    const res = await fetch(url);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    let temp, wind, hum, code;
+    if (isToday && data.current) {
+      temp = `${Math.round(data.current.temperature_2m)}°C`;
+      wind = `${Math.round(data.current.wind_speed_10m)} كم/س`;
+      hum = `${Math.round(data.current.relative_humidity_2m)}%`;
+      code = data.current.weather_code;
+    } else if (data.daily?.temperature_2m_max?.[0] != null) {
+      temp = `${Math.round(data.daily.temperature_2m_max[0])}°C`;
+      wind = `${Math.round(data.daily.wind_speed_10m_max[0])} كم/س`;
+      hum = `${Math.round(data.hourly?.relative_humidity_2m?.[12] ?? 55)}%`;
+      code = data.daily.weather_code[0];
+    } else throw new Error();
+    const cond = mapDsrWeatherCode(code);
+    if (currentDailyReport) currentDailyReport.weather = { condition: cond, temp, wind, humidity: hum };
+    document.getElementById('dsrWeatherCond').value = cond;
+    document.getElementById('dsrWeatherTemp').value = temp;
+    document.getElementById('dsrWeatherWind').value = wind;
+    document.getElementById('dsrWeatherHum').value = hum;
+    if (notify) showToast(`🌤️ تم تحديث طقس الإسكندرية: ${cond} (${temp})`);
+  } catch (e) {
+    if (notify) showToast('تعذر الاتصال بخدمة الطقس حالياً — يمكنك التعديل يدوياً.');
+  }
 }
 
 function autoPullDailyReportData() {
@@ -7443,43 +8664,53 @@ function autoPullDailyReportData() {
   const dt = currentDailyReport.date || todayISO();
   const live = getDailyLiveStatsForDate(dt);
 
+  // 1) Merge Building Matrix works logged on this date
   if (live.matrixWorksToday.length) {
-    const nonEmpty = (currentDailyReport.workItems || []).filter(w => w.desc.trim() || w.floor.trim());
-    currentDailyReport.workItems = [...nonEmpty, ...live.matrixWorksToday];
+    const existing = (currentDailyReport.todayWorks || []).filter(w => (w.desc || '').trim());
+    currentDailyReport.todayWorks = [...existing, ...live.matrixWorksToday];
   }
 
-  const matLines = [];
+  // 2) Pull today's GRN deliveries & cement consumption into Materials table
+  const itemNames = Object.fromEntries(DB.items.map(i => [i.code, i.name]));
+  const pulledMats = [];
+  live.grnToday.forEach(g => {
+    pulledMats.push({ name: itemNames[g.code] || g.code, supplier: g.sup || 'مورد معتمد', qty: `${g.qty} ${g.unit}`, status: 'مقبول' });
+  });
   if (live.cemBagsToday > 0) {
-    const byC = live.cemToday.map(c => `${c.cat}: ${c.bags} شكارة`).join(' | ');
-    matLines.push(`• منصرف الأسمنت اليوم: ${live.cemBagsToday} شكارة (${(live.cemBagsToday/20).toFixed(2)} طن) — [${byC}].`);
+    pulledMats.push({ name: `منصرف أسمنت اليوم (متبقي بالمخزن: ${fmt(S.cementRemBags)} شكارة)`, supplier: 'مخزن الموقع', qty: `${live.cemBagsToday} شكارة`, status: S.cementRemBags <= 100 ? 'رصيد حرج' : 'متاح' });
   }
-  matLines.push(`• الرصيد المتبقي من الأسمنت بالمخزن: ${fmt(S.cementRemBags)} شكارة (${(S.cementRemBags/20).toFixed(2)} طن).`);
-  if (live.grnToday.length) {
-    const itemNames = Object.fromEntries(DB.items.map(i => [i.code, i.name]));
-    matLines.push(`• تشوينات وتوريدات اليوم: ` + live.grnToday.map(g => `${itemNames[g.code] || g.code} (${g.qty} ${g.unit})`).join('، '));
+  if (pulledMats.length) {
+    const existingM = (currentDailyReport.materials || []).filter(m => (m.name || '').trim());
+    currentDailyReport.materials = [...existingM, ...pulledMats];
   }
-  if (live.trSumToday > 0) {
-    matLines.push(`• منصرف خزينة الموقع اليوم: ${fmt(live.trSumToday)} ج.م (${live.trToday.length} حركة).`);
-  }
-  if (live.paySumToday > 0) {
-    matLines.push(`• دفعات المقاولين المسجلة اليوم: ${fmt(live.paySumToday)} ج.م (${live.payToday.length} دفعة).`);
-  }
-  currentDailyReport.materialsNote = matLines.join('\n');
 
-  const existingTexts = new Set((currentDailyReport.blockers || []).map(b => b.text));
-  if (S.cementRemBags <= 100) {
-    const txt = `رصيد الأسمنت منخفض جداً (${fmt(S.cementRemBags)} شكارة فقط) — يلزم توريد نقلة أسمنت عاجلة`;
-    if (!existingTexts.has(txt)) currentDailyReport.blockers.push({ priority: 'P1', text: txt, owner: 'المشتريات / م. محمد', targetDate: addDaysISO(dt, 1) });
+  // 3) Sync Present Site Roster from Attendance into Supervision Staff
+  if (live.presentList.length) {
+    currentDailyReport.supervisionStaff = live.presentList.map(p => ({
+      role: `${p.name} — ${p.role}`,
+      present: true,
+      entity: 'المكتب العربي للتشييد'
+    }));
   }
+
+  // 4) Append alerts (low cement / urgent tasks / today's treasury) to General Notes if not already included
+  const extraNotes = [];
+  if (S.cementRemBags <= 100) extraNotes.push(`• تنبيه خامات: رصيد الأسمنت المتبقي بالمخزن ${fmt(S.cementRemBags)} شكارة فقط (${(S.cementRemBags/20).toFixed(2)} طن) — يلزم توريد نقلة عاجلة.`);
+  if (live.trSumToday > 0) extraNotes.push(`• خزينة الموقع اليوم: تم قيد ${live.trToday.length} حركة بمبلغ ${fmt(live.trSumToday)} ج.م.`);
+  if (live.paySumToday > 0) extraNotes.push(`• دفعات المقاولين اليوم: تم تسجيل ${live.payToday.length} دفعة بإجمالي ${fmt(live.paySumToday)} ج.م.`);
   ensureTasksList();
   DB.tasks.filter(t => !t.done && t.priority === 'high' && t.type === 'scheduled' && t.dueDate && t.dueDate <= dt).slice(0, 2).forEach(t => {
-    if (!existingTexts.has(t.title)) {
-      currentDailyReport.blockers.push({ priority: 'P2', text: t.title, owner: 'المكتب الفني', targetDate: t.dueDate });
-    }
+    extraNotes.push(`• متابعة عاجلة: ${t.title} (مستحق ${t.dueDate}).`);
   });
+  if (extraNotes.length) {
+    const curNotes = (currentDailyReport.generalNotes || '').trim();
+    const toAdd = extraNotes.filter(line => !curNotes.includes(line)).join('\n');
+    if (toAdd) currentDailyReport.generalNotes = curNotes ? (curNotes + '\n' + toAdd) : toAdd;
+  }
 
   populateDailyReportForm();
-  showToast(`⚡ تم سحب بيانات يوم (${dt}) من النظام وتحديث حقول التقرير اليومي!`);
+  fetchDsrWeather(false);
+  showToast(`⚡ تم سحب بيانات يوم (${dt}) من الحضور والمخزن ومصفوفة التقدم وتحديث الطقس!`);
 }
 
 function saveCurrentDailyReport() {
@@ -7491,7 +8722,7 @@ function saveCurrentDailyReport() {
   if (idx >= 0) DB.dailyReports[idx] = copy;
   else DB.dailyReports.unshift(copy);
   DB.dailyReports.sort((a,b) => (b.date || '').localeCompare(a.date || ''));
-  saveDB(`💾 تم حفظ التقرير اليومي بتاريخ (${copy.date}) في السحابة بنجاح!`);
+  saveDB(`💾 تم حفظ التقرير اليومي (${copy.header.reportCode} — ${copy.date}) في السحابة بنجاح!`);
 }
 
 function deleteDailyReport(dt) {
@@ -7510,22 +8741,27 @@ function renderDailyReportArchive() {
   ensureDailyReports();
   const sel = document.getElementById('drArchiveSelect');
   if (sel) {
-    sel.innerHTML = `<option value="">— أرشيف التقارير (${DB.dailyReports.length}) —</option>` +
-      DB.dailyReports.map(r => `<option value="${esc(r.date)}" ${currentDailyReport?.date===r.date?'selected':''}>تقرير ${r.date} (${(r.workItems||[]).filter(w=>w.desc.trim()).length} بنود)</option>`).join('');
+    sel.innerHTML = `<option value="">— أرشيف التقارير المحفوظة (${DB.dailyReports.length}) —</option>` +
+      DB.dailyReports.map(raw => {
+        const r = normalizeDailyReport(raw);
+        return `<option value="${esc(r.date)}" ${currentDailyReport?.date===r.date?'selected':''}>${esc(r.header.reportCode)} — ${r.date}</option>`;
+      }).join('');
   }
   const tbody = document.getElementById('drArchiveBody');
   if (!tbody) return;
-  tbody.innerHTML = DB.dailyReports.length ? DB.dailyReports.map(r => {
-    const wCnt = (r.workItems || []).filter(w => w.desc.trim()).length;
-    const bCnt = (r.blockers || []).filter(b => b.text.trim()).length;
+  tbody.innerHTML = DB.dailyReports.length ? DB.dailyReports.map(raw => {
+    const r = normalizeDailyReport(raw);
+    const m = computeDsrMetrics(r);
+    const irCnt = (r.inspections || []).length;
     return `
       <tr>
+        <td><span class="pill pill-plum num" dir="ltr">${esc(r.header.reportCode)}</span></td>
         <td class="num"><strong>${esc(r.date)}</strong></td>
-        <td>${esc(r.weather || '—')}</td>
-        <td class="num">${r.laborCount || 0}</td>
-        <td class="num">${wCnt}</td>
-        <td>${bCnt ? `<span class="pill pill-red">${bCnt} معوّق</span>` : '<span class="pill pill-green">لا يوجد</span>'}</td>
-        <td class="right">${esc(r.author || '—')}</td>
+        <td>${esc(r.weather.condition)} (${esc(r.weather.temp)})</td>
+        <td class="num">${m.grandTotal} فرد (${m.engSub}+${m.workersSub})</td>
+        <td class="num">${m.avgProgress}% (${m.worksCount} بنود)</td>
+        <td>${irCnt ? `<span class="pill pill-navy">${irCnt} طلب</span>` : '<span style="color:var(--muted);">—</span>'}</td>
+        <td class="right">${esc(r.signatures.name1 || '—')}</td>
         <td><div class="act-btns">
           <button class="btn btn-light btn-sm" style="padding:3px 8px; font-size:11px;" onclick="loadDailyReportForDate('${esc(r.date)}'); window.scrollTo({top:0,behavior:'smooth'});">فتح</button>
           <button class="icon-btn" onclick="loadDailyReportForDate('${esc(r.date)}'); printDailyReport();" title="طباعة A4">🖨️</button>
@@ -7534,120 +8770,341 @@ function renderDailyReportArchive() {
         </div></td>
       </tr>
     `;
-  }).join('') : '<tr><td colspan="7" style="padding:18px; color:var(--muted);">لم يتم حفظ أي تقرير يومي بعد — املأ التقرير بالأعلى واضغط «💾 حفظ التقرير بالسحابة».</td></tr>';
+  }).join('') : '<tr><td colspan="8" style="padding:18px; color:var(--muted);">لم يتم حفظ أي تقرير يومي بعد — املأ التقرير بالأعلى واضغط «💾 حفظ بالسحابة».</td></tr>';
 }
 
 function copyDailyReportWhatsApp() {
   syncDailyReportFromInputs();
   const r = currentDailyReport;
-  const live = getDailyLiveStatsForDate(r.date);
-  const works = (r.workItems || []).filter(w => w.desc.trim());
-  const blockers = (r.blockers || []).filter(b => b.text.trim());
+  const m = computeDsrMetrics(r);
+  const cal = formatDsrCalendarMeta(r.date);
+  const works = (r.todayWorks || []).filter(w => (w.desc || '').trim());
+  const nextW = (r.tomorrowWorks || []).filter(w => (w.desc || '').trim());
+  const mats = (r.materials || []).filter(x => (x.name || '').trim());
+  const irs = (r.inspections || []).filter(x => (x.desc || '').trim() || (x.irCode || '').trim());
 
   const lines = [
-    `*المكتب العربي للتشييد والبناء (A.O.B.C)*`,
-    `*التقرير اليومي التنفيذي — مشروع حياة مرسيليا (عمارة 5)*`,
-    `📅 *التاريخ:* ${r.date} | 🌤️ *الطقس:* ${r.weather}`,
+    `*${r.header.contractorName}*`,
+    `*التقرير اليومي للموقع (${r.header.reportCode}) — ${r.header.projectName}*`,
+    `📅 *التاريخ:* ${cal.dmy} (${cal.dayName})${cal.hijri ? ' | ' + cal.hijri : ''}`,
+    `🌤️ *الطقس:* ${r.weather.condition} (${r.weather.temp} • رياح ${r.weather.wind} • رطوبة ${r.weather.humidity})`,
     `━━━━━━━━━━━━━━━━━━`,
-    `👔 *طاقم الإشراف الحاضر:* ${live.presentEng.length ? live.presentEng.join('، ') : 'حسب كشف الحضور'}`,
-    `👷 *إجمالي العمالة:* ${r.laborCount || 0} عامل${r.laborDetails ? ' (' + r.laborDetails + ')' : ''}`,
+    `👷 *القوى العاملة:* ${m.grandTotal} فرد (هندسي/إداري: ${m.engSub} | فنيين: ${m.skTotal} | مساعدين: ${m.hlTotal})`,
+    `📊 *متوسط إنجاز اليوم:* ${m.avgProgress}% (${works.length} بنود) | 🚜 *المعدات:* ${m.equipSum}`,
     ``,
-    `🏗️ *1. الأعمال المنفذة والجارية:*`
+    `🏗️ *أولاً: الأعمال المنفذة والجارية اليوم:*`
   ];
-  if (works.length) {
-    works.forEach((w, i) => lines.push(`${i+1}. [${w.trade}${w.floor ? ' - ' + w.floor : ''}] ${w.desc}${w.qty ? ' (' + w.qty + ')' : ''}${w.contractor ? ' — ' + w.contractor : ''}`));
-  } else {
-    lines.push(`• لا توجد بنود مسجلة.`);
+  if (works.length) works.forEach((w, i) => lines.push(`${i+1}. [${w.location || 'عمارة 5'}] ${w.desc} — *${w.progress}%*${w.notes ? ' (' + w.notes + ')' : ''}`));
+  else lines.push('• لا توجد بنود مسجلة.');
+
+  if (nextW.length) {
+    lines.push('', '📅 *ثانياً: خطة عمل الغد:*');
+    nextW.forEach((w, i) => lines.push(`${i+1}. ${w.desc} [${w.location}] (${w.priority})`));
   }
-  if (r.materialsNote) {
-    lines.push(``, `🧱 *2. التوريدات والخامات:*`, r.materialsNote);
+  if (mats.length) {
+    lines.push('', '🧱 *الخامات الواردة للموقع:*');
+    mats.forEach(x => lines.push(`• ${x.name}: ${x.qty} (${x.supplier || '—'} — ${x.status})`));
   }
-  if (r.dcStatus) {
-    lines.push(``, `📋 *3. الموقف الفني والاعتمادات (DC):*`, r.dcStatus);
+  if (irs.length) {
+    lines.push('', '📋 *موقف طلبات الفحص (IR):*');
+    irs.forEach(ir => {
+      const codeObj = DSR_IR_CODES.find(c => c.code === ir.status);
+      lines.push(`• ${ir.irCode}: ${ir.desc} — [${codeObj ? codeObj.label : ir.status}]${ir.notes ? ' — ' + ir.notes : ''}`);
+    });
   }
-  if (blockers.length) {
-    lines.push(``, `🚨 *4. المعوقات والقرارات المطلوبة:*`);
-    blockers.forEach(b => lines.push(`• [${b.priority}] ${b.text}${b.owner ? ' — المسؤول: ' + b.owner : ''}${b.targetDate ? ' (موعد: ' + b.targetDate + ')' : ''}`));
-  }
-  if (r.tomorrowPlan) {
-    lines.push(``, `📌 *5. خطة عمل الغد:*`, r.tomorrowPlan);
-  }
-  lines.push(`━━━━━━━━━━━━━━━━━━`, `✍️ إعداد: ${r.author}`);
+  lines.push('', `🛡️ *السلامة المهنية (HSE):* ${r.safetyStatus === 'safe' ? 'آمن (0 حوادث)' : 'يوجد تنبيه'} — ${r.safetyNotes || '—'}`);
+  if (r.generalNotes) lines.push('', '📝 *ملاحظات وتوجيهات:*', r.generalNotes);
+  lines.push('━━━━━━━━━━━━━━━━━━', `✍️ إعداد: ${r.signatures.name1} | اعتماد: ${r.signatures.name3}`);
 
   const txt = lines.join('\n');
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(txt).then(() => showToast('📲 تم نسخ التقرير اليومي — الصقه مباشرة في واتساب!')).catch(() => showWhatsAppFallbackModal(txt));
-  } else {
-    showWhatsAppFallbackModal(txt);
-  }
+    navigator.clipboard.writeText(txt).then(() => showToast('📲 تم نسخ التقرير اليومي المنسق — الصقه مباشرة في واتساب!')).catch(() => showWhatsAppFallbackModal(txt));
+  } else showWhatsAppFallbackModal(txt);
 }
 
 function printDailyReport() {
   syncDailyReportFromInputs();
   const r = currentDailyReport;
-  const live = getDailyLiveStatsForDate(r.date);
-  const works = (r.workItems || []).filter(w => w.desc.trim());
-  const blockers = (r.blockers || []).filter(b => b.text.trim());
+  const m = computeDsrMetrics(r);
+  const cal = formatDsrCalendarMeta(r.date);
+  const safeTot = Math.max(1, m.grandTotal);
+  const pEng = Math.round((m.engSub / safeTot) * 100);
+  const pSk = Math.round((m.skTotal / safeTot) * 100);
+  const pHl = Math.max(0, 100 - pEng - pSk);
+
+  const logoOwner = getDsrLogoHtml('owner');
+  const logoCons  = getDsrLogoHtml('consultant');
+  const logoCont  = getDsrLogoHtml('contractor');
+
+  const irBadgeHtml = (st) => {
+    const map = {
+      A:  ['Code A — معتمد', '#067647', '#ECFDF3'],
+      B:  ['Code B — معتمد بملاحظات', '#175CD3', '#EFF8FF'],
+      C:  ['Code C — إعادة تقديم', '#B54708', '#FFFAEB'],
+      D:  ['Code D — مرفوض', '#B42318', '#FEF3F2'],
+      UR: ['UR — تحت المراجعة', '#475467', '#F1F3F5']
+    };
+    const [lbl, fg, bg] = map[st] || map.UR;
+    return `<span style="display:inline-block;padding:1.5px 6px;border-radius:999px;font-weight:700;font-size:8.8px;color:${fg};background:${bg};border:1px solid ${fg}44;">${lbl}</span>`;
+  };
 
   document.getElementById('printDailyReportArea').innerHTML = `
-    <div class="stmt-hdr">
-      <img src="${getBrandLogos().aobc}" alt="A.O.B.C" />
-      <div class="stmt-title">
-        <h2>المكتب العربي للتشييد والبناء (A.O.B.C)</h2>
-        <p>التقرير اليومي التنفيذي — مشروع حياة مرسيليا (عمارة 5)</p>
-        <p style="font-size:11px; color:#475467;">التاريخ: ${esc(r.date)} • الطقس: ${esc(r.weather)} • إعداد: ${esc(r.author)}</p>
+    <!-- ==================== A4 PRINT PAGE 1 ==================== -->
+    <div class="dsr-print-page page-break">
+      <div>
+        <!-- 3-Party Spacious Header (Equal 33.3% Columns — Full Consultant Name!) -->
+        <div class="dsr-p-box" style="border:1.5px solid #0E4D4E;">
+          <div class="dsr-p-parties">
+            <div class="dsr-p-party">
+              <div class="dsr-p-party-logo">${logoOwner}</div>
+              <div style="min-width:0;flex:1;">
+                <div style="font-size:8.5px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 6px;border-radius:999px;margin-bottom:2px;">المالك</div>
+                <div style="font-size:10.5px;font-weight:700;color:#101828;line-height:1.25;">${esc(r.header.ownerName)}</div>
+                <div style="font-size:8.5px;color:#475467;">${esc(r.header.ownerSub)}</div>
+              </div>
+            </div>
+            <div class="dsr-p-party">
+              <div class="dsr-p-party-logo">${logoCons}</div>
+              <div style="min-width:0;flex:1;">
+                <div style="font-size:8.5px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 6px;border-radius:999px;margin-bottom:2px;">الاستشاري العام</div>
+                <div style="font-size:10.5px;font-weight:700;color:#101828;line-height:1.25;">${esc(r.header.consultantName)}</div>
+                <div style="font-size:8.5px;color:#475467;">${esc(r.header.consultantSub)}</div>
+              </div>
+            </div>
+            <div class="dsr-p-party">
+              <div class="dsr-p-party-logo">${logoCont}</div>
+              <div style="min-width:0;flex:1;">
+                <div style="font-size:8.5px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 6px;border-radius:999px;margin-bottom:2px;">المقاول العام</div>
+                <div style="font-size:10.5px;font-weight:700;color:#101828;line-height:1.25;">${esc(r.header.contractorName)}</div>
+                <div style="font-size:8.5px;color:#475467;" dir="ltr">${esc(r.header.contractorSub)}</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#0E4D4E;color:#FFFFFF;padding:5px 10px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:12px;font-weight:700;">التقرير اليومي للموقع — ${esc(r.header.projectName)}</div>
+            <div style="font-size:10px;font-weight:700;display:flex;gap:10px;align-items:center;">
+              <span>تقرير رقم: ${esc(r.header.reportNumber)}</span>
+              <span dir="ltr" style="background:rgba(255,255,255,0.18);padding:1.5px 7px;border-radius:4px;">${esc(r.header.reportCode)}</span>
+            </div>
+          </div>
+
+          <div style="background:#F7F8F9;padding:4px 10px;border-bottom:1px solid #D0D5DD;display:flex;justify-content:space-between;font-size:9.5px;font-weight:600;">
+            <div>التاريخ: <strong class="num">${cal.dmy}</strong> (${cal.dayName}) ${cal.hijri ? '• ' + cal.hijri : ''}</div>
+            <div>طقس الإسكندرية: <strong>${esc(r.weather.condition)}</strong> • <span dir="ltr">${esc(r.weather.temp)}</span> • رياح ${esc(r.weather.wind)} • رطوبة <span dir="ltr">${esc(r.weather.humidity)}</span></div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);font-size:9.5px;">
+            <div style="padding:5px 8px;border-left:1px solid #D0D5DD;background:#E8F3F3;"><div style="font-size:8.5px;color:#475467;">متوسط إنجاز اليوم</div><strong style="color:#0E4D4E;">${m.avgProgress}% (${m.worksCount} بنود)</strong></div>
+            <div style="padding:5px 8px;border-left:1px solid #D0D5DD;"><div style="font-size:8.5px;color:#475467;">إجمالي القوى العاملة</div><strong>${m.grandTotal} فرد (${m.engSub} هندسي • ${m.workersSub} عمالة)</strong></div>
+            <div style="padding:5px 8px;border-left:1px solid #D0D5DD;"><div style="font-size:8.5px;color:#475467;">المعدات المشغلة</div><strong>${m.equipSum} معدات عاملة</strong></div>
+            <div style="padding:5px 8px;"><div style="font-size:8.5px;color:#475467;">الوردية وحالة الموقع</div><strong style="color:#067647;">${esc(r.header.shiftStatus)}</strong></div>
+          </div>
+        </div>
+
+        <!-- 1. Today Works -->
+        <div class="dsr-p-box">
+          <div class="dsr-p-hdr"><span>أولاً: الأعمال التي تمت اليوم أو جاري تنفيذها بالموقع</span><span>${m.worksCount} بنود</span></div>
+          <table class="dsr-p-tbl">
+            <thead><tr><th style="width:24px;">م</th><th style="text-align:right;">بيان الأعمال المنفذة / الجارية</th><th style="width:82px;">المبنى / الدور</th><th style="width:72px;">التخصص</th><th style="width:72px;">الإنجاز %</th><th style="text-align:right;width:130px;">ملاحظات التنفيذ</th></tr></thead>
+            <tbody>
+              ${(r.todayWorks||[]).filter(w=>(w.desc||'').trim()).map((w,i)=>`
+                <tr>
+                  <td style="text-align:center;font-weight:700;">${i+1}</td>
+                  <td style="text-align:right;font-weight:600;">${esc(w.desc)}</td>
+                  <td style="text-align:center;">${esc(w.location||'—')}</td>
+                  <td style="text-align:center;">${esc(w.discipline||'—')}</td>
+                  <td style="text-align:center;font-weight:700;color:#0E4D4E;">${w.progress||0}%<div style="height:3.5px;background:#E4E7EC;border-radius:99px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:${Math.min(100,w.progress||0)}%;background:#0E4D4E;"></div></div></td>
+                  <td style="text-align:right;color:#475467;">${esc(w.notes||'—')}</td>
+                </tr>
+              `).join('') || '<tr><td colspan="6" style="text-align:center;color:#667085;">لا توجد أعمال مسجلة اليوم</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 2. Tomorrow Works -->
+        <div class="dsr-p-box">
+          <div class="dsr-p-hdr"><span>ثانياً: الأعمال المخطط تنفيذها غداً (خطة العمل اليومية)</span></div>
+          <table class="dsr-p-tbl">
+            <thead><tr><th style="width:24px;">م</th><th style="text-align:right;">بيان الأعمال المخططة لغداً</th><th style="width:88px;">الموقع / العمارة</th><th style="width:95px;">القسم المسئول</th><th style="width:82px;">الأولوية</th></tr></thead>
+            <tbody>
+              ${(r.tomorrowWorks||[]).filter(w=>(w.desc||'').trim()).map((w,i)=>`
+                <tr>
+                  <td style="text-align:center;font-weight:700;">${i+1}</td>
+                  <td style="text-align:right;font-weight:600;">${esc(w.desc)}</td>
+                  <td style="text-align:center;">${esc(w.location||'—')}</td>
+                  <td style="text-align:center;">${esc(w.dept||'—')}</td>
+                  <td style="text-align:center;font-weight:700;color:#0E4D4E;">${esc(w.priority||'—')}</td>
+                </tr>
+              `).join('') || '<tr><td colspan="5" style="text-align:center;color:#667085;">استكمال بنود التنفيذ الجارية</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 3 & 4. Equipment & Materials Side by Side -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-bottom:2.5mm;">
+          <div class="dsr-p-box" style="margin-bottom:0;">
+            <div class="dsr-p-hdr"><span>ثالثاً: المعدات الوافدة والمشغلة</span><span>${m.equipSum}</span></div>
+            <table class="dsr-p-tbl">
+              <thead><tr><th style="text-align:right;">المعدة</th><th style="width:36px;">العدد</th><th style="width:72px;">المكان</th><th style="width:48px;">الحالة</th></tr></thead>
+              <tbody>
+                ${(r.equipment||[]).filter(e=>(e.name||'').trim()).map(e=>`<tr><td style="text-align:right;font-weight:600;">${esc(e.name)}</td><td style="text-align:center;font-weight:700;">${esc(e.qty)}</td><td style="text-align:center;">${esc(e.location)}</td><td style="text-align:center;color:#067647;font-weight:700;">${esc(e.status)}</td></tr>`).join('') || '<tr><td colspan="4" style="text-align:center;">—</td></tr>'}
+              </tbody>
+            </table>
+          </div>
+          <div class="dsr-p-box" style="margin-bottom:0;">
+            <div class="dsr-p-hdr"><span>رابعاً: المواد والخامات الواردة</span></div>
+            <table class="dsr-p-tbl">
+              <thead><tr><th style="text-align:right;">المادة / الخامة</th><th style="width:72px;">المورد</th><th style="width:54px;">الكمية</th><th style="width:46px;">الفحص</th></tr></thead>
+              <tbody>
+                ${(r.materials||[]).filter(x=>(x.name||'').trim()).map(x=>`<tr><td style="text-align:right;font-weight:600;">${esc(x.name)}</td><td style="text-align:center;">${esc(x.supplier||'—')}</td><td style="text-align:center;font-weight:700;">${esc(x.qty||'—')}</td><td style="text-align:center;color:#067647;font-weight:700;">${esc(x.status||'مقبول')}</td></tr>`).join('') || '<tr><td colspan="4" style="text-align:center;color:#667085;">لا توجد توريدات اليوم</td></tr>'}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 5. Supervision Attendance -->
+        <div class="dsr-p-box">
+          <div class="dsr-p-hdr"><span>خامساً: الأفراد المتواجدون بموقع المشروع اليوم (${esc(r.header.contractorName)})</span><span>متواجد: ${m.supPresent} / ${m.supTotal}</span></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:6px;background:#F7F8F9;">
+            ${(r.supervisionStaff||[]).map(s=>`
+              <div style="border:1px solid ${s.present?'#0E4D4E':'#D0D5DD'};background:${s.present?'#FFFFFF':'#F1F3F5'};border-radius:5px;padding:4px 6px;opacity:${s.present?'1':'0.62'};display:flex;align-items:center;gap:5px;">
+                <span style="font-size:10px;font-weight:700;color:${s.present?'#067647':'#667085'};">${s.present?'☑':'☐'}</span>
+                <div style="min-width:0;">
+                  <div style="font-size:9px;font-weight:700;color:#101828;line-height:1.2;">${esc(s.role)}</div>
+                  <div style="font-size:7.8px;color:#475467;">${esc(s.entity)}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
       </div>
-      <img src="${getBrandLogos().hayat}" alt="حياة مرسيليا" />
-    </div>
 
-    <div class="stmt-grid">
-      <div class="stmt-box"><div class="sl">طاقم الإشراف الحاضر</div><div class="sv">${live.presentEng.length} / ${live.rosterCount}</div></div>
-      <div class="stmt-box"><div class="sl">إجمالي العمالة بالموقع</div><div class="sv">${r.laborCount || 0} عامل</div></div>
-      <div class="stmt-box"><div class="sl">أسمنت منصرف / متبقي</div><div class="sv">${live.cemBagsToday} / ${fmt(S.cementRemBags)} شكارة</div></div>
-      <div class="stmt-box"><div class="sl">بنود الأعمال / المعوقات</div><div class="sv">${works.length} بند • ${blockers.length} معوّق</div></div>
-    </div>
-
-    <div style="font-size:12px; border:1px solid #D0D5DD; border-radius:8px; padding:8px 12px; margin-bottom:12px; background:#F7F8F9;">
-      <strong>طاقم الإشراف:</strong> ${esc(live.presentEng.join('، ') || '—')}<br>
-      <strong>توزيع العمالة:</strong> ${esc(r.laborDetails || '—')}
-    </div>
-
-    <h3 style="margin:10px 0 6px; font-size:13.5px; color:#0E4D4E;">1. الأعمال المنفذة والجارية</h3>
-    <table style="margin-bottom:12px;">
-      <thead><tr><th>م</th><th>التخصص</th><th>الدور / النطاق</th><th class="right">وصف الأعمال المنفذة</th><th>الكمية / %</th><th>المقاول</th><th>العمالة</th></tr></thead>
-      <tbody>
-        ${works.length ? works.map((w, i) => `<tr><td>${i+1}</td><td>${esc(w.trade)}</td><td>${esc(w.floor||'—')}</td><td class="right">${esc(w.desc)}</td><td class="num">${esc(w.qty||'—')}</td><td>${esc(w.contractor||'—')}</td><td class="num">${esc(w.workers||'—')}</td></tr>`).join('') : '<tr><td colspan="7">لا توجد أعمال مسجلة</td></tr>'}
-      </tbody>
-    </table>
-
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
-      <div style="border:1px solid #D0D5DD; border-radius:8px; padding:9px 11px;">
-        <strong style="color:#0E4D4E; font-size:12.5px;">2. التوريدات والخامات وحركة المخزن</strong>
-        <div style="white-space:pre-line; font-size:11.5px; margin-top:5px;">${esc(r.materialsNote || 'لا توجد ملاحظات توريد.')}</div>
-      </div>
-      <div style="border:1px solid #D0D5DD; border-radius:8px; padding:9px 11px;">
-        <strong style="color:#0E4D4E; font-size:12.5px;">3. الموقف الفني والاستلامات (DC / الاستشاري)</strong>
-        <div style="white-space:pre-line; font-size:11.5px; margin-top:5px;">${esc(r.dcStatus || 'لا توجد ملاحظات فنية معلقة.')}</div>
+      <div class="dsr-p-foot">
+        <span>${esc(r.header.contractorName)} — ${esc(r.header.projectName)}</span>
+        <span>صفحة 1 من 2</span>
       </div>
     </div>
 
-    <h3 style="margin:10px 0 6px; font-size:13.5px; color:#0E4D4E;">4. المعوقات والقرارات المطلوبة</h3>
-    <table style="margin-bottom:12px;">
-      <thead><tr><th>الأولوية</th><th class="right">المعوّق / القرار المطلوب</th><th>المسؤول</th><th>الموعد المستهدف</th></tr></thead>
-      <tbody>
-        ${blockers.length ? blockers.map(b => `<tr><td><strong>${esc(b.priority)}</strong></td><td class="right">${esc(b.text)}</td><td>${esc(b.owner||'—')}</td><td class="num">${esc(b.targetDate||'—')}</td></tr>`).join('') : '<tr><td colspan="4">لا توجد معوقات مسجلة اليوم</td></tr>'}
-      </tbody>
-    </table>
+    <!-- ==================== A4 PRINT PAGE 2 ==================== -->
+    <div class="dsr-print-page">
+      <div>
+        <!-- Compact Page 2 Header -->
+        <div class="dsr-p-box" style="border:1.5px solid #0E4D4E;padding:5px 9px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:7px;">
+            <div class="dsr-p-party-logo" style="width:34px;height:34px;">${logoOwner}</div>
+            <div class="dsr-p-party-logo" style="width:34px;height:34px;">${logoCons}</div>
+            <div class="dsr-p-party-logo" style="width:34px;height:34px;">${logoCont}</div>
+            <div>
+              <div style="font-size:8.5px;color:#475467;font-weight:600;">تابع التقرير اليومي للموقع • بيان القوى العاملة والجودة والاعتماد</div>
+              <div style="font-size:11.5px;font-weight:700;color:#0E4D4E;">${esc(r.header.projectName)}</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;font-size:9.5px;font-weight:700;">
+            <span>${cal.dmy} (${cal.dayName})</span>
+            <span dir="ltr" style="background:#0E4D4E;color:#FFFFFF;padding:2px 8px;border-radius:4px;">${esc(r.header.reportCode)}</span>
+          </div>
+        </div>
 
-    <div style="border:1px solid #D0D5DD; border-radius:8px; padding:9px 11px; background:#F7F8F9; margin-bottom:16px;">
-      <strong style="color:#0E4D4E; font-size:12.5px;">5. خطة العمل ليوم الغد:</strong>
-      <div style="white-space:pre-line; font-size:12px; margin-top:4px;">${esc(r.tomorrowPlan || 'استكمال بنود التنفيذ الجارية وفق الجدول الزمني.')}</div>
-    </div>
+        <!-- 6. Split Manpower -->
+        <div class="dsr-p-box">
+          <div class="dsr-p-hdr">
+            <span>سادساً: الطاقم الهندسي والإداري والعمالة التنفيذية بالموقع</span>
+            <span>الإجمالي العام: ${m.grandTotal} فرد (هندسي: ${m.engSub} | فنيين: ${m.skTotal} | مساعدين: ${m.hlTotal})</span>
+          </div>
+          <div style="padding:4px 8px;background:#F7F8F9;border-bottom:1px solid #D0D5DD;display:flex;align-items:center;gap:8px;font-size:8.8px;font-weight:700;">
+            <span>التوزيع:</span>
+            <div style="flex:1;height:6px;border-radius:99px;background:#E4E7EC;overflow:hidden;display:flex;">
+              <div style="width:${pEng}%;background:#0E4D4E;"></div>
+              <div style="width:${pSk}%;background:#1F7A7B;"></div>
+              <div style="width:${pHl}%;background:#38B2AC;"></div>
+            </div>
+            <span>هندسي ${pEng}% • فني ${pSk}% • مساعد ${pHl}%</span>
+          </div>
+          <div style="display:grid;grid-template-columns:5fr 7fr;gap:3mm;padding:6px;">
+            <table class="dsr-p-tbl">
+              <thead><tr><th style="text-align:right;">الطاقم الهندسي والإداري</th><th style="width:36px;">العدد</th><th style="text-align:right;width:72px;">ملاحظات</th></tr></thead>
+              <tbody>
+                ${(r.engAdminList||[]).map(e=>`<tr><td style="text-align:right;font-weight:600;">${esc(e.role)}</td><td style="text-align:center;font-weight:700;">${e.count||0}</td><td style="text-align:right;color:#475467;">${esc(e.notes||'—')}</td></tr>`).join('')}
+                <tr style="background:#E8F3F3;font-weight:700;"><td style="text-align:right;">إجمالي الطاقم الهندسي</td><td style="text-align:center;color:#0E4D4E;">${m.engSub}</td><td></td></tr>
+              </tbody>
+            </table>
+            <table class="dsr-p-tbl">
+              <thead><tr><th style="text-align:right;">العمالة التنفيذية</th><th style="width:38px;">فني</th><th style="width:38px;">مساعد</th><th style="width:42px;">المجموع</th><th style="width:74px;">الموقع</th></tr></thead>
+              <tbody>
+                ${(r.workersSplitList||[]).map(w=>{
+                  const sk = Number(w.skilled)||0, hl = Number(w.helper)||0;
+                  return `<tr><td style="text-align:right;font-weight:600;">${esc(w.trade)}</td><td style="text-align:center;">${sk}</td><td style="text-align:center;">${hl}</td><td style="text-align:center;font-weight:700;background:#F7F8F9;">${sk+hl}</td><td style="text-align:center;color:#475467;">${esc(w.loc||'—')}</td></tr>`;
+                }).join('')}
+                <tr style="background:#E8F3F3;font-weight:700;"><td style="text-align:right;">إجمالي العمالة</td><td style="text-align:center;">${m.skTotal}</td><td style="text-align:center;">${m.hlTotal}</td><td style="text-align:center;color:#0E4D4E;">${m.workersSub}</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <div class="stmt-sigs">
-      <div>معد التقرير (المكتب الفني)<br><small>${esc(r.author)}</small><br><br>التوقيع: ....................</div>
-      <div>مهندس التنفيذ بالموقع<br><small>المكتب العربي A.O.B.C</small><br><br>التوقيع: ....................</div>
-      <div>اعتماد مدير المشروع<br><small>م / محمد السيد</small><br><br>التوقيع والختم: ................</div>
+        <!-- 7. IR / QC Inspections -->
+        <div class="dsr-p-box">
+          <div class="dsr-p-hdr"><span>سابعاً: موقف طلبات الفحص والاستلام الهندسي (IR / QC)</span><span>${(r.inspections||[]).length} طلب</span></div>
+          ${(r.inspections||[]).length ? `
+            <table class="dsr-p-tbl">
+              <thead><tr><th style="width:78px;">رقم الطلب (IR)</th><th style="text-align:right;">بيان الاستلام / الفحص</th><th style="width:74px;">المبنى / الدور</th><th style="width:58px;">التخصص</th><th style="width:105px;">كود الاعتماد</th><th style="text-align:right;width:125px;">ملاحظات الاستشاري</th></tr></thead>
+              <tbody>
+                ${r.inspections.map(ir=>`
+                  <tr>
+                    <td dir="ltr" style="text-align:center;font-weight:700;">${esc(ir.irCode)}</td>
+                    <td style="text-align:right;font-weight:600;">${esc(ir.desc)}</td>
+                    <td style="text-align:center;">${esc(ir.location||'—')}</td>
+                    <td style="text-align:center;">${esc(ir.discipline||'—')}</td>
+                    <td style="text-align:center;">${irBadgeHtml(ir.status)}</td>
+                    <td style="text-align:right;color:#475467;">${esc(ir.notes||ir.defect||'—')}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          ` : '<div style="padding:8px;text-align:center;font-size:9.5px;color:#475467;">لا توجد طلبات فحص واستلام (IR) مسجلة لهذا اليوم.</div>'}
+        </div>
+
+        <!-- 8 & 9. HSE & Notes -->
+        <div style="display:grid;grid-template-columns:5fr 7fr;gap:3mm;margin-bottom:2.5mm;">
+          <div class="dsr-p-box" style="margin-bottom:0;">
+            <div class="dsr-p-hdr"><span>ثامناً: السلامة والصحة المهنية (HSE)</span></div>
+            <div style="padding:7px 9px;font-size:9.5px;">
+              <div style="display:inline-block;padding:2px 8px;border-radius:999px;font-weight:700;font-size:9px;margin-bottom:5px;color:${r.safetyStatus==='safe'?'#067647':'#B42318'};background:${r.safetyStatus==='safe'?'#ECFDF3':'#FEF3F2'};">
+                ${r.safetyStatus==='safe'?'✓ آمن — لا توجد إصابات أو حوادث اليوم':'⚠ يوجد تنبيه سلامة مهنية'}
+              </div>
+              <div style="white-space:pre-line;line-height:1.45;color:#101828;">${esc(r.safetyNotes||'—')}</div>
+            </div>
+          </div>
+          <div class="dsr-p-box" style="margin-bottom:0;">
+            <div class="dsr-p-hdr"><span>تاسعاً: ملاحظات عامة وتوجيهات الاستشاري وإدارة المشروع</span></div>
+            <div style="padding:7px 9px;font-size:9.5px;white-space:pre-line;line-height:1.45;color:#101828;">${esc(r.generalNotes||'لا توجد ملاحظات إضافية.')}</div>
+          </div>
+        </div>
+
+        <!-- Official Signatures (Aref Ruqaa) -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;border:1.5px solid #0E4D4E;border-radius:8px;padding:7px;text-align:center;">
+          <div style="border:1px solid #D0D5DD;border-radius:6px;padding:6px;background:#F7F8F9;">
+            <div style="font-size:9.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title1)}</div>
+            <div style="font-family:'Aref Ruqaa',serif;font-size:19px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name1)}</div>
+            <div style="font-size:8.5px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:3px;">التوقيع</div>
+          </div>
+          <div style="border:1px solid #D0D5DD;border-radius:6px;padding:6px;background:#F7F8F9;">
+            <div style="font-size:9.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title2)}</div>
+            <div style="font-family:'Aref Ruqaa',serif;font-size:19px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name2)}</div>
+            <div style="font-size:8.5px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:3px;">التوقيع</div>
+          </div>
+          <div style="border:1px solid #0E4D4E;border-radius:6px;padding:6px;background:#E8F3F3;">
+            <div style="font-size:9.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title3)}</div>
+            <div style="font-family:'Aref Ruqaa',serif;font-size:19px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name3)}</div>
+            <div style="font-size:8.5px;color:#475467;border-top:1px dashed #0E4D4E66;padding-top:3px;">التوقيع والاعتماد</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dsr-p-foot">
+        <span>${esc(r.header.contractorName)} — ${esc(r.header.projectName)}</span>
+        <span>صفحة 2 من 2</span>
+      </div>
     </div>
   `;
 
@@ -7660,7 +9117,7 @@ function printDailyReport() {
   setTimeout(() => {
     window.print();
     setTimeout(cleanup, 1200);
-  }, 120);
+  }, 140);
 }
 
 const _origRenderAll = renderAll;
