@@ -1987,7 +1987,7 @@
     .dsr-sup-grid { grid-template-columns: 1fr; }
   }
 
-  /* ==================== STRICT 2-PAGE A4 PRINT FOR DAILY REPORT ==================== */
+  /* ==================== STRICT 2-PAGE A4 PRINT FOR DAILY REPORT (V7.2 FULL-FILL) ==================== */
   .dsr-print-page {
     width: 100%;
     background: #FFFFFF;
@@ -1995,7 +1995,7 @@
     font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
   }
   @media print {
-    @page { size: A4 portrait; margin: 5mm; }
+    @page { size: A4 portrait; margin: 6mm; }
     body.printing-daily-report {
       background: #FFFFFF !important;
       color: #101828 !important;
@@ -2009,13 +2009,15 @@
       print-color-adjust: exact !important;
     }
     .dsr-print-page {
-      height: 285mm;
-      max-height: 285mm;
+      width: 100%;
+      height: 283mm;
+      max-height: 283mm;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border-top: 3.5px solid #0E4D4E;
+      border-top: 4px solid #0E4D4E;
       padding-top: 3mm;
+      box-sizing: border-box;
       overflow: hidden;
       page-break-inside: avoid;
     }
@@ -2023,40 +2025,124 @@
       page-break-after: always !important;
       break-after: page !important;
     }
+    .dsr-p-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 3.5mm;
+      min-height: 0;
+    }
     .dsr-p-box {
-      border: 1px solid #D0D5DD; border-radius: 6px; overflow: hidden; margin-bottom: 2.5mm;
+      border: 1px solid #CBD5E1;
+      border-radius: 7px;
+      overflow: hidden;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+    }
+    .dsr-p-box.grow {
+      flex: 1;
     }
     .dsr-p-hdr {
-      background: #0E4D4E; color: #FFFFFF; padding: 3.5px 8px; font-size: 10.5px; font-weight: 700;
-      display: flex; justify-content: space-between; align-items: center;
+      background: #0E4D4E !important;
+      color: #FFFFFF !important;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
     }
-    .dsr-p-tbl { width: 100%; border-collapse: collapse; font-size: 9.8px; }
+    .dsr-p-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.6px;
+    }
     .dsr-p-tbl th {
-      background: #F1F3F5 !important; color: #101828 !important; font-weight: 700; font-size: 9.5px;
-      padding: 3.5px 5px !important; border: 1px solid #D0D5DD !important; text-align: center;
+      background: #F1F5F9 !important;
+      color: #0F172A !important;
+      font-weight: 700;
+      font-size: 10.2px;
+      padding: 5.5px 6px !important;
+      border: 1px solid #CBD5E1 !important;
+      text-align: center;
     }
     .dsr-p-tbl td {
-      padding: 3px 5px !important; border: 1px solid #D0D5DD !important; color: #101828 !important;
-      font-size: 9.6px !important; line-height: 1.25;
+      padding: 5.5px 6px !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #101828 !important;
+      font-size: 10.4px !important;
+      line-height: 1.35;
+    }
+    .dsr-print-page.dense .dsr-p-tbl th {
+      padding: 3.5px 5px !important;
+      font-size: 9.6px !important;
+    }
+    .dsr-print-page.dense .dsr-p-tbl td {
+      padding: 3.5px 5px !important;
+      font-size: 9.6px !important;
+      line-height: 1.25;
+    }
+    .dsr-p-empty-row td {
+      height: 23px;
+      color: #94A3B8 !important;
     }
     .dsr-p-parties {
-      display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid #D0D5DD;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid #CBD5E1;
     }
     .dsr-p-party {
-      display: flex; align-items: center; gap: 7px; padding: 6px 8px; border-left: 1px solid #D0D5DD;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-left: 1px solid #CBD5E1;
     }
     .dsr-p-party:last-child { border-left: none; }
     .dsr-p-party-logo {
-      width: 44px; height: 44px; flex-shrink: 0; border: 1px solid #D0D5DD; border-radius: 6px;
-      padding: 2px; display: flex; align-items: center; justify-content: center; background: #FFFFFF;
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+      border: 1px solid #CBD5E1;
+      border-radius: 7px;
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FFFFFF;
     }
     .dsr-p-party-logo img, .dsr-p-party-logo svg { width: 100%; height: 100%; object-fit: contain; }
+    .dsr-p-ruled {
+      flex: 1;
+      padding: 8px 11px;
+      font-size: 10.5px;
+      line-height: 24px;
+      color: #101828;
+      white-space: pre-line;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 23px,
+        #E2E8F0 23px,
+        #E2E8F0 24px
+      );
+      background-position: 0 7px;
+    }
     .dsr-p-foot {
-      border-top: 1px solid #D0D5DD; padding-top: 2mm; display: flex; justify-content: space-between;
-      font-size: 9px; color: #475467; font-weight: 600;
+      margin-top: 2.5mm;
+      border-top: 1.5px solid #CBD5E1;
+      padding-top: 2mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9.5px;
+      color: #475467;
+      font-weight: 700;
+      flex-shrink: 0;
     }
   }
-
 </style>
 </head>
 <body class="locked">
@@ -2713,9 +2799,6 @@
       </div>
     </div>
 
-    <!-- Live ERP Data Pulse for Selected Date -->
-    <div class="dr-auto-strip no-print" id="drLiveSnapshot"></div>
-
     <!-- ==================== PAGE 1 WORKSPACE: HEADER + WORKS + EQUIP + MATERIALS + SUPERVISION ==================== -->
     <div class="dsr-sheet" id="dsrPage1">
       <div class="dsr-sheet-label no-print">
@@ -3304,7 +3387,7 @@
 // ============================================================================
 // 1. CLEAN ZERO-DATA CLOUD SHELL (ALL REAL DATA LOADS ONLY FROM SUPABASE AFTER AUTH)
 // ============================================================================
-const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.1 — الهوية المعتمدة + التقرير اليومي الهندسي المتكامل (ورقتين A4)", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
+const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.2 — تقرير يومي استشاري متوازن (ورقتين A4)", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
 
 // ============================================================================
 // ⚙️ إعدادات الربط السحابي (Supabase) — ضع الرابط والمفتاح هنا مرة واحدة قبل الرفع
@@ -8106,24 +8189,13 @@ function getDailyLiveStatsForDate(dt) {
   const dayIdx = Number(String(dt || todayISO()).slice(8, 10)) - 1;
   ensureAttendanceMonths();
   const roster = DB.attendanceMonths[ym] || [];
-  const presentEng = [];
   const presentList = [];
-  const absentEng = [];
   roster.forEach(e => {
     const code = (e.days || [])[dayIdx] || '';
     if (code === 'ح' || code === 'م' || code === 'ن') {
-      presentEng.push(`${e.name} (${code})`);
       presentList.push({ name: e.name, role: e.role, code });
-    } else if (code === 'غ') absentEng.push(e.name);
+    }
   });
-
-  const cemToday = DB.cement.filter(c => c.date === dt);
-  const cemBagsToday = cemToday.reduce((s, c) => s + Number(c.bags || 0), 0);
-  const grnToday = DB.grn.filter(g => g.date === dt);
-  const trToday = DB.treasury.filter(t => t.date === dt);
-  const trSumToday = trToday.reduce((s, t) => s + Number(t.amt || 0), 0);
-  const payToday = DB.payments.filter(p => p.date === dt);
-  const paySumToday = payToday.reduce((s, p) => s + Number(p.amt || 0), 0);
 
   ensureBuildingMatrix();
   const matrixWorksToday = [];
@@ -8141,7 +8213,7 @@ function getDailyLiveStatsForDate(dt) {
               location: fl.label,
               discipline: tr.label,
               progress: pct,
-              notes: 'مسحوب من مصفوفة التقدم'
+              notes: ''
             });
           }
         });
@@ -8149,7 +8221,7 @@ function getDailyLiveStatsForDate(dt) {
     });
   });
 
-  return { presentEng, presentList, absentEng, rosterCount: roster.length, cemToday, cemBagsToday, grnToday, trToday, trSumToday, payToday, paySumToday, matrixWorksToday };
+  return { presentList, rosterCount: roster.length, matrixWorksToday };
 }
 
 function computeDsrMetrics(r) {
@@ -8337,19 +8409,6 @@ function populateDailyReportForm() {
   setT('dsrP2Project', r.header.projectName);
   setT('dsrP2Date', `${cal.dmy} (${cal.dayName})`);
   setT('dsrP2Code', r.header.reportCode);
-
-  // Live ERP Data Pulse Strip for selected date
-  const live = getDailyLiveStatsForDate(r.date);
-  const snap = document.getElementById('drLiveSnapshot');
-  if (snap) {
-    snap.innerHTML = `
-      <div class="dr-mini-stat"><small>حضور طاقم الإشراف (${r.date})</small><strong>${live.presentEng.length} / ${live.rosterCount}</strong></div>
-      <div class="dr-mini-stat"><small>أسمنت منصرف اليوم</small><strong>${fmt(live.cemBagsToday)} شكارة (${(live.cemBagsToday/20).toFixed(2)} طن)</strong></div>
-      <div class="dr-mini-stat"><small>تشوينات وتوريدات اليوم</small><strong>${live.grnToday.length} نقلة</strong></div>
-      <div class="dr-mini-stat"><small>منصرف الخزينة اليوم</small><strong>${fmt(live.trSumToday)} ج.م (${live.trToday.length})</strong></div>
-      <div class="dr-mini-stat"><small>دفعات المقاولين اليوم</small><strong>${fmt(live.paySumToday)} ج.م (${live.payToday.length})</strong></div>
-    `;
-  }
 
   onDsrSafetyChange(false);
   renderDsrTodayWorks();
@@ -8664,27 +8723,13 @@ function autoPullDailyReportData() {
   const dt = currentDailyReport.date || todayISO();
   const live = getDailyLiveStatsForDate(dt);
 
-  // 1) Merge Building Matrix works logged on this date
+  // 1) Merge executed works logged on this date in Building 5 Progress Matrix
   if (live.matrixWorksToday.length) {
     const existing = (currentDailyReport.todayWorks || []).filter(w => (w.desc || '').trim());
     currentDailyReport.todayWorks = [...existing, ...live.matrixWorksToday];
   }
 
-  // 2) Pull today's GRN deliveries & cement consumption into Materials table
-  const itemNames = Object.fromEntries(DB.items.map(i => [i.code, i.name]));
-  const pulledMats = [];
-  live.grnToday.forEach(g => {
-    pulledMats.push({ name: itemNames[g.code] || g.code, supplier: g.sup || 'مورد معتمد', qty: `${g.qty} ${g.unit}`, status: 'مقبول' });
-  });
-  if (live.cemBagsToday > 0) {
-    pulledMats.push({ name: `منصرف أسمنت اليوم (متبقي بالمخزن: ${fmt(S.cementRemBags)} شكارة)`, supplier: 'مخزن الموقع', qty: `${live.cemBagsToday} شكارة`, status: S.cementRemBags <= 100 ? 'رصيد حرج' : 'متاح' });
-  }
-  if (pulledMats.length) {
-    const existingM = (currentDailyReport.materials || []).filter(m => (m.name || '').trim());
-    currentDailyReport.materials = [...existingM, ...pulledMats];
-  }
-
-  // 3) Sync Present Site Roster from Attendance into Supervision Staff
+  // 2) Sync Present Site Engineering & Supervision Roster from Attendance
   if (live.presentList.length) {
     currentDailyReport.supervisionStaff = live.presentList.map(p => ({
       role: `${p.name} — ${p.role}`,
@@ -8693,24 +8738,9 @@ function autoPullDailyReportData() {
     }));
   }
 
-  // 4) Append alerts (low cement / urgent tasks / today's treasury) to General Notes if not already included
-  const extraNotes = [];
-  if (S.cementRemBags <= 100) extraNotes.push(`• تنبيه خامات: رصيد الأسمنت المتبقي بالمخزن ${fmt(S.cementRemBags)} شكارة فقط (${(S.cementRemBags/20).toFixed(2)} طن) — يلزم توريد نقلة عاجلة.`);
-  if (live.trSumToday > 0) extraNotes.push(`• خزينة الموقع اليوم: تم قيد ${live.trToday.length} حركة بمبلغ ${fmt(live.trSumToday)} ج.م.`);
-  if (live.paySumToday > 0) extraNotes.push(`• دفعات المقاولين اليوم: تم تسجيل ${live.payToday.length} دفعة بإجمالي ${fmt(live.paySumToday)} ج.م.`);
-  ensureTasksList();
-  DB.tasks.filter(t => !t.done && t.priority === 'high' && t.type === 'scheduled' && t.dueDate && t.dueDate <= dt).slice(0, 2).forEach(t => {
-    extraNotes.push(`• متابعة عاجلة: ${t.title} (مستحق ${t.dueDate}).`);
-  });
-  if (extraNotes.length) {
-    const curNotes = (currentDailyReport.generalNotes || '').trim();
-    const toAdd = extraNotes.filter(line => !curNotes.includes(line)).join('\n');
-    if (toAdd) currentDailyReport.generalNotes = curNotes ? (curNotes + '\n' + toAdd) : toAdd;
-  }
-
   populateDailyReportForm();
   fetchDsrWeather(false);
-  showToast(`⚡ تم سحب بيانات يوم (${dt}) من الحضور والمخزن ومصفوفة التقدم وتحديث الطقس!`);
+  showToast(`⚡ تم سحب الأعمال المنفذة وطاقم الإشراف المتواجد وتحديث طقس اليوم (${dt})!`);
 }
 
 function saveCurrentDailyReport() {
@@ -8836,6 +8866,128 @@ function printDailyReport() {
   const logoCons  = getDsrLogoHtml('consultant');
   const logoCont  = getDsrLogoHtml('contractor');
 
+  const works = (r.todayWorks || []).filter(w => (w.desc || '').trim());
+  const nextW = (r.tomorrowWorks || []).filter(w => (w.desc || '').trim());
+  const equip = (r.equipment || []).filter(e => (e.name || '').trim());
+  const mats  = (r.materials || []).filter(x => (x.name || '').trim());
+  const irs   = (r.inspections || []).filter(x => (x.desc || '').trim() || (x.irCode || '').trim());
+  const engList = (r.engAdminList || []);
+  const wkList  = (r.workersSplitList || []);
+
+  // Dynamically pad tables to balanced minimum heights so A4 pages never look half-empty,
+  // while tightening padding automatically if the user logged many rows.
+  const isDenseP1 = (works.length + nextW.length > 12) || equip.length > 5 || mats.length > 5;
+  const minToday = isDenseP1 ? works.length : Math.max(6, works.length);
+  const minTom   = isDenseP1 ? nextW.length : Math.max(5, nextW.length);
+  const minEqMat = isDenseP1 ? Math.max(equip.length, mats.length) : Math.max(4, equip.length, mats.length);
+
+  const todayRowsHtml = [
+    ...works.map((w, i) => `
+      <tr>
+        <td style="text-align:center;font-weight:700;">${i + 1}</td>
+        <td style="text-align:right;font-weight:600;">${esc(w.desc)}</td>
+        <td style="text-align:center;">${esc(w.location || '—')}</td>
+        <td style="text-align:center;">${esc(w.discipline || '—')}</td>
+        <td style="text-align:center;font-weight:700;color:#0E4D4E;">
+          ${w.progress || 0}%
+          <div style="height:4px;background:#E2E8F0;border-radius:99px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:${Math.min(100, w.progress || 0)}%;background:#0E4D4E;"></div></div>
+        </td>
+        <td style="text-align:right;color:#475467;">${esc(w.notes || '—')}</td>
+      </tr>
+    `),
+    ...Array.from({ length: Math.max(0, minToday - works.length) }, (_, k) => `
+      <tr class="dsr-p-empty-row">
+        <td style="text-align:center;">${works.length + k + 1}</td>
+        <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+    `)
+  ].join('');
+
+  const tomRowsHtml = [
+    ...nextW.map((w, i) => `
+      <tr>
+        <td style="text-align:center;font-weight:700;">${i + 1}</td>
+        <td style="text-align:right;font-weight:600;">${esc(w.desc)}</td>
+        <td style="text-align:center;">${esc(w.location || '—')}</td>
+        <td style="text-align:center;">${esc(w.dept || '—')}</td>
+        <td style="text-align:center;font-weight:700;color:#0E4D4E;">${esc(w.priority || '—')}</td>
+      </tr>
+    `),
+    ...Array.from({ length: Math.max(0, minTom - nextW.length) }, (_, k) => `
+      <tr class="dsr-p-empty-row">
+        <td style="text-align:center;">${nextW.length + k + 1}</td>
+        <td style="text-align:right;">${(nextW.length === 0 && k === 0) ? 'استكمال بنود التنفيذ الجارية بالموقع' : ''}</td>
+        <td></td><td></td><td></td>
+      </tr>
+    `)
+  ].join('');
+
+  const equipRowsHtml = [
+    ...equip.map(e => `
+      <tr>
+        <td style="text-align:right;font-weight:600;">${esc(e.name)}</td>
+        <td style="text-align:center;font-weight:700;">${esc(e.qty)}</td>
+        <td style="text-align:center;">${esc(e.location)}</td>
+        <td style="text-align:center;color:#067647;font-weight:700;">${esc(e.status)}</td>
+      </tr>
+    `),
+    ...Array.from({ length: Math.max(0, minEqMat - equip.length) }, () => `
+      <tr class="dsr-p-empty-row"><td></td><td></td><td></td><td></td></tr>
+    `)
+  ].join('');
+
+  const matRowsHtml = [
+    ...mats.map(x => `
+      <tr>
+        <td style="text-align:right;font-weight:600;">${esc(x.name)}</td>
+        <td style="text-align:center;">${esc(x.supplier || '—')}</td>
+        <td style="text-align:center;font-weight:700;">${esc(x.qty || '—')}</td>
+        <td style="text-align:center;color:#067647;font-weight:700;">${esc(x.status || 'مقبول')}</td>
+      </tr>
+    `),
+    ...Array.from({ length: Math.max(0, minEqMat - mats.length) }, (_, k) => `
+      <tr class="dsr-p-empty-row">
+        <td style="text-align:right;">${(mats.length === 0 && k === 0) ? 'لا توجد خامات واردة اليوم' : ''}</td>
+        <td></td><td></td><td></td>
+      </tr>
+    `)
+  ].join('');
+
+  // Equalize Engineering & Workers table heights on Page 2 so both total footers align horizontally!
+  const maxMpRows = Math.max(engList.length, wkList.length, 7);
+  const isDenseP2 = maxMpRows > 10 || irs.length > 5;
+
+  const engRowsHtml = [
+    ...engList.map(e => `
+      <tr>
+        <td style="text-align:right;font-weight:600;">${esc(e.role)}</td>
+        <td style="text-align:center;font-weight:700;">${e.count || 0}</td>
+        <td style="text-align:right;color:#475467;">${esc(e.notes || '—')}</td>
+      </tr>
+    `),
+    ...Array.from({ length: Math.max(0, maxMpRows - engList.length) }, () => `
+      <tr class="dsr-p-empty-row"><td></td><td></td><td></td></tr>
+    `)
+  ].join('');
+
+  const wkRowsHtml = [
+    ...wkList.map(w => {
+      const sk = Number(w.skilled) || 0, hl = Number(w.helper) || 0;
+      return `
+        <tr>
+          <td style="text-align:right;font-weight:600;">${esc(w.trade)}</td>
+          <td style="text-align:center;">${sk}</td>
+          <td style="text-align:center;">${hl}</td>
+          <td style="text-align:center;font-weight:700;background:#F8FAFC;">${sk + hl}</td>
+          <td style="text-align:center;color:#475467;">${esc(w.loc || '—')}</td>
+        </tr>
+      `;
+    }),
+    ...Array.from({ length: Math.max(0, maxMpRows - wkList.length) }, () => `
+      <tr class="dsr-p-empty-row"><td></td><td></td><td></td><td></td><td></td></tr>
+    `)
+  ].join('');
+
   const irBadgeHtml = (st) => {
     const map = {
       A:  ['Code A — معتمد', '#067647', '#ECFDF3'],
@@ -8845,60 +8997,81 @@ function printDailyReport() {
       UR: ['UR — تحت المراجعة', '#475467', '#F1F3F5']
     };
     const [lbl, fg, bg] = map[st] || map.UR;
-    return `<span style="display:inline-block;padding:1.5px 6px;border-radius:999px;font-weight:700;font-size:8.8px;color:${fg};background:${bg};border:1px solid ${fg}44;">${lbl}</span>`;
+    return `<span style="display:inline-block;padding:2px 7px;border-radius:999px;font-weight:700;font-size:9.2px;color:${fg};background:${bg};border:1px solid ${fg}44;">${lbl}</span>`;
   };
+
+  const minIrRows = isDenseP2 ? irs.length : Math.max(3, irs.length);
+  const irRowsHtml = [
+    ...irs.map(ir => `
+      <tr>
+        <td dir="ltr" style="text-align:center;font-weight:700;">${esc(ir.irCode)}</td>
+        <td style="text-align:right;font-weight:600;">${esc(ir.desc)}</td>
+        <td style="text-align:center;">${esc(ir.location || '—')}</td>
+        <td style="text-align:center;">${esc(ir.discipline || '—')}</td>
+        <td style="text-align:center;">${irBadgeHtml(ir.status)}</td>
+        <td style="text-align:right;color:#475467;">${esc(ir.notes || ir.defect || '—')}</td>
+      </tr>
+    `),
+    ...Array.from({ length: Math.max(0, minIrRows - irs.length) }, (_, k) => `
+      <tr class="dsr-p-empty-row">
+        <td style="text-align:center;">—</td>
+        <td style="text-align:right;">${(irs.length === 0 && k === 0) ? 'لا توجد طلبات فحص واستلام (IR) مسجلة لهذا اليوم' : ''}</td>
+        <td></td><td></td><td></td><td></td>
+      </tr>
+    `)
+  ].join('');
 
   document.getElementById('printDailyReportArea').innerHTML = `
     <!-- ==================== A4 PRINT PAGE 1 ==================== -->
-    <div class="dsr-print-page page-break">
-      <div>
-        <!-- 3-Party Spacious Header (Equal 33.3% Columns — Full Consultant Name!) -->
+    <div class="dsr-print-page page-break ${isDenseP1 ? 'dense' : ''}">
+      <div class="dsr-p-body">
+        <!-- 3-Party Spacious Header (Equal 33.3% Columns) -->
         <div class="dsr-p-box" style="border:1.5px solid #0E4D4E;">
           <div class="dsr-p-parties">
             <div class="dsr-p-party">
               <div class="dsr-p-party-logo">${logoOwner}</div>
               <div style="min-width:0;flex:1;">
-                <div style="font-size:8.5px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 6px;border-radius:999px;margin-bottom:2px;">المالك</div>
-                <div style="font-size:10.5px;font-weight:700;color:#101828;line-height:1.25;">${esc(r.header.ownerName)}</div>
-                <div style="font-size:8.5px;color:#475467;">${esc(r.header.ownerSub)}</div>
+                <div style="font-size:9px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 7px;border-radius:999px;margin-bottom:3px;">المالك</div>
+                <div style="font-size:11.5px;font-weight:700;color:#101828;line-height:1.3;">${esc(r.header.ownerName)}</div>
+                <div style="font-size:9px;color:#475467;margin-top:1px;">${esc(r.header.ownerSub)}</div>
               </div>
             </div>
             <div class="dsr-p-party">
               <div class="dsr-p-party-logo">${logoCons}</div>
               <div style="min-width:0;flex:1;">
-                <div style="font-size:8.5px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 6px;border-radius:999px;margin-bottom:2px;">الاستشاري العام</div>
-                <div style="font-size:10.5px;font-weight:700;color:#101828;line-height:1.25;">${esc(r.header.consultantName)}</div>
-                <div style="font-size:8.5px;color:#475467;">${esc(r.header.consultantSub)}</div>
+                <div style="font-size:9px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 7px;border-radius:999px;margin-bottom:3px;">الاستشاري العام</div>
+                <div style="font-size:11.5px;font-weight:700;color:#101828;line-height:1.3;">${esc(r.header.consultantName)}</div>
+                <div style="font-size:9px;color:#475467;margin-top:1px;">${esc(r.header.consultantSub)}</div>
               </div>
             </div>
             <div class="dsr-p-party">
               <div class="dsr-p-party-logo">${logoCont}</div>
               <div style="min-width:0;flex:1;">
-                <div style="font-size:8.5px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 6px;border-radius:999px;margin-bottom:2px;">المقاول العام</div>
-                <div style="font-size:10.5px;font-weight:700;color:#101828;line-height:1.25;">${esc(r.header.contractorName)}</div>
-                <div style="font-size:8.5px;color:#475467;" dir="ltr">${esc(r.header.contractorSub)}</div>
+                <div style="font-size:9px;font-weight:700;color:#0E4D4E;background:#E8F3F3;display:inline-block;padding:1px 7px;border-radius:999px;margin-bottom:3px;">المقاول العام</div>
+                <div style="font-size:11.5px;font-weight:700;color:#101828;line-height:1.3;">${esc(r.header.contractorName)}</div>
+                <div style="font-size:9px;color:#475467;margin-top:1px;" dir="ltr">${esc(r.header.contractorSub)}</div>
               </div>
             </div>
           </div>
 
-          <div style="background:#0E4D4E;color:#FFFFFF;padding:5px 10px;display:flex;justify-content:space-between;align-items:center;">
-            <div style="font-size:12px;font-weight:700;">التقرير اليومي للموقع — ${esc(r.header.projectName)}</div>
-            <div style="font-size:10px;font-weight:700;display:flex;gap:10px;align-items:center;">
+          <div style="background:#0E4D4E;color:#FFFFFF;padding:6.5px 12px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:13px;font-weight:700;">التقرير اليومي للموقع — ${esc(r.header.projectName)}</div>
+            <div style="font-size:10.5px;font-weight:700;display:flex;gap:10px;align-items:center;">
               <span>تقرير رقم: ${esc(r.header.reportNumber)}</span>
-              <span dir="ltr" style="background:rgba(255,255,255,0.18);padding:1.5px 7px;border-radius:4px;">${esc(r.header.reportCode)}</span>
+              <span dir="ltr" style="background:rgba(255,255,255,0.18);padding:2px 8px;border-radius:5px;">${esc(r.header.reportCode)}</span>
             </div>
           </div>
 
-          <div style="background:#F7F8F9;padding:4px 10px;border-bottom:1px solid #D0D5DD;display:flex;justify-content:space-between;font-size:9.5px;font-weight:600;">
-            <div>التاريخ: <strong class="num">${cal.dmy}</strong> (${cal.dayName}) ${cal.hijri ? '• ' + cal.hijri : ''}</div>
+          <div style="background:#F8FAFC;padding:5.5px 12px;border-bottom:1px solid #CBD5E1;display:flex;justify-content:space-between;font-size:10.2px;font-weight:600;">
+            <div>التاريخ: <strong class="num">${cal.dmy}</strong> (${cal.dayName})${cal.hijri ? ' • ' + cal.hijri : ''}</div>
             <div>طقس الإسكندرية: <strong>${esc(r.weather.condition)}</strong> • <span dir="ltr">${esc(r.weather.temp)}</span> • رياح ${esc(r.weather.wind)} • رطوبة <span dir="ltr">${esc(r.weather.humidity)}</span></div>
           </div>
 
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);font-size:9.5px;">
-            <div style="padding:5px 8px;border-left:1px solid #D0D5DD;background:#E8F3F3;"><div style="font-size:8.5px;color:#475467;">متوسط إنجاز اليوم</div><strong style="color:#0E4D4E;">${m.avgProgress}% (${m.worksCount} بنود)</strong></div>
-            <div style="padding:5px 8px;border-left:1px solid #D0D5DD;"><div style="font-size:8.5px;color:#475467;">إجمالي القوى العاملة</div><strong>${m.grandTotal} فرد (${m.engSub} هندسي • ${m.workersSub} عمالة)</strong></div>
-            <div style="padding:5px 8px;border-left:1px solid #D0D5DD;"><div style="font-size:8.5px;color:#475467;">المعدات المشغلة</div><strong>${m.equipSum} معدات عاملة</strong></div>
-            <div style="padding:5px 8px;"><div style="font-size:8.5px;color:#475467;">الوردية وحالة الموقع</div><strong style="color:#067647;">${esc(r.header.shiftStatus)}</strong></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);font-size:10.2px;">
+            <div style="padding:7px 10px;border-left:1px solid #CBD5E1;background:#E8F3F3;"><div style="font-size:9px;color:#475467;margin-bottom:2px;">متوسط إنجاز اليوم</div><strong style="color:#0E4D4E;font-size:11px;">${m.avgProgress}% (${m.worksCount} بنود)</strong></div>
+            <div style="padding:7px 10px;border-left:1px solid #CBD5E1;"><div style="font-size:9px;color:#475467;margin-bottom:2px;">إجمالي القوى العاملة</div><strong style="font-size:11px;">${m.grandTotal} فرد (${m.engSub} هندسي • ${m.workersSub} عمالة)</strong></div>
+            <div style="padding:7px 10px;border-left:1px solid #CBD5E1;"><div style="font-size:9px;color:#475467;margin-bottom:2px;">المعدات المشغلة</div><strong style="font-size:11px;">${m.equipSum} معدات عاملة</strong></div>
+            <div style="padding:7px 10px;"><div style="font-size:9px;color:#475467;margin-bottom:2px;">الوردية وحالة الموقع</div><strong style="color:#067647;font-size:10.5px;">${esc(r.header.shiftStatus)}</strong></div>
           </div>
         </div>
 
@@ -8906,59 +9079,34 @@ function printDailyReport() {
         <div class="dsr-p-box">
           <div class="dsr-p-hdr"><span>أولاً: الأعمال التي تمت اليوم أو جاري تنفيذها بالموقع</span><span>${m.worksCount} بنود</span></div>
           <table class="dsr-p-tbl">
-            <thead><tr><th style="width:24px;">م</th><th style="text-align:right;">بيان الأعمال المنفذة / الجارية</th><th style="width:82px;">المبنى / الدور</th><th style="width:72px;">التخصص</th><th style="width:72px;">الإنجاز %</th><th style="text-align:right;width:130px;">ملاحظات التنفيذ</th></tr></thead>
-            <tbody>
-              ${(r.todayWorks||[]).filter(w=>(w.desc||'').trim()).map((w,i)=>`
-                <tr>
-                  <td style="text-align:center;font-weight:700;">${i+1}</td>
-                  <td style="text-align:right;font-weight:600;">${esc(w.desc)}</td>
-                  <td style="text-align:center;">${esc(w.location||'—')}</td>
-                  <td style="text-align:center;">${esc(w.discipline||'—')}</td>
-                  <td style="text-align:center;font-weight:700;color:#0E4D4E;">${w.progress||0}%<div style="height:3.5px;background:#E4E7EC;border-radius:99px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:${Math.min(100,w.progress||0)}%;background:#0E4D4E;"></div></div></td>
-                  <td style="text-align:right;color:#475467;">${esc(w.notes||'—')}</td>
-                </tr>
-              `).join('') || '<tr><td colspan="6" style="text-align:center;color:#667085;">لا توجد أعمال مسجلة اليوم</td></tr>'}
-            </tbody>
+            <thead><tr><th style="width:26px;">م</th><th style="text-align:right;">بيان الأعمال المنفذة / الجارية</th><th style="width:88px;">المبنى / الدور</th><th style="width:78px;">التخصص</th><th style="width:76px;">الإنجاز %</th><th style="text-align:right;width:138px;">ملاحظات التنفيذ والاستلام</th></tr></thead>
+            <tbody>${todayRowsHtml}</tbody>
           </table>
         </div>
 
         <!-- 2. Tomorrow Works -->
         <div class="dsr-p-box">
-          <div class="dsr-p-hdr"><span>ثانياً: الأعمال المخطط تنفيذها غداً (خطة العمل اليومية)</span></div>
+          <div class="dsr-p-hdr"><span>ثانياً: الأعمال المخطط تنفيذها غداً (خطة العمل اليومية)</span><span>${nextW.length} بنود</span></div>
           <table class="dsr-p-tbl">
-            <thead><tr><th style="width:24px;">م</th><th style="text-align:right;">بيان الأعمال المخططة لغداً</th><th style="width:88px;">الموقع / العمارة</th><th style="width:95px;">القسم المسئول</th><th style="width:82px;">الأولوية</th></tr></thead>
-            <tbody>
-              ${(r.tomorrowWorks||[]).filter(w=>(w.desc||'').trim()).map((w,i)=>`
-                <tr>
-                  <td style="text-align:center;font-weight:700;">${i+1}</td>
-                  <td style="text-align:right;font-weight:600;">${esc(w.desc)}</td>
-                  <td style="text-align:center;">${esc(w.location||'—')}</td>
-                  <td style="text-align:center;">${esc(w.dept||'—')}</td>
-                  <td style="text-align:center;font-weight:700;color:#0E4D4E;">${esc(w.priority||'—')}</td>
-                </tr>
-              `).join('') || '<tr><td colspan="5" style="text-align:center;color:#667085;">استكمال بنود التنفيذ الجارية</td></tr>'}
-            </tbody>
+            <thead><tr><th style="width:26px;">م</th><th style="text-align:right;">بيان الأعمال المخططة لغداً</th><th style="width:94px;">الموقع / العمارة</th><th style="width:104px;">القسم المسئول</th><th style="width:88px;">الأولوية</th></tr></thead>
+            <tbody>${tomRowsHtml}</tbody>
           </table>
         </div>
 
-        <!-- 3 & 4. Equipment & Materials Side by Side -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-bottom:2.5mm;">
-          <div class="dsr-p-box" style="margin-bottom:0;">
+        <!-- 3 & 4. Equipment & Materials Side by Side (Equal Heights) -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;align-items:stretch;">
+          <div class="dsr-p-box">
             <div class="dsr-p-hdr"><span>ثالثاً: المعدات الوافدة والمشغلة</span><span>${m.equipSum}</span></div>
             <table class="dsr-p-tbl">
-              <thead><tr><th style="text-align:right;">المعدة</th><th style="width:36px;">العدد</th><th style="width:72px;">المكان</th><th style="width:48px;">الحالة</th></tr></thead>
-              <tbody>
-                ${(r.equipment||[]).filter(e=>(e.name||'').trim()).map(e=>`<tr><td style="text-align:right;font-weight:600;">${esc(e.name)}</td><td style="text-align:center;font-weight:700;">${esc(e.qty)}</td><td style="text-align:center;">${esc(e.location)}</td><td style="text-align:center;color:#067647;font-weight:700;">${esc(e.status)}</td></tr>`).join('') || '<tr><td colspan="4" style="text-align:center;">—</td></tr>'}
-              </tbody>
+              <thead><tr><th style="text-align:right;">المعدة</th><th style="width:40px;">العدد</th><th style="width:76px;">المكان</th><th style="width:52px;">الحالة</th></tr></thead>
+              <tbody>${equipRowsHtml}</tbody>
             </table>
           </div>
-          <div class="dsr-p-box" style="margin-bottom:0;">
-            <div class="dsr-p-hdr"><span>رابعاً: المواد والخامات الواردة</span></div>
+          <div class="dsr-p-box">
+            <div class="dsr-p-hdr"><span>رابعاً: المواد والخامات الواردة للمشروع</span><span>${mats.length}</span></div>
             <table class="dsr-p-tbl">
-              <thead><tr><th style="text-align:right;">المادة / الخامة</th><th style="width:72px;">المورد</th><th style="width:54px;">الكمية</th><th style="width:46px;">الفحص</th></tr></thead>
-              <tbody>
-                ${(r.materials||[]).filter(x=>(x.name||'').trim()).map(x=>`<tr><td style="text-align:right;font-weight:600;">${esc(x.name)}</td><td style="text-align:center;">${esc(x.supplier||'—')}</td><td style="text-align:center;font-weight:700;">${esc(x.qty||'—')}</td><td style="text-align:center;color:#067647;font-weight:700;">${esc(x.status||'مقبول')}</td></tr>`).join('') || '<tr><td colspan="4" style="text-align:center;color:#667085;">لا توجد توريدات اليوم</td></tr>'}
-              </tbody>
+              <thead><tr><th style="text-align:right;">المادة / الخامة</th><th style="width:76px;">المورد</th><th style="width:58px;">الكمية</th><th style="width:48px;">الفحص</th></tr></thead>
+              <tbody>${matRowsHtml}</tbody>
             </table>
           </div>
         </div>
@@ -8966,13 +9114,13 @@ function printDailyReport() {
         <!-- 5. Supervision Attendance -->
         <div class="dsr-p-box">
           <div class="dsr-p-hdr"><span>خامساً: الأفراد المتواجدون بموقع المشروع اليوم (${esc(r.header.contractorName)})</span><span>متواجد: ${m.supPresent} / ${m.supTotal}</span></div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:6px;background:#F7F8F9;">
-            ${(r.supervisionStaff||[]).map(s=>`
-              <div style="border:1px solid ${s.present?'#0E4D4E':'#D0D5DD'};background:${s.present?'#FFFFFF':'#F1F3F5'};border-radius:5px;padding:4px 6px;opacity:${s.present?'1':'0.62'};display:flex;align-items:center;gap:5px;">
-                <span style="font-size:10px;font-weight:700;color:${s.present?'#067647':'#667085'};">${s.present?'☑':'☐'}</span>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px;background:#F8FAFC;">
+            ${(r.supervisionStaff || []).map(s => `
+              <div style="border:1px solid ${s.present ? '#0E4D4E' : '#CBD5E1'};background:${s.present ? '#FFFFFF' : '#F1F5F9'};border-radius:6px;padding:6px 8px;opacity:${s.present ? '1' : '0.62'};display:flex;align-items:center;gap:6px;">
+                <span style="font-size:11px;font-weight:700;color:${s.present ? '#067647' : '#64748B'};">${s.present ? '☑' : '☐'}</span>
                 <div style="min-width:0;">
-                  <div style="font-size:9px;font-weight:700;color:#101828;line-height:1.2;">${esc(s.role)}</div>
-                  <div style="font-size:7.8px;color:#475467;">${esc(s.entity)}</div>
+                  <div style="font-size:9.8px;font-weight:700;color:#101828;line-height:1.25;">${esc(s.role)}</div>
+                  <div style="font-size:8.5px;color:#475467;margin-top:1px;">${esc(s.entity)}</div>
                 </div>
               </div>
             `).join('')}
@@ -8987,56 +9135,53 @@ function printDailyReport() {
     </div>
 
     <!-- ==================== A4 PRINT PAGE 2 ==================== -->
-    <div class="dsr-print-page">
-      <div>
+    <div class="dsr-print-page ${isDenseP2 ? 'dense' : ''}">
+      <div class="dsr-p-body">
         <!-- Compact Page 2 Header -->
-        <div class="dsr-p-box" style="border:1.5px solid #0E4D4E;padding:5px 9px;display:flex;justify-content:space-between;align-items:center;">
-          <div style="display:flex;align-items:center;gap:7px;">
-            <div class="dsr-p-party-logo" style="width:34px;height:34px;">${logoOwner}</div>
-            <div class="dsr-p-party-logo" style="width:34px;height:34px;">${logoCons}</div>
-            <div class="dsr-p-party-logo" style="width:34px;height:34px;">${logoCont}</div>
+        <div class="dsr-p-box" style="border:1.5px solid #0E4D4E;padding:7px 11px;flex-direction:row;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="dsr-p-party-logo" style="width:40px;height:40px;">${logoOwner}</div>
+            <div class="dsr-p-party-logo" style="width:40px;height:40px;">${logoCons}</div>
+            <div class="dsr-p-party-logo" style="width:40px;height:40px;">${logoCont}</div>
             <div>
-              <div style="font-size:8.5px;color:#475467;font-weight:600;">تابع التقرير اليومي للموقع • بيان القوى العاملة والجودة والاعتماد</div>
-              <div style="font-size:11.5px;font-weight:700;color:#0E4D4E;">${esc(r.header.projectName)}</div>
+              <div style="font-size:9px;color:#475467;font-weight:600;">تابع التقرير اليومي للموقع • بيان القوى العاملة والجودة والاعتماد</div>
+              <div style="font-size:12.5px;font-weight:700;color:#0E4D4E;">${esc(r.header.projectName)}</div>
             </div>
           </div>
-          <div style="display:flex;gap:8px;align-items:center;font-size:9.5px;font-weight:700;">
+          <div style="display:flex;gap:8px;align-items:center;font-size:10.5px;font-weight:700;">
             <span>${cal.dmy} (${cal.dayName})</span>
-            <span dir="ltr" style="background:#0E4D4E;color:#FFFFFF;padding:2px 8px;border-radius:4px;">${esc(r.header.reportCode)}</span>
+            <span dir="ltr" style="background:#0E4D4E;color:#FFFFFF;padding:3px 9px;border-radius:5px;">${esc(r.header.reportCode)}</span>
           </div>
         </div>
 
-        <!-- 6. Split Manpower -->
+        <!-- 6. Split Manpower (Aligned Table Footers!) -->
         <div class="dsr-p-box">
           <div class="dsr-p-hdr">
             <span>سادساً: الطاقم الهندسي والإداري والعمالة التنفيذية بالموقع</span>
             <span>الإجمالي العام: ${m.grandTotal} فرد (هندسي: ${m.engSub} | فنيين: ${m.skTotal} | مساعدين: ${m.hlTotal})</span>
           </div>
-          <div style="padding:4px 8px;background:#F7F8F9;border-bottom:1px solid #D0D5DD;display:flex;align-items:center;gap:8px;font-size:8.8px;font-weight:700;">
+          <div style="padding:6px 10px;background:#F8FAFC;border-bottom:1px solid #CBD5E1;display:flex;align-items:center;gap:10px;font-size:9.6px;font-weight:700;">
             <span>التوزيع:</span>
-            <div style="flex:1;height:6px;border-radius:99px;background:#E4E7EC;overflow:hidden;display:flex;">
+            <div style="flex:1;height:8px;border-radius:99px;background:#E2E8F0;overflow:hidden;display:flex;">
               <div style="width:${pEng}%;background:#0E4D4E;"></div>
               <div style="width:${pSk}%;background:#1F7A7B;"></div>
               <div style="width:${pHl}%;background:#38B2AC;"></div>
             </div>
             <span>هندسي ${pEng}% • فني ${pSk}% • مساعد ${pHl}%</span>
           </div>
-          <div style="display:grid;grid-template-columns:5fr 7fr;gap:3mm;padding:6px;">
-            <table class="dsr-p-tbl">
-              <thead><tr><th style="text-align:right;">الطاقم الهندسي والإداري</th><th style="width:36px;">العدد</th><th style="text-align:right;width:72px;">ملاحظات</th></tr></thead>
+          <div style="display:grid;grid-template-columns:5fr 7fr;gap:3.5mm;padding:8px;align-items:stretch;">
+            <table class="dsr-p-tbl" style="height:100%;">
+              <thead><tr><th style="text-align:right;">الطاقم الهندسي والإداري</th><th style="width:42px;">العدد</th><th style="text-align:right;width:82px;">ملاحظات</th></tr></thead>
               <tbody>
-                ${(r.engAdminList||[]).map(e=>`<tr><td style="text-align:right;font-weight:600;">${esc(e.role)}</td><td style="text-align:center;font-weight:700;">${e.count||0}</td><td style="text-align:right;color:#475467;">${esc(e.notes||'—')}</td></tr>`).join('')}
-                <tr style="background:#E8F3F3;font-weight:700;"><td style="text-align:right;">إجمالي الطاقم الهندسي</td><td style="text-align:center;color:#0E4D4E;">${m.engSub}</td><td></td></tr>
+                ${engRowsHtml}
+                <tr style="background:#E8F3F3;font-weight:700;"><td style="text-align:right;color:#0E4D4E;">إجمالي الطاقم الهندسي</td><td style="text-align:center;color:#0E4D4E;">${m.engSub}</td><td></td></tr>
               </tbody>
             </table>
-            <table class="dsr-p-tbl">
-              <thead><tr><th style="text-align:right;">العمالة التنفيذية</th><th style="width:38px;">فني</th><th style="width:38px;">مساعد</th><th style="width:42px;">المجموع</th><th style="width:74px;">الموقع</th></tr></thead>
+            <table class="dsr-p-tbl" style="height:100%;">
+              <thead><tr><th style="text-align:right;">العمالة التنفيذية</th><th style="width:42px;">فني</th><th style="width:42px;">مساعد</th><th style="width:48px;">المجموع</th><th style="width:82px;">الموقع</th></tr></thead>
               <tbody>
-                ${(r.workersSplitList||[]).map(w=>{
-                  const sk = Number(w.skilled)||0, hl = Number(w.helper)||0;
-                  return `<tr><td style="text-align:right;font-weight:600;">${esc(w.trade)}</td><td style="text-align:center;">${sk}</td><td style="text-align:center;">${hl}</td><td style="text-align:center;font-weight:700;background:#F7F8F9;">${sk+hl}</td><td style="text-align:center;color:#475467;">${esc(w.loc||'—')}</td></tr>`;
-                }).join('')}
-                <tr style="background:#E8F3F3;font-weight:700;"><td style="text-align:right;">إجمالي العمالة</td><td style="text-align:center;">${m.skTotal}</td><td style="text-align:center;">${m.hlTotal}</td><td style="text-align:center;color:#0E4D4E;">${m.workersSub}</td><td></td></tr>
+                ${wkRowsHtml}
+                <tr style="background:#E8F3F3;font-weight:700;"><td style="text-align:right;color:#0E4D4E;">إجمالي العمالة</td><td style="text-align:center;">${m.skTotal}</td><td style="text-align:center;">${m.hlTotal}</td><td style="text-align:center;color:#0E4D4E;">${m.workersSub}</td><td></td></tr>
               </tbody>
             </table>
           </div>
@@ -9044,59 +9189,46 @@ function printDailyReport() {
 
         <!-- 7. IR / QC Inspections -->
         <div class="dsr-p-box">
-          <div class="dsr-p-hdr"><span>سابعاً: موقف طلبات الفحص والاستلام الهندسي (IR / QC)</span><span>${(r.inspections||[]).length} طلب</span></div>
-          ${(r.inspections||[]).length ? `
-            <table class="dsr-p-tbl">
-              <thead><tr><th style="width:78px;">رقم الطلب (IR)</th><th style="text-align:right;">بيان الاستلام / الفحص</th><th style="width:74px;">المبنى / الدور</th><th style="width:58px;">التخصص</th><th style="width:105px;">كود الاعتماد</th><th style="text-align:right;width:125px;">ملاحظات الاستشاري</th></tr></thead>
-              <tbody>
-                ${r.inspections.map(ir=>`
-                  <tr>
-                    <td dir="ltr" style="text-align:center;font-weight:700;">${esc(ir.irCode)}</td>
-                    <td style="text-align:right;font-weight:600;">${esc(ir.desc)}</td>
-                    <td style="text-align:center;">${esc(ir.location||'—')}</td>
-                    <td style="text-align:center;">${esc(ir.discipline||'—')}</td>
-                    <td style="text-align:center;">${irBadgeHtml(ir.status)}</td>
-                    <td style="text-align:right;color:#475467;">${esc(ir.notes||ir.defect||'—')}</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          ` : '<div style="padding:8px;text-align:center;font-size:9.5px;color:#475467;">لا توجد طلبات فحص واستلام (IR) مسجلة لهذا اليوم.</div>'}
+          <div class="dsr-p-hdr"><span>سابعاً: موقف طلبات الفحص والاستلام الهندسي (IR / QC)</span><span>${irs.length} طلب</span></div>
+          <table class="dsr-p-tbl">
+            <thead><tr><th style="width:84px;">رقم الطلب (IR)</th><th style="text-align:right;">بيان الاستلام / الفحص الهندسي</th><th style="width:80px;">المبنى / الدور</th><th style="width:64px;">التخصص</th><th style="width:112px;">كود الاعتماد (DC)</th><th style="text-align:right;width:130px;">ملاحظات الاستشاري</th></tr></thead>
+            <tbody>${irRowsHtml}</tbody>
+          </table>
         </div>
 
-        <!-- 8 & 9. HSE & Notes -->
-        <div style="display:grid;grid-template-columns:5fr 7fr;gap:3mm;margin-bottom:2.5mm;">
-          <div class="dsr-p-box" style="margin-bottom:0;">
+        <!-- 8 & 9. HSE & Consultant Notes (Flex-Grow with Ruled Lines for Handwritten Consultant Directives) -->
+        <div style="flex:1;display:grid;grid-template-columns:5fr 7fr;gap:3.5mm;align-items:stretch;min-height:46mm;">
+          <div class="dsr-p-box grow">
             <div class="dsr-p-hdr"><span>ثامناً: السلامة والصحة المهنية (HSE)</span></div>
-            <div style="padding:7px 9px;font-size:9.5px;">
-              <div style="display:inline-block;padding:2px 8px;border-radius:999px;font-weight:700;font-size:9px;margin-bottom:5px;color:${r.safetyStatus==='safe'?'#067647':'#B42318'};background:${r.safetyStatus==='safe'?'#ECFDF3':'#FEF3F2'};">
+            <div style="padding:8px 10px 4px;">
+              <div style="display:inline-block;padding:2.5px 9px;border-radius:999px;font-weight:700;font-size:9.8px;color:${r.safetyStatus==='safe'?'#067647':'#B42318'};background:${r.safetyStatus==='safe'?'#ECFDF3':'#FEF3F2'};border:1px solid ${r.safetyStatus==='safe'?'#ABEFC6':'#FECDCA'};">
                 ${r.safetyStatus==='safe'?'✓ آمن — لا توجد إصابات أو حوادث اليوم':'⚠ يوجد تنبيه سلامة مهنية'}
               </div>
-              <div style="white-space:pre-line;line-height:1.45;color:#101828;">${esc(r.safetyNotes||'—')}</div>
             </div>
+            <div class="dsr-p-ruled">${esc(r.safetyNotes || '')}</div>
           </div>
-          <div class="dsr-p-box" style="margin-bottom:0;">
+          <div class="dsr-p-box grow">
             <div class="dsr-p-hdr"><span>تاسعاً: ملاحظات عامة وتوجيهات الاستشاري وإدارة المشروع</span></div>
-            <div style="padding:7px 9px;font-size:9.5px;white-space:pre-line;line-height:1.45;color:#101828;">${esc(r.generalNotes||'لا توجد ملاحظات إضافية.')}</div>
+            <div class="dsr-p-ruled">${esc(r.generalNotes || '')}</div>
           </div>
         </div>
 
-        <!-- Official Signatures (Aref Ruqaa) -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;border:1.5px solid #0E4D4E;border-radius:8px;padding:7px;text-align:center;">
-          <div style="border:1px solid #D0D5DD;border-radius:6px;padding:6px;background:#F7F8F9;">
-            <div style="font-size:9.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title1)}</div>
-            <div style="font-family:'Aref Ruqaa',serif;font-size:19px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name1)}</div>
-            <div style="font-size:8.5px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:3px;">التوقيع</div>
+        <!-- Official Signatures (Aref Ruqaa — Generous Wet-Ink Approval Space) -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3.5mm;border:1.5px solid #0E4D4E;border-radius:8px;padding:9px;text-align:center;background:#FFFFFF;">
+          <div style="border:1px solid #CBD5E1;border-radius:7px;padding:8px 10px;background:#F8FAFC;min-height:30mm;display:flex;flex-direction:column;justify-content:space-between;">
+            <div style="font-size:10.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title1)}</div>
+            <div style="font-family:'Aref Ruqaa',serif;font-size:22px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name1)}</div>
+            <div style="font-size:9.2px;color:#64748B;border-top:1px dashed #CBD5E1;padding-top:4px;">التوقيع</div>
           </div>
-          <div style="border:1px solid #D0D5DD;border-radius:6px;padding:6px;background:#F7F8F9;">
-            <div style="font-size:9.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title2)}</div>
-            <div style="font-family:'Aref Ruqaa',serif;font-size:19px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name2)}</div>
-            <div style="font-size:8.5px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:3px;">التوقيع</div>
+          <div style="border:1px solid #CBD5E1;border-radius:7px;padding:8px 10px;background:#F8FAFC;min-height:30mm;display:flex;flex-direction:column;justify-content:space-between;">
+            <div style="font-size:10.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title2)}</div>
+            <div style="font-family:'Aref Ruqaa',serif;font-size:22px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name2)}</div>
+            <div style="font-size:9.2px;color:#64748B;border-top:1px dashed #CBD5E1;padding-top:4px;">التوقيع</div>
           </div>
-          <div style="border:1px solid #0E4D4E;border-radius:6px;padding:6px;background:#E8F3F3;">
-            <div style="font-size:9.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title3)}</div>
-            <div style="font-family:'Aref Ruqaa',serif;font-size:19px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name3)}</div>
-            <div style="font-size:8.5px;color:#475467;border-top:1px dashed #0E4D4E66;padding-top:3px;">التوقيع والاعتماد</div>
+          <div style="border:1.5px solid #0E4D4E;border-radius:7px;padding:8px 10px;background:#E8F3F3;min-height:30mm;display:flex;flex-direction:column;justify-content:space-between;">
+            <div style="font-size:10.5px;font-weight:700;color:#0E4D4E;">${esc(r.signatures.title3)}</div>
+            <div style="font-family:'Aref Ruqaa',serif;font-size:22px;font-weight:700;color:#101828;margin:4px 0;">${esc(r.signatures.name3)}</div>
+            <div style="font-size:9.2px;color:#475467;border-top:1px dashed #0E4D4E66;padding-top:4px;">التوقيع والاعتماد</div>
           </div>
         </div>
       </div>

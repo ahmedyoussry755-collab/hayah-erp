@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hayah-erp-pwa-v71';
+const CACHE_NAME = 'hayah-erp-pwa-v72';
 const STATIC_ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (event) => {
