@@ -2143,6 +2143,183 @@
       flex-shrink: 0;
     }
   }
+
+  /* ============================================================================
+     V7.3: ITEMIZED SUBCONTRACTOR IPC SHEET + APARTMENT IR DELIVERY MATRIX
+     ============================================================================ */
+  .ipc-sheet-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 14px; margin-bottom: 14px;
+  }
+  .ipc-sheet-card {
+    background: var(--card); border: 1.5px solid var(--brand); border-radius: 12px;
+    overflow: hidden; margin-bottom: 16px;
+  }
+  .ipc-sheet-top {
+    background: var(--brand); color: #FFFFFF; padding: 12px 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .ipc-sheet-top h3 { margin: 0; font-size: 15px; font-weight: 700; color: #FFFFFF; }
+  .ipc-sheet-top small { font-size: 12px; opacity: 0.9; }
+  .ipc-meta-grid {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-bottom: 1px solid var(--border); background: var(--surface-2);
+  }
+  .ipc-meta-cell {
+    padding: 10px 12px; border-left: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px;
+  }
+  .ipc-meta-cell:last-child { border-left: none; }
+  .ipc-meta-cell label { font-size: 11px; font-weight: 700; color: var(--muted); }
+  .ipc-tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .ipc-tbl th {
+    background: var(--surface-2) !important; color: var(--text) !important; font-weight: 700;
+    font-size: 11.5px; padding: 8px 6px !important; border: 1px solid var(--border) !important;
+    text-align: center;
+  }
+  .ipc-tbl td {
+    padding: 5px 6px !important; border: 1px solid var(--border) !important; vertical-align: middle;
+  }
+  .ipc-tbl tr.ipc-row-ded td {
+    background: var(--red-soft) !important; color: var(--red) !important;
+  }
+  .ipc-tbl tr.ipc-row-ded input, .ipc-tbl tr.ipc-row-ded select {
+    color: var(--red) !important; font-weight: 600;
+  }
+  .ipc-inp {
+    width: 100%; background: transparent; border: 1px solid transparent; border-radius: 5px;
+    padding: 4px 5px; font-size: 12.5px; color: var(--text); font-family: inherit;
+    font-variant-numeric: tabular-nums;
+  }
+  .ipc-inp:hover { border-color: var(--border-strong); background: var(--card); }
+  .ipc-inp:focus { outline: none; border-color: var(--brand); background: var(--card); }
+  .ipc-summary-box {
+    border-top: 2px solid var(--brand); background: var(--card);
+  }
+  .ipc-sum-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 9px 16px; border-bottom: 1px solid var(--border); font-size: 13.5px; font-weight: 600;
+  }
+  .ipc-sum-row:last-child { border-bottom: none; }
+  .ipc-sum-row.add { background: var(--surface-2); color: var(--text); }
+  .ipc-sum-row.ded { background: var(--red-soft); color: var(--red); }
+  .ipc-sum-row.net { background: var(--green-soft); color: var(--green); font-weight: 700; }
+  .ipc-sum-row.ret { background: var(--amber-soft); color: var(--amber); }
+  .ipc-sum-row.due {
+    background: var(--brand); color: #FFFFFF; font-size: 15px; font-weight: 700;
+  }
+  .ipc-sum-row.due.overpay { background: var(--red); color: #FFFFFF; }
+  .ipc-sum-val { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 14.5px; min-width: 135px; text-align: left; }
+  .ipc-sigs-row {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+    padding: 14px 16px; border-top: 1px solid var(--border); background: var(--surface-2); text-align: center;
+  }
+  .ipc-sig-box {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+
+  /* --- Apartment Delivery & IR Matrix --- */
+  .apt-stage-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; margin-bottom: 16px;
+  }
+  .apt-stage-hdr {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    padding: 11px 16px; background: var(--surface-2); border-bottom: 1px solid var(--border);
+  }
+  .apt-stage-hdr h3 { margin: 0; font-size: 14.5px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .apt-tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .apt-tbl th {
+    background: var(--surface-2) !important; color: var(--text-2) !important; font-size: 11.5px !important;
+    padding: 8px 6px !important; border-bottom: 1px solid var(--border) !important; border-left: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .apt-tbl td {
+    padding: 5px 5px !important; border-bottom: 1px solid var(--border) !important; border-left: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .apt-tbl th:first-child, .apt-tbl td:first-child {
+    position: sticky; right: 0; z-index: 2; background: var(--card); min-width: 108px; font-weight: 700; text-align: right;
+  }
+  .apt-tbl thead th:first-child { background: var(--surface-2) !important; z-index: 4; }
+  .apt-cell-btn {
+    width: 100%; min-height: 36px; border-radius: 7px; padding: 4px 6px; cursor: pointer;
+    border: 1px solid transparent; font-family: inherit; font-size: 11px; font-weight: 700;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+    transition: border-color 140ms ease, transform 120ms ease; font-variant-numeric: tabular-nums;
+  }
+  .apt-cell-btn:hover { border-color: var(--brand); transform: translateY(-1px); }
+  .apt-st-A { background: var(--green-soft); color: var(--green); border-color: var(--green-bd); }
+  .apt-st-B { background: var(--amber-soft); color: var(--amber); border-color: var(--amber-bd); }
+  .apt-st-C { background: var(--red-soft); color: var(--red); border-color: var(--red-bd); }
+  .apt-st-D { background: var(--red-soft); color: var(--red); border-color: var(--red-bd); }
+  .apt-st-UR { background: var(--blue-soft); color: var(--blue); border-color: var(--blue-bd); }
+  .apt-st-none { background: var(--surface-2); color: var(--muted); border: 1px dashed var(--border-strong); font-weight: 600; }
+  .apt-code-ltr { direction: ltr; unicode-bidi: embed; font-size: 10.8px; line-height: 1.2; }
+  .apt-sub-tag { font-size: 9.5px; opacity: 0.9; line-height: 1.1; }
+
+  /* --- Pre-Coding Generator --- */
+  .precod-card {
+    background: var(--card); border: 1.5px solid var(--brand); border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 16px;
+  }
+  .precod-grid {
+    display: grid; grid-template-columns: 1.6fr 0.9fr 0.9fr 0.7fr auto; gap: 8px; align-items: end;
+    margin-bottom: 10px;
+  }
+  .precod-out {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    padding: 10px 12px; border-radius: 8px; background: var(--brand-soft); border: 1px solid rgba(14,77,78,0.22);
+  }
+  .precod-out.warn { background: var(--amber-soft); border-color: var(--amber-bd); color: var(--amber); }
+
+  @media (max-width: 900px) {
+    .ipc-meta-grid { grid-template-columns: repeat(2, 1fr); }
+    .ipc-meta-cell { border-bottom: 1px solid var(--border); }
+    .precod-grid { grid-template-columns: 1fr 1fr; }
+    .ipc-sigs-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .ipc-meta-grid, .precod-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ==================== DEDICATED A4 PRINT: IPC SHEET & APT MATRIX ==================== */
+  #printIpcSheetArea, #printAptMatrixArea { display: none; }
+  @media print {
+    body.printing-ipc-sheet > header,
+    body.printing-ipc-sheet > .v6-shell,
+    body.printing-ipc-sheet > .v6-drawer,
+    body.printing-ipc-sheet > .v6-drawer-bg,
+    body.printing-ipc-sheet > .v7-mobile-nav,
+    body.printing-ipc-sheet > .ipc-drawer,
+    body.printing-ipc-sheet > .ipc-drawer-bg,
+    body.printing-ipc-sheet > .modal-bg,
+    body.printing-ipc-sheet > .gs-overlay,
+    body.printing-ipc-sheet > .toast { display: none !important; }
+    body.printing-ipc-sheet #printIpcSheetArea {
+      display: block !important; background: #FFFFFF !important; color: #101828 !important;
+      padding: 4mm !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+    }
+    body.printing-ipc-sheet #printIpcSheetArea thead { display: table-header-group; }
+    body.printing-ipc-sheet #printIpcSheetArea tr { page-break-inside: avoid; }
+
+    body.printing-apt-matrix > header,
+    body.printing-apt-matrix > .v6-shell,
+    body.printing-apt-matrix > .v6-drawer,
+    body.printing-apt-matrix > .v6-drawer-bg,
+    body.printing-apt-matrix > .v7-mobile-nav,
+    body.printing-apt-matrix > .ipc-drawer,
+    body.printing-apt-matrix > .ipc-drawer-bg,
+    body.printing-apt-matrix > .modal-bg,
+    body.printing-apt-matrix > .gs-overlay,
+    body.printing-apt-matrix > .toast { display: none !important; }
+    body.printing-apt-matrix #printAptMatrixArea {
+      display: block !important; background: #FFFFFF !important; color: #101828 !important;
+      padding: 4mm !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+    }
+  }
+
 </style>
 </head>
 <body class="locked">
@@ -2261,7 +2438,7 @@
           📂 تحديث من Excel / JSON
           <input type="file" id="excelFileInput" accept=".xlsx,.xlsm,.xls,.json" style="display:none" />
         </label>
-        <button class="tools-item" onclick="closeToolsMenu(); exportExcelOrJson()">📊 تصدير Excel شامل (18 شيتاً)</button>
+        <button class="tools-item" onclick="closeToolsMenu(); exportExcelOrJson()">📊 تصدير Excel شامل (20 شيتاً)</button>
         <button class="tools-item" onclick="closeToolsMenu(); exportJsonBackup()">💾 حفظ نسخة JSON أرشيفية</button>
         <button class="tools-item" onclick="closeToolsMenu(); window.print()">🖨️ طباعة A4 / PDF</button>
         <div class="tools-sep"></div>
@@ -2674,63 +2851,212 @@
     </div>
   </section>
 
-  <!-- ==================== 4. المقاولون (SUBCONTRACTORS + IPC DRAWER) ==================== -->
+  <!-- ==================== 4. المقاولون (SUBCONTRACTORS + ITEMIZED IPC SHEET) ==================== -->
   <section id="tab-subcontractors" class="section">
+    <input type="file" id="ipcExcelImportInput" accept=".xlsx,.xlsm,.xls" style="display:none" onchange="importIpcFromExcel(this)" />
     <div class="v7-page-head">
       <div class="v7-page-title">
         <h2>المقاولون والمستخلصات</h2>
-        <p>متابعة المستخلصات الجارية والدفعات وتأمين الأعمال — اضغط على أي مقاول لفتح درج المراجعة التفصيلي</p>
+        <p>متابعة الموقف المالي والدفعات، وإعداد وطباعة نماذج المستخلصات التفصيلية (A4) لكل مقاول من القائمة المنسدلة</p>
       </div>
-      <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn btn-light btn-sm" onclick="openAddContractModal()">+ بند / عقد جديد</button>
-        <button class="btn btn-light btn-sm" onclick="openUpdateIpcModal()">📑 تحديث مستخلص</button>
-        <button class="btn btn-gold btn-sm" onclick="openAddPaymentModal(DB.contracts[0]?.code||'CNT-01')">+ تسجيل دفعة مقاول</button>
+      <div class="v7-subtabs no-print" id="subcontractorsSubtabs">
+        <button type="button" class="v7-subtab-btn active" data-sub="overview" onclick="switchSubTab('subcontractors','overview',this)">
+          الموقف المالي والدفعات <span class="v7-subtab-count" id="subBdgContracts">0</span>
+        </button>
+        <button type="button" class="v7-subtab-btn" data-sub="ipc-sheet" onclick="switchSubTab('subcontractors','ipc-sheet',this)">
+          نموذج المستخلص التفصيلي (A4)
+        </button>
       </div>
     </div>
 
-    <div class="kpi-grid" id="subKpis"></div>
+    <!-- Subcontractors Sub-Pane A: Financial Position & Payments -->
+    <div class="v7-subpane active" id="subpane-subcontractors-overview">
+      <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+        <button class="btn btn-gold btn-sm" onclick="openAddPaymentModal(DB.contracts[0]?.code||'CNT-01')">+ تسجيل دفعة مقاول</button>
+        <button class="btn btn-light btn-sm" onclick="switchSubTab('subcontractors','ipc-sheet')">📑 فتح نموذج المستخلص التفصيلي</button>
+        <button class="btn btn-light btn-sm" onclick="openUpdateIpcModal()">⚡ تحديث سريع لقيمة مستخلص</button>
+        <button class="btn btn-light btn-sm" onclick="openAddContractModal()">+ بند / عقد جديد</button>
+      </div>
 
-    <div class="panel">
-      <div class="panel-hdr">
-        <span id="subPanelTitle">الموقف المالي التراكمي للعقود ورادار أمان الصرف</span>
-        <div class="v7-filter-chips no-print" style="margin-bottom:0;" id="subAuditChips">
-          <button type="button" class="v7-chip active" data-rf="ALL" onclick="setSubAuditFilter('ALL', this)">الكل</button>
-          <button type="button" class="v7-chip" data-rf="OVER" onclick="setSubAuditFilter('OVER', this)">تجاوز المستخلص</button>
-          <button type="button" class="v7-chip" data-rf="NEAR" onclick="setSubAuditFilter('NEAR', this)">قارب 100%</button>
-          <button type="button" class="v7-chip" data-rf="NOIPC" onclick="setSubAuditFilter('NOIPC', this)">بدون مستخلص</button>
-          <button type="button" class="v7-chip" data-rf="SAFE" onclick="setSubAuditFilter('SAFE', this)">آمن للصرف</button>
+      <div class="kpi-grid" id="subKpis"></div>
+
+      <div class="panel">
+        <div class="panel-hdr">
+          <span id="subPanelTitle">الموقف المالي التراكمي للعقود ورادار أمان الصرف</span>
+          <div class="v7-filter-chips no-print" style="margin-bottom:0;" id="subAuditChips">
+            <button type="button" class="v7-chip active" data-rf="ALL" onclick="setSubAuditFilter('ALL', this)">الكل</button>
+            <button type="button" class="v7-chip" data-rf="OVER" onclick="setSubAuditFilter('OVER', this)">تجاوز المستخلص</button>
+            <button type="button" class="v7-chip" data-rf="NEAR" onclick="setSubAuditFilter('NEAR', this)">قارب 100%</button>
+            <button type="button" class="v7-chip" data-rf="NOIPC" onclick="setSubAuditFilter('NOIPC', this)">بدون مستخلص</button>
+            <button type="button" class="v7-chip" data-rf="SAFE" onclick="setSubAuditFilter('SAFE', this)">آمن للصرف</button>
+          </div>
+        </div>
+        <div class="panel-body sc-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>الكود</th><th class="right">المقاول والبند</th><th>المستخلص</th>
+                <th>صافي المستخلص</th><th>المدفوع فعلياً</th><th>الدفعات</th>
+                <th>السحب %</th><th>المتبقي قبل التأمين</th><th>التأمين</th>
+                <th>المتاح بعد التأمين</th><th>رادار الصرف</th><th class="no-print">مراجعة / تعديل</th>
+              </tr>
+            </thead>
+            <tbody id="subSummaryBody"></tbody>
+          </table>
         </div>
       </div>
-      <div class="panel-body sc-table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>الكود</th><th class="right">المقاول والبند</th><th>المستخلص</th>
-              <th>صافي المستخلص</th><th>المدفوع فعلياً</th><th>الدفعات</th>
-              <th>السحب %</th><th>المتبقي قبل التأمين</th><th>التأمين</th>
-              <th>المتاح بعد التأمين</th><th>رادار الصرف</th><th class="no-print">مراجعة / تعديل</th>
-            </tr>
-          </thead>
-          <tbody id="subSummaryBody"></tbody>
-        </table>
+
+      <div class="filter-bar no-print">
+        <strong style="color:var(--text);">كروت دفعات المقاولين التفصيلية:</strong>
+        <select class="inp" id="subCardFilter" onchange="renderSubSmartCards()">
+          <option value="ALL">عرض جميع الكروت الذكية</option>
+          <option value="OVER">عقود تجاوز المستخلص فقط</option>
+          <option value="NEAR">عقود قاربت الـ 100% فقط</option>
+          <option value="SAFE">العقود الآمنة للصرف</option>
+          <option value="NOIPC">دفعات بدون مستخلص</option>
+        </select>
+      </div>
+
+      <div class="smart-grid" id="subSmartCards"></div>
+    </div>
+
+    <!-- Subcontractors Sub-Pane B: Dynamic Itemized IPC Sheet (Printable A4) -->
+    <div class="v7-subpane" id="subpane-subcontractors-ipc-sheet">
+      <div class="ipc-sheet-bar no-print">
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <label style="font-size:12.5px; font-weight:700; color:var(--text);">اختر المقاول / البند:</label>
+          <select class="inp" id="ipcSheetContractSelect" onchange="selectIpcSheetContract(this.value)" style="min-width:250px; font-weight:700;"></select>
+          <span class="pill pill-plum" id="ipcSheetCountBadge">0 سطر</span>
+        </div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-gold btn-sm" onclick="addIpcSheetRow('add')">+ إضافة أعمال</button>
+          <button type="button" class="btn btn-danger btn-sm" onclick="addIpcSheetRow('ded')">— خصم خامات</button>
+          <button type="button" class="btn btn-light btn-sm" onclick="pullPaymentsIntoIpcSheet()">🔄 سحب الدفعات</button>
+          <button type="button" class="btn btn-lime btn-sm" onclick="syncIpcSheetToFinancials()">⚡ اعتماد للموقف المالي</button>
+          <button type="button" class="btn btn-light btn-sm" onclick="loadSampleIpc35IntoCurrent()">📄 عينة مستخلص 35</button>
+          <button type="button" class="btn btn-light btn-sm" onclick="document.getElementById('ipcExcelImportInput').click()">📂 استيراد Excel</button>
+          <button type="button" class="btn btn-light btn-sm" onclick="printItemizedIpcSheet()">🖨️ طباعة A4</button>
+          <button type="button" class="btn btn-gold btn-sm" onclick="saveCurrentIpcSheet()">💾 حفظ</button>
+        </div>
+      </div>
+
+      <div class="ipc-sheet-card" id="ipcSheetWorkspace">
+        <div class="ipc-sheet-top">
+          <div>
+            <h3>المكتب العربي للتشييد والبناء (A.O.B.C) — سجل تجاري (174355)</h3>
+            <small id="ipcSheetHeaderProject">المشروع: حياة مرسيليا — عمارة رقم (5)</small>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span class="pill" style="background:rgba(255,255,255,0.18); color:#FFFFFF; border-color:rgba(255,255,255,0.3);" id="ipcSheetContractPill">—</span>
+          </div>
+        </div>
+
+        <div class="ipc-meta-grid">
+          <div class="ipc-meta-cell">
+            <label>رقم ونوع المستخلص</label>
+            <div style="display:flex; gap:6px;">
+              <input type="text" class="inp num" id="ipcShNo" style="width:72px; text-align:center; font-weight:700;" oninput="syncIpcMetaFromDom()" />
+              <select class="inp" id="ipcShKind" style="flex:1;" onchange="syncIpcMetaFromDom()">
+                <option value="جاري">جاري</option>
+                <option value="ختامي">ختامي</option>
+              </select>
+            </div>
+          </div>
+          <div class="ipc-meta-cell">
+            <label>تاريخ المستخلص</label>
+            <input type="date" class="inp" id="ipcShDate" onchange="syncIpcMetaFromDom()" />
+          </div>
+          <div class="ipc-meta-cell">
+            <label>اسم المقاول</label>
+            <input type="text" class="inp" id="ipcShContractor" style="font-weight:700;" oninput="syncIpcMetaFromDom()" />
+          </div>
+          <div class="ipc-meta-cell">
+            <label>وصف العمل (البند) والعمارة</label>
+            <div style="display:flex; gap:6px;">
+              <input type="text" class="inp" id="ipcShTrade" style="flex:1;" oninput="syncIpcMetaFromDom()" />
+              <input type="text" class="inp" id="ipcShBuilding" style="width:92px;" oninput="syncIpcMetaFromDom()" />
+            </div>
+          </div>
+        </div>
+
+        <div class="sc-table-wrap">
+          <table class="ipc-tbl">
+            <thead>
+              <tr>
+                <th rowspan="2" style="width:36px;">م</th>
+                <th rowspan="2" style="width:128px;">نوع السطر</th>
+                <th rowspan="2" class="right" style="min-width:220px;">بيان الأعمال التفصيلي</th>
+                <th rowspan="2" style="width:78px;">الوحدة</th>
+                <th colspan="3">الكميات المنفذة</th>
+                <th rowspan="2" style="width:72px;">النسبة %</th>
+                <th rowspan="2" style="width:92px;">الفئة (جنيه)</th>
+                <th rowspan="2" style="width:118px;">القيمة الإجمالية (جنيه)</th>
+                <th rowspan="2" class="no-print" style="width:36px;"></th>
+              </tr>
+              <tr>
+                <th style="width:78px;">سابقة</th>
+                <th style="width:78px;">حالية</th>
+                <th style="width:82px;">إجمالي</th>
+              </tr>
+            </thead>
+            <tbody id="ipcSheetBody"></tbody>
+          </table>
+        </div>
+
+        <div class="ipc-summary-box">
+          <div class="ipc-sum-row add">
+            <span>إجمالي قيمة الأعمال المنفذة (بدون الخصومات) +</span>
+            <span class="ipc-sum-val" id="ipcSumGross">0.00</span>
+          </div>
+          <div class="ipc-sum-row ded">
+            <span>يُخصم: إجمالي استقطاعات الخامات والمستلزمات —</span>
+            <span class="ipc-sum-val" id="ipcSumDed">0.00</span>
+          </div>
+          <div class="ipc-sum-row net">
+            <span>صافي قيمة المستخلص المستحق (بعد خصم الخامات) ✓</span>
+            <span class="ipc-sum-val" id="ipcSumNet">0.00</span>
+          </div>
+          <div class="ipc-sum-row ret">
+            <span style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span>يُخصم: تأمين أعمال (ضمان) بنسبة</span>
+              <input type="number" min="0" max="20" step="0.5" class="inp num" id="ipcShRetPct" style="width:68px; padding:2px 6px; text-align:center;" oninput="onIpcSummaryInputsChange()" />
+              <span>%</span>
+              <small style="font-weight:500; opacity:0.85;">(اتركها 0% إذا لم يُخصم التأمين على هذا المستخلص)</small>
+            </span>
+            <span class="ipc-sum-val" id="ipcSumRet">0.00</span>
+          </div>
+          <div class="ipc-sum-row">
+            <span style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span>يُخصم: إجمالي الدفعات والأعمال السابقة المنصرفة</span>
+              <span class="pill pill-navy" id="ipcLivePaidHint">سجل الدفعات: 0 ج.م</span>
+            </span>
+            <input type="number" min="0" step="0.01" class="inp num" id="ipcShPrevPaid" style="width:145px; text-align:left; font-weight:700;" oninput="onIpcSummaryInputsChange()" />
+          </div>
+          <div class="ipc-sum-row due" id="ipcSumDueRow">
+            <span>الصافي المستحق للصرف في هذه الدفعة (ج.م)</span>
+            <span class="ipc-sum-val" id="ipcSumDue">0.00</span>
+          </div>
+        </div>
+
+        <div class="ipc-sigs-row">
+          <div class="ipc-sig-box">
+            <input type="text" class="ipc-inp" id="ipcSigT1" style="text-align:center; font-weight:700; color:var(--brand);" value="إعداد ومراجعة الكميات" oninput="syncIpcMetaFromDom()" />
+            <input type="text" class="ipc-inp" id="ipcSigN1" style="text-align:center; font-family:'Aref Ruqaa',serif; font-size:20px; font-weight:700;" value="م / أحمد يسري" oninput="syncIpcMetaFromDom()" />
+          </div>
+          <div class="ipc-sig-box">
+            <input type="text" class="ipc-inp" id="ipcSigT2" style="text-align:center; font-weight:700; color:var(--brand);" value="المكتب الفني والتنفيذ" oninput="syncIpcMetaFromDom()" />
+            <input type="text" class="ipc-inp" id="ipcSigN2" style="text-align:center; font-family:'Aref Ruqaa',serif; font-size:20px; font-weight:700;" value="م / ...................." oninput="syncIpcMetaFromDom()" />
+          </div>
+          <div class="ipc-sig-box">
+            <input type="text" class="ipc-inp" id="ipcSigT3" style="text-align:center; font-weight:700; color:var(--brand);" value="اعتماد مدير المشروع" oninput="syncIpcMetaFromDom()" />
+            <input type="text" class="ipc-inp" id="ipcSigN3" style="text-align:center; font-family:'Aref Ruqaa',serif; font-size:20px; font-weight:700;" value="م / محمد السيد" oninput="syncIpcMetaFromDom()" />
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="filter-bar no-print">
-      <strong style="color:var(--text);">كروت دفعات المقاولين التفصيلية:</strong>
-      <select class="inp" id="subCardFilter" onchange="renderSubSmartCards()">
-        <option value="ALL">عرض جميع الكروت الذكية</option>
-        <option value="OVER">عقود تجاوز المستخلص فقط</option>
-        <option value="NEAR">عقود قاربت الـ 100% فقط</option>
-        <option value="SAFE">العقود الآمنة للصرف</option>
-        <option value="NOIPC">دفعات بدون مستخلص</option>
-      </select>
-    </div>
-
-    <div class="smart-grid" id="subSmartCards"></div>
   </section>
 
-  <!-- ==================== 5. الموظفون والحضور (DEDICATED HR & ATTENDANCE) ==================== -->
+<!-- ==================== 5. الموظفون والحضور (DEDICATED HR & ATTENDANCE) ==================== -->
   <section id="tab-hr" class="section">
     <div class="v7-page-head">
       <div class="v7-page-title">
@@ -3185,52 +3511,212 @@
     </div>
   </section>
 
-<!-- ==================== 7. مصفوفة التقدم (BUILDING 5 MATRIX) ==================== -->
+<!-- ==================== 7. مصفوفة التقدم (BUILDING 5 MATRIX + APARTMENT IR TRACKER) ==================== -->
   <section id="tab-matrix" class="section">
+    <input type="file" id="hayahLogImportInput" accept=".xlsx,.xlsm,.xls" style="display:none" onchange="importHayahLogExcel(this)" />
     <div class="v7-page-head">
       <div class="v7-page-title">
-        <h2>مصفوفة التقدم — عمارة 5</h2>
-        <p>متابعة تنفيذ تراكمية متعددة المراحل لكل دور وتخصص (تنفيذ / استلام / محاسبة)</p>
+        <h2>مصفوفة التقدم وتسليمات الشقق — عمارة 5</h2>
+        <p>تتبع تسليم الشقق بأكواد الـ IR المعتمدة، مولّد التكويد المسبق، ومصفوفة الكميات التراكمية</p>
       </div>
-      <div class="no-print bm-actions">
+      <div class="v7-subtabs no-print" id="matrixSubtabs">
+        <button type="button" class="v7-subtab-btn active" data-sub="apartments" onclick="switchSubTab('matrix','apartments',this)">
+          مصفوفة الشقق والـ IR <span class="v7-subtab-count" id="subBdgAptMat">0%</span>
+        </button>
+        <button type="button" class="v7-subtab-btn" data-sub="ir-log" onclick="switchSubTab('matrix','ir-log',this)">
+          سجل الـ IR ومولّد التكويد <span class="v7-subtab-count" id="subBdgIrLog">0</span>
+        </button>
+        <button type="button" class="v7-subtab-btn" data-sub="cumulative" onclick="switchSubTab('matrix','cumulative',this)">
+          مصفوفة الكميات التراكمية
+        </button>
+      </div>
+    </div>
+
+    <!-- Matrix Sub-Pane A: Apartment Delivery & IR Matrix (Default Active!) -->
+    <div class="v7-subpane active" id="subpane-matrix-apartments">
+      <div class="kpi-grid" id="aptMatrixKpis"></div>
+
+      <div class="dsr-toolbar no-print">
+        <div class="v7-filter-chips" style="margin-bottom:0;" id="aptStageChips">
+          <button type="button" class="v7-chip active" data-st="ALL" onclick="setAptStageFilter('ALL', this)">كل المصفوفات (5)</button>
+          <button type="button" class="v7-chip" data-st="mas_qad" onclick="setAptStageFilter('mas_qad', this)">قد المباني</button>
+          <button type="button" class="v7-chip" data-st="mas_raf" onclick="setAptStageFilter('mas_raf', this)">رفع المباني</button>
+          <button type="button" class="v7-chip" data-st="elec" onclick="setAptStageFilter('elec', this)">الكهرباء (9/دور)</button>
+          <button type="button" class="v7-chip" data-st="pls_tar" onclick="setAptStageFilter('pls_tar', this)">محارة (طرطشة وبؤج)</button>
+          <button type="button" class="v7-chip" data-st="pls_malo" onclick="setAptStageFilter('pls_malo', this)">محارة (ملو)</button>
+        </div>
+        <div class="dsr-toolbar-grp">
+          <label style="font-size:12px; font-weight:700; display:inline-flex; align-items:center; gap:5px; color:var(--text-2); cursor:pointer;">
+            <input type="checkbox" id="aptOnlyPendingChk" onchange="renderAptDeliveryMatrices()" />
+            المتبقي وكود B فقط
+          </label>
+          <button type="button" class="btn btn-light btn-sm" onclick="document.getElementById('hayahLogImportInput').click()">📂 تحديث من Hayah_Log.xlsx</button>
+          <button type="button" class="btn btn-gold btn-sm" onclick="printAptMatrixA4()">🖨️ طباعة A4</button>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; font-size:11.5px; align-items:center;">
+        <span style="color:var(--muted); font-weight:600;">دليل الألوان:</span>
+        <span class="pill pill-green">Code A — معتمد صافي</span>
+        <span class="pill pill-amber">Code B — معتمد بملاحظات</span>
+        <span class="pill pill-red">Code C / D — تعديل أو مرفوض</span>
+        <span class="pill pill-navy">باقي ⏳ — لم يُسلم بعد</span>
+        <span style="color:var(--muted);">• اضغط على أي شقة لعرض تفاصيل الـ IR أو تسجيل/تعديل التسليم فوراً</span>
+      </div>
+
+      <div id="aptMatrixContainer"></div>
+    </div>
+
+    <!-- Matrix Sub-Pane B: Pre-Coding Generator + Complete IR Log -->
+    <div class="v7-subpane" id="subpane-matrix-ir-log">
+      <div class="precod-card no-print">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
+          <strong style="font-size:14px; color:var(--text);">⚡ مولّد التكويد المسبق والبيان القياسي للـ IR (عمارة 5)</strong>
+          <span class="pill pill-plum" id="precodNextInfo">توليد تلقائي لأقرب رقم متسلسل</span>
+        </div>
+        <div class="precod-grid">
+          <div class="form-row">
+            <label>نوع العمل / المرحلة</label>
+            <select class="inp" id="pcStage" onchange="updatePreCoderPreview()">
+              <option value="mas_qad|معماري|قد مباني">قد مباني (معماري)</option>
+              <option value="mas_raf|معماري|رفع مباني">رفع مباني (معماري)</option>
+              <option value="pls_tar|معماري|أعمال محارة داخلية طرطشة + بؤج + أوتار + شبك فواصل">محارة داخلية: طرطشة + بؤج + أوتار + شبك (معماري)</option>
+              <option value="pls_malo|معماري|أعمال محارة داخلية ملو">محارة داخلية: ملو (معماري)</option>
+              <option value="other_arc|معماري|أعمال محارة خارجية ملو التراسات">محارة خارجية: ملو التراسات (معماري)</option>
+              <option value="elec|كهرباء|أعمال كهرباء">أعمال كهرباء (كهرباء)</option>
+              <option value="other_str|إنشائي|أعمال خرسانة / إنشائي">أعمال خرسانة / إنشائي (إنشائي)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>رقم الشقة / المكان</label>
+            <select class="inp" id="pcUnit" onchange="updatePreCoderPreview()">
+              <option value="1">شقة 1</option><option value="2">شقة 2</option><option value="3">شقة 3</option>
+              <option value="4">شقة 4</option><option value="5">شقة 5</option><option value="6">شقة 6</option>
+              <option value="7">شقة 7</option><option value="1+2">شقة 1+2</option><option value="3+4">شقة 3+4</option>
+              <option value="5+6">شقة 5+6</option><option value="الطرقة">الطرقة / الممر</option><option value="السقف">كهرباء السقف</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>الدور</label>
+            <select class="inp" id="pcFloor" onchange="updatePreCoderPreview()">
+              <option value="1|الأول">الدور الأول</option><option value="2|الثاني">الدور الثاني</option>
+              <option value="3|الثالث">الدور الثالث</option><option value="4|الرابع">الدور الرابع</option>
+              <option value="5|الخامس">الدور الخامس</option><option value="6|السادس">الدور السادس</option>
+              <option value="7|السابع">الدور السابع</option><option value="8|الثامن">الدور الثامن</option>
+              <option value="9|التاسع" selected>الدور التاسع</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>الكود (الحالة)</label>
+            <select class="inp" id="pcStatus">
+              <option value="UR">UR — تحت المراجعة</option>
+              <option value="A">Code A — معتمد</option>
+              <option value="B">Code B — بملاحظات</option>
+              <option value="C">Code C — إعادة تقديم</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-gold" onclick="commitPreCodedIr()">+ تسجيل وتحديث المصفوفة</button>
+        </div>
+        <div class="precod-out" id="precodPreviewBox">
+          <div>
+            <span class="pill pill-plum num" dir="ltr" id="pcGenCode">—</span>
+            <strong id="pcGenDesc" style="margin-right:8px; font-size:13px;">—</strong>
+          </div>
+          <button type="button" class="btn btn-light btn-sm" onclick="copyPreCodedText()">📋 نسخ الكود والبيان</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-hdr">
+          <span>سجل طلبات الفحص والاستلام (IR Log)</span>
+          <div class="no-print" style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-light btn-sm" onclick="document.getElementById('hayahLogImportInput').click()">📂 استيراد من Hayah_Log.xlsx</button>
+            <button type="button" class="btn btn-gold btn-sm" onclick="openIrEditModal(null)">+ إضافة IR يدوي</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="filter-bar no-print">
+            <input class="inp" id="irSearchInp" placeholder="🔍 ابحث برقم المعاملة أو الوصف أو الدور أو الشقة..." oninput="renderIrLogTable()" style="min-width:250px; flex:1;" />
+            <select class="inp" id="irDiscFilter" onchange="renderIrLogTable()">
+              <option value="ALL">كل الأقسام</option>
+              <option value="إنشائي">إنشائي</option>
+              <option value="معماري">معماري</option>
+              <option value="كهرباء">كهرباء</option>
+            </select>
+            <select class="inp" id="irStatusFilter" onchange="renderIrLogTable()">
+              <option value="ALL">كل الأكواد</option>
+              <option value="A">Code A (معتمد)</option>
+              <option value="B">Code B (بملاحظات)</option>
+              <option value="C">Code C (إعادة)</option>
+              <option value="D">Code D (مرفوض)</option>
+              <option value="UR">UR (تحت المراجعة)</option>
+            </select>
+            <span class="pill pill-navy" id="irFilterCount">0 معاملة</span>
+          </div>
+          <div class="sc-table-wrap custom-scroll" style="max-height:460px; overflow-y:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:42px;">م</th>
+                  <th style="width:145px;">رقم المعاملة (IR)</th>
+                  <th style="width:74px;">القسم</th>
+                  <th style="width:76px;">الكود</th>
+                  <th class="right">البيان / الوصف</th>
+                  <th style="width:60px;">REV</th>
+                  <th style="width:94px;">تاريخ التقديم</th>
+                  <th style="width:94px;">تاريخ الاستلام</th>
+                  <th style="width:78px;">الدور</th>
+                  <th class="no-print" style="width:70px;">إجراء</th>
+                </tr>
+              </thead>
+              <tbody id="irLogBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Matrix Sub-Pane C: Existing Cumulative Floor×Trade Quantity Matrix (V2) -->
+    <div class="v7-subpane" id="subpane-matrix-cumulative">
+      <div class="no-print bm-actions" style="margin-bottom:12px;">
         <button class="btn btn-light btn-sm" onclick="openAddMatrixScopeModal()">+ دور / نطاق</button>
         <button class="btn btn-light btn-sm" onclick="openAddMatrixTradeModal()">+ تخصص</button>
         <button class="btn btn-light btn-sm" onclick="openMatrixTradeTemplateModal()">⚙️ قوالب المراحل</button>
         <button class="btn btn-gold btn-sm" onclick="window.print()">🖨️ طباعة A4</button>
       </div>
-    </div>
 
-    <div class="kpi-grid" id="matrixKpis"></div>
+      <div class="kpi-grid" id="matrixKpis"></div>
 
-    <div class="panel">
-      <div class="panel-hdr">
-        <span>جدول متابعة الأدوار والتخصصات</span>
-      </div>
-      <div class="panel-body">
-        <div class="bm-toolbar no-print">
-          <input class="inp bm-search" id="matrixSearch" placeholder="🔎 ابحث عن دور أو نطاق..." oninput="renderBuildingMatrix()" />
-          <span class="pill pill-navy">لم يبدأ</span>
-          <span class="pill pill-amber">جاري التنفيذ</span>
-          <span class="pill pill-blue">ينتظر الاستلام</span>
-          <span class="pill pill-green">مستلم</span>
-          <span class="pill pill-plum">غير مطلوب</span>
+      <div class="panel">
+        <div class="panel-hdr">
+          <span>جدول متابعة الكميات التراكمية (أدوار × تخصصات)</span>
         </div>
-        <div class="bm-guidance">
-          <strong>طريقة الاستخدام:</strong> اضغط على خلية التخصص لفتح مراحله، ثم سجّل كميات التنفيذ اليومية. التقدم تراكمي ولا يستبدل سجل الأيام السابقة.
+        <div class="panel-body">
+          <div class="bm-toolbar no-print">
+            <input class="inp bm-search" id="matrixSearch" placeholder="🔎 ابحث عن دور أو نطاق..." oninput="renderBuildingMatrix()" />
+            <span class="pill pill-navy">لم يبدأ</span>
+            <span class="pill pill-amber">جاري التنفيذ</span>
+            <span class="pill pill-blue">ينتظر الاستلام</span>
+            <span class="pill pill-green">مستلم</span>
+            <span class="pill pill-plum">غير مطلوب</span>
+          </div>
+          <div class="bm-guidance">
+            <strong>طريقة الاستخدام:</strong> اضغط على خلية التخصص لفتح مراحله، ثم سجّل كميات التنفيذ اليومية. التقدم تراكمي ولا يستبدل سجل الأيام السابقة.
+          </div>
+          <div class="sc-table-wrap bm-matrix-scroll">
+            <table class="bm-table">
+              <thead id="bmHead"></thead>
+              <tbody id="bmBody"></tbody>
+            </table>
+          </div>
+          <div id="bmMobileCards" class="bm-mobile-cards"></div>
+          <div class="bm-footnote">مؤشر الإنجاز العام متوسط مرجعي للخلايا المطلوبة وبأوزان متساوية افتراضيًا؛ التنفيذ والاستلام والمحاسبة مؤشرات منفصلة.</div>
         </div>
-        <div class="sc-table-wrap bm-matrix-scroll">
-          <table class="bm-table">
-            <thead id="bmHead"></thead>
-            <tbody id="bmBody"></tbody>
-          </table>
-        </div>
-        <div id="bmMobileCards" class="bm-mobile-cards"></div>
-        <div class="bm-footnote">مؤشر الإنجاز العام متوسط مرجعي للخلايا المطلوبة وبأوزان متساوية افتراضيًا؛ التنفيذ والاستلام والمحاسبة مؤشرات منفصلة.</div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== 8. المهام والتذكيرات (TASKS & REMINDERS) ==================== -->
+<!-- ==================== 8. المهام والتذكيرات (TASKS & REMINDERS) ==================== -->
   <section id="tab-tasks" class="section">
     <div class="v7-page-head">
       <div class="v7-page-title">
@@ -3322,6 +3808,8 @@
 
 <!-- ==================== DEDICATED OFFICIAL A4 DAILY REPORT PRINT AREA ==================== -->
 <div id="printDailyReportArea"></div>
+<div id="printIpcSheetArea"></div>
+<div id="printAptMatrixArea"></div>
 
 <!-- ==================== V6.0 SLIDE-OVER NOTIFICATIONS DRAWER ==================== -->
 <div class="v6-drawer-bg" id="notifDrawerBg" onclick="closeNotifDrawer()"></div>
@@ -3387,7 +3875,7 @@
 // ============================================================================
 // 1. CLEAN ZERO-DATA CLOUD SHELL (ALL REAL DATA LOADS ONLY FROM SUPABASE AFTER AUTH)
 // ============================================================================
-const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.2 — تقرير يومي استشاري متوازن (ورقتين A4)", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
+const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.3 — المستخلص التفصيلي المتغير بالمقاول + مصفوفة الشقق وسجل الـ IR", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
 
 // ============================================================================
 // ⚙️ إعدادات الربط السحابي (Supabase) — ضع الرابط والمفتاح هنا مرة واحدة قبل الرفع
@@ -5058,8 +5546,28 @@ function exportExcelOrJson() {
         ملاحظات_وتوجيهات: r.generalNotes || ''
       };
     }), 'التقارير_اليومية');
+    if (typeof ensureIrAndAptMatrix === 'function') {
+      ensureIrAndAptMatrix();
+      safeSheet((DB.irLog || []).map((x, idx) => ({
+        م: idx + 1, رقم_المعاملة: x.code, الكود_المختصر: x.short, القسم: x.disc,
+        الحالة: x.status, البيان: x.desc, REV: x.rev, تاريخ_التقديم: x.subDate,
+        تاريخ_الاستلام: x.retDate, الدور: x.floor, ملاحظات: x.notes
+      })), 'سجل_الـ_IR');
+      const aptExp = [];
+      APT_STAGE_CONFIG.forEach(st => {
+        APT_FLOORS.forEach(fl => {
+          const row = { المرحلة: st.label, الدور: fl.label };
+          st.units.forEach(u => {
+            const c = ((DB.aptMatrix[st.id] || {})[fl.id] || {})[u.id];
+            row[u.label] = c ? `${c.short || c.code} (${c.status || 'A'})` : 'باقي';
+          });
+          aptExp.push(row);
+        });
+      });
+      safeSheet(aptExp, 'مصفوفة_تسليمات_الشقق');
+    }
     XLSX.writeFile(wb, `Hayah_AOBC_Complete_ERP_${todayISO()}.xlsx`);
-    showToast('📊 تم تصدير ملف Excel الأرشيفي الشامل (18 شيتاً كاملاً) لحفظه على OneDrive!');
+    showToast('📊 تم تصدير ملف Excel الأرشيفي الشامل (20 شيتاً كاملاً) لحفظه على OneDrive!');
   } else {
     exportJsonBackup();
   }
@@ -7600,7 +8108,7 @@ switchTab = function(id, btn, explicitSub) {
   if (btn && btn.getAttribute('data-tab') === targetMain) btn.classList.add('active');
   else document.querySelector(`.tab-btn[data-tab="${targetMain}"]`)?.classList.add('active');
 
-  if (targetSub && (targetMain === 'warehouse' || targetMain === 'accounts')) {
+  if (targetSub && ['warehouse', 'accounts', 'subcontractors', 'matrix'].includes(targetMain)) {
     switchSubTab(targetMain, targetSub);
   }
 
@@ -7838,6 +8346,7 @@ function openIpcDrawer(code) {
   `;
 
   document.getElementById('ipcDrawerFoot').innerHTML = `
+    <button class="btn btn-light btn-sm" onclick="closeIpcDrawer(); openContractorIpcSheet('${esc(x.code)}')">📄 المستخلص التفصيلي</button>
     <button class="btn btn-light btn-sm" onclick="closeIpcDrawer(); copyContractorWhatsApp('${esc(x.code)}')">📲 واتساب</button>
     <button class="btn btn-light btn-sm" onclick="closeIpcDrawer(); printContractorStatement('${esc(x.code)}')">🖨️ كشف حساب A4</button>
     <button class="btn btn-light btn-sm" onclick="closeIpcDrawer(); openUpdateIpcModal()">📑 تحديث المستخلص</button>
@@ -8738,9 +9247,27 @@ function autoPullDailyReportData() {
     }));
   }
 
+  // 3) Pull today's IR inspections from DB.irLog into Section 7 (IR / QC)
+  if (typeof ensureIrAndAptMatrix === 'function') {
+    ensureIrAndAptMatrix();
+    const irToday = (DB.irLog || []).filter(x => x.subDate === dt || x.retDate === dt);
+    if (irToday.length) {
+      const existingCodes = new Set((currentDailyReport.inspections || []).map(i => i.irCode));
+      irToday.forEach(ir => {
+        if (!existingCodes.has(ir.code)) {
+          currentDailyReport.inspections.push({
+            irCode: ir.code, desc: ir.desc || 'طلب فحص واستلام',
+            location: ir.floor ? `عمارة 5 - ${ir.floor}` : 'عمارة رقم 5',
+            discipline: ir.disc || 'معماري', status: ir.status || 'UR', notes: ir.notes || ''
+          });
+        }
+      });
+    }
+  }
+
   populateDailyReportForm();
   fetchDsrWeather(false);
-  showToast(`⚡ تم سحب الأعمال المنفذة وطاقم الإشراف المتواجد وتحديث طقس اليوم (${dt})!`);
+  showToast(`⚡ تم سحب الأعمال المنفذة وطلبات الـ IR وطاقم الإشراف وتحديث طقس اليوم (${dt})!`);
 }
 
 function saveCurrentDailyReport() {
@@ -9252,10 +9779,1123 @@ function printDailyReport() {
   }, 140);
 }
 
+// ============================================================================
+// 19. V7.3 ENGINE: ITEMIZED SUBCONTRACTOR IPC SHEET + APARTMENT IR MATRIX + IR LOG
+// ============================================================================
+const SEED_IPC35_ROWS = [["add","بالمتر المكعب حدادة لبشة","م³",2084.0,0.0,100.0,140.0],["ded","بالخصم سلك رباط (لبشة - دفعة 1)","عدد",14.0,0.0,100.0,750.0],["ded","بالخصم سلك رباط (لبشة - دفعة 2)","عدد",7.0,0.0,100.0,920.0],["add","علوة بمعرفة الحاج محمد","مقطوعية",10.0,0.0,100.0,2000.0],["add","بالمتر المكعب حدادة أعمدة البدروم","م³",181.8,0.0,95.0,200.0],["ded","بالخصم سلك رباط (أعمدة البدروم)","عدد",6.0,0.0,100.0,790.0],["add","بالمتر المكعب حدادة سقف البدروم","م³",323.0,0.0,95.0,200.0],["ded","بالخصم سلك رباط (سقف البدروم)","عدد",8.0,0.0,100.0,790.0],["add","بالمتر المكعب حدادة أعمدة الدور الأرضي","م³",163.0,0.0,95.0,200.0],["ded","بالخصم سلك رباط (أعمدة الأرضي)","عدد",5.0,0.0,100.0,810.0],["add","بالمتر المكعب حدادة سقف الدور الأرضي","م³",313.0,0.0,95.0,200.0],["ded","بالخصم سلك رباط (سقف الأرضي)","عدد",7.0,0.0,100.0,810.0],["add","بالمتر المكعب حدادة أعمدة دور الميزانين","م³",117.0,0.0,95.0,205.0],["ded","بالخصم سلك رباط (أعمدة الميزانين)","عدد",6.0,0.0,100.0,810.0],["add","بالمتر المكعب حدادة سقف دور الميزانين","م³",300.0,0.0,95.0,205.0],["ded","بالخصم سلك رباط (سقف الميزانين)","عدد",6.0,0.0,100.0,810.0],["add","بالمتر المكعب حدادة أعمدة الدور الأول سكني","م³",87.0,0.0,95.0,215.0],["ded","بالخصم سلك رباط (أعمدة الأول سكني)","عدد",4.0,0.0,100.0,850.0],["add","بالمتر المكعب حدادة سقف الدور الأول سكني","م³",227.0,0.0,95.0,215.0],["ded","بالخصم سلك رباط (سقف الأول سكني)","عدد",6.0,0.0,100.0,850.0],["add","بالمتر المكعب حدادة أعمدة الدور الثاني سكني","م³",83.0,0.0,95.0,225.0],["ded","بالخصم سلك رباط (أعمدة الثاني سكني)","عدد",4.0,0.0,100.0,850.0],["add","بالمتر المكعب حدادة سقف الدور الثاني سكني","م³",228.0,0.0,95.0,225.0],["ded","بالخصم سلك رباط (سقف الثاني سكني)","عدد",3.0,0.0,100.0,850.0],["add","بالمتر المكعب حدادة أعمدة الدور الثالث سكني","م³",83.0,0.0,95.0,235.0],["ded","بالخصم سلك رباط (أعمدة الثالث سكني)","عدد",2.0,0.0,100.0,850.0],["add","بالمتر المكعب حدادة سقف الدور الثالث سكني","م³",228.0,0.0,95.0,235.0],["ded","بالخصم سلك رباط (سقف الثالث سكني)","عدد",2.0,1.0,100.0,850.0]];
+const SEED_IR_COMPACT = [["AO-IR-0022-01","IR-22-01","إنشائي","A","احداثيات ثوابت مشروع حياة","Rev-0","2022-09-17","2022-09-17","لبشة",""],["AO-IR-0022-02","IR-22-02","إنشائي","A","ميزانية شبكية لسطح الارض الطبيعية","Rev-0","2022-09-17","2022-09-17","لبشة",""],["AO-IR-0022-03","IR-22-03","إنشائي","A","احداثيات أعمدة الفاصل","Rev-0","2022-09-17","2022-09-17","لبشة",""],["AO-IR-0022-04","IR-22-04","إنشائي","A","استلام بند حفر و ارنكة حفر","Rev-0","2022-10-24","2022-10-25","لبشة",""],["AO-IR-0022-05","IR-22-05","إنشائي","A","مناسيب ظهر البالتات","Rev-0","2022-10-30","2022-01-31","لبشة",""],["AO-IR-0022-06","IR-22-06","إنشائي","A","طلب استلام مناسيب ظهر الباريتات","Rev-0","2022-11-17","2022-11-17","لبشة",""],["AO-IR-0022-07","IR-22-07","إنشائي","A","طلب استلام نجارة القواعد العادية لعمارات 4-5","Rev-0","2022-11-30","2022-11-30","لبشة",""],["AO-IR-0023-01","IR-23-01","إنشائي","A","مناسيب ظهر البالتات بعد التكبير","Rev-0","2023-01-28","2023-01-30","لبشة",""],["AO-IR-0023-02","IR-23-02","إنشائي","A","","Rev-0","","","لبشة",""],["AO-IR-0023-03","IR-23-03","إنشائي","A","","Rev-0","","","لبشة",""],["AO-IR-0023-04","IR-23-04","إنشائي","A","","Rev-0","","","لبشة",""],["AO-IR-0023-05","IR-23-05","إنشائي","A","","Rev-0","","","لبشة",""],["AO-IR-0023-06","IR-23-06","إنشائي","A","استلام حدادة الرقة السفلية للتهبيطات 1","Rev-0","2023-10-07","2023-10-08","لبشة",""],["AO-IR-0023-07","IR-23-07","إنشائي","B","استلام حدادة الرقة السفلية للتهبيطات 2","Rev-0","2023-10-09","2023-10-09","لبشة",""],["AO-IR-0023-07+","IR-23-07+","إنشائي","B","اعمال السند بلاست اشاير عمارة 6","Rev-0","2023-09-18","2023-09-24","لبشة",""],["AO-IR-0023-08","IR-23-08","إنشائي","B","استلام حدادة الرقة السفلية للتهبيطات للشريحة الموضحة علي اللوحات للبشة","Rev-0","2023-10-18","2023-10-18","لبشة",""],["AO-IR-0023-09","IR-23-09","إنشائي","A","استلام اعمال معالجة رؤس(BARRETS)","Rev-0","2023-10-15","2023-10-16","لبشة",""],["AO-IR-0023-010","IR-23-010","إنشائي","B","استلام حدادة الرقة السفلية للتهبيطات الموضحة علي اللوحات","Rev-0","2023-10-18","2023-10-18","لبشة",""],["AO-IR-0023-011","IR-23-011","إنشائي","A","استلام اعمال دهان اشايرالحديد عمارة5-6كيمابوكس 131","Rev-0","2023-10-22","2023-10-22","لبشة",""],["AO-IR-0023-012","IR-23-012","إنشائي","A","استلام للاحدثيات للنقط المساحية لحدود لبشة المسلحة","Rev-0","2023-10-23","2023-10-23","لبشة",""],["AO-IR-0023-013","IR-23-013","إنشائي","B","استلام حدادة الرقة السفلية للتهبيطات الموضحة علي اللوحة","Rev-0","2023-10-25","2023-10-25","لبشة",""],["AO-IR-0023-014","IR-23-014","إنشائي","B","استلام حدادة الرقة السفلية للشريحة الموضحة علي اللوحات للبشة","Rev-0","2023-10-28","2023-10-28","لبشة",""],["AO-IR-0023-015","IR-23-015","إنشائي","B","استلام حدادة الرقة السفلية للتهبيطات الموضحة علي اللوحات 3","Rev-0","2023-10-30","2023-10-30","لبشة",""],["AO-IR-0023-016","IR-23-016","إنشائي","B","استلام حدادة الرقة السفلية للبشة عمارة (5) للشريحة الموضحة علي اللوحات","Rev-0","2023-11-01","2023-11-01","لبشة",""],["AO-IR-0023-017","IR-23-017","إنشائي","B","استلام حدادة الرقة السفلية للشريحة الموضحة علي اللوحات للبشة","Rev-0","2023-11-07","2023-11-07","لبشة",""],["AO-IR-0023-018","IR-23-018","إنشائي","B","استلام حدادة الرقة السفلية للتهبيطات الموضحة علي اللوحة","Rev-0","2023-11-13","2023-11-13","لبشة",""],["AO-IR-0023-019","IR-23-019","إنشائي","B","استلام حدادة الرقة العلوية للشريحة الموضحة علي اللوحات للبشة","Rev-0","2023-11-16","2023-11-16","لبشة",""],["AO-IR-0023-020","IR-23-020","إنشائي","A","استلام احداثيات النقاط المساحية لللاعمدة الموضحة علي اللوحات","Rev-0","2023-11-29","2023-11-29","لبشة",""],["AO-IR-0023-021","IR-23-021","إنشائي","B","استلام حدادة الرقة العلوية للشريحة الموضحة علي اللوحات للبشة عمارة 5 +","Rev-0","2023-12-11","2023-12-11","لبشة",""],["AO-IR-0023-022","IR-23-022","إنشائي","A","استلام احداثيات نقاط الاعمدة الموضحة علي اللوحة","Rev-0","2023-12-13","2023-12-13","لبشة",""],["AO-IR-0023-023","IR-23-023","إنشائي","C","استلام حدادة الرقة العلوية للشريحة الموضحة علي اللوحات للبشة عمارة 5+","Rev-0","2023-12-21","2023-12-21","لبشة",""],["AO-IR-0023-024","IR-23-024","إنشائي","B","استلام حدادة الرقة السفلية للشريحة المتبقية للبشة عمارة5","Rev-0","2023-12-26","2023-12-27","لبشة",""],["AO-IR-0023-025","IR-23-025","إنشائي","B","استلام حدادة الرقة العلوية للشريحة الموضحة علي اللوحات للبشة عمارة5","Rev-0","2023-12-30","2023-12-30","لبشة",""],["AO-IR-0024-01","IR-24-01","إنشائي","A","استلام احداثيات نقاط الاعمدة الموضحة علي اللوحة 1","Rev-0","2024-01-03","2024-01-03","لبشة",""],["AO-IR-0024-02","IR-24-02","إنشائي","A","استلام حدادة الرقة العلوية للشريحة المتبقية للبشة عمارة5","Rev-0","2024-01-06","2024-01-07","لبشة",""],["AO-IR-0024-03","IR-24-03","إنشائي","A","استلام احداثيات نقاط الاعمدة الموضحة علي اللوحات للبشة عمارة5","Rev-0","2024-01-08","2024-01-09","لبشة",""],["AO-IR-0024-04","IR-24-04","إنشائي","A","اشاير الاأعمدة والحوائط","Rev-0","2024-01-16","2024-01-20","لبشة",""],["AO-IR-0024-05","IR-24-05","إنشائي","A","اعمال نجارة اللبشة","Rev-0","2024-01-23","2024-01-23","لبشة",""],["AO-IR-0024-06","IR-24-06","إنشائي","A","حدادة اشاير بادي السلم والمنحدر والكمرة المقلوبة حول الاسانسير","Rev-0","2024-01-28","2024-01-28","لبشة",""],["AO-IR-0024-07","IR-24-07","إنشائي","A","كراسي اللبشة","Rev-0","2024-01-28","2024-01-28","لبشة",""],["AO-IR-0024-08","IR-24-08","إنشائي","A","حدادة برندات حول الاسانسير واشاير سند فواتير  ابار النزح","Rev-0","2024-01-30","2024-01-30","لبشة",""],["AO-IR-0024-09","IR-24-09","إنشائي","A","استلام اعمال تركيب(sika water bar ar 25) بير عمارة 5 و عمارة4-2","Rev-0","2024-02-04","2024-02-04","لبشة",""],["AO-IR-0024-010","IR-24-010","إنشائي","A","استلام اعمال تركيب(sika water bar ar 26) بير عمارة 5 و عمارة4-2","Rev-0","2024-02-04","2024-02-04","لبشة",""],["AO-IR-0024-011","IR-24-011","إنشائي","A","استلام تركيب SWELLING BAR بير عمارة 5 و عمارة6 و حول ابار النزح","Rev-0","2024-02-10","2024-02-10","لبشة",""],["AO-IR-0024-012","IR-24-012","إنشائي","A","احداثيات نجارة الأعمدة","Rev-0","2024-04-29","2024-04-29","البدروم",""],["AO-IR-0024-013","IR-24-013","إنشائي","A","استلام أعمال عزل (XYPEX)","Rev-0","2024-04-29","2024-04-29","البدروم",""],["AO-IR-0024-014","IR-24-014","إنشائي","A","تسليم حدادة اعمدة بين محورين B88-B92-كما موضح علي اللوحة","Rev-0","2024-05-07","2024-05-07","البدروم",""],["AO-IR-0024-015","IR-24-015","إنشائي","A","تسليم حدادة اعمدة بين محورين B80-B85-كما موضح علي اللوحة","Rev-0","2024-05-11","2024-05-11","البدروم",""],["AO-IR-0024-016","IR-24-016","إنشائي","A","تسليم نجارة اعمدة بين محورين B88-B92-كما موضح علي اللوحة","Rev-0","2024-05-14","2024-05-14","البدروم",""],["AO-IR-0024-017","IR-24-017","إنشائي","A","تسليم نجارة اعمدة بين محورين B80-B87-كما موضح علي اللوحة","Rev-0","2024-05-15","2024-05-15","البدروم",""],["AO-IR-0024-018","IR-24-018","إنشائي","A","حدادة جزء من أعمدة عمارة رقم 5","Rev-0","2024-05-30","2024-05-30","البدروم",""],["AO-IR-0024-019","IR-24-019","إنشائي","A","استلام حدادة core-5-4 كما موضح باللوحة","Rev-0","2024-06-02","2024-06-05","البدروم",""],["AO-IR-0024-020","IR-24-020","إنشائي","A","استلام نجارة سلم البدروم عمارة5","Rev-0","2024-06-08","2024-06-08","البدروم",""],["AO-IR-0024-021","IR-24-021","إنشائي","A","استلام حدادة سلم البدروم عمارة5","Rev-0","2024-06-11","2024-06-11","البدروم",""],["AO-IR-0024-022","IR-24-022","إنشائي","A","استلام نجارة جزء من اعمدة البدروم كما موضح باللوحة","Rev-0","2024-06-11","2024-06-11","البدروم",""],["AO-IR-0024-023","IR-24-023","إنشائي","A","نجارة احداثيات سقف البدروم","Rev-0","2024-08-08","2024-08-08","البدروم",""],["AO-IR-0024-024","IR-24-024","إنشائي","A","حدادة الرقة السفلية لسقف البدروم","Rev-0","2024-08-17","2024-08-17","البدروم",""],["AO-IR-0024-025","IR-24-025","كهرباء","A","كهرباء سقف البدروم","Rev-0","2024-08-29","2024-08-29","البدروم",""],["AO-IR-0024-026","IR-24-026","إنشائي","A","الرقة العلوية لسقف البدروم + السلم","Rev-0","2024-08-31","2024-01-09","البدروم",""],["AO-IR-0024-027","IR-24-027","إنشائي","A","احداثيات أعمدة الدور الأرضي","Rev-0","2024-09-18","2024-09-18","الأرضي",""],["AO-IR-0024-028","IR-24-028","إنشائي","A","حطات نجارة وجزء من أعمدة ما بين المحورين B88-B91","Rev-0","2024-09-23","2024-09-24","الأرضي",""],["AO-IR-0024-029","IR-24-029","إنشائي","A","حطات أعمدة لدور الأرضي","Rev-0","2024-09-26","2024-09-26","الأرضي",""],["AO-IR-0024-030","IR-24-030","إنشائي","A","حدادة اعمدة الدور الأرضي عدا اكس 77-78","Rev-0","2024-09-29","2024-09-30","الأرضي",""],["AO-IR-0024-031","IR-24-031","إنشائي","A","حدادة اعمدة الدور الأرضي 77-78","Rev-0","2024-09-30","2024-09-30","الأرضي",""],["AO-IR-0024-032","IR-24-032","إنشائي","A","حدادة حوائط واكوار الدور الأرضي ما عدا (W10)","Rev-0","2024-10-02","2024-10-02","الأرضي",""],["AO-IR-0024-033","IR-24-033","إنشائي","A","نجارة أعمدة الدور الأرضي ما بين اكسين B88-B91","Rev-0","2024-10-05","2024-10-05","الأرضي",""],["AO-IR-0024-034","IR-24-034","إنشائي","A","نجارة سلم الدور الأرضي SEC 1.1+SEC2.2 تطبيق فقط","Rev-0","2024-10-05","2024-10-05","الأرضي",""],["AO-IR-0024-035","IR-24-035","إنشائي","A","نجارة أعمدة الدور الأرضي اكس (77*78+81+83)","Rev-0","2024-10-07","2024-10-07","الأرضي",""],["AO-IR-0024-036","IR-24-036","إنشائي","A","نجارة حطاط سفلية اكس (W10) + حدادة","Rev-0","2024-10-09","2024-10-09","الأرضي",""],["AO-IR-0024-037","IR-24-037","إنشائي","A","نجارة أعمدة الدور الأرضي بين محاور (A42+B84+B85)","Rev-0","2024-10-13","2024-10-13","الأرضي",""],["AO-IR-0024-038","IR-24-038","إنشائي","A","نجارة سلم الدور الأرضي SEC 1.1+SEC2.2","Rev-0","2024-10-16","2024-10-17","الأرضي",""],["AO-IR-0024-039","IR-24-039","إنشائي","A","حدادة سلم الدور الأرضي SEC 1.1+SEC2.2","Rev-0","2024-10-22","2024-10-23","الأرضي",""],["AO-IR-0024-040","IR-24-040","كهرباء","A","كهرباء سقف البدروم 1","Rev-0","2024-08-29","2024-08-29","الأرضي",""],["AO-IR-0024-041","IR-24-041","إنشائي","A","احداثيات سقف الدور الرضي","Rev-0","2024-11-13","2024-11-13","الأرضي",""],["AO-IR-0024-042","IR-24-042","إنشائي","A","تطبيق سقف الدور الأرضي","Rev-0","2024-11-16","2024-11-16","الأرضي",""],["AO-IR-0024-043","IR-24-043","إنشائي","A","حدادة الرقة السفلية رئيسي واضافي","Rev-0","2024-11-26","2024-11-26","الأرضي",""],["AO-IR-0024-044","IR-24-044","إنشائي","A","كمرات وفواتير الفتحات سقف الدور الأرضي","Rev-0","2024-11-27","2024-11-27","الأرضي",""],["AO-IR-0024-045","IR-24-045","كهرباء","A","كهرباء الدور الأرضي","Rev-0","2024-12-01","2024-12-01","الأرضي",""],["AO-IR-0024-046","IR-24-046","إنشائي","A","حدادة الرقة العلوية رئيسى","Rev-0","2024-12-05","2024-12-05","الأرضي",""],["AO-IR-0024-047","IR-24-047","إنشائي","A","حدادة إضافي الرقة العلوية والفواتير","Rev-0","2024-12-05","2024-12-05","الأرضي",""],["AO-IR-0024-048","IR-24-048","إنشائي","A","حدادة ونجارة القلبة الثالثة لسلم الدور الأرضي","Rev-0","2024-12-10","2024-12-10","الأرضي",""],["AO-IR-0024-049","IR-24-049","إنشائي","A","احداثيات أعمدة وحوائط دور  الميزانين","Rev-0","2024-12-24","2024-12-24","الميزانين",""],["AO-IR-0025-01","IR-25-01","إنشائي","A","الحطات السفلية لأعمدة دور  الميزانين محاور (B91+B88+B78+B77)","Rev-0","2025-01-02","2025-01-02","الميزانين",""],["AO-IR-0025-02","IR-25-02","إنشائي","B","حدادة اعمدة دور الميزانين محاور (B91+B88+B78+B77)","Rev-0","2025-01-07","2025-01-07","الميزانين",""],["AO-IR-0025-03","IR-25-03","إنشائي","B","حدادة اعمدة دور الميزانين محاور (B80 To B85)","Rev-0","2025-01-11","2025-01-11","الميزانين",""],["AO-IR-0025-04","IR-25-04","إنشائي","B","الحطات السفلية لاعمدة دور الميزانين محاور (B80 To B85)","Rev-0","2025-01-11","2025-01-11","الميزانين",""],["AO-IR-0025-05","IR-25-05","إنشائي","B","حدادة حوائط واكوار دور الميزانين","Rev-0","2025-01-11","2025-01-11","الميزانين",""],["AO-IR-0025-06","IR-25-06","إنشائي","A","نجارة سلم دور الميزانين تطبيق فقط","Rev-0","2025-01-15","2025-01-15","الميزانين",""],["AO-IR-0025-07","IR-25-07","إنشائي","A","حدادة حوائط (W+9+WC-2)","Rev-0","2025-01-19","2025-01-19","الميزانين",""],["AO-IR-0025-08","IR-25-08","إنشائي","A","حدادة سلم دور الميزانين","Rev-0","2025-01-19","2025-01-19","الميزانين",""],["AO-IR-0025-09","IR-25-09","إنشائي","A","وزنات عمدة دور الميزانين","Rev-0","2025-01-19","2025-01-19","الميزانين",""],["AO-IR-0025-10","IR-25-10","إنشائي","B","نجارة وحدادة درج سلم الميزانين","Rev-0","2025-01-23","2025-01-23","الميزانين",""],["AO-IR-0025-11","IR-25-11","إنشائي","A","حدادة الأعمدة والحوائط المشار اليها (C6+W5+C2+W9)","Rev-0","2025-01-23","2025-01-23","الميزانين",""],["AO-IR-0025-12","IR-25-12","إنشائي","B","نجارة وحدادة سقف الدور الأرضي","Rev-0","2025-01-24","2025-01-24","الأرضي",""],["AO-IR-0025-13","IR-25-13","إنشائي","B","تسليم النقاط المساحية المشار اليها سقف الميزانين","Rev-0","2025-02-04","2025-02-04","الميزانين",""],["AO-IR-0025-14","IR-25-14","إنشائي","B","وزنات سقف الميزانين","Rev-0","2025-02-05","2025-02-05","الميزانين",""],["AO-IR-0025-15","IR-25-15","إنشائي","B","تطبيق نجارة سقف دور الميزانين","Rev-0","2025-02-16","2025-02-16","الميزانين",""],["AO-IR-0025-16","IR-25-16","إنشائي","B","حدادة كمرات سقف دور الميزانين","Rev-0","2025-02-16","2025-02-16","الميزانين",""],["AO-IR-0025-17","IR-25-17","إنشائي","A","الشبكة السفلية (رئيسي واضافي)","Rev-0","2025-02-18","2025-02-18","الميزانين",""],["AO-IR-0025-18","IR-25-18","كهرباء","A","كهرباء دور الميزانين","Rev-0","2025-02-16","2025-02-16","الميزانين",""],["AO-IR-0025-19","IR-25-19","إنشائي","A","التسليح الإضافي حول الفتحات","Rev-0","2025-02-25","2025-02-25","الميزانين",""],["AO-IR-0025-20","IR-25-20","إنشائي","B","التسليح الرئيسي العلوي في الاتجاه الافقي والراسي","Rev-0","2025-02-23","2025-02-23","الميزانين",""],["AO-IR-0025-21","IR-25-21","إنشائي","B","التسليح الإضافي العلوي في الاتجاه الافقي والراسي","Rev-0","2025-02-25","2025-02-25","الميزانين",""],["AO-IR-0025-22","IR-25-22","إنشائي","B","التسليح الإضافي حول الفتحات  لدور الميزانين","Rev-0","2025-02-25","2025-02-25","الميزانين",""],["AO-IR-0025-23","IR-25-23","إنشائي","B","نجارة وحدادة سلم الميزانين القلبة الثانية دون الدرج","Rev-0","2025-02-26","2025-02-26","الميزانين",""],["AO-IR-0025-23-ELEC","IR-25-23-ELEC","كهرباء","B","كهرباء دور الميزانين","Rev-1","2025-02-23","2025-02-23","الميزانين",""],["AO-IR-0025-24","IR-25-24","إنشائي","B","الكتروميكنيك سقف دور الميزانين","Rev-0","2025-02-26","2025-02-26","الميزانين",""],["AO-IR-0025-25","IR-25-25","إنشائي","B","حدادة ونجارة درج سلم الميزانين","Rev-0","2025-02-27","2025-03-03","الميزانين",""],["AO-IR-0025-26-REV-01","IR-25-26-REV-01","إنشائي","B","احداثيات أعمدة الدور الأول  ريفجين","Rev-0","2025-03-20","2025-03-20","الأول",""],["AO-IR-0025-27","IR-25-27","إنشائي","B","الحطات السفلية لاعمدة الدور الأول","Rev-0","2025-03-20","2025-03-20","الأول",""],["AO-IR-0025-28","IR-25-28","إنشائي","B","حدادة الاعمدة باللوحات المرفقة","Rev-0","2025-03-24","2025-03-24","الأول",""],["AO-IR-0025-29","IR-25-29","إنشائي","B","حدادة الاعمدة المشار اليها","Rev-0","2025-03-25","2025-03-25","الأول",""],["AO-IR-0025-30","IR-25-30","إنشائي","B","حدادة أعمدة الدور الأول المشر اليها","Rev-0","2025-03-26","2025-03-26","الأول",""],["AO-IR-0025-31","IR-25-31","إنشائي","B","حدادة كور السلم الدور الأول","Rev-0","2025-04-07","2025-04-07","الأول",""],["AO-IR-0025-32","IR-25-32","إنشائي","B","تسليم حدادة كور 5 والحوائط المشار اليها","Rev-0","2025-04-07","2025-04-07","الأول",""],["AO-IR-0025-33","IR-25-33","إنشائي","B","تسليم حدادة الحوائط المشار اليها","Rev-0","2025-04-08","2025-04-08","الأول",""],["AO-IR-0025-34","IR-25-34","إنشائي","B","تسليم حدادة الحوائط المشار اليها 2","Rev-0","2025-04-09","2025-04-09","الأول",""],["AO-IR-0025-35","IR-25-35","إنشائي","B","تسليم حدادة الحوائط المشار اليها 3","Rev-0","2025-04-10","2025-04-10","الأول",""],["AO-IR-0025-36","IR-25-36","إنشائي","B","وزنات الاعمدة والحوائط","Rev-0","2025-04-11","2025-04-11","الأول",""],["AO-IR-0025-37","IR-25-37","إنشائي","B","وزنات الاعمدة المشار اليها","Rev-0","2025-04-12","2025-04-12","الأول",""],["AO-IR-0025-38","IR-25-38","إنشائي","B","تسليم نجارة السلم القلبة الاولي + الصدفة الوسطية","Rev-0","2025-04-12","2025-04-12","الأول",""],["AO-IR-0025-39","IR-25-39","إنشائي","A","تسليم وزنات الاعمدة المشار اليها","Rev-0","2025-04-13","2025-04-13","الأول",""],["AO-IR-0025-40","IR-25-40","إنشائي","A","حدادة سلم الدور الأول","Rev-0","2025-04-13","2025-04-13","الأول",""],["AO-IR-0025-41","IR-25-41","إنشائي","A","نجارة  درج سلم الدور الأول","Rev-0","2025-04-14","2025-04-14","الأول",""],["AO-IR-0025-42","IR-25-42","إنشائي","A","حدادة درج سلم الدور الأول","Rev-0","2025-04-19","2025-04-19","الأول",""],["AO-IR-0025-43","IR-25-43","إنشائي","A","تسليم نجارة سقف الدور الأول مناسيب + تطبيق","Rev-0","2025-04-26","2025-04-26","الأول",""],["AO-IR-0025-44","IR-25-44","إنشائي","A","التسيح الرئيسى السفلي + الإضافي","Rev-0","2025-04-30","2025-05-01","الأول",""],["AO-IR-0025-45","IR-25-45","إنشائي","A","حدادة كمرات سقف الدور الأول","Rev-0","2025-05-01","2025-05-02","الأول",""],["AO-IR-0025-46","IR-25-46","إنشائي","A","الإضافي العلوي في الاتجاه الافقي","Rev-0","2025-05-10","2025-05-10","الأول",""],["AO-IR-0025-46-01","IR-25-46-01","إنشائي","A","الإضافي العلوي في الاتجاه الافقي","Rev-1","2025-05-12","2025-05-12","الأول",""],["AO-IR-0025-47","IR-25-47","إنشائي","A","الرئيسي العلوي في الاتجاه الراسي","Rev-0","2025-05-10","2025-05-10","الأول",""],["AO-IR-0025-48","IR-25-48","إنشائي","A","الرئيسي العلوي في الاتجاه الافقي","Rev-0","2025-05-10","2025-05-10","الأول",""],["AO-IR-0025-49","IR-25-49","إنشائي","A","الاضافي العلوي في الاتجاه الراسي","Rev-0","2025-05-12","2025-05-12","الأول",""],["AO-IR-0025-49-01","IR-25-49-01","إنشائي","A","الاضافي العلوي في الاتجاه الراسي","Rev-1","2025-05-13","2025-05-13","الأول",""],["AO-IR-0025-50","IR-25-50","إنشائي","A","نجارة سقف الدور الأول تهبيطات الحمام","Rev-0","2025-05-13","2025-05-13","الأول",""],["AO-IR-0025-51","IR-25-51","إنشائي","A","نجارة سلم الدور الأول","Rev-0","2025-05-13","2025-05-13","الأول",""],["AO-IR-0025-52","IR-25-52","إنشائي","A","حدا ة سلم الدور  الأول","Rev-0","2025-05-14","2025-05-14","الأول",""],["AO-IR-0025-53-01","IR-25-53-01","إنشائي","A","الكترويكانيك سقف الدور الأول","Rev-0","2025-05-21","2025-05-21","الأول",""],["AO-IR-0025-54","IR-25-54","إنشائي","A","احداثيات أعمدة الدور الثاني","Rev-0","2025-05-24","2025-05-25","الثاني",""],["AO-IR-0025-55","IR-25-55","إنشائي","A","نجارة أعمدة الدور الثاني","Rev-0","2025-05-28","2025-05-29","الثاني",""],["AO-IR-0025-56","IR-25-56","إنشائي","A","تسليح أعمدة الدور الثاني","Rev-0","2025-06-17","2025-06-17","الثاني",""],["AO-IR-0025-57","IR-25-57","إنشائي","A","تسليح اكوار الدور الثاني","Rev-0","2025-06-21","2025-06-21","الثاني",""],["AO-IR-0025-58","IR-25-58","إنشائي","A","تسليح حوائط الدور الثاني","Rev-0","2025-06-17","2025-06-18","الثاني",""],["AO-IR-0025-59","IR-25-59","إنشائي","A","تطبيق سلم الدور الثاني القلبة الاولي فقط","Rev-0","2025-06-19","2025-06-19","الثاني",""],["AO-IR-0025-60","IR-25-60","إنشائي","A","وزنات أعمدة الدور الثاني","Rev-0","2025-06-22","2025-06-22","الثاني",""],["AO-IR-0025-61","IR-25-61","إنشائي","A","تسليح سلم الدورالثاني + المتاليت","Rev-0","2025-06-24","2025-06-25","الثاني",""],["AO-IR-0025-62","IR-25-62","إنشائي","A","نجارة سقف الدور الثاني","Rev-0","2025-07-12","2025-07-12","الثاني",""],["AO-IR-0025-63","IR-25-63","إنشائي","A","تسليح الرقة السفلية في الاتجاه الراسي والافقي","Rev-0","2025-07-15","2025-07-15","الثاني",""],["AO-IR-0025-64","IR-25-64","إنشائي","A","تسليح الرقة السفلية الاضافية في الاتجاه الراسي والافقي ماعدا الإضافي والفواتير حول الفتحات","Rev-0","2025-07-15","2025-07-15","الثاني",""],["AO-IR-0025-65","IR-25-65","إنشائي","A","كمرات سقف الدور الثاني","Rev-0","2025-07-15","2025-07-17","الثاني",""],["AO-IR-0025-66","IR-25-66","إنشائي","A","التسليح الرئيسي العلوي في الاتجه الراسي والافقي","Rev-0","2025-07-22","2025-07-22","الثاني",""],["AO-IR-0025-67","IR-25-67","إنشائي","A","التسلي الإضافي  العلوي في الاتجاه الراسي","Rev-0","2025-07-22","2025-07-23","الثاني",""],["AO-IR-0025-68","IR-25-68","إنشائي","A","التسلي الإضافي  العلوي في الاتجاه الافقي","Rev-0","2025-07-22","2025-07-23","الثاني",""],["AO-IR-0025-69","IR-25-69","إنشائي","A","سلم الدور الثاني القلبة الثانية","Rev-0","2025-07-23","2025-07-23","الثاني",""],["AO-IR-0025-70","IR-25-70","إنشائي","A","تسليح سلم الدور الثاني القبة الثانية","Rev-0","2025-07-23","2025-07-23","الثاني",""],["AO-IR-0025-71","IR-25-71","إنشائي","A","احداثيات أعمدة الدور الثالث","Rev-0","2025-07-28","2024-07-28","الثالث",""],["AO-IR-0025-72","IR-25-72","إنشائي","A","الحطات السفلية لاعمدة وحوائط الدور الثالث","Rev-0","2025-07-30","2025-07-30","الثالث",""],["AO-IR-0025-73","IR-25-73","إنشائي","A","تسليح أعمدة الدور الثالث","Rev-0","2025-08-04","2025-08-05","الثالث",""],["AO-IR-0025-74","IR-25-74","إنشائي","A","تسليح اكوار الدور الثالث","Rev-0","2025-08-04","2025-08-05","الثالث",""],["AO-IR-0025-75","IR-25-75","إنشائي","A","تسليح حوائط الدور الثالث","Rev-0","2025-08-06","2025-08-06","الثالث",""],["AO-IR-0025-76","IR-25-76","إنشائي","A","نجارة سلم الدور الثالث","Rev-0","2025-08-09","2025-08-09","الثالث",""],["AO-IR-0025-77","IR-25-77","إنشائي","A","وزنات أعمدة الدور الثالث","Rev-0","2025-08-09","2025-08-09","الثالث",""],["AO-IR-0025-78","IR-25-78","إنشائي","A","حدادة سلم الدور الثالث + المتاليت","Rev-0","2025-08-09","2025-08-09","الثالث",""],["AO-IR-0025-79","IR-25-79","إنشائي","A","نجارة سقف الدور الثالث","Rev-0","2025-08-20","2025-08-20","الثالث",""],["AO-IR-0025-80","IR-25-80","إنشائي","A","تسليح كمرات سقف الدور الثالث","Rev-0","2025-08-30","2025-08-30","الثالث",""],["AO-IR-0025-81","IR-25-81","إنشائي","A","تسليح الرقة السفلية للدور الثالث","Rev-0","2025-08-30","2025-08-30","الثالث",""],["AO-IR-0025-82","IR-25-82","إنشائي","A","الإضافي العلوي في الاتجاه الافقي والراسي للدور الثالث","Rev-0","2025-09-07","2025-09-07","الثالث",""],["AO-IR-0025-83","IR-25-83","إنشائي","A","الرئيسي العلوي في الاتجاه الافقي والراسي للدور الثالث + الكراسي","Rev-0","2025-09-06","2025-09-06","الثالث",""],["AO-IR-0025-84","IR-25-84","كهرباء","A","اعمال كهرباء سقف الدور الأول","Rev-0","2025-05-20","2025-05-20","الثالث",""],["AO-IR-0025-85","IR-25-85","كهرباء","A","اعمال كهرباء سقف الدور الثاني","Rev-0","2025-07-22","2025-07-22","الثالث",""],["AO-IR-0025-86","IR-25-86","كهرباء","A","اعمال كهرباء سقف الدور الثالث","Rev-0","2025-09-06","2025-09-06","الثالث",""],["AO-IR-0025-87","IR-25-87","إنشائي","A","نجارة سلم الدور الثالث القلبة الثانية","Rev-0","2025-09-07","2025-09-07","الثالث",""],["AO-IR-0025-88","IR-25-88","إنشائي","A","تسليح سلم الدور الثالث + المتاليت","Rev-0","2025-09-07","2025-09-07","الثالث",""],["AO-IR-0025-89","IR-25-89","إنشائي","A","احداثيات أعمدة الدور الرابع عماة رقم 5","Rev-0","2025-09-10","2025-09-10","الرابع",""],["AO-IR-0025-90","IR-25-90","إنشائي","A","الحطاط السفلية أعمدة الدور الرابع - عمارة رقم 5","Rev-0","2025-09-14","2025-09-14","الرابع",""],["AO-IR-0025-91","IR-25-91","إنشائي","A","تسليم تسليح أعمدة الدور الرابع - عمارة رقم 5","Rev-0","2025-09-21","2025-09-21","الرابع",""],["AO-IR-0025-92","IR-25-92","إنشائي","A","تسليم تسليح حوائط الدور الرابع - عمارة رقم 5","Rev-0","2025-09-21","2025-09-21","الرابع",""],["AO-IR-0025-93","IR-25-93","إنشائي","A","تسليم تسليح أكوار الدور الرابع - عمارة رقم 5","Rev-0","2025-09-21","2025-09-21","الرابع",""],["AO-IR-0025-94","IR-25-94","إنشائي","A","وزنات أعمدة الدور الرابع سكني - عمارة رقم 5","Rev-0","2025-09-24","2025-09-24","الرابع",""],["AO-IR-0025-95","IR-25-95","إنشائي","A","تسليم نجارة سلم الدور الرابع سكني (القلبة الأولى) - عمارة رقم 5","Rev-0","2025-09-24","2025-09-24","الرابع",""],["AO-IR-0025-96","IR-25-96","إنشائي","A","تسليح سلم الدور الرابع سكني (القلبة الأولى) - عمارة رقم 5","Rev-0","2025-09-25","2025-09-25","الرابع",""],["AO-IR-0025-97","IR-25-97","إنشائي","A","تسليم نجارة سقف الدور الرابع سكني - عمارة رقم 5","Rev-0","2025-10-07","2025-10-07","الرابع",""],["AO-IR-0025-98","IR-25-98","إنشائي","A","أعمال مرمات الدور الأول سكني - عمارة رقم 5","Rev-0","2025-10-09","2025-10-09","الرابع",""],["AO-IR-0025-99","IR-25-99","إنشائي","A","أعمال الدور الرابع سكني - عمارة رقم 5","Rev-0","2025-10-16","2025-10-16","الرابع",""],["AO-IR-0025-100","IR-25-100","إنشائي","A","تسليح كمرات الدور الرابع سكني - عمارة رقم 5","Rev-0","2025-10-16","2025-10-16","الرابع",""],["AO-IR-0025-101","IR-25-101","إنشائي","A","تسليح الرقة السفلية (رئيسي + إضافي في الاتجاهين) الدور الرابع سكني - عمارة رقم 5","Rev-0","2025-10-18","2025-10-18","الرابع",""],["AO-IR-0025-102","IR-25-102","إنشائي","A","تسليم أعمال كهرباء سقف الدور الرابع (المتكرر) - عمارة رقم 5","Rev-0","2025-10-23","2025-10-23","الرابع",""],["AO-IR-0025-103","IR-25-103","إنشائي","A","تسليح الرقة العلوية (رئيسي + إضافي في الاتجاهين) الدور الرابع سكني - عمارة رقم 5","Rev-0","2025-10-23","2025-10-23","الرابع",""],["AO-IR-0025-104","IR-25-104","إنشائي","A","تسليم نجارة سلم الدور الرابع (القلبة الثانية) - عمارة رقم 5","Rev-0","2025-10-23","2025-10-23","الرابع",""],["AO-IR-0025-105","IR-25-105","إنشائي","A","تسليم تسليح سلم الدور الرابع (القلبة الثانية) - عمارة رقم 5","Rev-0","2025-10-23","2025-10-23","الرابع",""],["AO-IR-0025-106","IR-25-106","معماري","A","تسليم أعمال مرمات الدور الثاني - عمارة رقم 5","Rev-0","2025-10-23","2025-10-23","الثاني",""],["AO-IR-0025-107","IR-25-107","إنشائي","A","تسليم إحداثيات أعمدة الدور الخامس - عمارة رقم 5","Rev-0","2025-10-29","2025-10-29","الخامس",""],["AO-IR-0025-108","IR-25-108","إنشائي","A","تسليم الحطاط السفلية أعمدة الدور الخامس - عمارة رقم 5","Rev-0","2025-11-02","2025-11-02","الخامس",""],["AO-IR-0025-109","IR-25-109","معماري","A","تسليم أعمال مرمات الدور الثالث - عمارة رقم 5","Rev-0","2025-11-04","2025-11-04","الثالث",""],["AO-IR-0025-110","IR-25-110","إنشائي","A","تسليم قد مباني الدور الثالث شقة (1+2+3+5+7)","Rev-0","2025-11-06","2025-11-06","الثالث",""],["AO-IR-0025-111","IR-25-111","إنشائي","A","تسليم أعمال عمارة رقم 5 (يرجى مراجعة تفصيل البند بالملف)","Rev-0","2025-11-12","2025-11-12","الثالث",""],["AO-IR-0025-112","IR-25-112","إنشائي","A","رفع مباني الدور الأول شقة (1+2+5+7) - عمارة رقم 5","Rev-0","2025-11-18","2025-11-18","الأول",""],["AO-IR-0025-113","IR-25-113","إنشائي","A","تسليم رفع مباني الدور الثالث شقة (2) - عمارة رقم 5","Rev-0","2025-11-23","2025-11-23","الثالث",""],["AO-IR-0025-114","IR-25-114","إنشائي","A","تسليم بؤج السقف الدور الثالث شقة (7) - عمارة رقم 5","Rev-0","2025-11-23","2025-11-23","الثالث",""],["AO-IR-0025-115","IR-25-115","إنشائي","A","تسليم تسليح أعمدة الدور الخامس - عمارة رقم 5","Rev-0","2025-11-24","2025-11-24","الخامس",""],["AO-IR-0025-116","IR-25-116","إنشائي","A","تسليم تسليح حوائط الدور الخامس - عمارة رقم 5","Rev-0","2025-11-25","2025-11-25","الخامس",""],["AO-IR-0025-117","IR-25-117","إنشائي","A","تسليم تسليح أكوار الدور الخامس - عمارة رقم 5","Rev-0","2025-11-25","2025-11-25","الخامس",""],["AO-IR-0025-118","IR-25-118","إنشائي","A","تسليم رفع مباني الدور الأول شقة (3+4+6) - عمارة رقم 5","Rev-0","2025-11-26","2025-11-26","الأول",""],["AO-IR-0025-119","IR-25-119","إنشائي","A","أعمال محارة (طرطشة + أوتار + شبك الفواصل) الدور الثالث شقة (7) - عمارة رقم 5","Rev-0","2025-11-26","2025-11-26","الثالث",""],["AO-IR-0025-120","IR-25-120","إنشائي","A","أعمال كهرباء الدور الثالث شقة رقم (7) - عمارة رقم 5","Rev-0","2025-11-27","2025-11-27","الثالث",""],["AO-IR-0025-120-ELEC","IR-25-120-ELEC","كهرباء","A","أعمال كهرباء  شقة رقم 7- الدور الثالث","Rev-0","2025-12-20","2025-12-20","الثالث",""],["AO-IR-0025-121","IR-25-121","إنشائي","A","تسليم وزنات أعمدة وحوائط واكوار الدور الخامس","Rev-0","2025-11-30","2025-11-30","الخامس",""],["AO-IR-0025-122","IR-25-122","إنشائي","A","أعمال محارة (طرطشة + أوتار + شبك الفواصل + بؤج السقف) الدور الثالث شقة (2) - عمارة رقم 5","Rev-0","2025-12-04","2025-12-06","الثالث",""],["AO-IR-0025-123","IR-25-123","إنشائي","A","تسليم قد مباني الدور الثاني شقة (2+3+7) - عمارة رقم 5","Rev-0","2025-12-07","2025-12-07","الثاني",""],["AO-IR-0025-124","IR-25-124","إنشائي","A","تسليم قد مباني الدور الثالث شقة (4+6) - عمارة رقم 5","Rev-0","2025-12-09","2025-12-09","الثالث",""],["AO-IR-0025-125","IR-25-125","إنشائي","A","نجارة سلم الدور الخامس (القلبة الأولى) والصدفة الوسطية - عمارة رقم 5","Rev-0","2025-12-10","2025-12-10","الخامس",""],["AO-IR-0025-126","IR-25-126","إنشائي","A","تسليم تسليح سلم الدور الخامس (القلبة الأولى) والصدفة الوسطية - عمارة رقم 5","Rev-0","2025-12-10","2025-12-10","الخامس",""],["AO-IR-0025-127","IR-25-127","إنشائي","A","أعمال محارة (ملو) الدور الثالث شقة (7) - عمارة رقم 5","Rev-0","2025-12-13","2025-12-13","الثالث",""],["AO-IR-0025-128","IR-25-128","إنشائي","A","تسليم رفع مباني الدور الثالث شقة (1+5) - عمارة رقم 5","Rev-0","2025-12-13","2025-12-13","الثالث",""],["AO-IR-0025-129","IR-25-129","إنشائي","A","تسليم أعمال محارة (طرطشة + أوتار + شبك الفواصل + بؤج السقف) الدور الأول شقة (1+2) - عمارة رقم 5","Rev-0","2025-12-15","2025-12-15","الأول",""],["AO-IR-0025-130","IR-25-130","إنشائي","A","تسليم أعمال محارة (طرطشة + أوتار + شبك الفواصل + بؤج السقف) الدور الأول شقة (3+7) - عمارة رقم 5","Rev-0","2025-12-17","2025-12-17","الأول",""],["AO-IR-0025-131","IR-25-131","إنشائي","A","تسليم قد مباني الدور الثاني شقة (1+4+5+6) - عمارة رقم 5","Rev-0","2025-12-21","2025-12-21","الثاني",""],["AO-IR-0025-132","IR-25-132","إنشائي","A","تسليم رفع مباني الدور الثالث بدون عتب شقة (3+4+6) - عمارة رقم 5","Rev-0","2025-12-22","2025-12-22","الثالث",""],["AO-IR-0025-133","IR-25-133","إنشائي","A","تسليم نجارة سقف الدور الخامس - عمارة رقم 5","Rev-0","2025-12-23","2025-12-23","الخامس",""],["AO-IR-0025-134","IR-25-134","إنشائي","A","تسليم رفع مباني الدور الثاني بدون عتب - عمارة رقم 5","Rev-0","2025-12-27","2025-12-27","الثاني",""],["AO-IR-0025-135","IR-25-135","إنشائي","A","أعمال محارة (طرطشة + أوتار + بؤج السقف + شبك الفواصل) الدور الأول شقة (4+6) - عمارة رقم 5","Rev-0","2025-12-27","2025-12-27","الأول",""],["AO-IR-0025-136","IR-25-136","إنشائي","A","تسليم تسليح كمرات الدور الخامس - عمارة رقم 5","Rev-0","2025-12-28","2025-12-28","الخامس",""],["AO-IR-0025-137","IR-25-137","إنشائي","A","أعمال كهرباء الدور الأول شقة (1+3+7)","Rev-0","2025-12-29","2025-12-29","الأول",""],["AO-IR-0025-138","IR-25-138","كهرباء","A","تسليم أعمال كهرباء شقة رقم 2 الدورالثالث","Rev-0","2025-12-29","2025-12-29","الثالث",""],["AO-IR-0026-01","IR-26-01","إنشائي","A","تسليح الرقة السفلية رئيسي + إضافي في الاتجاهين","Rev-0","2026-01-01","2026-01-01","الخامس",""],["AO-IR-0026-02","IR-26-02","إنشائي","A","تسليم - نجارة سلم الدور الخامس القلبة الثانية","Rev-0","2026-01-06","2026-01-07","الخامس",""],["AO-IR-0026-03","IR-26-03","إنشائي","A","تسليح سلم الدور الخامس القلبة الثانية","Rev-0","2026-01-06","2026-01-07","الخامس",""],["AO-IR-0026-04","IR-26-04","إنشائي","A","تسليح الرقة العلوية رئيسي + إضافي في الاتجاهين","Rev-0","2026-01-06","2026-01-06","الخامس",""],["AO-IR-0026-05","IR-26-05","إنشائي","A","إحداثيات أعمدة الدور السادس","Rev-0","2026-01-11","2026-01-11","السادس",""],["AO-IR-0026-06","IR-26-06","إنشائي","A","تسليم - الحطات السفلية أعمدة الدور السادس","Rev-0","2026-01-12","2026-01-14","السادس",""],["AO-IR-0026-07","IR-26-07","إنشائي","A","تسليم - تسليح أعمدة الدور السادس","Rev-0","2026-01-25","2026-01-25","السادس",""],["AO-IR-0026-08","IR-26-08","إنشائي","A","تسليم - تسليح حوائط الدور السادس","Rev-0","2026-01-25","2026-01-25","السادس",""],["AO-IR-0026-09","IR-26-09","إنشائي","A","تسليح اكوار الدور السادس","Rev-0","2026-01-25","2026-01-25","السادس",""],["AO-IR-0026-10","IR-26-10","إنشائي","A","وزنات وتقوية أعمدة وحوائط واكوار الدور السادس","Rev-0","2026-01-27","2026-01-29","السادس",""],["AO-IR-0026-11","IR-26-11","إنشائي","A","نجارة سلم الدور السادس القلبة الأولي والصدفة الوسطية","Rev-0","2026-01-27","2026-01-29","السادس",""],["AO-IR-0026-12","IR-26-12","إنشائي","A","تسليح سلم الدور السادس القلبة الأولي والصدفة الوسطية","Rev-0","2026-01-27","2026-01-29","السادس",""],["AO-IR-0026-13","IR-26-13","إنشائي","A","تسليم نجارة سقف الدور السادس","Rev-0","2026-02-10","2026-02-11","السادس",""],["AO-IR-0026-14","IR-26-14","إنشائي","A","تسليم - تسليح كمرات سقف الدور السادس","Rev-0","2026-02-16","2026-02-16","السادس",""],["AO-IR-0026-15","IR-26-15","إنشائي","A","تسليح الرقة السفلية رئيسى + إضافي في الاتجاهين سقف الدورالسادس","Rev-0","2026-02-16","2026-02-16","السادس",""],["AO-IR-0026-16","IR-26-16","إنشائي","A","تسليح الرقة العلوية رئيسى + إضافي في الاتجاهين سقف الدورالسادس","Rev-0","2026-02-24","2026-02-24","السادس",""],["AO-IR-0026-17","IR-26-17","إنشائي","A","تسليم - نجارة سلم الدور السادس القلبة الثانية","Rev-0","2026-02-24","2026-02-24","السادس",""],["AO-IR-0026-18","IR-26-18","إنشائي","A","تسليح سلم الدور السادس القلبة الثانية","Rev-0","2026-02-24","2026-02-24","السادس",""],["AO-IR-0026-19","IR-26-19","إنشائي","A","إحداثيات أعمدة الدورالسابع - عمارة رقم 5","Rev-0","2026-02-28","2026-02-28","السابع",""],["AO-IR-0026-20","IR-26-20","إنشائي","A","حطات أعمدة الدورالسابع - عمارة رقم 5","Rev-0","2026-03-03","2026-03-03","السابع",""],["AO-IR-0026-21","IR-26-21","إنشائي","A","تسليح أعمدة الدور السابع - عمارة رقم 5","Rev-0","2026-03-08","2026-03-08","السابع",""],["AO-IR-0026-22","IR-26-22","إنشائي","A","تسليح حوائط الدور السابع","Rev-0","2026-03-10","2026-03-10","السابع",""],["AO-IR-0026-23","IR-26-23","إنشائي","A","تسليح اكوار الدور السابع - عمارة رقم 5","Rev-0","2026-03-10","2026-03-10","السابع",""],["AO-IR-0026-24","IR-26-24","إنشائي","A","وزنات وتقوية أعمدة وحوائط واكوار المشار اليها  الدور السابع  1","Rev-0","2026-03-14","2026-03-15","السابع",""],["AO-IR-0026-25","IR-26-25","إنشائي","A","وزنات وتقوية أعمدة وحوائط واكوار المشار اليها  الدور السابع 2","Rev-0","2026-03-15","2026-03-16","السابع",""],["AO-IR-0026-26","IR-26-26","إنشائي","A","نجارة سلم تطبيق القلبة الاولي + الصدفة الوسطية - الدور السابع","Rev-0","2026-03-15","2026-03-16","السابع",""],["AO-IR-0026-27","IR-26-27","إنشائي","A","تسليح سلم القلبة الاولي + الصدفة الوسطية + نجارة الدرج الدور السابع","Rev-0","2026-03-15","2026-03-16","السابع",""],["AO-IR-0026-28","IR-26-28","إنشائي","A","تسليم - نجارة سقف الدور السابع - عمارة رقم 5","Rev-0","2026-04-09","2026-04-09","السابع",""],["AO-IR-0026-29","IR-26-29","إنشائي","A","تسليم - تسليح كمرات سقف الدور السابع","Rev-0","2026-04-15","2026-04-16","السابع",""],["AO-IR-0026-30","IR-26-30","إنشائي","A","تسليح الرقة السفلية رئيسي واضافي في الاتجاهين سقف الدور السابع","Rev-0","2026-04-15","2026-04-16","السابع",""],["AO-IR-0026-31","IR-26-31","إنشائي","A","نجارة سلم القلبة الثانية الدور السابع","Rev-0","2026-04-21","2026-04-21","السابع",""],["AO-IR-0026-32","IR-26-32","إنشائي","A","تسليح سلم الدور السابع القلبة الثانية","Rev-0","2026-04-21","2026-04-21","السابع",""],["AO-IR-0026-33","IR-26-33","إنشائي","A","تسليح الرقة العلوية رئيسى وإضافي في الاتجاهين سقف الدور السابع عمارة رقم","Rev-0","2026-04-21","2026-04-21","السابع",""],["AO-IR-0026-34","IR-26-34","إنشائي","A","احداثيات أعمدة الدور الثامن","Rev-0","2026-04-26","2026-04-26","الثامن",""],["AO-IR-0026-35","IR-26-35","إنشائي","A","حطات أعمدة الثامن","Rev-0","2026-05-03","2026-05-03","الثامن",""],["AO-IR-0026-36","IR-26-36","إنشائي","A","تسليح أعمدة - الدور الثامن","Rev-0","2026-05-07","2026-05-07","الثامن",""],["AO-IR-0026-37","IR-26-37","إنشائي","A","تسليح حوائط الدور الثامن","Rev-0","2026-05-07","2026-05-07","الثامن",""],["AO-IR-0026-38","IR-26-38","إنشائي","A","تسليح أكوار - الدور الثامن","Rev-0","2026-05-07","2026-05-07","الثامن",""],["AO-IR-0026-39","IR-26-39","إنشائي","A","وزنات وتقويات أعمدة وحوائط واكوار الدور الثامن","Rev-0","2026-05-10","2026-05-10","الثامن",""],["AO-IR-0026-40","IR-26-40","إنشائي","A","نجارة سلم القلبة الأولي + الصدفة الوسطية  الدور الثامن","Rev-0","2026-05-10","2026-05-10","الثامن",""],["AO-IR-0026-41","IR-26-41","إنشائي","A","حدادة سلم القلبة الأولي + الصدفة الوسطية الدور الثامن","Rev-0","2026-05-10","2026-05-10","الثامن",""],["AO-IR-0026-42","IR-26-42","إنشائي","A","نجارة سقف الدور الثامن","Rev-0","2026-06-08","2026-06-08","الثامن",""],["AO-IR-0026-43","IR-26-43","إنشائي","A","تسليح كمرات الدور الثامن","Rev-0","2026-06-14","2026-06-14","الثامن",""],["AO-IR-0026-44","IR-26-44","إنشائي","A","أعمال حدادة الرقة السفلية رئيسي + إضافي الدور الثامن","Rev-0","2026-06-17","2026-06-17","الثامن",""],["AO-IR-0026-45","IR-26-45","إنشائي","A","أعمال حدادة الرقة العلوية رئيسي + إضافي الدور الثامن","Rev-0","2026-06-24","2026-06-24","الثامن",""],["AO-IR-0026-46","IR-26-46","إنشائي","A","نجارة سلم القلبة الثانية الدور الثامن","Rev-0","2026-06-24","2026-06-24","الثامن",""],["AO-IR-0026-47","IR-26-47","إنشائي","A","تسليح سلم القلبة الثانية الدور الثامن","Rev-0","2026-06-24","2026-06-24","الثامن",""],["AO-IR-0026-48","IR-26-48","إنشائي","A","إحداثيات أعمدة الدور التاسع","Rev-0","2026-06-30","2026-06-30","التاسع",""],["AO-IR-0026-49","IR-26-49","إنشائي","A","الحطات السفلية للاعمدة والحوائط - الدور التاسع","Rev-0","2026-07-11","2026-07-11","التاسع",""],["AO-IR-0026-50","IR-26-50","إنشائي","A","تسليح حوائط الدور التاسع","Rev-0","2026-07-11","2026-07-11","التاسع",""],["AO-IR-0026-51","IR-26-51","إنشائي","A","تسليح اكوار الدور التاسع","Rev-0","2026-07-11","2026-07-11","التاسع",""],["AO-IR-0026-52","IR-26-52","إنشائي","A","تسليح اعمدة الدور التاسع","Rev-0","2026-07-15","2026-07-15","التاسع",""],["AO-IR-0026-53","IR-26-53","إنشائي","A","وزنات وتقويات الأعمدة والحوائط والاكوار الدور التاسع","Rev-0","2026-07-18","2026-07-18","التاسع",""],["AO-IR-0026-54","IR-26-54","إنشائي","A","نجارة السلم القلبة الاولي والصدفة الوسطية الدور التاسع","Rev-0","2026-07-18","2026-07-18","التاسع",""],["AO-IR-0026-55","IR-26-55","إنشائي","A","حدادة السلم القلبة القلبة الاولي والصدفة الوسطية الدور التاسع","Rev-0","2026-07-18","2026-07-18","التاسع",""],["AO-IR-0026-56","IR-26-56","إنشائي","A","نجارة سقف الدور التاسع","Rev-0","2026-08-03","2026-08-03","التاسع",""],["AO-IR-0026-57","IR-26-57","إنشائي","A","تسليح كمرات سقف الدور التاسع","Rev-0","2026-08-08","2026-08-08","التاسع",""],["AO-IR-0026-58","IR-26-58","إنشائي","A","التسليح السفلي رئيسى + إضافي في الاتجاهين الدور التاسع","Rev-0","2026-08-08","2026-08-08","التاسع",""],["AO-IR-0026-59","IR-26-59","إنشائي","A","التسليح العلوي رئيسى + إضافي في الاتجاهين الدور التاسع","Rev-0","2026-08-15","2026-08-15","التاسع",""],["AO-IR-0026-60","IR-26-60","إنشائي","A","نجارة سلم القلبة الثانية الدور التاسع","Rev-0","2026-08-15","2026-08-15","التاسع",""],["AO-IR-0026-61","IR-26-61","إنشائي","A","تسليح سلم القلبة الثانية الدور التاسع","Rev-0","2026-08-16","2026-08-16","الدور",""],["AO-IR-ARC-0026-01","ARC-26-01","معماري","A","اعمل محارة ملو شقة رقم 2 الدور الثالث","Rev-0","2026-01-04","2026-01-05","الثالث",""],["AO-IR-ARC-0026-02","ARC-26-02","معماري","A","اعمال محارة طرطشة + بؤج + أوتار + شبك فواصل شقة رقم 5 الدور  الأول + الطرقة","Rev-0","2026-01-04","2026-01-04","الاول",""],["AO-IR-ARC-0026-03","ARC-26-03","معماري","A","اعمال محارة ملو شقة رقم 1+3+7 الدور الأول","Rev-0","2026-01-07","2026-01-07","الاول",""],["AO-IR-ARC-0026-04","ARC-26-04","معماري","A","اعمال مباني رفع شقة رقم 1+3+5 الدور الثاني ما عدا الاعتاب","Rev-0","2026-01-11","2026-01-11","الثاني",""],["AO-IR-ARC-0026-05","ARC-26-05","معماري","A","أعمال مرمات الدور الرابع - عمارة رقم 5","Rev-0","2026-01-19","2026-01-19","الرابع",""],["AO-IR-ARC-0026-06","ARC-26-06","معماري","A","قد مباني الدور الرابع شقة 1+5","Rev-0","2026-01-19","2026-01-20","الرابع",""],["AO-IR-ARC-0026-07","ARC-26-07","معماري","A","رفع مباني الدور الثاني شقة 4+6","Rev-0","2026-01-19","2026-01-20","الثاني",""],["AO-IR-ARC-0026-08","ARC-26-08","معماري","A","تسليم - اعتاب الدور الثاني والثالث - عمارة رقم 5","Rev-0","2026-01-25","2026-01-25","والثالث",""],["AO-IR-ARC-0026-09","ARC-26-09","معماري","A","اعمال محارة ملو شقة رقم 2+5+6 الدور الأول","Rev-0","2026-01-25","2026-01-25","الأول",""],["AO-IR-ARC-0026-10","ARC-26-10","معماري","A","قد مباني الدور الرابع شقة 2+3+6+7","Rev-0","2026-01-27","2026-01-27","الرابع",""],["AO-IR-ARC-0026-11","ARC-26-11","معماري","A","اعمال محارة طرطشة+بؤج+أوتار+شبك الفواصل شقة 1+5 الدور الثالث","Rev-0","2026-02-03","2026-02-03","الثالث",""],["AO-IR-ARC-0026-12","ARC-26-12","معماري","A","اعمال محارة طرطشة + بؤج + أوتار + شبك فواصل شقة رقم 3+6 الدور  الثالث","Rev-0","2026-02-04","2026-02-05","الثالث",""],["AO-IR-ARC-0026-13","ARC-26-13","معماري","A","اعمال محارة طرطشة + بؤج + أوتار + شبك فواصل طرقة الدور  الثالث","Rev-0","2026-02-05","2026-02-05","الثالث",""],["AO-IR-ARC-0026-14","ARC-26-14","معماري","A","قد مباني الدور الرابع شقة رقم 4","Rev-0","2026-02-10","2026-02-11","الرابع",""],["AO-IR-ARC-0026-15","ARC-26-15","معماري","A","اعمال محارة طرطشة + بؤج + أوتار + شبك فواصل شقة رقم 4 الدور  الثالث","Rev-0","2026-02-11","2026-02-11","الثالث",""],["AO-IR-ARC-0026-16","ARC-26-16","معماري","A","رفع مباني شقة رقم  1+2+5+6 الدور الرابع","Rev-0","2026-02-16","2026-02-16","الرابع",""],["AO-IR-ARC-0026-17","ARC-26-17","معماري","A","اعمال محارة ملو شقة 4 + الطرقة الدور الأول","Rev-0","2026-02-16","2026-02-16","الاول",""],["AO-IR-ARC-0026-18","ARC-26-18","معماري","A","اعمال محارة ملو شقة رقم 1 الدور الثالث","Rev-0","2026-02-16","2026-02-16","الثالث",""],["AO-IR-ARC-0026-19","ARC-26-19","معماري","A","رفع مباني الدور الرابع شقة 3+7","Rev-0","2026-02-17","2026-02-17","الرابع",""],["AO-IR-ARC-0026-20","ARC-26-20","معماري","A","اعمال محارة طرطشة+بؤج+أوتار+شبك الفواصل شقة 1+2+3+4+5+6+الطرقة الدور الثاني","Rev-0","2026-02-24","2026-02-24","الثاني",""],["AO-IR-ARC-0026-21","ARC-26-21","معماري","A","اعمال مرمات الدور الخامس","Rev-0","2026-02-24","2026-02-24","الخامس",""],["AO-IR-ARC-0026-22","ARC-26-22","معماري","A","رفع مباني الدور الرابع شقة رقم 4","Rev-0","2026-03-02","2026-03-02","الرابع",""],["AO-IR-ARC-0026-23","ARC-26-23","معماري","A","اعمال محارة طرطشة+بؤج+أوتار+شبك الفواصل شقة 7 الدور الثاني","Rev-0","2026-03-02","2026-03-02","الثاني",""],["AO-IR-ARC-0026-24","ARC-26-24","معماري","A","اعمال محارة ملو شقة رقم 3+4+5+6 الدور الثالث","Rev-0","2026-03-03","2026-03-03","الثالث",""],["AO-IR-ARC-0026-25","ARC-26-25","معماري","A","اعمال محارة ملو الطرقة الدور الثالث","Rev-0","2026-03-03","2026-03-03","الثالث",""],["AO-IR-ARC-0026-26","ARC-26-26","معماري","A","اعمال محارة خارجية الدور الاول ملو التراسات","Rev-0","2026-03-05","2026-03-05","الاول",""],["AO-IR-ARC-0026-27","ARC-26-27","معماري","A","قد مباني شقة 2+3+7 الدور الخامس","Rev-0","2026-03-12","2026-03-12","الخامس",""],["AO-IR-ARC-0026-28","ARC-26-28","معماري","A","قد مباني  الدور الخامس","Rev-0","2026-03-12","2026-03-12","الخامس",""],["AO-IR-ARC-0026-29","ARC-26-29","معماري","A","اعمال محارة ملو شقة رقم 2+5+6 الدور الثاني","Rev-0","2026-03-12","2026-03-12","الثاني",""],["AO-IR-ARC-0026-30","ARC-26-30","معماري","A","اعمال محارة طرطشة+بؤج+أوتار+شبك الفواصل شقة 1+2 الدور الرابع","Rev-0","2026-03-17","2026-03-17","الرابع",""],["AO-IR-ARC-0026-31","ARC-26-31","معماري","A","عتب الدور الرابع","Rev-0","2026-03-31","2026-03-31","الرابع",""],["AO-IR-ARC-0026-32","ARC-26-32","معماري","A","اعمال محارة خارجية طرطشة+بؤج+أوتار+شبك الفواصل شقة 5+7  التراسات الدور الرابع","Rev-0","2026-04-01","2026-04-01","الرابع",""],["AO-IR-ARC-0026-33","ARC-26-33","معماري","A","اعمال محارة ملو شقة رقم 1+3+4+7 الدور الثالث","Rev-0","2026-04-01","2026-04-01","الثاني",""],["AO-IR-ARC-0026-34","ARC-26-34","معماري","A","قد مباني شقة رقم 4 الدور الخامس","Rev-0","2026-04-05","2026-04-05","الخامس",""],["AO-IR-ARC-0026-35","ARC-26-35","معماري","A","اعمال محارة خارجية طرطشة+بؤج+أوتار+شبك الفواصل طرقة الدور الرابع","Rev-0","2026-04-05","2026-04-05","الرابع",""],["AO-IR-ARC-0026-36","ARC-26-36","معماري","A","رفع مباني الدور الخامس شقة 1+2+3+5+6+7","Rev-0","2026-04-09","2026-04-09","الخامس",""],["AO-IR-ARC-0026-37","ARC-26-37","معماري","A","اعمال محارة خارجية ملو الطرقة الدور الثاني","Rev-0","2026-04-11","2026-04-11","الثاني",""],["AO-IR-ARC-0026-38","ARC-26-38","معماري","A","اعمال محارة طرطشة+بؤج+أوتار+شبك الفواصل شقة 3+6 الدور الرابع","Rev-0","2026-04-11","2026-04-11","الرابع",""],["AO-IR-ARC-0026-39","ARC-26-39","معماري","A","اعمال محارة ملو شقة رقم 1+2 الدور الرابع","Rev-0","2026-04-11","2026-04-11","الرابع",""],["AO-IR-ARC-0026-40","ARC-26-40","معماري","A","اعمال محارة خارجية طرطشة+بؤج+أوتار+شبك فواصل شقة رقم 1+2+3+4+6+7 التراسات الدور الرابع","Rev-0","2026-04-12","2026-04-12","الرابع",""],["AO-IR-ARC-0026-41","ARC-26-41","معماري","A","اعمال محارة ملو شقة رقم 1+2+7 الدور الرابع","Rev-0","2026-04-13","2026-04-14","الرابع",""],["AO-IR-ARC-0026-42","ARC-26-42","معماري","A","اعمال مرمات الدور السادس","Rev-0","2026-04-14","2026-04-14","السادس",""],["AO-IR-ARC-0026-43","ARC-26-43","معماري","A","رفع مباني الدور الخامس شقة 4 الدور الخامس","Rev-0","2026-04-18","2026-04-18","الخامس",""],["AO-IR-ARC-0026-44","ARC-26-44","معماري","A","قد مباني شقة رقم 1+5  الدور السادس","Rev-0","2026-04-15","2026-04-15","السادس",""],["AO-IR-ARC-0026-45","ARC-26-45","معماري","A","اعمل محارة ملو شقة رقم 7 الدور الرابع","Rev-0","2026-04-16","2026-04-16","الرابع",""],["AO-IR-ARC-0026-46","ARC-26-46","معماري","A","أعمال مباني قد 2شقة 2 7+6+3+ رقم الدور السادس","Rev-0","2026-04-18","2026-04-18","السادس",""],["AO-IR-ARC-0026-47","ARC-26-47","معماري","A","اعمال محارة داخلية - شبك الفواصل( +بؤج+أوتار+)طرطشة - (1شقة رقم ) - الدور الخامس","Rev-0","2026-04-20","2026-04-20","الخامس",""],["AO-IR-ARC-0026-48","ARC-26-48","معماري","A","اعمال محارة داخلية شبك الفواصل+بؤج+أوتار+طرطشة شقة 4 رقم  الدور الرابع","Rev-0","2026-04-20","2026-04-20","الرابع",""],["AO-IR-ARC-0026-49","ARC-26-49","معماري","A","اعمال محارة داخلية طرطشة+بؤج+أوتار+شبك فواصل شقة رقم +2+3+5+6 الدور  الخامس","Rev-0","2026-04-26","2026-04-26","الخامس",""],["AO-IR-ARC-0026-50","ARC-26-50","معماري","A","اعمال محارة خارجية - شبك الفواصل+بؤج+أوتار+طرطشة شقة رقم 6+5+3+2+1 الدور الخامس","Rev-0","2026-04-26","2026-04-26","الخامس",""],["AO-IR-ARC-0026-51","ARC-26-51","معماري","A","اعمال محارة داخلية ملو 3+5+6  الدور الرابع","Rev-0","2026-04-28","2026-04-28","الرابع",""],["AO-IR-ARC-0026-52","ARC-26-52","معماري","A","اعمال محارة خارجية ملو شقة رقم 3+5+6  التراسات + الطرقة الدور الرابع عمارة رقم","Rev-0","2026-04-28","2026-04-28","الرابع",""],["AO-IR-ARC-0026-53","ARC-26-53","معماري","A","اعمال محارة خارجية شبك الفواصل+بؤج+أوتار+طرطشة طرقة الدور الخامس","Rev-0","2026-04-28","2026-04-28","الخامس",""],["AO-IR-ARC-0026-54","ARC-26-54","معماري","A","اعمال محارة داخلية ملو شقة رقم 4 - الدور الرابع","Rev-0","2026-04-30","2026-04-30","الرابع",""],["AO-IR-ARC-0026-55","ARC-26-55","معماري","A","اعمال محارة خارجية شقة رقم 4 جوانب سقف التراسات الدور الرابع","Rev-0","2026-04-30","2026-04-30","الرابع",""],["AO-IR-ARC-0026-56","ARC-26-56","معماري","A","اعمال محارة داخلية شبك فواصل +بؤج+أوتار+طرطشة شقة رقم 4+7 - الدور الخامس","Rev-0","2026-05-03","2026-05-03","الخامس",""],["AO-IR-ARC-0026-57","ARC-26-57","معماري","A","اعمال محارة خارجية طرطشة +بؤج +اوتار+شبك فواصل","Rev-0","2026-05-03","2026-05-03","الخامس",""],["AO-IR-ARC-0026-58","ARC-26-58","معماري","A","رفع مباني شقة 1+5+6 الدور السادس","Rev-0","2026-05-03","2026-05-03","السادس",""],["AO-IR-ARC-0026-59","ARC-26-59","معماري","A","قد مباني شقة 4 رقم الدور السادس","Rev-0","2026-05-10","2026-05-10","السادس",""],["AO-IR-ARC-0026-60","ARC-26-60","معماري","A","أعمال محارة داخلية ملو  شقة رقم 1+2+3 الدور الخامس","Rev-0","2026-05-16","2026-05-16","الخامس",""],["AO-IR-ARC-0026-61","ARC-26-61","معماري","A","أعمال محارة خارجية ملو التراسات شقة رقم 1+2+3 الدور الخامس","Rev-0","2026-05-16","2026-05-16","الخامس",""],["AO-IR-ARC-0026-62","ARC-26-62","معماري","A","أعمال مباني رفع شقة رقم 2+3+7 الدور السادس","Rev-0","2026-05-18","2026-05-18","السادس",""],["AO-IR-ARC-0026-63","ARC-26-63","معماري","A","اعمال مرمات الدور السابع","Rev-0","2026-05-19","2026-05-19","السابع",""],["AO-IR-ARC-0026-64","ARC-26-64","معماري","A","أعمال مباني رفع شقة رقم 4 الدور السادس","Rev-0","2026-05-19","2026-05-19","السادس",""],["AO-IR-ARC-0026-65","ARC-26-65","معماري","A","أعمال محارة خارجية ملو شقة رقم 5+6 + التراسات الدور الخامس","Rev-0","2026-05-20","2026-05-20","الخامس",""],["AO-IR-ARC-0026-66","ARC-26-66","معماري","A","أعمال محارة داخلية شبك فواصل+بؤج+أوتار+طرطشةشقة رقم 1+5 الدور السادس","Rev-0","2026-05-20","2026-05-20","السادس",""],["AO-IR-ARC-0026-67","ARC-26-67","معماري","A","أعمال محارة خارجية شبك فواصل +بؤج+أوتار+طرطشة شقة رقم 1+5 الدور السادس","Rev-0","2026-05-20","2026-05-20","السادس",""],["AO-IR-ARC-0026-68","ARC-26-68","معماري","A","قد مباني شقة رقم 2+3+4+7 الدور السابع","Rev-0","2026-05-20","2026-05-20","السابع",""],["AO-IR-ARC-0026-69","ARC-26-69","معماري","A","اعمال محارة داخلية ملو شقة رقم 5+6 الدور الخامس","Rev-0","2026-05-20","2026-05-20","الخامس",""],["AO-IR-ARC-0026-70","ARC-26-70","معماري","A","اعمال محارة داخلية ملو شقة رقم 7 الدور الخامس","Rev-0","2026-05-24","2026-05-24","الخامس",""],["AO-IR-ARC-0026-71","ARC-26-71","معماري","A","اعمال محارة خارجية ملو شقة رقم 7 التراسات + الطرقة  الدور الخامس","Rev-0","2026-05-24","2026-05-24","الخامس",""],["AO-IR-ARC-0026-72","ARC-26-72","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم 7 الدور السادس","Rev-0","2026-05-24","2026-05-24","السادس",""],["AO-IR-ARC-0026-73","ARC-26-73","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم 7 التراسات الدور السادس","Rev-0","2026-05-24","2026-05-24","السادس",""],["AO-IR-ARC-0026-74","ARC-26-74","معماري","A","اعمال محارة داخلية ملو شقة رقم 4 الدور الخامس","Rev-0","2026-06-03","2026-06-03","الخامس",""],["AO-IR-ARC-0026-75","ARC-26-75","معماري","A","اعمال محارة خارجية ملو  شقة رقم 4 التراسات  الدور الخامس","Rev-0","2026-06-03","2026-06-03","الخامس",""],["AO-IR-ARC-0026-76","ARC-26-76","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم 2 الدور السادس","Rev-0","2026-06-03","2026-06-03","السادس",""],["AO-IR-ARC-0026-77","ARC-26-77","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم 2 التراسات الدور السادس","Rev-0","2026-06-03","2026-06-03","السادس",""],["AO-IR-ARC-0026-78","ARC-26-78","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم 3+6 الدور السادس","Rev-0","08/06/20026","08/06/20026","السادس",""],["AO-IR-ARC-0026-79","ARC-26-79","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم 3+6 التراسات الدور السادس","Rev-0","08/06/20026","08/06/20026","السادس",""],["AO-IR-ARC-0026-80","ARC-26-80","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم4 التراسات الدور السادس","Rev-0","09/06/20027","09/06/20027","السادس",""],["AO-IR-ARC-0026-81","ARC-26-81","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم4 الدور السادس","Rev-0","09/06/20028","09/06/20028","السادس",""],["AO-IR-ARC-0026-82","ARC-26-82","معماري","A","قد مباني شقة رقم 1+5 الدور السابع","Rev-0","09/06/20029","09/06/20029","السابع",""],["AO-IR-ARC-0026-83","ARC-26-83","معماري","A","أعمال مباني رفع شقة رقم 2+7 الدور السابع","Rev-0","09/06/20030","09/06/20030","السابع",""],["AO-IR-ARC-0026-84","ARC-26-84","معماري","A","أعمال محارة داخلية ملو شقة رقم 1+2 الدور السادس","Rev-0","2026-06-17","2026-06-17","السادس",""],["AO-IR-ARC-0026-85","ARC-26-85","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم 1+2+5 التراسات الدور السادس","Rev-0","2026-06-17","2026-06-17","السادس",""],["AO-IR-ARC-0026-86","ARC-26-86","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم7 الدور السابع","Rev-0","2026-06-17","2026-06-17","السابع",""],["AO-IR-ARC-0026-87","ARC-26-87","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم 7 التراسات الدور السابع","Rev-0","2026-06-17","2026-06-17","السابع",""],["AO-IR-ARC-0026-88","ARC-26-88","معماري","A","رفع مباني شقة رقم 3 الدور السابع","Rev-0","2026-06-17","2026-06-17","السابع",""],["AO-IR-ARC-0026-89","ARC-26-89","معماري","A","اعمال محارة داخلية ملو شقة رقم 7 الدور الخامس","Rev-1","2026-06-21","2026-06-21","الخامس",""],["AO-IR-ARC-0026-90","ARC-26-90","معماري","A","اعمال محارة خارجية ملو شقة رقم 7  التراسات الدور السادس","Rev-0","2026-06-21","2026-06-21","السادس",""],["AO-IR-ARC-0026-91","ARC-26-91","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة طرقة الدور السادس","Rev-0","2026-06-21","2026-06-21","السادس",""],["AO-IR-ARC-0026-92","ARC-26-92","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم2 الدور السابع","Rev-0","2026-06-25","2026-06-25","السابع",""],["AO-IR-ARC-0026-93","ARC-26-93","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة رقم2 التراسات  الدور السابع","Rev-0","2026-06-25","2026-06-25","السابع",""],["AO-IR-ARC-0026-94","ARC-26-94","معماري","A","رفع مباني شقة رقم 1 الدور السابع","Rev-0","2026-06-25","2026-06-25","السابع",""],["AO-IR-ARC-0026-95","ARC-26-95","معماري","A","قد مباني شقة رقم 6 الدور السابع","Rev-0","2026-06-30","2026-06-30","السابع",""],["AO-IR-ARC-0026-96","ARC-26-96","معماري","A","رفع مباني شقة رقم 5 الدور السابع","Rev-0","2026-07-04","2026-07-04","السابع",""],["AO-IR-ARC-0026-97","ARC-26-97","معماري","A","اعمال محارة داخلية ملو شقة رقم 7 الدور السابع","Rev-0","2026-07-04","2026-07-04","السابع",""],["AO-IR-ARC-0026-98","ARC-26-98","معماري","A","اعمال محارة خارجية ملو شقة رقم 7  التراسات الدور السابع","Rev-0","2026-07-04","2026-07-04","السابع",""],["AO-IR-ARC-0026-99","ARC-26-99","معماري","A","اعمال محارة داخلية ملو شقة رقم 3 الدور السادس","Rev-0","2026-07-04","2026-07-04","السادس",""],["AO-IR-ARC-0026-100","ARC-26-100","معماري","A","اعمال محارة خارجية ملو شقة رقم 3 التراسات الدور السادس","Rev-0","2026-07-04","2026-07-04","السادس",""],["AO-IR-ARC-0026-101","ARC-26-101","معماري","A","اعمال محارة داخلية ملو شقة رقم 4+6 الدور السادس","Rev-0","2026-07-12","2026-07-12","السادس",""],["AO-IR-ARC-0026-102","ARC-26-102","معماري","A","أعمال محارة خارجية ملو التراسات شقة 6+4 الدور السادس","Rev-0","2026-07-12","2026-07-12","السادس",""],["AO-IR-ARC-0026-103","ARC-26-103","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة 1+3 الدور السابع","Rev-0","2026-07-12","2026-07-12","السابع",""],["AO-IR-ARC-0026-104","ARC-26-104","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة 1+3 التراسات  الدور السابع","Rev-0","2026-07-12","2026-07-12","السابع",""],["AO-IR-ARC-0026-105","ARC-26-105","معماري","A","رفع مباني شقة 6 الدور السابع","Rev-0","2026-07-12","2026-07-12","السابع",""],["AO-IR-ARC-0026-106","ARC-26-106","معماري","A","رفع مباني شقة 4 الدور السابع","Rev-0","2026-07-15","2026-07-15","السابع",""],["AO-IR-ARC-0026-107","ARC-26-107","معماري","A","اعمال محارة خارجية ملو طرقة الدور السادس","Rev-0","2026-07-15","2026-07-15","السادس",""],["AO-IR-ARC-0026-108","ARC-26-108","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة 5 الدور السابع","Rev-0","2026-07-15","2026-07-15","السابع",""],["AO-IR-ARC-0026-109","ARC-26-109","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة شقة 5 تراسات الدور السابع","Rev-0","2026-07-15","2026-07-15","السابع",""],["AO-IR-ARC-0026-110","ARC-26-110","معماري","A","قد مباني شقة رقم2+3+7 الدور الثامن","Rev-0","2026-07-19","2026-07-19","الثامن",""],["AO-IR-ARC-0026-111","ARC-26-111","معماري","A","اعمال مرمات الدور الثامن","Rev-0","2026-07-19","2026-07-19","الثامن",""],["AO-IR-ARC-0026-112","ARC-26-112","معماري","A","أعمال محارة داخلية ملو شقة 1+2+3 الدور السابع","Rev-0","2026-07-25","2026-07-25","السابع",""],["AO-IR-ARC-0026-113","ARC-26-113","معماري","A","أعمال محارة خارجية ملو التراسات شقة 1+2+3 الدور السابع","Rev-0","2026-07-25","2026-07-25","السابع",""],["AO-IR-ARC-0026-114","ARC-26-114","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة طرقة الدور السابع","Rev-0","2026-07-25","2026-07-25","السابع",""],["AO-IR-ARC-0026-115","ARC-26-115","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة 4 الدور السابع","Rev-0","2026-07-27","2026-07-27","السابع",""],["AO-IR-ARC-0026-116","ARC-26-116","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة  تراسات شقة 5 الدور السابع","Rev-0","2026-07-27","2026-07-27","السابع",""],["AO-IR-ARC-0026-117","ARC-26-117","معماري","A","اعمال محارة خارجية ملو شقة 5 التراسات الدور السابع","Rev-0","2026-07-29","2026-07-29","السابع",""],["AO-IR-ARC-0026-118","ARC-26-118","معماري","A","رفع مباني شقة 2 الدور الثامن","Rev-0","2026-07-29","2026-07-29","الثامن",""],["AO-IR-ARC-0026-119","ARC-26-119","معماري","A","اعمل محارة داخلية ملو شقة رقم 5 الدور السابع","Rev-0","2026-07-29","2026-07-29","السابع",""],["AO-IR-ARC-0026-120","ARC-26-120","معماري","A","رفع مباني شقة رقم 7 الدور الثامن","Rev-0","2026-08-03","2026-08-03","الثامن",""],["AO-IR-ARC-0026-121","ARC-26-121","معماري","A","قد مباني شقة رقم 1+5 الدور الثامن","Rev-0","2026-08-03","2026-08-03","الثامن",""],["AO-IR-ARC-0026-122","ARC-26-122","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة 2 الدور الثامن","Rev-0","2026-08-08","2026-08-08","الثامن",""],["AO-IR-ARC-0026-123","ARC-26-123","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة تراسات شقة 2 الدور الثامن","Rev-0","2026-08-08","2026-08-08","الثامن",""],["AO-IR-ARC-0026-124","ARC-26-124","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة 7 الدور الثامن","Rev-0","2026-08-10","2026-08-10","الثامن",""],["AO-IR-ARC-0026-125","ARC-26-125","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة تراسات شقة 7 الدور الثامن","Rev-0","2026-08-10","2026-08-10","الثامن",""],["AO-IR-ARC-0026-126","ARC-26-126","معماري","A","رفع مباني شقة رقم 3 الدور الثامن","Rev-0","2026-08-10","2026-08-10","الثامن",""],["AO-IR-ARC-0026-127","ARC-26-127","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة 6 الدور السابع","Rev-0","2026-08-15","2026-08-15","السابع",""],["AO-IR-ARC-0026-128","ARC-26-128","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة تراسات شقة 6 الدور السابع","Rev-0","2026-08-15","2026-08-15","السابع",""],["AO-IR-ARC-0026-129","ARC-26-129","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج+طرطشة شقة 3 الدور الثامن","Rev-0","2026-08-15","2026-08-15","الثامن",""],["AO-IR-ARC-0026-130","ARC-26-130","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج+طرطشة تراسات شقة 3 الدور الثامن","Rev-0","2026-08-15","2026-08-15","الثامن",""],["AO-IR-ARC-0026-131","ARC-26-131","معماري","A","أعمال محارة داخلية ملو شقة رقم 4 الدور السابع","Rev-0","2026-08-15","2026-08-15","السابع",""],["AO-IR-ARC-0026-132","ARC-26-132","معماري","A","أعمال محارة خارجية ملو التراسات شقة رقم 4 + الطرقة الدور السابع","Rev-0","2026-08-15","2026-08-15","السابع",""],["AO-IR-ARC-0026-133","ARC-26-133","معماري","A","قد مباني ثقة رقم 4+6 الدورالثامن","Rev-0","2026-08-19","2026-08-19","الثامن",""],["AO-IR-ARC-0026-134","ARC-26-134","معماري","A","رفع مباني شقة رقم 1 الدور الثامن","Rev-0","2026-08-19","2026-08-19","الثامن",""],["AO-IR-ARC-0026-135","ARC-26-135","معماري","A","أعمال محارة داخلية ملو شقة رقم 2+3+7 الدور الثامن","Rev-0","2026-08-29","2026-08-29","الثامن",""],["AO-IR-ARC-0026-136","ARC-26-136","معماري","A","اعمال محارة خارجية ملو تراسات شقة رقم 2+3+7 الدور الثامن","Rev-0","2026-08-29","2026-08-29","الثامن",""],["AO-IR-ARC-0026-137","ARC-26-137","معماري","A","أعمال محارة داخلية شبك فواصل+بؤج+أوتار+طرطشةشقة رقم1 الدور الثامن","Rev-0","2026-08-29","2026-08-29","الثامن",""],["AO-IR-ARC-0026-138","ARC-26-138","معماري","A","أعمال محارة خارجية شبك فواصل+بؤج+أوتار+طرطشة تراسات شقة رقم1 الدور الثامن","Rev-0","2026-08-29","2026-08-29","الثامن",""],["AO-IR-ARC-0026-139","ARC-26-139","معماري","A","رفع مباني شقة رقم 5 الدور الثامن","Rev-0","2026-08-29","2026-08-29","الثامن",""],["AO-IR-ARC-0026-140","ARC-26-140","معماري","A","أعمال محارة داخلية شبك فواصل+بؤج+أوتار+طرطشة شقة رقم 5 الدور الثامن","Rev-0","2026-09-02","2026-09-02","الثامن",""],["AO-IR-ARC-0026-141","ARC-26-141","معماري","A","أعمال محارة خارجية شبك فواصل+بؤج+أوتار+طرطشة تراسات شقة رقم 5 الدور الثامن","Rev-0","2026-09-02","2026-09-02","الثامن",""],["AO-IR-ARC-0026-142","ARC-26-142","معماري","A","اعمال محارة داخلية ملو شقة رقم 1 الدور الثامن","Rev-0","2026-09-10","2026-09-10","الثامن",""],["AO-IR-ARC-0026-143","ARC-26-143","معماري","A","اعمال محارة خارجية ملو تراسات شقة رقم 1 الدور الثامن","Rev-0","2026-09-10","2026-09-10","الثامن",""],["AO-IR-ARC-0026-144","ARC-26-144","معماري","A","رفع مباني شقة رقم 6 الدور الثامن","Rev-0","2026-09-10","2026-09-10","الثامن",""],["AO-IR-ARC-0026-145","ARC-26-145","معماري","A","اعمال مرمات الدور التاسع","Rev-0","2026-09-12","2026-09-12","التاسع",""],["AO-IR-ARC-0026-146","ARC-26-146","معماري","A","قد مباني شقة رقم 1+5 الدور التاسع","Rev-0","2026-09-14","2026-09-14","التاسع",""],["AO-IR-ARC-0026-147","ARC-26-147","معماري","A","أعمال محارة داخلية شبك فواصل+أوتار+بؤج +طرطشة شقة 6 الدور الثامن","Rev-0","2026-09-14","2026-09-14","الثامن",""],["AO-IR-ARC-0026-148","ARC-26-148","معماري","A","أعمال محارة خارجية شبك فواصل+أوتار+بؤج +طرطشة  تراسات شقة 6 الدور الثامن","Rev-0","2026-09-16","2026-09-16","الثامن",""],["AO-IR-ARC-0026-149","ARC-26-149","معماري","A","رفع مباني شقة 4 الدور الثامن","Rev-0","2026-09-22","2026-09-22","الثامن",""],["AO-IR-ARC-0026-150","ARC-26-150","معماري","A","أعمال محارة داخلية شبك فواصل +بؤج+أوتار+طرطشة شقة 4 الدور الثامن","Rev-0","2026-09-22","2026-09-22","الثامن",""],["AO-IR-ARC-0026-151","ARC-26-151","معماري","A","أعمال محارة خارجية شبك فواصل+بؤج+أوتار+طرطشة تراسات شقة 4 + طرقة الدور الثامن","Rev-0","2026-09-22","2026-09-22","الثامن",""],["AO-IR-ARC-0026-152","ARC-26-152","معماري","A","اعمال محارة داخلية ملو شقة رقم 5 الدور الثامن","Rev-0","2026-09-22","2026-09-22","الثامن",""],["AO-IR-ARC-0026-153","ARC-26-153","معماري","A","أعمال محارة خارجية ملو تراسات شقة 5 الدور الثامن","Rev-0","2026-09-28","2026-09-28","الثامن",""],["AO-IR-ARC-0026-154","ARC-26-154","معماري","A","قد مباني شقة 2+3+4+6+7 الدور التاسع","Rev-0","2026-10-11","2026-10-11","التاسع",""],["AO-IR-ARC-0026-155","ARC-26-155","معماري","A","رفع مباني شقة رقم 1 الدور التاسع","Rev-0","2026-10-11","2026-10-11","التاسع",""],["AO-IR-ARC-0026-156","ARC-26-156","معماري","B","اعمال محارة داخلية ملو شقة رقم 4+6 الدور الثامن","Rev-0","2026-10-11","2026-10-11","الثامن",""],["AO-IR-ARC-0026-157","ARC-26-157","معماري","B","اعمال محارة خارجية ملو شقة رقم 4+6 التراسات + الطرقة الدور الثامن","Rev-0","2026-10-14","2026-10-15","الثامن",""],["AO-IR-ARC-0026-158","ARC-26-158","معماري","B","رفع مباني شقة رقم 2 الدور التاسع","Rev-0","2026-10-17","2026-10-17","التاسع",""],["AO-IR-ARC-0026-159","ARC-26-159","معماري","B","اعمال محارة داخلية طرطشة +بؤج +أوتار+ شبك فواصل شقة رقم 1 الدورالتاسع","Rev-0","2026-10-17","2026-10-17","التاسع",""],["AO-IR-ARC-0026-160","ARC-26-160","معماري","B","اعمال محارة خارجية طرطشة +بؤج +أوتار+ شبك فواصل التراسات شقة رقم 1 الدورالتاسع","Rev-0","2026-10-20","2026-10-20","التاسع",""],["AO-IR-ARC-0026-161","ARC-26-161","معماري","B","اعمال محارة داخلية طرطشة +بؤج +أوتار+ شبك فواصل شقة رقم 2 الدورالتاسع","Rev-0","2026-10-20","2026-10-20","التاسع",""],["AO-IR-ARC-0026-162","ARC-26-162","معماري","B","اعمال محارة خارجية طرطشة +بؤج +أوتار+ شبك فواصل التراسات شقة رقم 2 الدورالتاسع","Rev-0","2026-10-20","2026-10-20","التاسع",""],["AO-IR-ARC-0026-163","ARC-26-163","معماري","B","رفع مباني شقة رقم 7 الدور التاسع","Rev-0","2026-10-20","2026-10-20","التاسع",""],["AO-IR-ELEC-0026-01","ELC-26-01","كهرباء","A","اعمال كهرباء سقف الدور الخامس","Rev-0","03/01/20269","03/01/20269","الخامس",""],["AO-IR-ELEC-0026-02","ELC-26-02","كهرباء","A","اعمال كهرباء شقة رقم 2 الدور الأول","Rev-0","04/01/20269","04/01/20269","الأول",""],["AO-IR-ELEC-0026-03","ELC-26-03","كهرباء","A","اعمال كهرباء شقة رقم 4+5+6 الدور الأول","Rev-0","2026-01-10","2026-01-10","الأول",""],["AO-IR-ELEC-0026-04","ELC-26-04","كهرباء","A","اعمال كهرباء الممر (الطرقة) الدور الأول","Rev-0","2026-01-28","2026-01-28","الأول",""],["AO-IR-ELEC-0026-05","ELC-26-05","كهرباء","A","اعمال كهرباء شقة رقم 1+3+6 الدور الثالث","Rev-0","2026-02-04","2026-02-05","الثالث",""],["AO-IR-ELEC-0026-06","ELC-26-06","كهرباء","A","اعمال كهرباء شقة رقم 5 + الطرقة الدور الثالث","Rev-0","2026-02-08","2026-02-08","الثالث",""],["AO-IR-ELEC-0026-07","ELC-26-07","كهرباء","A","اعمال كهرباء شقة رقم 4 + الدور الثالث","Rev-0","2026-02-17","2026-02-17","الثالث",""],["AO-IR-ELEC-0026-08","ELC-26-08","كهرباء","A","اعمال كهرباء سقف الدور السادس","Rev-0","2026-02-22","2026-02-22","السادس",""],["AO-IR-ELEC-0026-09","ELC-26-09","كهرباء","A","اعمال كهرباء شقة رقم 5+6 الدور الثالث","Rev-0","2026-03-02","2026-03-02","الثالث",""],["AO-IR-ELEC-0026-10","ELC-26-10","كهرباء","A","اعمال كهرباء شقة رقم 1+2 الدور الثاني","Rev-0","2026-03-04","2026-03-04","الثاني",""],["AO-IR-ELEC-0026-11","ELC-26-11","كهرباء","A","اعمال كهرباء شقة رقم 3+4+7+الطرقة الدور الثاني","Rev-0","2026-03-07","2026-03-07","الثاني",""],["AO-IR-ELEC-0026-12","ELC-26-12","كهرباء","A","اعمال كهرباء شقة رقم 1+2 الدور الرابع","Rev-0","2026-03-31","2026-03-31","الرابع",""],["AO-IR-ELEC-0026-13","ELC-26-13","كهرباء","A","اعمال كهرباء شقة رقم 3+4+7 (لوح تغذية) الدور الثاني","Rev-0","2026-03-31","2026-03-31","الثاني",""],["AO-IR-ELEC-0026-14","ELC-26-14","كهرباء","A","اعمال كهرباء طرقة الدور الرابع","Rev-0","2026-03-31","2026-03-31","الرابع",""],["AO-IR-ELEC-0026-15","ELC-26-15","كهرباء","A","اعمال كهرباء شقة رقم 7 الدور الرابع","Rev-0","2026-04-02","2026-04-02","الرابع",""],["AO-IR-ELEC-0026-16","ELC-26-16","كهرباء","A","اعمال كهرباء شقة رقم 5 الدور الرابع","Rev-0","2026-04-05","2026-04-05","الرابع",""],["AO-IR-ELEC-0026-17","ELC-26-17","كهرباء","A","اعمال كهرباء شقة رقم 3+6 الدور الرابع","Rev-0","2026-04-14","2026-04-14","الرابع",""],["AO-IR-ELEC-0026-18","ELC-26-18","كهرباء","A","اعمال كهرباء سقف الدور السابع","Rev-0","2026-04-21","2026-04-21","السابع",""],["AO-IR-ELEC-0026-19","ELC-26-19","كهرباء","A","اعمال كهرباء شقة رقم 4 الدور الرابع","Rev-0","2026-04-25","2026-04-25","الرابع",""],["AO-IR-ELEC-0026-20","ELC-26-20","كهرباء","A","اعمال كهرباء شقة رقم 1 الدور الخامس","Rev-0","2026-04-28","2026-04-28","الخامس",""],["AO-IR-ELEC-0026-20-REV-01","ELC-26-20-REV-01","كهرباء","A","اعمال كهرباء شقة رقم 1 الدور الخامس","Rev-1","2026-05-05","2026-05-05","الخامس",""],["AO-IR-ELEC-0026-21","ELC-26-21","كهرباء","A","اعمال كهرباء شقة رقم 2+5 + الطرقة الدور الخامس","Rev-0","2026-04-30","2026-04-30","الخامس",""],["AO-IR-ELEC-0026-21-REV-01","ELC-26-21-REV-01","كهرباء","A","اعمال كهرباء شقة رقم 2+5 + الطرقة الدور الخامس","Rev-1","2026-05-05","2026-05-05","الخامس",""],["AO-IR-ELEC-0026-22","ELC-26-22","كهرباء","A","اعمال كهرباء شقة رقم 3+6 الدور الخامس","Rev-0","2026-05-05","2026-05-05","الخامس",""],["AO-IR-ELEC-0026-23","ELC-26-23","كهرباء","A","اعمال كهرباء شقة رقم 4+7 الدور الخامس","Rev-0","2026-05-14","2026-05-14","الخامس",""],["AO-IR-ELEC-0026-24","ELC-26-24","كهرباء","A","اعمال كهرباء شقة رقم 1+5 الدور السادس","Rev-0","2026-05-24","2026-05-24","السادس",""],["AO-IR-ELEC-0026-25","ELC-26-25","كهرباء","A","اعمال كهرباء شقة رقم 2+7 الدور السادس","Rev-0","2026-06-08","2026-06-08","السادس",""],["AO-IR-ELEC-0026-26","ELC-26-26","كهرباء","A","اعمال كهرباء شقة رقم 3+6 الدور السادس","Rev-0","2026-06-13","2026-06-13","السادس",""],["AO-IR-ELEC-0026-27","ELC-26-27","كهرباء","A","اعمال كهرباء شقة رقم 4+ طرقة الدور السادس","Rev-0","2026-06-22","2026-06-22","السادس",""],["AO-IR-ELEC-0026-28","ELC-26-28","كهرباء","A","اعمال كهرباء شقة رقم 7 الدور السابع","Rev-0","2026-06-22","2026-06-22","السابع",""],["AO-IR-ELEC-0026-29","ELC-26-29","كهرباء","A","اعمال كهرباء سقف الدور الثامن","Rev-0","2026-06-24","2026-06-24","الثامن",""],["AO-IR-ELEC-0026-30","ELC-26-30","كهرباء","A","اعمال كهرباء شقة رقم 2 الدور السابع","Rev-0","2026-06-29","2026-06-29","السابع",""],["AO-IR-ELEC-0026-31","ELC-26-31","كهرباء","A","اعمال كهرباء شقة رقم 1 الدور السابع","Rev-0","2026-07-14","2026-07-14","السابع",""],["AO-IR-ELEC-0026-32","ELC-26-32","كهرباء","A","اعمال كهرباء شقة رقم 3 الدور السابع","Rev-0","2026-07-15","2026-07-15","السابع",""],["AO-IR-ELEC-0026-33","ELC-26-33","كهرباء","A","اعمال كهرباء شقة رقم 5 الدور السابع","Rev-0","2026-07-22","2026-07-22","السابع",""],["AO-IR-ELEC-0026-34","ELC-26-34","كهرباء","A","اعمال كهرباء طرقة الدور السابع","Rev-0","2026-07-25","2026-07-25","السابع",""],["AO-IR-ELEC-0026-35","ELC-26-35","كهرباء","A","اعمال كهرباء شقة رقم 4 الدور السابع","Rev-0","2026-07-30","2026-07-30","السابع",""],["AO-IR-ELEC-0026-36","ELC-26-36","كهرباء","A","اعمال كهرباء شقة رقم 2 الدور الثامن","Rev-0","2026-08-08","2026-08-08","الثامن",""],["AO-IR-ELEC-0026-37","ELC-26-37","كهرباء","A","اعمال كهرباء شقة رقم 7 الدور الثامن","Rev-0","2026-08-12","2026-08-12","الثامن",""],["AO-IR-ELEC-0026-38","ELC-26-38","كهرباء","A","اعمال كهرباء سقف الدور التاسع","Rev-0","2026-08-15","2026-08-15","التاسع",""],["AO-IR-ELEC-0026-39","ELC-26-39","كهرباء","A","اعمال كهرباء شقة رقم 3 الدور الثامن","Rev-0","2026-08-18","2026-08-18","الثامن",""],["AO-IR-ELEC-0026-40","ELC-26-40","كهرباء","A","اعمال كهرباء شقة رقم 6 الدور السابع","Rev-0","2026-08-26","2026-08-26","السابع",""],["AO-IR-ELEC-0026-41","ELC-26-41","كهرباء","A","اعمال كهرباء شقة رقم 1 الدور الثامن","Rev-0","2026-08-29","2026-08-29","الثامن",""],["AO-IR-ELEC-0026-42","ELC-26-42","كهرباء","A","اعمال كهرباء شقة رقم 5 الدور الثامن","Rev-0","2026-09-03","2026-09-03","الثامن",""],["AO-IR-ELEC-0026-43","ELC-26-43","كهرباء","A","اعمال كهرباء شقة رقم 6 الدور الثامن","Rev-0","2026-09-17","2026-09-17","الثامن",""],["AO-IR-ELEC-0026-44","ELC-26-44","كهرباء","A","اعمال كهرباء شقة رقم 4+ طرقة الدور الثامن","Rev-0","2026-09-23","2026-09-23","الثامن",""],["AO-IR-ELEC-0026-45","ELC-26-45","كهرباء","A","(5أعمال كهرباء شقة ) - الدور الثامن - عمارة رقم 5","Rev-0","2026-09-24","","الثامن",""]];
+const SEED_APT_MATRIX = {"mas_qad":{"F1":{"U1":["AO-IR-0025-112","IR-25-112","A"],"U2":["AO-IR-0025-112","IR-25-112","A"],"U3":["AO-IR-0025-118","IR-25-118","A"],"U4":["AO-IR-0025-118","IR-25-118","A"],"U5":["AO-IR-0025-112","IR-25-112","A"],"U6":["AO-IR-0025-118","IR-25-118","A"],"U7":["AO-IR-0025-112","IR-25-112","A"]},"F2":{"U1":["AO-IR-0025-131","IR-25-131","A"],"U2":["AO-IR-0025-123","IR-25-123","A"],"U3":["AO-IR-0025-123","IR-25-123","A"],"U4":["AO-IR-0025-131","IR-25-131","A"],"U5":["AO-IR-0025-131","IR-25-131","A"],"U6":["AO-IR-0025-131","IR-25-131","A"],"U7":["AO-IR-0025-123","IR-25-123","A"]},"F3":{"U1":["AO-IR-0025-110","IR-25-110","A"],"U2":["AO-IR-0025-110","IR-25-110","A"],"U3":["AO-IR-0025-110","IR-25-110","A"],"U4":["AO-IR-0025-124","IR-25-124","A"],"U5":["AO-IR-0025-110","IR-25-110","A"],"U6":["AO-IR-0025-124","IR-25-124","A"],"U7":["AO-IR-0025-110","IR-25-110","A"]},"F4":{"U1":["AO-IR-ARC-0026-06","ARC-26-06","A"],"U2":["AO-IR-ARC-0026-10","ARC-26-10","A"],"U3":["AO-IR-ARC-0026-10","ARC-26-10","A"],"U4":["AO-IR-ARC-0026-14","ARC-26-14","A"],"U5":["AO-IR-ARC-0026-06","ARC-26-06","A"],"U6":["AO-IR-ARC-0026-10","ARC-26-10","A"],"U7":["AO-IR-ARC-0026-10","ARC-26-10","A"]},"F5":{"U1":["AO-IR-ARC-0026-28","ARC-26-28","A"],"U2":["AO-IR-ARC-0026-27","ARC-26-27","A"],"U3":["AO-IR-ARC-0026-27","ARC-26-27","A"],"U4":["AO-IR-ARC-0026-28","ARC-26-28","A"],"U5":["AO-IR-ARC-0026-28","ARC-26-28","A"],"U6":["AO-IR-ARC-0026-28","ARC-26-28","A"],"U7":["AO-IR-ARC-0026-27","ARC-26-27","A"]},"F6":{"U1":["AO-IR-ARC-0026-44","ARC-26-44","A"],"U2":["AO-IR-ARC-0026-46","ARC-26-46","A"],"U3":["AO-IR-ARC-0026-46","ARC-26-46","A"],"U4":["AO-IR-ARC-0026-59","ARC-26-59","A"],"U5":["AO-IR-ARC-0026-44","ARC-26-44","A"],"U6":["AO-IR-ARC-0026-46","ARC-26-46","A"],"U7":["AO-IR-ARC-0026-46","ARC-26-46","A"]},"F7":{"U1":["AO-IR-ARC-0026-82","ARC-26-82","A"],"U2":["AO-IR-ARC-0026-68","ARC-26-68","A"],"U3":["AO-IR-ARC-0026-68","ARC-26-68","A"],"U4":["AO-IR-ARC-0026-68","ARC-26-68","A"],"U5":["AO-IR-ARC-0026-82","ARC-26-82","A"],"U6":["AO-IR-ARC-0026-95","ARC-26-95","A"],"U7":["AO-IR-ARC-0026-68","ARC-26-68","A"]},"F8":{"U1":["AO-IR-ARC-0026-121","ARC-26-121","A"],"U2":["AO-IR-ARC-0026-110","ARC-26-110","A"],"U3":["AO-IR-ARC-0026-110","ARC-26-110","A"],"U4":["AO-IR-ARC-0026-133","ARC-26-133","A"],"U5":["AO-IR-ARC-0026-121","ARC-26-121","A"],"U6":["AO-IR-ARC-0026-133","ARC-26-133","A"],"U7":["AO-IR-ARC-0026-110","ARC-26-110","A"]},"F9":{"U1":["AO-IR-ARC-0026-146","ARC-26-146","A"],"U2":["AO-IR-ARC-0026-154","ARC-26-154","A"],"U3":["AO-IR-ARC-0026-154","ARC-26-154","A"],"U4":["AO-IR-ARC-0026-154","ARC-26-154","A"],"U5":["AO-IR-ARC-0026-146","ARC-26-146","A"],"U6":["AO-IR-ARC-0026-154","ARC-26-154","A"],"U7":["AO-IR-ARC-0026-154","ARC-26-154","A"]}},"mas_raf":{"F1":{"U1":["AO-IR-0025-112","IR-25-112","A"],"U2":["AO-IR-0025-112","IR-25-112","A"],"U3":["AO-IR-0025-118","IR-25-118","A"],"U4":["AO-IR-0025-118","IR-25-118","A"],"U5":["AO-IR-0025-112","IR-25-112","A"],"U6":["AO-IR-0025-118","IR-25-118","A"],"U7":["AO-IR-0025-112","IR-25-112","A"]},"F2":{"U1":["AO-IR-0025-134","IR-25-134","A"],"U2":["AO-IR-0025-134","IR-25-134","A"],"U3":["AO-IR-0025-134","IR-25-134","A"],"U4":["AO-IR-0025-134","IR-25-134","A"],"U5":["AO-IR-0025-134","IR-25-134","A"],"U6":["AO-IR-0025-134","IR-25-134","A"],"U7":["AO-IR-0025-134","IR-25-134","A"]},"F3":{"U1":["AO-IR-0025-128","IR-25-128","A"],"U2":["AO-IR-0025-113","IR-25-113","A"],"U3":["AO-IR-0025-132","IR-25-132","A"],"U4":["AO-IR-0025-132","IR-25-132","A"],"U5":["AO-IR-0025-128","IR-25-128","A"],"U6":["AO-IR-0025-132","IR-25-132","A"],"U7":null},"F4":{"U1":["AO-IR-ARC-0026-16","ARC-26-16","A"],"U2":["AO-IR-ARC-0026-16","ARC-26-16","A"],"U3":["AO-IR-ARC-0026-19","ARC-26-19","A"],"U4":["AO-IR-ARC-0026-22","ARC-26-22","A"],"U5":["AO-IR-ARC-0026-16","ARC-26-16","A"],"U6":["AO-IR-ARC-0026-16","ARC-26-16","A"],"U7":["AO-IR-ARC-0026-19","ARC-26-19","A"]},"F5":{"U1":["AO-IR-ARC-0026-36","ARC-26-36","A"],"U2":["AO-IR-ARC-0026-36","ARC-26-36","A"],"U3":["AO-IR-ARC-0026-36","ARC-26-36","A"],"U4":["AO-IR-ARC-0026-43","ARC-26-43","A"],"U5":["AO-IR-ARC-0026-36","ARC-26-36","A"],"U6":["AO-IR-ARC-0026-36","ARC-26-36","A"],"U7":["AO-IR-ARC-0026-36","ARC-26-36","A"]},"F6":{"U1":["AO-IR-ARC-0026-58","ARC-26-58","A"],"U2":["AO-IR-ARC-0026-62","ARC-26-62","A"],"U3":["AO-IR-ARC-0026-62","ARC-26-62","A"],"U4":["AO-IR-ARC-0026-64","ARC-26-64","A"],"U5":["AO-IR-ARC-0026-58","ARC-26-58","A"],"U6":["AO-IR-ARC-0026-58","ARC-26-58","A"],"U7":["AO-IR-ARC-0026-62","ARC-26-62","A"]},"F7":{"U1":["AO-IR-ARC-0026-94","ARC-26-94","A"],"U2":["AO-IR-ARC-0026-83","ARC-26-83","A"],"U3":["AO-IR-ARC-0026-88","ARC-26-88","A"],"U4":["AO-IR-ARC-0026-106","ARC-26-106","A"],"U5":["AO-IR-ARC-0026-96","ARC-26-96","A"],"U6":["AO-IR-ARC-0026-105","ARC-26-105","A"],"U7":["AO-IR-ARC-0026-83","ARC-26-83","A"]},"F8":{"U1":["AO-IR-ARC-0026-134","ARC-26-134","A"],"U2":["AO-IR-ARC-0026-118","ARC-26-118","A"],"U3":["AO-IR-ARC-0026-126","ARC-26-126","A"],"U4":["AO-IR-ARC-0026-149","ARC-26-149","A"],"U5":["AO-IR-ARC-0026-139","ARC-26-139","A"],"U6":["AO-IR-ARC-0026-144","ARC-26-144","A"],"U7":["AO-IR-ARC-0026-120","ARC-26-120","A"]},"F9":{"U1":["AO-IR-ARC-0026-155","ARC-26-155","A"],"U2":["AO-IR-ARC-0026-158","ARC-26-158","B"],"U3":null,"U4":null,"U5":null,"U6":null,"U7":["AO-IR-ARC-0026-163","ARC-26-163","B"]}},"elec":{"F1":{"U1":["AO-IR-0025-137","IR-25-137","A"],"U2":["AO-IR-ELEC-0026-02","ELC-26-02","A"],"U3":["AO-IR-0025-137","IR-25-137","A"],"U4":["AO-IR-ELEC-0026-03","ELC-26-03","A"],"U5":["AO-IR-ELEC-0026-03","ELC-26-03","A"],"U6":["AO-IR-ELEC-0026-03","ELC-26-03","A"],"U7":["AO-IR-0025-137","IR-25-137","A"],"U8":["AO-IR-ELEC-0026-04","ELC-26-04","A"],"U9":["AO-IR-0025-84","IR-25-84","A"]},"F2":{"U1":["AO-IR-ELEC-0026-10","ELC-26-10","A"],"U2":["AO-IR-ELEC-0026-10","ELC-26-10","A"],"U3":["AO-IR-ELEC-0026-11","ELC-26-11","A"],"U4":["AO-IR-ELEC-0026-11","ELC-26-11","A"],"U5":null,"U6":null,"U7":["AO-IR-ELEC-0026-11","ELC-26-11","A"],"U8":["AO-IR-ELEC-0026-11","ELC-26-11","A"],"U9":["AO-IR-0025-85","IR-25-85","A"]},"F3":{"U1":["AO-IR-ELEC-0026-05","ELC-26-05","A"],"U2":["AO-IR-0025-138","IR-25-138","A"],"U3":["AO-IR-ELEC-0026-05","ELC-26-05","A"],"U4":["AO-IR-ELEC-0026-07","ELC-26-07","A"],"U5":["AO-IR-ELEC-0026-06","ELC-26-06","A"],"U6":["AO-IR-ELEC-0026-05","ELC-26-05","A"],"U7":["AO-IR-0025-120","IR-25-120","A"],"U8":["AO-IR-ELEC-0026-06","ELC-26-06","A"],"U9":["AO-IR-0025-84","IR-25-84","A"]},"F4":{"U1":["AO-IR-ELEC-0026-12","ELC-26-12","A"],"U2":["AO-IR-ELEC-0026-12","ELC-26-12","A"],"U3":["AO-IR-ELEC-0026-17","ELC-26-17","A"],"U4":["AO-IR-ELEC-0026-19","ELC-26-19","A"],"U5":["AO-IR-ELEC-0026-16","ELC-26-16","A"],"U6":["AO-IR-ELEC-0026-17","ELC-26-17","A"],"U7":["AO-IR-ELEC-0026-15","ELC-26-15","A"],"U8":["AO-IR-ELEC-0026-14","ELC-26-14","A"],"U9":["AO-IR-0025-102","IR-25-102","A"]},"F5":{"U1":["AO-IR-ELEC-0026-20","ELC-26-20","A"],"U2":["AO-IR-ELEC-0026-21","ELC-26-21","A"],"U3":["AO-IR-ELEC-0026-22","ELC-26-22","A"],"U4":["AO-IR-ELEC-0026-23","ELC-26-23","A"],"U5":["AO-IR-ELEC-0026-21","ELC-26-21","A"],"U6":["AO-IR-ELEC-0026-22","ELC-26-22","A"],"U7":["AO-IR-ELEC-0026-23","ELC-26-23","A"],"U8":["AO-IR-ELEC-0026-21","ELC-26-21","A"],"U9":["AO-IR-ELEC-0026-01","ELC-26-01","A"]},"F6":{"U1":["AO-IR-ELEC-0026-24","ELC-26-24","A"],"U2":["AO-IR-ELEC-0026-25","ELC-26-25","A"],"U3":["AO-IR-ELEC-0026-26","ELC-26-26","A"],"U4":["AO-IR-ELEC-0026-27","ELC-26-27","A"],"U5":["AO-IR-ELEC-0026-24","ELC-26-24","A"],"U6":["AO-IR-ELEC-0026-26","ELC-26-26","A"],"U7":["AO-IR-ELEC-0026-25","ELC-26-25","A"],"U8":["AO-IR-ELEC-0026-27","ELC-26-27","A"],"U9":["AO-IR-ELEC-0026-08","ELC-26-08","A"]},"F7":{"U1":["AO-IR-ELEC-0026-31","ELC-26-31","A"],"U2":["AO-IR-ELEC-0026-30","ELC-26-30","A"],"U3":["AO-IR-ELEC-0026-32","ELC-26-32","A"],"U4":["AO-IR-ELEC-0026-35","ELC-26-35","A"],"U5":["AO-IR-ELEC-0026-33","ELC-26-33","A"],"U6":["AO-IR-ELEC-0026-40","ELC-26-40","A"],"U7":["AO-IR-ELEC-0026-28","ELC-26-28","A"],"U8":["AO-IR-ELEC-0026-34","ELC-26-34","A"],"U9":["AO-IR-ELEC-0026-18","ELC-26-18","A"]},"F8":{"U1":["AO-IR-ELEC-0026-41","ELC-26-41","A"],"U2":["AO-IR-ELEC-0026-36","ELC-26-36","A"],"U3":["AO-IR-ELEC-0026-39","ELC-26-39","A"],"U4":["AO-IR-ELEC-0026-44","ELC-26-44","A"],"U5":["AO-IR-ELEC-0026-42","ELC-26-42","A"],"U6":["AO-IR-ELEC-0026-43","ELC-26-43","A"],"U7":["AO-IR-ELEC-0026-37","ELC-26-37","A"],"U8":["AO-IR-ELEC-0026-44","ELC-26-44","A"],"U9":["AO-IR-ELEC-0026-29","ELC-26-29","A"]},"F9":{"U1":null,"U2":null,"U3":null,"U4":null,"U5":null,"U6":null,"U7":null,"U8":null,"U9":["AO-IR-ELEC-0026-38","ELC-26-38","A"]}},"pls_tar":{"F1":{"U1":["AO-IR-0025-129","IR-25-129","A"],"U2":["AO-IR-0025-129","IR-25-129","A"],"U3":["AO-IR-0025-130","IR-25-130","A"],"U4":["AO-IR-0025-135","IR-25-135","A"],"U5":["AO-IR-ARC-0026-02","ARC-26-02","A"],"U6":["AO-IR-0025-135","IR-25-135","A"],"U7":["AO-IR-0025-130","IR-25-130","A"],"U8":["AO-IR-ARC-0026-02","ARC-26-02","A"]},"F2":{"U1":["AO-IR-ARC-0026-20","ARC-26-20","A"],"U2":["AO-IR-ARC-0026-20","ARC-26-20","A"],"U3":["AO-IR-ARC-0026-20","ARC-26-20","A"],"U4":["AO-IR-ARC-0026-20","ARC-26-20","A"],"U5":["AO-IR-ARC-0026-20","ARC-26-20","A"],"U6":["AO-IR-ARC-0026-20","ARC-26-20","A"],"U7":["AO-IR-ARC-0026-23","ARC-26-23","A"],"U8":["AO-IR-ARC-0026-20","ARC-26-20","A"]},"F3":{"U1":["AO-IR-ARC-0026-11","ARC-26-11","A"],"U2":["AO-IR-0025-122","IR-25-122","A"],"U3":["AO-IR-ARC-0026-12","ARC-26-12","A"],"U4":["AO-IR-ARC-0026-15","ARC-26-15","A"],"U5":["AO-IR-ARC-0026-11","ARC-26-11","A"],"U6":["AO-IR-ARC-0026-12","ARC-26-12","A"],"U7":["AO-IR-0025-119","IR-25-119","A"],"U8":["AO-IR-ARC-0026-13","ARC-26-13","A"]},"F4":{"U1":["AO-IR-ARC-0026-30","ARC-26-30","A"],"U2":["AO-IR-ARC-0026-30","ARC-26-30","A"],"U3":["AO-IR-ARC-0026-38","ARC-26-38","A"],"U4":["AO-IR-ARC-0026-40","ARC-26-40","A"],"U5":["AO-IR-ARC-0026-32","ARC-26-32","A"],"U6":["AO-IR-ARC-0026-38","ARC-26-38","A"],"U7":["AO-IR-ARC-0026-32","ARC-26-32","A"],"U8":["AO-IR-ARC-0026-35","ARC-26-35","A"]},"F5":{"U1":["AO-IR-ARC-0026-47","ARC-26-47","A"],"U2":["AO-IR-ARC-0026-49","ARC-26-49","A"],"U3":["AO-IR-ARC-0026-49","ARC-26-49","A"],"U4":["AO-IR-ARC-0026-56","ARC-26-56","A"],"U5":["AO-IR-ARC-0026-49","ARC-26-49","A"],"U6":["AO-IR-ARC-0026-49","ARC-26-49","A"],"U7":["AO-IR-ARC-0026-56","ARC-26-56","A"],"U8":["AO-IR-ARC-0026-53","ARC-26-53","A"]},"F6":{"U1":["AO-IR-ARC-0026-66","ARC-26-66","A"],"U2":["AO-IR-ARC-0026-76","ARC-26-76","A"],"U3":["AO-IR-ARC-0026-78","ARC-26-78","A"],"U4":["AO-IR-ARC-0026-80","ARC-26-80","A"],"U5":["AO-IR-ARC-0026-66","ARC-26-66","A"],"U6":["AO-IR-ARC-0026-78","ARC-26-78","A"],"U7":["AO-IR-ARC-0026-72","ARC-26-72","A"],"U8":["AO-IR-ARC-0026-91","ARC-26-91","A"]},"F7":{"U1":["AO-IR-ARC-0026-103","ARC-26-103","A"],"U2":["AO-IR-ARC-0026-92","ARC-26-92","A"],"U3":["AO-IR-ARC-0026-103","ARC-26-103","A"],"U4":["AO-IR-ARC-0026-115","ARC-26-115","A"],"U5":["AO-IR-ARC-0026-108","ARC-26-108","A"],"U6":["AO-IR-ARC-0026-127","ARC-26-127","A"],"U7":["AO-IR-ARC-0026-86","ARC-26-86","A"],"U8":["AO-IR-ARC-0026-114","ARC-26-114","A"]},"F8":{"U1":["AO-IR-ARC-0026-137","ARC-26-137","A"],"U2":["AO-IR-ARC-0026-122","ARC-26-122","A"],"U3":["AO-IR-ARC-0026-129","ARC-26-129","A"],"U4":["AO-IR-ARC-0026-150","ARC-26-150","A"],"U5":["AO-IR-ARC-0026-140","ARC-26-140","A"],"U6":["AO-IR-ARC-0026-147","ARC-26-147","A"],"U7":["AO-IR-ARC-0026-124","ARC-26-124","A"],"U8":["AO-IR-ARC-0026-151","ARC-26-151","A"]},"F9":{"U1":["AO-IR-ARC-0026-159","ARC-26-159","B"],"U2":["AO-IR-ARC-0026-161","ARC-26-161","B"],"U3":null,"U4":null,"U5":null,"U6":null,"U7":null,"U8":null}},"pls_malo":{"F1":{"U1":["AO-IR-ARC-0026-03","ARC-26-03","A"],"U2":["AO-IR-ARC-0026-09","ARC-26-09","A"],"U3":["AO-IR-ARC-0026-03","ARC-26-03","A"],"U4":["AO-IR-ARC-0026-17","ARC-26-17","A"],"U5":["AO-IR-ARC-0026-09","ARC-26-09","A"],"U6":["AO-IR-ARC-0026-09","ARC-26-09","A"],"U7":["AO-IR-ARC-0026-03","ARC-26-03","A"],"U8":["AO-IR-ARC-0026-17","ARC-26-17","A"]},"F2":{"U1":["AO-IR-ARC-0026-33","ARC-26-33","A"],"U2":["AO-IR-ARC-0026-29","ARC-26-29","A"],"U3":["AO-IR-ARC-0026-33","ARC-26-33","A"],"U4":["AO-IR-ARC-0026-33","ARC-26-33","A"],"U5":["AO-IR-ARC-0026-29","ARC-26-29","A"],"U6":["AO-IR-ARC-0026-29","ARC-26-29","A"],"U7":["AO-IR-ARC-0026-33","ARC-26-33","A"],"U8":["AO-IR-ARC-0026-37","ARC-26-37","A"]},"F3":{"U1":["AO-IR-ARC-0026-18","ARC-26-18","A"],"U2":["AO-IR-ARC-0026-01","ARC-26-01","A"],"U3":["AO-IR-ARC-0026-24","ARC-26-24","A"],"U4":["AO-IR-ARC-0026-24","ARC-26-24","A"],"U5":["AO-IR-ARC-0026-24","ARC-26-24","A"],"U6":["AO-IR-ARC-0026-24","ARC-26-24","A"],"U7":["AO-IR-0025-127","IR-25-127","A"],"U8":["AO-IR-ARC-0026-25","ARC-26-25","A"]},"F4":{"U1":["AO-IR-ARC-0026-39","ARC-26-39","A"],"U2":["AO-IR-ARC-0026-39","ARC-26-39","A"],"U3":["AO-IR-ARC-0026-51","ARC-26-51","A"],"U4":["AO-IR-ARC-0026-54","ARC-26-54","A"],"U5":["AO-IR-ARC-0026-51","ARC-26-51","A"],"U6":["AO-IR-ARC-0026-51","ARC-26-51","A"],"U7":["AO-IR-ARC-0026-41","ARC-26-41","A"],"U8":["AO-IR-ARC-0026-52","ARC-26-52","A"]},"F5":{"U1":["AO-IR-ARC-0026-60","ARC-26-60","A"],"U2":["AO-IR-ARC-0026-60","ARC-26-60","A"],"U3":["AO-IR-ARC-0026-60","ARC-26-60","A"],"U4":["AO-IR-ARC-0026-74","ARC-26-74","A"],"U5":["AO-IR-ARC-0026-65","ARC-26-65","A"],"U6":["AO-IR-ARC-0026-65","ARC-26-65","A"],"U7":["AO-IR-ARC-0026-70","ARC-26-70","A"],"U8":["AO-IR-ARC-0026-71","ARC-26-71","A"]},"F6":{"U1":["AO-IR-ARC-0026-84","ARC-26-84","A"],"U2":["AO-IR-ARC-0026-84","ARC-26-84","A"],"U3":["AO-IR-ARC-0026-99","ARC-26-99","A"],"U4":["AO-IR-ARC-0026-101","ARC-26-101","A"],"U5":null,"U6":["AO-IR-ARC-0026-101","ARC-26-101","A"],"U7":["AO-IR-ARC-0026-90","ARC-26-90","A"],"U8":["AO-IR-ARC-0026-107","ARC-26-107","A"]},"F7":{"U1":["AO-IR-ARC-0026-112","ARC-26-112","A"],"U2":["AO-IR-ARC-0026-112","ARC-26-112","A"],"U3":["AO-IR-ARC-0026-112","ARC-26-112","A"],"U4":["AO-IR-ARC-0026-131","ARC-26-131","A"],"U5":["AO-IR-ARC-0026-117","ARC-26-117","A"],"U6":null,"U7":["AO-IR-ARC-0026-97","ARC-26-97","A"],"U8":["AO-IR-ARC-0026-132","ARC-26-132","A"]},"F8":{"U1":["AO-IR-ARC-0026-142","ARC-26-142","A"],"U2":["AO-IR-ARC-0026-135","ARC-26-135","A"],"U3":["AO-IR-ARC-0026-135","ARC-26-135","A"],"U4":["AO-IR-ARC-0026-156","ARC-26-156","B"],"U5":["AO-IR-ARC-0026-152","ARC-26-152","A"],"U6":["AO-IR-ARC-0026-156","ARC-26-156","B"],"U7":["AO-IR-ARC-0026-135","ARC-26-135","A"],"U8":["AO-IR-ARC-0026-157","ARC-26-157","B"]},"F9":{"U1":null,"U2":null,"U3":null,"U4":null,"U5":null,"U6":null,"U7":null,"U8":null}}};
+
+const APT_FLOORS = [
+  { id: 'F1', num: 1, label: 'الدور الأول', short: 'الأول' },
+  { id: 'F2', num: 2, label: 'الدور الثاني', short: 'الثاني' },
+  { id: 'F3', num: 3, label: 'الدور الثالث', short: 'الثالث' },
+  { id: 'F4', num: 4, label: 'الدور الرابع', short: 'الرابع' },
+  { id: 'F5', num: 5, label: 'الدور الخامس', short: 'الخامس' },
+  { id: 'F6', num: 6, label: 'الدور السادس', short: 'السادس' },
+  { id: 'F7', num: 7, label: 'الدور السابع', short: 'السابع' },
+  { id: 'F8', num: 8, label: 'الدور الثامن', short: 'الثامن' },
+  { id: 'F9', num: 9, label: 'الدور التاسع', short: 'التاسع' }
+];
+
+const APT_UNITS_7 = [1,2,3,4,5,6,7].map(n => ({ id: 'U'+n, label: 'شقة ' + n }));
+const APT_UNITS_8 = [...APT_UNITS_7, { id: 'U8', label: 'الطرقة' }];
+const APT_UNITS_9 = [...APT_UNITS_8, { id: 'U9', label: 'السقف' }];
+
+const APT_STAGE_CONFIG = [
+  { id: 'mas_qad',  label: '1. قد المباني (شقق 1–7)', disc: 'معماري', units: APT_UNITS_7 },
+  { id: 'mas_raf',  label: '2. رفع المباني (شقق 1–7)', disc: 'معماري', units: APT_UNITS_7 },
+  { id: 'elec',     label: '3. أعمال الكهرباء (7 شقق + الطرقة + السقف)', disc: 'كهرباء', units: APT_UNITS_9 },
+  { id: 'pls_tar',  label: '4. محارة: طرطشة + بؤج + أوتار + شبك (7 شقق + الطرقة)', disc: 'معماري', units: APT_UNITS_8 },
+  { id: 'pls_malo', label: '5. محارة: ملو (7 شقق + الطرقة)', disc: 'معماري', units: APT_UNITS_8 }
+];
+
+let activeIpcSheetCode = null;
+let activeAptStageFilter = 'ALL';
+
+// --- A) ITEMIZED SUBCONTRACTOR IPC SHEET ENGINE ---
+function ensureIpcSheets() {
+  if (!DB.ipcSheets || typeof DB.ipcSheets !== 'object') DB.ipcSheets = {};
+}
+
+function buildDefaultIpcSheetForContract(cntCode) {
+  const c = (DB.contracts || []).find(x => x.code === cntCode);
+  const st = (S?.subStats || []).find(x => x.code === cntCode);
+  const ipc = (DB.ipcs || []).find(x => x.cnt === cntCode);
+  const isSteelSample = c && (/حداد/i.test(c.name || '') || /حداد/i.test(c.trade || '') || cntCode === 'CNT-04');
+  const rows = isSteelSample
+    ? SEED_IPC35_ROWS.map(r => ({ kind: r[0], desc: r[1], unit: r[2], prevQty: r[3], currQty: r[4], pct: r[5], rate: r[6] }))
+    : [{ kind: 'add', desc: '', unit: 'م²', prevQty: 0, currQty: 0, pct: 100, rate: 0 }];
+  return {
+    contractCode: cntCode,
+    ipcNo: isSteelSample ? '35' : String(ipc?.no || 1),
+    ipcKind: 'جاري',
+    date: isSteelSample ? '2025-09-11' : todayISO(),
+    contractorName: c?.person || c?.name || '',
+    tradeDesc: c ? (c.trade || c.name) : '',
+    building: 'عمارة رقم (5)',
+    retPct: 0,
+    prevPaid: st ? Number(st.totalPaid || 0) : (isSteelSample ? 700000 : 0),
+    rows,
+    sigs: {
+      t1: 'إعداد ومراجعة الكميات', n1: 'م / أحمد يسري',
+      t2: 'المكتب الفني والتنفيذ', n2: 'م / ....................',
+      t3: 'اعتماد مدير المشروع',   n3: 'م / محمد السيد'
+    }
+  };
+}
+
+function getOrCreateIpcSheet(cntCode) {
+  ensureIpcSheets();
+  if (!cntCode) return null;
+  if (!DB.ipcSheets[cntCode]) {
+    DB.ipcSheets[cntCode] = buildDefaultIpcSheetForContract(cntCode);
+  }
+  return DB.ipcSheets[cntCode];
+}
+
+function openContractorIpcSheet(cntCode) {
+  activeIpcSheetCode = cntCode;
+  switchTab('subcontractors', null, 'ipc-sheet');
+  renderIpcSheetView();
+}
+
+function selectIpcSheetContract(cntCode) {
+  activeIpcSheetCode = cntCode;
+  renderIpcSheetView();
+}
+
+function computeIpcSheetTotals(sheet) {
+  let gross = 0, ded = 0;
+  (sheet?.rows || []).forEach(r => {
+    const totQty = (Number(r.prevQty) || 0) + (Number(r.currQty) || 0);
+    const val = totQty * ((Number(r.pct) || 0) / 100) * (Number(r.rate) || 0);
+    if (r.kind === 'ded') ded += val;
+    else gross += val;
+  });
+  const net = gross - ded;
+  const retPct = Math.max(0, Number(sheet?.retPct) || 0);
+  const retVal = net > 0 ? net * (retPct / 100) : 0;
+  const prevPaid = Math.max(0, Number(sheet?.prevPaid) || 0);
+  const netDue = net - retVal - prevPaid;
+  return { gross, ded, net, retPct, retVal, prevPaid, netDue };
+}
+
+function renderIpcSheetView() {
+  ensureIpcSheets();
+  const bdg = document.getElementById('subBdgContracts');
+  if (bdg) bdg.textContent = (DB.contracts || []).length;
+
+  const sel = document.getElementById('ipcSheetContractSelect');
+  if (!sel) return;
+
+  const contracts = DB.contracts || [];
+  if (!contracts.length) {
+    sel.innerHTML = '<option value="">لا توجد عقود مقاولين مسجلة بعد</option>';
+    const tb = document.getElementById('ipcSheetBody');
+    if (tb) tb.innerHTML = '<tr><td colspan="11" style="padding:18px; color:var(--muted);">أضف عقد مقاول من تبويب «الموقف المالي والدفعات» أولاً.</td></tr>';
+    return;
+  }
+
+  if (!activeIpcSheetCode || !contracts.some(c => c.code === activeIpcSheetCode)) {
+    const steelC = contracts.find(c => /حداد/i.test(c.name || '') || /حداد/i.test(c.trade || ''));
+    activeIpcSheetCode = (steelC || contracts[0]).code;
+  }
+
+  sel.innerHTML = contracts.map(c => {
+    const savedMark = DB.ipcSheets[c.code]?.rows?.some(r => (r.desc||'').trim()) ? ' ✓' : '';
+    return `<option value="${esc(c.code)}" ${c.code===activeIpcSheetCode?'selected':''}>${esc(c.code)} — ${esc(c.name)}${savedMark}</option>`;
+  }).join('');
+
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  const cObj = contracts.find(c => c.code === activeIpcSheetCode);
+  const liveSub = (S?.subStats || []).find(x => x.code === activeIpcSheetCode);
+
+  const setV = (id, v) => { const el = document.getElementById(id); if (el) el.value = v ?? ''; };
+  const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v ?? ''; };
+
+  setT('ipcSheetContractPill', `${activeIpcSheetCode} • ${cObj?.name || ''}`);
+  setV('ipcShNo', sheet.ipcNo);
+  setV('ipcShKind', sheet.ipcKind || 'جاري');
+  setV('ipcShDate', sheet.date || todayISO());
+  setV('ipcShContractor', sheet.contractorName);
+  setV('ipcShTrade', sheet.tradeDesc);
+  setV('ipcShBuilding', sheet.building || 'عمارة رقم (5)');
+  setV('ipcShRetPct', sheet.retPct ?? 0);
+  setV('ipcShPrevPaid', sheet.prevPaid ?? 0);
+  setT('ipcLivePaidHint', `سجل الدفعات الفعلي: ${fmt(liveSub?.totalPaid || 0, 2)} ج.م`);
+
+  const sigs = sheet.sigs || {};
+  setV('ipcSigT1', sigs.t1 || 'إعداد ومراجعة الكميات'); setV('ipcSigN1', sigs.n1 || 'م / أحمد يسري');
+  setV('ipcSigT2', sigs.t2 || 'المكتب الفني والتنفيذ'); setV('ipcSigN2', sigs.n2 || 'م / ....................');
+  setV('ipcSigT3', sigs.t3 || 'اعتماد مدير المشروع');   setV('ipcSigN3', sigs.n3 || 'م / محمد السيد');
+
+  renderIpcSheetRows();
+}
+
+function renderIpcSheetRows() {
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  const tb = document.getElementById('ipcSheetBody');
+  if (!sheet || !tb) return;
+
+  const badge = document.getElementById('ipcSheetCountBadge');
+  if (badge) badge.textContent = `${sheet.rows.length} سطر`;
+
+  tb.innerHTML = sheet.rows.map((r, i) => {
+    const prevQ = Number(r.prevQty) || 0;
+    const currQ = Number(r.currQty) || 0;
+    const totQ = prevQ + currQ;
+    const pct = Number(r.pct) || 0;
+    const rate = Number(r.rate) || 0;
+    const val = totQ * (pct / 100) * rate;
+    const isDed = r.kind === 'ded';
+    return `
+      <tr class="${isDed ? 'ipc-row-ded' : ''}">
+        <td class="num" style="font-weight:700; color:var(--muted);">${i + 1}</td>
+        <td>
+          <select class="ipc-inp" style="font-weight:700; text-align:center;" onchange="updateIpcRowField(${i},'kind',this.value,true)">
+            <option value="add" ${!isDed?'selected':''}>إضافة أعمال ➕</option>
+            <option value="ded" ${isDed?'selected':''}>خصم خامات ➖</option>
+          </select>
+        </td>
+        <td class="right"><input type="text" class="ipc-inp" style="font-weight:600;" value="${esc(r.desc)}" oninput="updateIpcRowField(${i},'desc',this.value,false)" placeholder="بيان البند أو الخصم..." /></td>
+        <td><input type="text" class="ipc-inp" style="text-align:center;" value="${esc(r.unit)}" oninput="updateIpcRowField(${i},'unit',this.value,false)" placeholder="م³ / م²" /></td>
+        <td><input type="number" step="0.01" class="ipc-inp num" style="text-align:center;" value="${prevQ}" oninput="updateIpcRowField(${i},'prevQty',this.value,false)" /></td>
+        <td><input type="number" step="0.01" class="ipc-inp num" style="text-align:center;" value="${currQ}" oninput="updateIpcRowField(${i},'currQty',this.value,false)" /></td>
+        <td class="num" style="font-weight:700; background:var(--surface-2);" id="ipcRowTotQ-${i}">${fmt(totQ, totQ % 1 ? 2 : 0)}</td>
+        <td><input type="number" step="1" min="0" max="100" class="ipc-inp num" style="text-align:center;" value="${pct}" oninput="updateIpcRowField(${i},'pct',this.value,false)" /></td>
+        <td><input type="number" step="0.01" min="0" class="ipc-inp num" style="text-align:center;" value="${rate}" oninput="updateIpcRowField(${i},'rate',this.value,false)" /></td>
+        <td class="num" style="font-weight:700;" id="ipcRowVal-${i}">${fmt(val, 2)}</td>
+        <td class="no-print"><button type="button" class="icon-btn del" onclick="removeIpcSheetRow(${i})" title="حذف السطر">✕</button></td>
+      </tr>
+    `;
+  }).join('');
+
+  updateIpcSummaryDom();
+}
+
+function updateIpcRowField(idx, field, val, rerenderAll) {
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet || !sheet.rows[idx]) return;
+  const numFields = ['prevQty', 'currQty', 'pct', 'rate'];
+  sheet.rows[idx][field] = numFields.includes(field) ? (Number(val) || 0) : val;
+  if (rerenderAll) {
+    renderIpcSheetRows();
+    return;
+  }
+  const r = sheet.rows[idx];
+  const totQ = (Number(r.prevQty) || 0) + (Number(r.currQty) || 0);
+  const totV = totQ * ((Number(r.pct) || 0) / 100) * (Number(r.rate) || 0);
+  const qEl = document.getElementById('ipcRowTotQ-' + idx);
+  const vEl = document.getElementById('ipcRowVal-' + idx);
+  if (qEl) qEl.textContent = fmt(totQ, totQ % 1 ? 2 : 0);
+  if (vEl) vEl.textContent = fmt(totV, 2);
+  updateIpcSummaryDom();
+}
+
+function updateIpcSummaryDom() {
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  const t = computeIpcSheetTotals(sheet);
+  const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  setT('ipcSumGross', fmt(t.gross, 2));
+  setT('ipcSumDed', fmt(t.ded, 2));
+  setT('ipcSumNet', fmt(t.net, 2));
+  setT('ipcSumRet', fmt(t.retVal, 2));
+  setT('ipcSumDue', fmt(t.netDue, 2));
+  const dueRow = document.getElementById('ipcSumDueRow');
+  if (dueRow) dueRow.classList.toggle('overpay', t.netDue < 0);
+}
+
+function syncIpcMetaFromDom() {
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  const g = id => document.getElementById(id)?.value ?? '';
+  sheet.ipcNo = g('ipcShNo').trim() || '1';
+  sheet.ipcKind = g('ipcShKind') || 'جاري';
+  sheet.date = g('ipcShDate') || todayISO();
+  sheet.contractorName = g('ipcShContractor').trim();
+  sheet.tradeDesc = g('ipcShTrade').trim();
+  sheet.building = g('ipcShBuilding').trim() || 'عمارة رقم (5)';
+  sheet.sigs = {
+    t1: g('ipcSigT1').trim(), n1: g('ipcSigN1').trim(),
+    t2: g('ipcSigT2').trim(), n2: g('ipcSigN2').trim(),
+    t3: g('ipcSigT3').trim(), n3: g('ipcSigN3').trim()
+  };
+}
+
+function onIpcSummaryInputsChange() {
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  sheet.retPct = Math.max(0, Number(document.getElementById('ipcShRetPct')?.value) || 0);
+  sheet.prevPaid = Math.max(0, Number(document.getElementById('ipcShPrevPaid')?.value) || 0);
+  updateIpcSummaryDom();
+}
+
+function addIpcSheetRow(kind) {
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  sheet.rows.push({
+    kind: kind === 'ded' ? 'ded' : 'add',
+    desc: kind === 'ded' ? 'بالخصم خامات / ' : '',
+    unit: kind === 'ded' ? 'عدد' : 'م²',
+    prevQty: 0, currQty: 0, pct: 100, rate: 0
+  });
+  renderIpcSheetRows();
+}
+
+function removeIpcSheetRow(idx) {
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  sheet.rows.splice(idx, 1);
+  if (!sheet.rows.length) sheet.rows.push({ kind: 'add', desc: '', unit: 'م²', prevQty: 0, currQty: 0, pct: 100, rate: 0 });
+  renderIpcSheetRows();
+}
+
+function pullPaymentsIntoIpcSheet() {
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  const liveSub = (S?.subStats || []).find(x => x.code === activeIpcSheetCode);
+  sheet.prevPaid = Number(liveSub?.totalPaid || 0);
+  const el = document.getElementById('ipcShPrevPaid');
+  if (el) el.value = sheet.prevPaid;
+  updateIpcSummaryDom();
+  showToast(`🔄 تم سحب إجمالي الدفعات (${fmt(sheet.prevPaid, 2)} ج.م) من سجل مدفوعات المقاول!`);
+}
+
+function loadSampleIpc35IntoCurrent() {
+  if (!activeIpcSheetCode) return showToast('اختر مقاولاً من القائمة المنسدلة أولاً.');
+  if (!confirm('هل تريد تحميل بنود العينة التفصيلية (28 سطراً من مستخلص 35 حدادة) داخل شيت المقاول الحالي؟')) return;
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  sheet.ipcNo = '35';
+  sheet.ipcKind = 'جاري';
+  sheet.date = '2025-09-11';
+  sheet.prevPaid = 700000;
+  sheet.retPct = 0;
+  sheet.rows = SEED_IPC35_ROWS.map(r => ({ kind: r[0], desc: r[1], unit: r[2], prevQty: r[3], currQty: r[4], pct: r[5], rate: r[6] }));
+  renderIpcSheetView();
+  showToast('📄 تم تحميل بنود مستخلص 35 التفصيلية — يمكنك التعديل أو الطباعة أو الحفظ.');
+}
+
+function saveCurrentIpcSheet() {
+  syncIpcMetaFromDom();
+  onIpcSummaryInputsChange();
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  saveDB(`💾 تم حفظ نموذج المستخلص التفصيلي (#${sheet.ipcNo} — ${activeIpcSheetCode}) في السحابة!`);
+}
+
+function syncIpcSheetToFinancials() {
+  syncIpcMetaFromDom();
+  onIpcSummaryInputsChange();
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  const t = computeIpcSheetTotals(sheet);
+  if (t.gross <= 0) return alert('أدخل بنود الأعمال أولاً قبل اعتماد المستخلص.');
+  const idx = DB.ipcs.findIndex(x => x.cnt === activeIpcSheetCode);
+  const rec = {
+    id: idx >= 0 ? DB.ipcs[idx].id : `IPC-${todayISO().slice(0,4)}-${String(DB.ipcs.length+1).padStart(4,'0')}`,
+    cnt: activeIpcSheetCode,
+    no: Number(sheet.ipcNo) || 1,
+    date: sheet.date || todayISO(),
+    desc: `مستخلص ${sheet.ipcNo} ${sheet.ipcKind} — ${sheet.tradeDesc}`,
+    gross: Number(t.gross.toFixed(2)),
+    matDed: Number(t.ded.toFixed(2)),
+    custDed: 0,
+    status: 'معتمد',
+    pdf: idx >= 0 ? (DB.ipcs[idx].pdf || '') : '',
+    doc: idx >= 0 ? (DB.ipcs[idx].doc || null) : null
+  };
+  if (idx >= 0) DB.ipcs[idx] = rec;
+  else DB.ipcs.push(rec);
+  saveDB(`⚡ تم اعتماد وترحيل صافي المستخلص (${fmt(t.net, 2)} ج.م) للموقف المالي لـ ${activeIpcSheetCode}!`);
+}
+
+async function importIpcFromExcel(inputEl) {
+  const file = inputEl?.files?.[0];
+  if (!file) return;
+  if (typeof XLSX === 'undefined') { alert('تأكد من الاتصال بالإنترنت لتحميل مكتبة قراءة Excel.'); inputEl.value=''; return; }
+  try {
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf, { type: 'array', cellDates: true });
+    const shName = wb.SheetNames.find(n => n.includes('مستخلص')) || wb.SheetNames[0];
+    const aoa = XLSX.utils.sheet_to_json(wb.Sheets[shName], { header: 1, defval: '' });
+    const imported = [];
+    for (let r = 8; r < aoa.length; r++) {
+      const row = aoa[r];
+      const off = (String(row[17] || '').includes('إضافة') || String(row[17] || '').includes('خصم')) ? 16 : 0;
+      const kindS = String(row[off + 1] || '');
+      const desc = String(row[off + 2] || '').trim();
+      if (!desc || desc.includes('إجمالي قيمة الأعمال')) continue;
+      if (!kindS.includes('إضافة') && !kindS.includes('خصم') && off === 0 && !Number(row[off + 8])) continue;
+      imported.push({
+        kind: kindS.includes('خصم') ? 'ded' : 'add',
+        desc,
+        unit: String(row[off + 3] || 'م²').trim(),
+        prevQty: Number(row[off + 4]) || 0,
+        currQty: Number(row[off + 5]) || 0,
+        pct: (Number(row[off + 7]) <= 1 && Number(row[off + 7]) > 0) ? Math.round(Number(row[off + 7]) * 100) : (Number(row[off + 7]) || 100),
+        rate: Number(row[off + 8]) || 0
+      });
+    }
+    if (!imported.length) throw new Error('لم يتم العثور على بنود مستخلص صالحة في الملف.');
+    const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+    sheet.rows = imported;
+    saveDB(`📂 تم استيراد ${imported.length} بنداً إلى مستخلص ${activeIpcSheetCode} بنجاح!`);
+  } catch (err) {
+    alert('تعذر الاستيراد: ' + err.message);
+  }
+  inputEl.value = '';
+}
+
+function printItemizedIpcSheet() {
+  syncIpcMetaFromDom();
+  onIpcSummaryInputsChange();
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sheet) return;
+  const t = computeIpcSheetTotals(sheet);
+  const logos = getBrandLogos();
+  const dtFmt = (sheet.date || '').split('-').reverse().join(' / ');
+
+  const rowsHtml = sheet.rows.filter(r => (r.desc || '').trim() || Number(r.rate) > 0).map((r, i) => {
+    const prevQ = Number(r.prevQty) || 0, currQ = Number(r.currQty) || 0, totQ = prevQ + currQ;
+    const pct = Number(r.pct) || 0, rate = Number(r.rate) || 0;
+    const val = totQ * (pct / 100) * rate;
+    const isDed = r.kind === 'ded';
+    const bg = isDed ? 'background:#FEF3F2; color:#B42318;' : (i % 2 ? 'background:#F8FAFC;' : '');
+    const tdBase = 'border:1px solid #CBD5E1; padding:4px 5px;';
+    return `
+      <tr style="${bg}">
+        <td style="${tdBase} text-align:center; font-weight:700;">${i + 1}</td>
+        <td style="${tdBase} text-align:center; font-weight:700;">${isDed ? 'خصم خامات —' : 'إضافة أعمال +'}</td>
+        <td style="${tdBase} text-align:right; font-weight:600;">${esc(r.desc)}</td>
+        <td style="${tdBase} text-align:center;">${esc(r.unit)}</td>
+        <td style="${tdBase} text-align:center;" class="num">${prevQ ? fmt(prevQ, prevQ % 1 ? 2 : 0) : ''}</td>
+        <td style="${tdBase} text-align:center;" class="num">${currQ ? fmt(currQ, currQ % 1 ? 2 : 0) : ''}</td>
+        <td style="${tdBase} text-align:center; font-weight:700; color:${isDed ? '#B42318' : '#0E4D4E'};" class="num">${fmt(totQ, totQ % 1 ? 2 : 0)}</td>
+        <td style="${tdBase} text-align:center;" class="num">${pct}%</td>
+        <td style="${tdBase} text-align:center;" class="num">${fmt(rate, rate % 1 ? 2 : 0)}</td>
+        <td style="${tdBase} text-align:left; font-weight:700;" class="num">${fmt(val, 2)}</td>
+      </tr>
+    `;
+  }).join('');
+
+  document.getElementById('printIpcSheetArea').innerHTML = `
+    <div style="font-family:'IBM Plex Sans Arabic','Cairo',sans-serif; color:#101828;">
+      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #0E4D4E; padding-bottom:8px; margin-bottom:10px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          ${logos.aobc ? `<img src="${logos.aobc}" style="height:48px; border-radius:6px;" />` : ''}
+          <div>
+            <div style="font-size:14px; font-weight:700; color:#0E4D4E;">المكتب العربي للتشييد والبناء (A.O.B.C) — سجل تجاري (174355)</div>
+            <div style="font-size:11.5px; color:#475467; font-weight:600;">المشروع: حياة مرسيليا — ${esc(sheet.building)}</div>
+          </div>
+        </div>
+        <div style="text-align:left;">
+          <div style="background:#0E4D4E; color:#FFFFFF; padding:4px 12px; border-radius:6px; font-size:13px; font-weight:700;">مستخلص رقم / ${esc(sheet.ipcNo)} ${esc(sheet.ipcKind)}</div>
+          <div style="font-size:10.5px; color:#475467; margin-top:3px; font-weight:600;">التاريخ: ${esc(dtFmt)}</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; padding:8px 12px; background:#F7F8F9; border:1px solid #CBD5E1; border-radius:7px; font-size:11.5px;">
+        <div><strong>اسم المقاول:</strong> ${esc(sheet.contractorName)}</div>
+        <div><strong>وصف العمل (البند):</strong> ${esc(sheet.tradeDesc)}</div>
+      </div>
+
+      <table style="width:100%; border-collapse:collapse; font-size:10.5px; margin-bottom:10px;">
+        <thead>
+          <tr style="background:#0E4D4E; color:#FFFFFF;">
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:26px;">م</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:82px;">نوع السطر</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; text-align:right;">بيان الأعمال التفصيلي</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:48px;">الوحدة</th>
+            <th colspan="3" style="border:1px solid #0E4D4E; padding:4px;">الكميات المنفذة</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:48px;">النسبة %</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:64px;">الفئة (جنيه)</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:86px;">القيمة الإجمالية</th>
+          </tr>
+          <tr style="background:#1F7A7B; color:#FFFFFF;">
+            <th style="border:1px solid #0E4D4E; padding:3px; width:54px;">سابقة</th>
+            <th style="border:1px solid #0E4D4E; padding:3px; width:54px;">حالية</th>
+            <th style="border:1px solid #0E4D4E; padding:3px; width:58px;">إجمالي</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+
+      <div style="border:1.5px solid #0E4D4E; border-radius:7px; overflow:hidden; page-break-inside:avoid; font-size:11.5px;">
+        <div style="display:flex; justify-content:space-between; padding:6px 12px; background:#F1F5F9; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>إجمالي قيمة الأعمال المنفذة (بدون الخصومات) +</span><span class="num">${fmt(t.gross, 2)} ج.م</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:6px 12px; background:#FEF3F2; color:#B42318; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>يُخصم: إجمالي استقطاعات الخامات والمستلزمات —</span><span class="num">${fmt(t.ded, 2)} ج.م</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:6px 12px; background:#ECFDF3; color:#067647; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>صافي قيمة المستخلص المستحق (بعد خصم الخامات) ✓</span><span class="num">${fmt(t.net, 2)} ج.م</span>
+        </div>
+        ${t.retPct > 0 ? `<div style="display:flex; justify-content:space-between; padding:6px 12px; background:#FFFAEB; color:#B54708; border-bottom:1px solid #CBD5E1; font-weight:700;"><span>يُخصم: تأمين أعمال (${t.retPct}%)</span><span class="num">${fmt(t.retVal, 2)} ج.م</span></div>` : ''}
+        <div style="display:flex; justify-content:space-between; padding:6px 12px; background:#FFFFFF; border-bottom:1px solid #CBD5E1; font-weight:600;">
+          <span>يُخصم: إجمالي الدفعات والأعمال السابقة المنصرفة</span><span class="num">${fmt(t.prevPaid, 2)} ج.م</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 12px; background:${t.netDue < 0 ? '#B42318' : '#0E4D4E'}; color:#FFFFFF; font-size:13px; font-weight:700;">
+          <span>الصافي المستحق للصرف في هذه الدفعة (ج.م)</span><span class="num">${fmt(t.netDue, 2)} ج.م</span>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px; text-align:center; page-break-inside:avoid;">
+        <div style="border:1px solid #CBD5E1; border-radius:7px; padding:8px;">
+          <div style="font-size:10.5px; font-weight:700; color:#0E4D4E;">${esc(sheet.sigs?.t1 || 'إعداد ومراجعة الكميات')}</div>
+          <div style="font-family:'Aref Ruqaa',serif; font-size:20px; margin:6px 0;">${esc(sheet.sigs?.n1 || 'م / أحمد يسري')}</div>
+        </div>
+        <div style="border:1px solid #CBD5E1; border-radius:7px; padding:8px;">
+          <div style="font-size:10.5px; font-weight:700; color:#0E4D4E;">${esc(sheet.sigs?.t2 || 'المكتب الفني والتنفيذ')}</div>
+          <div style="font-family:'Aref Ruqaa',serif; font-size:20px; margin:6px 0;">${esc(sheet.sigs?.n2 || 'م / ....................')}</div>
+        </div>
+        <div style="border:1px solid #0E4D4E; border-radius:7px; padding:8px; background:#E8F3F3;">
+          <div style="font-size:10.5px; font-weight:700; color:#0E4D4E;">${esc(sheet.sigs?.t3 || 'اعتماد مدير المشروع')}</div>
+          <div style="font-family:'Aref Ruqaa',serif; font-size:20px; margin:6px 0;">${esc(sheet.sigs?.n3 || 'م / محمد السيد')}</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.classList.add('printing-ipc-sheet');
+  const cleanup = () => {
+    document.body.classList.remove('printing-ipc-sheet');
+    window.removeEventListener('afterprint', cleanup);
+  };
+  window.addEventListener('afterprint', cleanup);
+  setTimeout(() => { window.print(); setTimeout(cleanup, 1200); }, 140);
+}
+
+// --- B) APARTMENT DELIVERY & IR MATRIX + PRE-CODING GENERATOR + IR LOG ---
+function inflateSeedIrLog() {
+  return SEED_IR_COMPACT.map(r => ({
+    code: r[0], short: r[1], disc: r[2], status: r[3], desc: r[4],
+    rev: r[5], subDate: r[6], retDate: r[7], floor: r[8], notes: r[9]
+  }));
+}
+
+function inflateSeedAptMatrix() {
+  const out = {};
+  Object.keys(SEED_APT_MATRIX).forEach(stId => {
+    out[stId] = {};
+    Object.keys(SEED_APT_MATRIX[stId]).forEach(flId => {
+      out[stId][flId] = {};
+      Object.keys(SEED_APT_MATRIX[stId][flId]).forEach(uId => {
+        const v = SEED_APT_MATRIX[stId][flId][uId];
+        out[stId][flId][uId] = v ? { code: v[0], short: v[1], status: v[2] } : null;
+      });
+    });
+  });
+  return out;
+}
+
+function ensureIrAndAptMatrix() {
+  if (!Array.isArray(DB.irLog) || !DB.irLog.length) {
+    DB.irLog = inflateSeedIrLog();
+  }
+  if (!DB.aptMatrix || typeof DB.aptMatrix !== 'object' || !DB.aptMatrix.mas_qad) {
+    DB.aptMatrix = inflateSeedAptMatrix();
+  }
+}
+
+function makeShortIrCode(fullCode) {
+  const s = String(fullCode || '').trim();
+  const m = s.match(/(ARC|ELEC|STR)?-?00(\d{2})-(\d+)/i);
+  if (m) {
+    const dTag = (m[1] || 'IR').toUpperCase().replace('ELEC', 'ELC');
+    return `${dTag}-${m[2]}-${m[3]}`;
+  }
+  return s;
+}
+
+function computeAptMatrixSummary() {
+  ensureIrAndAptMatrix();
+  let totalUnits = 0, deliveredUnits = 0, codeBCount = 0, codeCDCount = 0;
+  const byStage = {};
+  APT_STAGE_CONFIG.forEach(st => {
+    let stTot = 0, stDone = 0, stB = 0;
+    APT_FLOORS.forEach(fl => {
+      st.units.forEach(u => {
+        stTot++;
+        const cell = ((DB.aptMatrix[st.id] || {})[fl.id] || {})[u.id];
+        if (cell && cell.code) {
+          if (cell.status === 'A' || cell.status === 'B') stDone++;
+          if (cell.status === 'B') stB++;
+          if (cell.status === 'C' || cell.status === 'D') codeCDCount++;
+        }
+      });
+    });
+    totalUnits += stTot;
+    deliveredUnits += stDone;
+    codeBCount += stB;
+    byStage[st.id] = { tot: stTot, done: stDone, rem: stTot - stDone, b: stB, pct: stTot ? (stDone / stTot * 100) : 0 };
+  });
+  return { totalUnits, deliveredUnits, remUnits: totalUnits - deliveredUnits, pct: totalUnits ? (deliveredUnits / totalUnits * 100) : 0, codeBCount, codeCDCount, byStage };
+}
+
+function setAptStageFilter(stId, btnEl) {
+  activeAptStageFilter = stId;
+  document.querySelectorAll('#aptStageChips .v7-chip').forEach(b => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+  renderAptDeliveryMatrices();
+}
+
+function renderAptDeliveryMatrices() {
+  ensureIrAndAptMatrix();
+  const sum = computeAptMatrixSummary();
+
+  const bApt = document.getElementById('subBdgAptMat');
+  if (bApt) bApt.textContent = `${sum.pct.toFixed(0)}%`;
+  const bIr = document.getElementById('subBdgIrLog');
+  if (bIr) bIr.textContent = (DB.irLog || []).length;
+
+  const kpisEl = document.getElementById('aptMatrixKpis');
+  if (kpisEl) {
+    const irB = (DB.irLog || []).filter(x => x.status === 'B').length;
+    kpisEl.innerHTML = `
+      <div class="kpi-card hero-kpi">
+        <div class="kpi-label">إجمالي التسليمات المعتمدة بالشقق (عمارة 5)</div>
+        <div class="kpi-val">${sum.pct.toFixed(1)}%</div>
+        <div class="kpi-sub">${sum.deliveredUnits} / ${sum.totalUnits} وحدة مستلمة بالـ IR</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">الوحدات المتبقية بدون تسليم</div>
+        <div class="kpi-val">${sum.remUnits} <small style="font-size:12px;">وحدة</small></div>
+        <div class="kpi-sub">قد ${sum.byStage.mas_qad.rem} • رفع ${sum.byStage.mas_raf.rem} • كهرباء ${sum.byStage.elec.rem} • محارة ${sum.byStage.pls_tar.rem + sum.byStage.pls_malo.rem}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">ملاحظات الاستشاري (Code B)</div>
+        <div class="kpi-val" style="color:var(--amber);">${sum.codeBCount} <small style="font-size:12px;">بالمصفوفة</small></div>
+        <div class="kpi-sub">إجمالي Code B بكامل سجل الـ IR: ${irB} معاملة</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">إجمالي سجل طلبات الفحص (IR)</div>
+        <div class="kpi-val">${DB.irLog.length}</div>
+        <div class="kpi-sub">مربوط تلقائياً بالتقرير اليومي ومولّد التكويد</div>
+      </div>
+    `;
+  }
+
+  const onlyPending = !!document.getElementById('aptOnlyPendingChk')?.checked;
+  const stages = activeAptStageFilter === 'ALL'
+    ? APT_STAGE_CONFIG
+    : APT_STAGE_CONFIG.filter(s => s.id === activeAptStageFilter);
+
+  const cont = document.getElementById('aptMatrixContainer');
+  if (!cont) return;
+
+  cont.innerHTML = stages.map(st => {
+    const stSum = sum.byStage[st.id];
+    const rowsHtml = APT_FLOORS.map(fl => {
+      const flObj = ((DB.aptMatrix[st.id] || {})[fl.id] || {});
+      let flDone = 0, flB = 0, hasPendingOrB = false;
+      const cellsHtml = st.units.map(u => {
+        const cell = flObj[u.id];
+        if (cell && cell.code) {
+          if (cell.status === 'A' || cell.status === 'B') flDone++;
+          if (cell.status === 'B') { flB++; hasPendingOrB = true; }
+          if (cell.status !== 'A') hasPendingOrB = true;
+          const stCls = 'apt-st-' + (cell.status || 'A');
+          const icon = cell.status === 'B' ? '⚠️ B' : (cell.status === 'A' ? '✓ A' : (cell.status || ''));
+          return `<td>
+            <button type="button" class="apt-cell-btn ${stCls}" onclick="openAptCellModal('${st.id}','${fl.id}','${u.id}')" title="${esc(cell.code)} — اضغط للتفاصيل أو التعديل">
+              <span class="apt-code-ltr">${esc(cell.short || makeShortIrCode(cell.code))}</span>
+              <span class="apt-sub-tag">${icon}</span>
+            </button>
+          </td>`;
+        } else {
+          hasPendingOrB = true;
+          return `<td>
+            <button type="button" class="apt-cell-btn apt-st-none" onclick="openAptCellModal('${st.id}','${fl.id}','${u.id}')" title="اضغط لتسجيل تسليم IR لهذه الشقة">
+              <span>باقي ⏳</span>
+            </button>
+          </td>`;
+        }
+      }).join('');
+      if (onlyPending && !hasPendingOrB) return '';
+      const pctPill = flDone === st.units.length ? 'pill-green' : (flDone > 0 ? 'pill-amber' : 'pill-navy');
+      const bNote = flB > 0
+        ? `<span class="pill pill-amber">${flB} كود B ⚠️</span>`
+        : (flDone === st.units.length ? '<span class="pill pill-green">صافي A ✓</span>' : `<span style="color:var(--muted); font-size:11px;">متبقي ${st.units.length - flDone}</span>`);
+      return `
+        <tr>
+          <td>${fl.label}</td>
+          ${cellsHtml}
+          <td class="num"><span class="pill ${pctPill}">${flDone} / ${st.units.length}</span></td>
+          <td>${bNote}</td>
+        </tr>
+      `;
+    }).filter(Boolean).join('');
+
+    return `
+      <div class="apt-stage-card">
+        <div class="apt-stage-hdr">
+          <h3>
+            <span>${st.label}</span>
+            <span class="pill ${stSum.rem === 0 ? 'pill-green' : 'pill-plum'} num">${stSum.done} / ${stSum.tot} (${stSum.pct.toFixed(1)}%)</span>
+            ${stSum.b > 0 ? `<span class="pill pill-amber">${stSum.b} ملاحظات كود B</span>` : ''}
+          </h3>
+          <span style="font-size:12px; color:var(--muted); font-weight:600;">${stSum.rem === 0 ? 'مكتمل التسليم بالكامل ✓' : `متبقي ${stSum.rem} وحدة`}</span>
+        </div>
+        <div class="sc-table-wrap">
+          <table class="apt-tbl">
+            <thead>
+              <tr>
+                <th>الدور \ الوحدة</th>
+                ${st.units.map(u => `<th>${u.label}</th>`).join('')}
+                <th style="width:90px;">الإنجاز</th>
+                <th style="width:115px;">حالة الاعتماد</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHtml || '<tr><td colspan="12" style="padding:14px; color:var(--muted);">لا توجد وحدات متبقية أو ملاحظات كود B في هذه المرحلة ✓</td></tr>'}</tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openAptCellModal(stageId, floorId, unitId) {
+  ensureIrAndAptMatrix();
+  const st = APT_STAGE_CONFIG.find(s => s.id === stageId);
+  const fl = APT_FLOORS.find(f => f.id === floorId);
+  const un = st?.units.find(u => u.id === unitId);
+  const cell = ((DB.aptMatrix[stageId] || {})[floorId] || {})[unitId] || null;
+  const linkedIr = cell?.code ? (DB.irLog || []).find(x => x.code === cell.code) : null;
+
+  const suggestedCode = nextIrCodeForDisc(st?.disc || 'معماري');
+  const stageClean = (st?.label || '').replace(/^\d+\.\s*/, '').split('(')[0].trim();
+  const defaultDesc = `${stageClean} — ${un?.label} — ${fl?.label} — عمارة رقم 5`;
+
+  openModal(`📋 تسليم وحدة: ${fl?.label} / ${un?.label} (${stageClean})`, `
+    <div style="padding:9px 11px; border-radius:8px; background:var(--surface-2); border:1px solid var(--border); font-size:12px;">
+      <strong>الموقع:</strong> ${fl?.label} • <strong>الوحدة:</strong> ${un?.label} • <strong>القسم:</strong> ${st?.disc}
+    </div>
+    <div class="form-row">
+      <label>رقم معاملة الـ IR (اتركه فارغاً لإرجاع الوحدة إلى «باقي ⏳»)</label>
+      <div style="display:flex; gap:6px;">
+        <input class="inp ltr-inp" id="m_ac_code" style="flex:1;" value="${esc(cell?.code || '')}" placeholder="${suggestedCode}" />
+        <button type="button" class="btn btn-light btn-sm" onclick="document.getElementById('m_ac_code').value='${suggestedCode}'">⚡ كود تلقائي</button>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="form-row">
+        <label>حالة الاعتماد (DC Code)</label>
+        <select class="inp" id="m_ac_st">
+          <option value="A" ${(cell?.status||'A')==='A'?'selected':''}>Code A — معتمد صافي</option>
+          <option value="B" ${cell?.status==='B'?'selected':''}>Code B — معتمد بملاحظات</option>
+          <option value="C" ${cell?.status==='C'?'selected':''}>Code C — إعادة تقديم</option>
+          <option value="D" ${cell?.status==='D'?'selected':''}>Code D — مرفوض</option>
+          <option value="UR" ${cell?.status==='UR'?'selected':''}>UR — تحت المراجعة</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>تاريخ التقديم</label>
+        <input type="date" class="inp" id="m_ac_dt" value="${esc(linkedIr?.subDate || todayISO())}" />
+      </div>
+    </div>
+    <div class="form-row">
+      <label>البيان / الوصف في سجل الـ IR</label>
+      <input class="inp" id="m_ac_desc" value="${esc(linkedIr?.desc || defaultDesc)}" />
+    </div>
+    <div class="form-row">
+      <label>ملاحظات الاستشاري (خصوصاً في حالة Code B)</label>
+      <input class="inp" id="m_ac_notes" value="${esc(linkedIr?.notes || '')}" placeholder="اكتب أي ملاحظات للاستشاري..." />
+    </div>
+  `, () => {
+    const codeVal = (document.getElementById('m_ac_code').value || '').trim();
+    if (!DB.aptMatrix[stageId]) DB.aptMatrix[stageId] = {};
+    if (!DB.aptMatrix[stageId][floorId]) DB.aptMatrix[stageId][floorId] = {};
+
+    if (!codeVal) {
+      DB.aptMatrix[stageId][floorId][unitId] = null;
+      closeModal();
+      saveDB(`⏳ تم إعادة (${fl?.label} / ${un?.label}) إلى حالة «باقي بدون تسليم».`);
+      return;
+    }
+    const statusVal = document.getElementById('m_ac_st').value || 'A';
+    const subDt = document.getElementById('m_ac_dt').value || todayISO();
+    const descVal = (document.getElementById('m_ac_desc').value || '').trim() || defaultDesc;
+    const notesVal = (document.getElementById('m_ac_notes').value || '').trim();
+    const shortVal = makeShortIrCode(codeVal);
+
+    DB.aptMatrix[stageId][floorId][unitId] = { code: codeVal, short: shortVal, status: statusVal };
+
+    const existingIdx = (DB.irLog || []).findIndex(x => x.code === codeVal);
+    if (existingIdx >= 0) {
+      DB.irLog[existingIdx].status = statusVal;
+      DB.irLog[existingIdx].desc = descVal;
+      DB.irLog[existingIdx].notes = notesVal;
+      if (subDt) DB.irLog[existingIdx].subDate = subDt;
+    } else {
+      DB.irLog.push({
+        code: codeVal, short: shortVal, disc: st?.disc || 'معماري', status: statusVal,
+        desc: descVal, rev: 'Rev-0', subDate: subDt, retDate: (statusVal === 'A' || statusVal === 'B') ? subDt : '',
+        floor: fl?.short || '', notes: notesVal
+      });
+    }
+    closeModal();
+    saveDB(`✅ تم تحديث تسليم (${fl?.label} / ${un?.label}) بكود ${shortVal} (${statusVal}) ومزامنته مع سجل الـ IR!`);
+  });
+}
+
+function nextIrCodeForDisc(disc) {
+  ensureIrAndAptMatrix();
+  const yr = String(todayISO()).slice(2, 4);
+  const tag = disc === 'كهرباء' ? 'ELEC' : (disc === 'إنشائي' ? 'STR' : 'ARC');
+  let maxSeq = 0;
+  (DB.irLog || []).forEach(r => {
+    const s = String(r.code || '');
+    const m = tag === 'STR'
+      ? s.match(new RegExp(`AO-IR-(?:STR-)?00${yr}-(\d+)`, 'i'))
+      : s.match(new RegExp(`AO-IR-${tag}-00${yr}-(\d+)`, 'i'));
+    if (m) maxSeq = Math.max(maxSeq, parseInt(m[1], 10) || 0);
+  });
+  const nextN = String(maxSeq + 1).padStart(2, '0');
+  return tag === 'STR' ? `AO-IR-00${yr}-${nextN}` : `AO-IR-${tag}-00${yr}-${nextN}`;
+}
+
+function updatePreCoderPreview() {
+  const stRaw = document.getElementById('pcStage')?.value || 'mas_qad|معماري|قد مباني';
+  const [stId, disc, stageTxt] = stRaw.split('|');
+  const unitVal = document.getElementById('pcUnit')?.value || '1';
+  const flRaw = document.getElementById('pcFloor')?.value || '9|التاسع';
+  const [, flTxt] = flRaw.split('|');
+
+  const box = document.getElementById('precodPreviewBox');
+  const codeEl = document.getElementById('pcGenCode');
+  const descEl = document.getElementById('pcGenDesc');
+  if (!box || !codeEl || !descEl) return;
+
+  const isInvalidMabaniCorridor = (stId === 'mas_qad' || stId === 'mas_raf') && (unitVal === 'الطرقة' || unitVal === 'السقف');
+  const code = nextIrCodeForDisc(disc);
+  codeEl.textContent = code;
+
+  if (isInvalidMabaniCorridor) {
+    box.classList.add('warn');
+    descEl.textContent = '⚠️ تنبيه هندسي: أعمال المباني لا يوجد لها تسليم طرقة أو سقف منفصل (تُسلم ضمن الشقق).';
+  } else {
+    box.classList.remove('warn');
+    const unitPhrase = (unitVal === 'الطرقة' || unitVal === 'السقف') ? unitVal : `شقة رقم ${unitVal}`;
+    descEl.textContent = `${stageTxt} ${unitPhrase} الدور ${flTxt} عمارة رقم 5`;
+  }
+}
+
+function copyPreCodedText() {
+  const code = document.getElementById('pcGenCode')?.textContent || '';
+  const desc = document.getElementById('pcGenDesc')?.textContent || '';
+  const txt = `${code} — ${desc}`;
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(txt).then(() => showToast('📋 تم نسخ الكود والبيان القياسي!'));
+  }
+}
+
+function commitPreCodedIr() {
+  ensureIrAndAptMatrix();
+  const stRaw = document.getElementById('pcStage')?.value || 'mas_qad|معماري|قد مباني';
+  const [stId, disc] = stRaw.split('|');
+  const unitVal = document.getElementById('pcUnit')?.value || '1';
+  const flRaw = document.getElementById('pcFloor')?.value || '9|التاسع';
+  const [flNum, flTxt] = flRaw.split('|');
+  const statusVal = document.getElementById('pcStatus')?.value || 'UR';
+  const code = document.getElementById('pcGenCode')?.textContent?.trim();
+  const desc = document.getElementById('pcGenDesc')?.textContent?.trim();
+
+  if (!code || desc.startsWith('⚠️')) return alert('اختر وحدة صحيحة لهذا البند أولاً.');
+  const shortVal = makeShortIrCode(code);
+  const dt = todayISO();
+
+  DB.irLog.push({
+    code, short: shortVal, disc, status: statusVal, desc, rev: 'Rev-0',
+    subDate: dt, retDate: (statusVal === 'A' || statusVal === 'B') ? dt : '',
+    floor: flTxt, notes: ''
+  });
+
+  if (DB.aptMatrix[stId]) {
+    const flKey = 'F' + flNum;
+    if (!DB.aptMatrix[stId][flKey]) DB.aptMatrix[stId][flKey] = {};
+    const targetUnits = unitVal === 'الطرقة' ? ['U8']
+      : (unitVal === 'السقف' ? ['U9']
+      : unitVal.split('+').map(n => 'U' + n.trim()));
+    targetUnits.forEach(uKey => {
+      DB.aptMatrix[stId][flKey][uKey] = { code, short: shortVal, status: statusVal };
+    });
+  }
+
+  saveDB(`✅ تم تسجيل المعاملة (${code}) وتحديث مصفوفة تسليمات الشقق تلقائياً!`);
+}
+
+function renderIrLogTable() {
+  ensureIrAndAptMatrix();
+  updatePreCoderPreview();
+  const tb = document.getElementById('irLogBody');
+  if (!tb) return;
+
+  const q = (document.getElementById('irSearchInp')?.value || '').trim().toLowerCase();
+  const discF = document.getElementById('irDiscFilter')?.value || 'ALL';
+  const stF = document.getElementById('irStatusFilter')?.value || 'ALL';
+
+  const indexed = (DB.irLog || []).map((x, idx) => ({ ...x, _idx: idx })).reverse();
+  const filtered = indexed.filter(x => {
+    if (discF !== 'ALL' && x.disc !== discF) return false;
+    if (stF !== 'ALL' && x.status !== stF) return false;
+    if (q && !(x.code||'').toLowerCase().includes(q) && !(x.desc||'').toLowerCase().includes(q) && !(x.floor||'').toLowerCase().includes(q) && !(x.notes||'').toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  const cntEl = document.getElementById('irFilterCount');
+  if (cntEl) cntEl.textContent = `${filtered.length} معاملة`;
+
+  const stPill = (s) => {
+    if (s === 'A') return '<span class="pill pill-green">Code A</span>';
+    if (s === 'B') return '<span class="pill pill-amber">Code B</span>';
+    if (s === 'C') return '<span class="pill pill-red">Code C</span>';
+    if (s === 'D') return '<span class="pill pill-red">Code D</span>';
+    return '<span class="pill pill-blue">UR</span>';
+  };
+
+  tb.innerHTML = filtered.slice(0, 250).map((x, i) => `
+    <tr>
+      <td class="num" style="color:var(--muted);">${filtered.length - i}</td>
+      <td dir="ltr" class="num" style="font-weight:700; color:var(--brand);">${esc(x.code)}</td>
+      <td><span class="pill pill-navy">${esc(x.disc || '—')}</span></td>
+      <td>${stPill(x.status)}</td>
+      <td class="right" style="font-weight:600;">${esc(x.desc || '—')}${x.notes ? `<br><small style="color:var(--muted);">${esc(x.notes)}</small>` : ''}</td>
+      <td>${esc(x.rev || 'Rev-0')}</td>
+      <td class="num">${esc(x.subDate || '—')}</td>
+      <td class="num">${esc(x.retDate || '—')}</td>
+      <td>${esc(x.floor || '—')}</td>
+      <td class="no-print"><div class="act-btns">
+        <button class="icon-btn" onclick="openIrEditModal(${x._idx})" title="تعديل المعاملة">✏️</button>
+        <button class="icon-btn del" onclick="deleteIrRecord(${x._idx})" title="حذف">🗑️</button>
+      </div></td>
+    </tr>
+  `).join('') || '<tr><td colspan="10" style="padding:18px; color:var(--muted);">لا توجد معاملات مطابقة للبحث</td></tr>';
+}
+
+function openIrEditModal(idx) {
+  ensureIrAndAptMatrix();
+  const isNew = idx === null || idx === undefined;
+  const rec = isNew ? { code: nextIrCodeForDisc('معماري'), disc: 'معماري', status: 'UR', desc: '', rev: 'Rev-0', subDate: todayISO(), retDate: '', floor: 'التاسع', notes: '' } : DB.irLog[idx];
+  if (!rec) return;
+  openModal(isNew ? '+ إضافة طلب فحص واستلام (IR)' : `✏️ تعديل معاملة (${rec.code})`, `
+    <div style="display:grid; grid-template-columns:1.4fr 1fr; gap:8px;">
+      <div class="form-row"><label>رقم المعاملة (الكود)</label><input class="inp ltr-inp" id="m_ir_code" value="${esc(rec.code)}" /></div>
+      <div class="form-row"><label>القسم</label>
+        <select class="inp" id="m_ir_disc">
+          <option value="معماري" ${rec.disc==='معماري'?'selected':''}>معماري</option>
+          <option value="إنشائي" ${rec.disc==='إنشائي'?'selected':''}>إنشائي</option>
+          <option value="كهرباء" ${rec.disc==='كهرباء'?'selected':''}>كهرباء</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row"><label>البيان / الوصف</label><input class="inp" id="m_ir_desc" value="${esc(rec.desc)}" /></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+      <div class="form-row"><label>كود الاعتماد</label>
+        <select class="inp" id="m_ir_st">
+          <option value="A" ${rec.status==='A'?'selected':''}>Code A</option>
+          <option value="B" ${rec.status==='B'?'selected':''}>Code B</option>
+          <option value="C" ${rec.status==='C'?'selected':''}>Code C</option>
+          <option value="D" ${rec.status==='D'?'selected':''}>Code D</option>
+          <option value="UR" ${rec.status==='UR'?'selected':''}>UR</option>
+        </select>
+      </div>
+      <div class="form-row"><label>REV</label><input class="inp" id="m_ir_rev" value="${esc(rec.rev || 'Rev-0')}" /></div>
+      <div class="form-row"><label>الدور</label><input class="inp" id="m_ir_fl" value="${esc(rec.floor || '')}" /></div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="form-row"><label>تاريخ التقديم</label><input type="date" class="inp" id="m_ir_sub" value="${esc(rec.subDate || '')}" /></div>
+      <div class="form-row"><label>تاريخ الاستلام</label><input type="date" class="inp" id="m_ir_ret" value="${esc(rec.retDate || '')}" /></div>
+    </div>
+    <div class="form-row"><label>ملاحظات</label><input class="inp" id="m_ir_notes" value="${esc(rec.notes || '')}" /></div>
+  `, () => {
+    const codeVal = (document.getElementById('m_ir_code').value || '').trim();
+    if (!codeVal) return alert('أدخل رقم المعاملة.');
+    const updated = {
+      code: codeVal, short: makeShortIrCode(codeVal),
+      disc: document.getElementById('m_ir_disc').value,
+      status: document.getElementById('m_ir_st').value,
+      desc: (document.getElementById('m_ir_desc').value || '').trim(),
+      rev: (document.getElementById('m_ir_rev').value || 'Rev-0').trim(),
+      subDate: document.getElementById('m_ir_sub').value || '',
+      retDate: document.getElementById('m_ir_ret').value || '',
+      floor: (document.getElementById('m_ir_fl').value || '').trim(),
+      notes: (document.getElementById('m_ir_notes').value || '').trim()
+    };
+    if (isNew) DB.irLog.push(updated);
+    else {
+      const oldCode = DB.irLog[idx].code;
+      DB.irLog[idx] = updated;
+      Object.values(DB.aptMatrix || {}).forEach(stObj => {
+        Object.values(stObj || {}).forEach(flObj => {
+          Object.keys(flObj || {}).forEach(uKey => {
+            if (flObj[uKey] && flObj[uKey].code === oldCode) {
+              flObj[uKey] = { code: updated.code, short: updated.short, status: updated.status };
+            }
+          });
+        });
+      });
+    }
+    closeModal();
+    saveDB(isNew ? `✅ تم إضافة معاملة الـ IR (${codeVal}) بنجاح!` : `✅ تم تحديث المعاملة (${codeVal}) ومزامنتها مع المصفوفة!`);
+  });
+}
+
+function deleteIrRecord(idx) {
+  ensureIrAndAptMatrix();
+  const r = DB.irLog[idx];
+  if (!r || !confirm(`هل تريد حذف المعاملة (${r.code}) من سجل الـ IR؟`)) return;
+  DB.irLog.splice(idx, 1);
+  saveDB(`🗑️ تم حذف المعاملة (${r.code}).`);
+}
+
+async function importHayahLogExcel(inputEl) {
+  const file = inputEl?.files?.[0];
+  if (!file) return;
+  if (typeof XLSX === 'undefined') { alert('تأكد من الاتصال بالإنترنت لتحميل مكتبة SheetJS.'); inputEl.value=''; return; }
+  try {
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf, { type: 'array', cellDates: true });
+    const cleanDt = (v) => {
+      if (!v) return '';
+      if (v instanceof Date) return v.toISOString().slice(0, 10);
+      const s = String(v).trim();
+      const m = s.match(/^(\d{1,2})\/(\d{1,2})\/206$/);
+      if (m) return `2026-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+      return s.slice(0, 10);
+    };
+    if (wb.Sheets['IR']) {
+      const aoa = XLSX.utils.sheet_to_json(wb.Sheets['IR'], { header: 1, defval: '' });
+      const parsed = [];
+      const rowMap = {};
+      for (let r = 4; r < aoa.length; r++) {
+        const row = aoa[r];
+        const codeS = String(row[1] || '').trim();
+        if (!codeS) continue;
+        let disc = String(row[2] || '').trim();
+        if (!disc) disc = codeS.toUpperCase().includes('ELEC') ? 'كهرباء' : (codeS.toUpperCase().includes('ARC') ? 'معماري' : 'إنشائي');
+        let st = String(row[3] || 'UR').trim().toUpperCase();
+        if (!['A','B','C','D','UR'].includes(st)) st = 'UR';
+        const obj = {
+          code: codeS, short: String(row[34] || makeShortIrCode(codeS)).replace('✅','').trim(),
+          disc, status: st, desc: String(row[4] || '').trim(), rev: String(row[5] || 'Rev-0').trim(),
+          retDate: cleanDt(row[8]), subDate: cleanDt(row[9]), floor: String(row[12] || '').trim(), notes: String(row[14] || '').trim()
+        };
+        parsed.push(obj);
+        rowMap[r + 1] = obj;
+      }
+      if (parsed.length) DB.irLog = parsed;
+      if (wb.Sheets['تتبع الشقق والتكويد المسبق']) {
+        const aptAoa = XLSX.utils.sheet_to_json(wb.Sheets['تتبع الشقق والتكويد المسبق'], { header: 1, defval: '' });
+        const ranges = [['mas_qad',18,7], ['mas_raf',30,7], ['elec',42,9], ['pls_tar',54,8], ['pls_malo',66,8]];
+        const newMat = {};
+        ranges.forEach(([stId, startIdx, uCnt]) => {
+          newMat[stId] = {};
+          for (let fi = 0; fi < 9; fi++) {
+            const row = aptAoa[startIdx + fi] || [];
+            newMat[stId]['F' + (fi + 1)] = {};
+            for (let ui = 0; ui < uCnt; ui++) {
+              const refRow = Number(row[14 + ui]);
+              const disp = String(row[1 + ui] || '').trim();
+              if (refRow && rowMap[refRow]) {
+                const ir = rowMap[refRow];
+                newMat[stId]['F' + (fi + 1)]['U' + (ui + 1)] = { code: ir.code, short: ir.short, status: ir.status };
+              } else if (disp.includes('✅')) {
+                const sc = disp.replace('✅','').trim();
+                newMat[stId]['F' + (fi + 1)]['U' + (ui + 1)] = { code: sc, short: sc, status: 'A' };
+              } else {
+                newMat[stId]['F' + (fi + 1)]['U' + (ui + 1)] = null;
+              }
+            }
+          }
+        });
+        DB.aptMatrix = newMat;
+      }
+    }
+    saveDB(`📂 تم استيراد وتحديث سجل الـ IR (${(DB.irLog||[]).length} معاملة) ومصفوفة الشقق من ${file.name}!`);
+  } catch (err) {
+    alert('تعذر قراءة ملف اللوج: ' + err.message);
+  }
+  inputEl.value = '';
+}
+
+function printAptMatrixA4() {
+  ensureIrAndAptMatrix();
+  const sum = computeAptMatrixSummary();
+  const logos = getBrandLogos();
+  const stages = activeAptStageFilter === 'ALL' ? APT_STAGE_CONFIG : APT_STAGE_CONFIG.filter(s => s.id === activeAptStageFilter);
+
+  const tablesHtml = stages.map(st => {
+    const stSum = sum.byStage[st.id];
+    return `
+      <div style="border:1px solid #CBD5E1; border-radius:6px; overflow:hidden; margin-bottom:9px; page-break-inside:avoid;">
+        <div style="background:#0E4D4E; color:#FFFFFF; padding:4px 9px; font-size:10.5px; font-weight:700; display:flex; justify-content:space-between;">
+          <span>${st.label}</span>
+          <span>المسلم: ${stSum.done} / ${stSum.tot} (${stSum.pct.toFixed(1)}%)</span>
+        </div>
+        <table style="width:100%; border-collapse:collapse; font-size:9px; text-align:center;">
+          <thead>
+            <tr style="background:#F1F5F9;">
+              <th style="border:1px solid #CBD5E1; padding:3px; width:74px;">الدور</th>
+              ${st.units.map(u => `<th style="border:1px solid #CBD5E1; padding:3px;">${u.label}</th>`).join('')}
+              <th style="border:1px solid #CBD5E1; padding:3px; width:52px;">الإنجاز</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${APT_FLOORS.map(fl => {
+              const flObj = ((DB.aptMatrix[st.id] || {})[fl.id] || {});
+              let done = 0;
+              const tds = st.units.map(u => {
+                const c = flObj[u.id];
+                if (c && c.code) {
+                  if (c.status === 'A' || c.status === 'B') done++;
+                  const bg = c.status === 'B' ? '#FFFAEB' : (c.status === 'A' ? '#ECFDF3' : '#FEF3F2');
+                  const fg = c.status === 'B' ? '#B54708' : (c.status === 'A' ? '#067647' : '#B42318');
+                  return `<td style="border:1px solid #CBD5E1; padding:2.5px; background:${bg}; color:${fg}; font-weight:700;" dir="ltr">${esc(c.short)} (${c.status})</td>`;
+                }
+                return '<td style="border:1px solid #CBD5E1; padding:2.5px; background:#F8FAFC; color:#64748B;">باقي</td>';
+              }).join('');
+              return `<tr><td style="border:1px solid #CBD5E1; padding:2.5px 5px; font-weight:700; text-align:right;">${fl.label}</td>${tds}<td style="border:1px solid #CBD5E1; padding:2.5px; font-weight:700;">${done}/${st.units.length}</td></tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('printAptMatrixArea').innerHTML = `
+    <div style="font-family:'IBM Plex Sans Arabic','Cairo',sans-serif; color:#101828;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #0E4D4E; padding-bottom:6px; margin-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          ${logos.aobc ? `<img src="${logos.aobc}" style="height:40px; border-radius:5px;" />` : ''}
+          <div>
+            <div style="font-size:13px; font-weight:700; color:#0E4D4E;">مصفوفة تسليمات شقق عمارة 5 بالـ IR — مشروع حياة مرسيليا</div>
+            <div style="font-size:10px; color:#475467;">المكتب العربي للتشييد والبناء (A.O.B.C) • تاريخ الطباعة: ${todayISO()}</div>
+          </div>
+        </div>
+        <div style="background:#0E4D4E; color:#FFFFFF; padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">إجمالي التسليم: ${sum.deliveredUnits} / ${sum.totalUnits} (${sum.pct.toFixed(1)}%)</div>
+      </div>
+      ${tablesHtml}
+    </div>
+  `;
+
+  document.body.classList.add('printing-apt-matrix');
+  const cleanup = () => {
+    document.body.classList.remove('printing-apt-matrix');
+    window.removeEventListener('afterprint', cleanup);
+  };
+  window.addEventListener('afterprint', cleanup);
+  setTimeout(() => { window.print(); setTimeout(cleanup, 1200); }, 140);
+}
+
 const _origRenderAll = renderAll;
 renderAll = function() {
   _origRenderAll();
   renderDailyReportPage();
+  renderIpcSheetView();
+  renderAptDeliveryMatrices();
+  renderIrLogTable();
   const mk = document.querySelectorAll('#matrixKpis .kpi-card');
   if (mk[0]) mk[0].classList.add('hero-kpi');
   const tk = document.querySelectorAll('#tasksKpis .kpi-card');
