@@ -2320,6 +2320,167 @@
     }
   }
 
+
+  /* ============================================================================
+     V7.4: COMPACT 100%-FIT IPC + DROPDOWNS + TAFQEET + ANALYTICS BI DASHBOARD
+     ============================================================================ */
+  .ipc-sheet-card { overflow: visible !important; }
+  .ipc-meta-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    border-bottom: 1px solid var(--border); background: var(--surface-2);
+  }
+  .ipc-meta-cell {
+    padding: 9px 12px; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 4px; min-width: 0;
+  }
+  .ipc-meta-cell:nth-child(2n) { border-left: none; }
+  .ipc-meta-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .ipc-sel {
+    width: 100%; min-width: 0; height: 34px; padding: 4px 8px;
+    border-radius: 7px; border: 1px solid var(--border-strong) !important;
+    background: var(--card) !important; color: var(--text) !important;
+    font-size: 12.5px; font-weight: 600; font-family: inherit; cursor: pointer;
+  }
+  .ipc-sel:focus { outline: none; border-color: var(--brand) !important; box-shadow: 0 0 0 2px var(--brand-soft); }
+
+  /* Compact IPC Table — fits 100% on laptop screen without clipping! */
+  .ipc-tbl-wrap { width: 100%; overflow-x: auto; }
+  .ipc-tbl { width: 100%; border-collapse: collapse; font-size: 11.8px; table-layout: auto; }
+  .ipc-tbl th {
+    padding: 6px 4px !important; font-size: 11px !important; white-space: nowrap;
+  }
+  .ipc-tbl td { padding: 3px 3px !important; font-size: 11.8px !important; }
+  .ipc-inp {
+    width: 100%; min-width: 0; background: transparent; border: 1px solid transparent;
+    border-radius: 5px; padding: 3px 4px; font-size: 11.8px; color: var(--text);
+    font-family: inherit; font-variant-numeric: tabular-nums;
+  }
+  .ipc-tbl select.ipc-inp {
+    background: var(--surface-2); border-color: var(--border); cursor: pointer; padding: 3px 2px;
+  }
+  .ipc-tbl tr.ipc-row-ded select.ipc-inp {
+    background: rgba(180, 35, 24, 0.08); border-color: var(--red-bd);
+  }
+  .ipc-tafqeet-row {
+    padding: 9px 16px; background: var(--brand-soft); border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    font-size: 13px; color: var(--brand); font-weight: 700;
+  }
+  [data-theme="dark"] .ipc-tafqeet-row { color: var(--brand-2); }
+  .ipc-tafqeet-row.overpay { background: var(--red-soft); color: var(--red); }
+
+  /* --- Executive Analytics & Charts Dashboard --- */
+  .bi-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .bi-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .bi-card-hdr {
+    padding: 13px 16px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+  }
+  .bi-card-hdr h3 { margin: 0; font-size: 14.5px; font-weight: 700; color: var(--text); }
+  .bi-card-hdr small { font-size: 11.5px; color: var(--muted); font-weight: 600; }
+  .bi-card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+  .bi-donut-wrap { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: space-around; }
+  .bi-legend { display: flex; flex-direction: column; gap: 7px; flex: 1; min-width: 190px; }
+  .bi-leg-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 6px 9px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .bi-leg-left { display: flex; align-items: center; gap: 7px; min-width: 0; }
+  .bi-swatch { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .bi-bar-list { display: flex; flex-direction: column; gap: 9px; }
+  .bi-bar-item { display: flex; flex-direction: column; gap: 4px; }
+  .bi-bar-head { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; font-weight: 600; color: var(--text); }
+  .bi-bar-track { height: 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); overflow: hidden; }
+  .bi-bar-fill { height: 100%; border-radius: 999px; transition: width 220ms ease; }
+  .bi-floor-bars { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 6px; align-items: end; height: 125px; padding-top: 8px; }
+  .bi-fl-col { display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .bi-fl-bar-wrap { width: 100%; max-width: 28px; flex: 1; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: flex-end; overflow: hidden; }
+  .bi-fl-bar { width: 100%; border-radius: 4px 4px 0 0; transition: height 220ms ease; }
+  .bi-fl-lbl { font-size: 10px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .bi-fl-pct { font-size: 10px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bi-svg-box { width: 100%; overflow-x: auto; }
+  .bi-svg-box svg { width: 100%; display: block; }
+  .bi-stat-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .bi-stat-mini {
+    padding: 8px 10px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border);
+    text-align: center;
+  }
+  .bi-stat-mini small { display: block; font-size: 10.5px; color: var(--muted); font-weight: 600; }
+  .bi-stat-mini strong { display: block; font-size: 14px; font-weight: 700; color: var(--text); margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 980px) {
+    .bi-grid-2 { grid-template-columns: 1fr; }
+    .ipc-meta-grid { grid-template-columns: 1fr !important; }
+    .ipc-meta-cell { border-left: none; }
+  }
+  @media (max-width: 600px) {
+    .bi-stat-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ==================== BULLETPROOF PRINT OVERRIDE (FIXES DARK MODE WHITE TEXT!) ==================== */
+  #printAnalyticsArea { display: none; }
+  @media print {
+    html, html[data-theme="dark"], body, body[data-theme="dark"] {
+      --bg: #FFFFFF !important;
+      --card: #FFFFFF !important;
+      --surface-2: #F1F5F9 !important;
+      --border: #CBD5E1 !important;
+      --border-strong: #94A3B8 !important;
+      --text: #101828 !important;
+      --text-2: #334155 !important;
+      --muted: #475467 !important;
+      --brand: #0E4D4E !important;
+      --brand-2: #1F7A7B !important;
+      --brand-soft: #E8F3F3 !important;
+      --green: #067647 !important;
+      --green-soft: #ECFDF3 !important;
+      --amber: #B54708 !important;
+      --amber-soft: #FFFAEB !important;
+      --red: #B42318 !important;
+      --red-soft: #FEF3F2 !important;
+      background: #FFFFFF !important;
+      color: #101828 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    [data-theme="dark"] .num,
+    [data-theme="dark"] td,
+    [data-theme="dark"] th,
+    [data-theme="dark"] p,
+    [data-theme="dark"] span,
+    [data-theme="dark"] div,
+    [data-theme="dark"] strong {
+      color: #101828;
+    }
+    /* Explicit print utility colors (highest specificity) */
+    .prt-ink, .prt-ink * { color: #101828 !important; }
+    .prt-white, .prt-white * { color: #FFFFFF !important; }
+    .prt-red, .prt-red * { color: #B42318 !important; }
+    .prt-green, .prt-green * { color: #067647 !important; }
+    .prt-amber, .prt-amber * { color: #B54708 !important; }
+    .prt-brand, .prt-brand * { color: #0E4D4E !important; }
+    .prt-muted { color: #475467 !important; }
+
+    body.printing-analytics > header,
+    body.printing-analytics > .v6-shell,
+    body.printing-analytics > .v6-drawer,
+    body.printing-analytics > .v6-drawer-bg,
+    body.printing-analytics > .v7-mobile-nav,
+    body.printing-analytics > .ipc-drawer,
+    body.printing-analytics > .ipc-drawer-bg,
+    body.printing-analytics > .modal-bg,
+    body.printing-analytics > .gs-overlay,
+    body.printing-analytics > .toast { display: none !important; }
+    body.printing-analytics #printAnalyticsArea {
+      display: block !important; background: #FFFFFF !important; color: #101828 !important;
+      padding: 4mm !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+    }
+  }
+
 </style>
 </head>
 <body class="locked">
@@ -2537,62 +2698,162 @@
 
   <main class="v6-main">
 
-  <!-- ==================== 1. الرئيسية (EXECUTIVE HOME) ==================== -->
+  <!-- ==================== 1. الرئيسية (EXECUTIVE HOME + ANALYTICS BI DASHBOARD) ==================== -->
   <section id="tab-overview" class="section active">
     <div class="v7-page-head">
       <div class="v7-page-title">
-        <h2>لوحة القيادة — مشروع حياة مرسيليا (عمارة 5)</h2>
-        <p id="odooDateLine">المكتب العربي للتشييد والبناء (A.O.B.C) • متابعة تنفيذية ومالية لحظية</p>
+        <h2>لوحة القيادة والتحليلات — مشروع حياة مرسيليا (عمارة 5)</h2>
+        <p id="odooDateLine">المكتب العربي للتشييد والبناء (A.O.B.C) • متابعة تنفيذية ومالية وبيانية لحظية</p>
       </div>
-      <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn btn-light btn-sm" onclick="switchTab('daily-report')">📝 إعداد التقرير اليومي</button>
+      <div class="v7-subtabs no-print" id="overviewSubtabs">
+        <button type="button" class="v7-subtab-btn active" data-sub="home" onclick="switchSubTab('overview','home',this)">
+          لوحة القيادة التنفيذية
+        </button>
+        <button type="button" class="v7-subtab-btn" data-sub="analytics" onclick="switchSubTab('overview','analytics',this); renderExecutiveBiDashboard()">
+          📊 الداش بورد التحليلي والشارتس
+        </button>
+      </div>
+    </div>
+
+    <!-- Overview Sub-Pane A: Operational Executive Home -->
+    <div class="v7-subpane active" id="subpane-overview-home">
+      <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
         <button class="btn btn-gold btn-sm" onclick="openAddPaymentModal(DB.contracts[0]?.code||'CNT-01')">+ تسجيل دفعة جديدة</button>
+        <button class="btn btn-light btn-sm" onclick="switchSubTab('overview','analytics'); renderExecutiveBiDashboard()">📊 فتح الداش بورد التحليلي (Charts)</button>
+        <button class="btn btn-light btn-sm" onclick="switchTab('subcontractors', null, 'ipc-sheet')">📑 نموذج المستخلص التفصيلي</button>
+        <button class="btn btn-light btn-sm" onclick="switchTab('daily-report')">📝 التقرير اليومي</button>
+      </div>
+
+      <div class="kpi-grid" id="overviewKpis"></div>
+
+      <!-- Compact 7-Department Quick Access -->
+      <div class="v7-dept-strip no-print" id="v7DeptStrip"></div>
+
+      <div class="panel">
+        <div class="panel-hdr">
+          <span>رادار التنبيهات الرقابية الحية</span>
+          <span style="font-size:12px; color:var(--muted); font-weight:500;">اضغط على أي تنبيه للانتقال المباشر</span>
+        </div>
+        <div class="panel-body">
+          <div class="alerts-grid" id="overviewAlerts"></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-hdr">
+            <span>مقارنة المقاولين: صافي المستخلص مقابل المدفوع فعلياً</span>
+            <span style="font-size:11.5px; color:var(--muted);">■ مستخلص معتمد &nbsp;|&nbsp; ■ مدفوع فعلي</span>
+          </div>
+          <div class="panel-body" id="chartSubcontractors"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-hdr">
+            <span>المهام القادمة وأحدث التنبيهات</span>
+            <div class="no-print" style="display:flex; gap:6px;">
+              <button class="btn btn-gold btn-sm" onclick="openTaskModal()">+ مهمة</button>
+              <button class="btn btn-light btn-sm" onclick="switchTab('tasks')">الكل</button>
+            </div>
+          </div>
+          <div class="panel-body" style="display:flex; flex-direction:column; gap:12px;">
+            <div class="odoo-mini-list" id="homeTasksPreview"></div>
+            <div style="border-top:1px solid var(--border); padding-top:10px;">
+              <div style="font-size:12px; font-weight:700; color:var(--muted); margin-bottom:8px;">أهم التنبيهات الرقابية</div>
+              <div class="odoo-mini-list" id="homeNotifPreview"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="kpi-grid" id="overviewKpis"></div>
-
-    <!-- Compact 7-Department Quick Access (Main Modules ONLY — No sub-sections exposed!) -->
-    <div class="v7-dept-strip no-print" id="v7DeptStrip"></div>
-
-    <div class="panel">
-      <div class="panel-hdr">
-        <span>رادار التنبيهات الرقابية الحية</span>
-        <span style="font-size:12px; color:var(--muted); font-weight:500;">اضغط على أي تنبيه للانتقال المباشر</span>
-      </div>
-      <div class="panel-body">
-        <div class="alerts-grid" id="overviewAlerts"></div>
-      </div>
-    </div>
-
-    <div class="grid-2">
-      <div class="panel">
-        <div class="panel-hdr">
-          <span>مقارنة المقاولين: صافي المستخلص مقابل المدفوع فعلياً</span>
-          <span style="font-size:11.5px; color:var(--muted);">■ مستخلص معتمد &nbsp;|&nbsp; ■ مدفوع فعلي</span>
+    <!-- Overview Sub-Pane B: Professional BI Analytics & Charts Dashboard -->
+    <div class="v7-subpane" id="subpane-overview-analytics">
+      <div class="dsr-toolbar no-print">
+        <div class="dsr-toolbar-grp">
+          <strong style="font-size:13.5px; color:var(--text);">📊 الداش بورد التحليلي الشامل (Executive BI)</strong>
+          <span class="pill pill-plum" id="biLastUpdatedPill">محدّث لحظياً من السحابة</span>
         </div>
-        <div class="panel-body" id="chartSubcontractors"></div>
-      </div>
-      <div class="panel">
-        <div class="panel-hdr">
-          <span>المهام القادمة وأحدث التنبيهات</span>
-          <div class="no-print" style="display:flex; gap:6px;">
-            <button class="btn btn-gold btn-sm" onclick="openTaskModal()">+ مهمة</button>
-            <button class="btn btn-light btn-sm" onclick="switchTab('tasks')">الكل</button>
-          </div>
+        <div class="dsr-toolbar-grp">
+          <button type="button" class="btn btn-light btn-sm" onclick="renderExecutiveBiDashboard()">🔄 تحديث المؤشرات</button>
+          <button type="button" class="btn btn-gold btn-sm" onclick="printAnalyticsDashboard()">🖨️ طباعة التقرير التحليلي A4</button>
         </div>
-        <div class="panel-body" style="display:flex; flex-direction:column; gap:12px;">
-          <div class="odoo-mini-list" id="homeTasksPreview"></div>
-          <div style="border-top:1px solid var(--border); padding-top:10px;">
-            <div style="font-size:12px; font-weight:700; color:var(--muted); margin-bottom:8px;">أهم التنبيهات الرقابية</div>
-            <div class="odoo-mini-list" id="homeNotifPreview"></div>
+      </div>
+
+      <div class="kpi-grid" id="biTopKpis"></div>
+
+      <!-- Row 1: Cost Structure Donut + IR QA/QC Donut -->
+      <div class="bi-grid-2">
+        <div class="bi-card">
+          <div class="bi-card-hdr">
+            <h3>توزيع هيكل تكلفة المشروع الإجمالية</h3>
+            <small id="biCostTotalSub">—</small>
           </div>
+          <div class="bi-card-body" id="biChartCostDonut"></div>
+        </div>
+        <div class="bi-card">
+          <div class="bi-card-hdr">
+            <h3>مؤشرات الجودة والاستلامات الهندسية (IR Log)</h3>
+            <small id="biIrTotalSub">—</small>
+          </div>
+          <div class="bi-card-body" id="biChartIrDonut"></div>
+        </div>
+      </div>
+
+      <!-- Row 2: Monthly Burn Rate & Cumulative S-Curve (Full Width) -->
+      <div class="bi-card" style="margin-bottom:16px;">
+        <div class="bi-card-hdr">
+          <h3>منحنى التدفق النقدي الشهري والتكلفة التراكمية (Monthly Burn Rate & S-Curve)</h3>
+          <small id="biSCurveSub">—</small>
+        </div>
+        <div class="bi-card-body">
+          <div class="scurve-legend" style="margin-bottom:0;">
+            <span><span class="leg-dot" style="background:#0E4D4E;"></span>دفعات المقاولين الشهرية</span>
+            <span><span class="leg-dot" style="background:#38B2AC;"></span>صافي خزينة الموقع الشهرية</span>
+            <span><span class="leg-dot" style="background:#B54708; border-radius:50%;"></span>التكلفة التراكمية (S-Curve)</span>
+          </div>
+          <div class="bi-svg-box" id="biChartSCurve"></div>
+        </div>
+      </div>
+
+      <!-- Row 3: Subcontractors Comparison + Weekly Treasury Cashflow (Last 12 Weeks) -->
+      <div class="bi-grid-2">
+        <div class="bi-card">
+          <div class="bi-card-hdr">
+            <h3>تحليل عقود المقاولين (صافي المستخلص vs المدفوع الفعلي)</h3>
+            <small id="biSubAvgSub">—</small>
+          </div>
+          <div class="bi-card-body" id="biChartSubCompare"></div>
+        </div>
+        <div class="bi-card">
+          <div class="bi-card-hdr">
+            <h3>إنفاق وتمويل خزينة الموقع — آخر 12 أسبوعاً</h3>
+            <small id="biWkTrendSub">—</small>
+          </div>
+          <div class="bi-card-body" id="biChartWeeklyCash"></div>
+        </div>
+      </div>
+
+      <!-- Row 4: Building 5 Apartment Delivery Progress (Stages + 9 Floors) + Cement Gauge & Inventory Health -->
+      <div class="bi-grid-2">
+        <div class="bi-card">
+          <div class="bi-card-hdr">
+            <h3>تقدم تسليمات شقق عمارة 5 بالـ IR (المراحل والأدوار)</h3>
+            <small id="biAptProgSub">—</small>
+          </div>
+          <div class="bi-card-body" id="biChartAptProgress"></div>
+        </div>
+        <div class="bi-card">
+          <div class="bi-card-hdr">
+            <h3>مؤشر استهلاك الأسمنت الأسود وصحة المخزن</h3>
+            <small id="biInvHealthSub">—</small>
+          </div>
+          <div class="bi-card-body" id="biChartCementInv"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== 2. المخزن (UNIFIED WAREHOUSE WITH INTERNAL SUB-TABS) ==================== -->
+<!-- ==================== 2. المخزن (UNIFIED WAREHOUSE WITH INTERNAL SUB-TABS) ==================== -->
   <section id="tab-warehouse" class="section">
     <div class="v7-page-head">
       <div class="v7-page-title">
@@ -2925,7 +3186,7 @@
       <div class="ipc-sheet-bar no-print">
         <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
           <label style="font-size:12.5px; font-weight:700; color:var(--text);">اختر المقاول / البند:</label>
-          <select class="inp" id="ipcSheetContractSelect" onchange="selectIpcSheetContract(this.value)" style="min-width:250px; font-weight:700;"></select>
+          <select class="ipc-sel" id="ipcSheetContractSelect" onchange="selectIpcSheetContract(this.value)" style="width:auto; min-width:230px;"></select>
           <span class="pill pill-plum" id="ipcSheetCountBadge">0 سطر</span>
         </div>
         <div style="display:flex; gap:6px; flex-wrap:wrap;">
@@ -2935,6 +3196,7 @@
           <button type="button" class="btn btn-lime btn-sm" onclick="syncIpcSheetToFinancials()">⚡ اعتماد للموقف المالي</button>
           <button type="button" class="btn btn-light btn-sm" onclick="loadSampleIpc35IntoCurrent()">📄 عينة مستخلص 35</button>
           <button type="button" class="btn btn-light btn-sm" onclick="document.getElementById('ipcExcelImportInput').click()">📂 استيراد Excel</button>
+          <button type="button" class="btn btn-light btn-sm" onclick="toggleSidebar()" title="طيّ/فتح القائمة الجانبية لتوسيع مساحة العرض">⛶ توسيع</button>
           <button type="button" class="btn btn-light btn-sm" onclick="printItemizedIpcSheet()">🖨️ طباعة A4</button>
           <button type="button" class="btn btn-gold btn-sm" onclick="saveCurrentIpcSheet()">💾 حفظ</button>
         </div>
@@ -2955,48 +3217,56 @@
           <div class="ipc-meta-cell">
             <label>رقم ونوع المستخلص</label>
             <div style="display:flex; gap:6px;">
-              <input type="text" class="inp num" id="ipcShNo" style="width:72px; text-align:center; font-weight:700;" oninput="syncIpcMetaFromDom()" />
-              <select class="inp" id="ipcShKind" style="flex:1;" onchange="syncIpcMetaFromDom()">
-                <option value="جاري">جاري</option>
-                <option value="ختامي">ختامي</option>
+              <input type="text" class="inp num" id="ipcShNo" style="width:76px; text-align:center; font-weight:700;" oninput="syncIpcMetaFromDom()" />
+              <select class="ipc-sel" id="ipcShKind" style="flex:1;" onchange="syncIpcMetaFromDom()">
+                <option value="جاري">مستخلص جاري</option>
+                <option value="ختامي">مستخلص ختامي</option>
+                <option value="تصفية">مستخلص تصفية نهائي</option>
               </select>
             </div>
           </div>
           <div class="ipc-meta-cell">
-            <label>تاريخ المستخلص</label>
-            <input type="date" class="inp" id="ipcShDate" onchange="syncIpcMetaFromDom()" />
-          </div>
-          <div class="ipc-meta-cell">
-            <label>اسم المقاول</label>
-            <input type="text" class="inp" id="ipcShContractor" style="font-weight:700;" oninput="syncIpcMetaFromDom()" />
-          </div>
-          <div class="ipc-meta-cell">
-            <label>وصف العمل (البند) والعمارة</label>
+            <label>تاريخ المستخلص والعمارة / الموقع</label>
             <div style="display:flex; gap:6px;">
-              <input type="text" class="inp" id="ipcShTrade" style="flex:1;" oninput="syncIpcMetaFromDom()" />
-              <input type="text" class="inp" id="ipcShBuilding" style="width:92px;" oninput="syncIpcMetaFromDom()" />
+              <input type="date" class="inp" id="ipcShDate" style="width:142px;" onchange="syncIpcMetaFromDom()" />
+              <select class="ipc-sel" id="ipcShBuildingSel" style="flex:1;" onchange="onIpcMetaSelectChange('building')"></select>
+              <input type="text" class="inp" id="ipcShBuilding" style="display:none; flex:1;" placeholder="اكتب الموقع..." oninput="syncIpcMetaFromDom()" />
+            </div>
+          </div>
+          <div class="ipc-meta-cell">
+            <label>اسم المقاول (قائمة منسدلة)</label>
+            <div style="display:flex; gap:6px;">
+              <select class="ipc-sel" id="ipcShContractorSel" style="flex:1;" onchange="onIpcMetaSelectChange('contractor')"></select>
+              <input type="text" class="inp" id="ipcShContractor" style="display:none; flex:1; font-weight:700;" placeholder="اكتب اسم المقاول..." oninput="syncIpcMetaFromDom()" />
+            </div>
+          </div>
+          <div class="ipc-meta-cell">
+            <label>نوع العمل / وصف البند (قائمة منسدلة)</label>
+            <div style="display:flex; gap:6px;">
+              <select class="ipc-sel" id="ipcShTradeSel" style="flex:1;" onchange="onIpcMetaSelectChange('trade')"></select>
+              <input type="text" class="inp" id="ipcShTrade" style="display:none; flex:1;" placeholder="اكتب وصف البند..." oninput="syncIpcMetaFromDom()" />
             </div>
           </div>
         </div>
 
-        <div class="sc-table-wrap">
+        <div class="ipc-tbl-wrap">
           <table class="ipc-tbl">
             <thead>
               <tr>
-                <th rowspan="2" style="width:36px;">م</th>
-                <th rowspan="2" style="width:128px;">نوع السطر</th>
-                <th rowspan="2" class="right" style="min-width:220px;">بيان الأعمال التفصيلي</th>
-                <th rowspan="2" style="width:78px;">الوحدة</th>
+                <th rowspan="2" style="width:28px;">م</th>
+                <th rowspan="2" style="width:104px;">نوع السطر</th>
+                <th rowspan="2" class="right" style="min-width:165px;">بيان الأعمال التفصيلي</th>
+                <th rowspan="2" style="width:74px;">الوحدة</th>
                 <th colspan="3">الكميات المنفذة</th>
-                <th rowspan="2" style="width:72px;">النسبة %</th>
-                <th rowspan="2" style="width:92px;">الفئة (جنيه)</th>
-                <th rowspan="2" style="width:118px;">القيمة الإجمالية (جنيه)</th>
-                <th rowspan="2" class="no-print" style="width:36px;"></th>
+                <th rowspan="2" style="width:58px;">النسبة %</th>
+                <th rowspan="2" style="width:72px;">الفئة</th>
+                <th rowspan="2" style="width:98px;">القيمة (ج.م)</th>
+                <th rowspan="2" class="no-print" style="width:28px;"></th>
               </tr>
               <tr>
-                <th style="width:78px;">سابقة</th>
-                <th style="width:78px;">حالية</th>
-                <th style="width:82px;">إجمالي</th>
+                <th style="width:64px;">سابقة</th>
+                <th style="width:64px;">حالية</th>
+                <th style="width:68px;">إجمالي</th>
               </tr>
             </thead>
             <tbody id="ipcSheetBody"></tbody>
@@ -3019,9 +3289,9 @@
           <div class="ipc-sum-row ret">
             <span style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
               <span>يُخصم: تأمين أعمال (ضمان) بنسبة</span>
-              <input type="number" min="0" max="20" step="0.5" class="inp num" id="ipcShRetPct" style="width:68px; padding:2px 6px; text-align:center;" oninput="onIpcSummaryInputsChange()" />
+              <input type="number" min="0" max="20" step="0.5" class="inp num" id="ipcShRetPct" style="width:64px; padding:2px 6px; text-align:center;" oninput="onIpcSummaryInputsChange()" />
               <span>%</span>
-              <small style="font-weight:500; opacity:0.85;">(اتركها 0% إذا لم يُخصم التأمين على هذا المستخلص)</small>
+              <small style="font-weight:500; opacity:0.85;">(0% إذا لم يُخصم التأمين على هذا المستخلص)</small>
             </span>
             <span class="ipc-sum-val" id="ipcSumRet">0.00</span>
           </div>
@@ -3030,11 +3300,14 @@
               <span>يُخصم: إجمالي الدفعات والأعمال السابقة المنصرفة</span>
               <span class="pill pill-navy" id="ipcLivePaidHint">سجل الدفعات: 0 ج.م</span>
             </span>
-            <input type="number" min="0" step="0.01" class="inp num" id="ipcShPrevPaid" style="width:145px; text-align:left; font-weight:700;" oninput="onIpcSummaryInputsChange()" />
+            <input type="number" min="0" step="0.01" class="inp num" id="ipcShPrevPaid" style="width:138px; text-align:left; font-weight:700;" oninput="onIpcSummaryInputsChange()" />
           </div>
           <div class="ipc-sum-row due" id="ipcSumDueRow">
             <span>الصافي المستحق للصرف في هذه الدفعة (ج.م)</span>
             <span class="ipc-sum-val" id="ipcSumDue">0.00</span>
+          </div>
+          <div class="ipc-tafqeet-row" id="ipcTafqeetRow">
+            <span>التفقيط (بالحروف العربية): <span id="ipcSumTafqeet">فقط صفر جنيه مصري لا غير.</span></span>
           </div>
         </div>
 
@@ -3810,6 +4083,7 @@
 <div id="printDailyReportArea"></div>
 <div id="printIpcSheetArea"></div>
 <div id="printAptMatrixArea"></div>
+<div id="printAnalyticsArea"></div>
 
 <!-- ==================== V6.0 SLIDE-OVER NOTIFICATIONS DRAWER ==================== -->
 <div class="v6-drawer-bg" id="notifDrawerBg" onclick="closeNotifDrawer()"></div>
@@ -3875,7 +4149,7 @@
 // ============================================================================
 // 1. CLEAN ZERO-DATA CLOUD SHELL (ALL REAL DATA LOADS ONLY FROM SUPABASE AFTER AUTH)
 // ============================================================================
-const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.3 — المستخلص التفصيلي المتغير بالمقاول + مصفوفة الشقق وسجل الـ IR", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
+const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.4 — الداش بورد التحليلي الشامل + المستخلص بالتفقيط والقوائم المنسدلة", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
 
 // ============================================================================
 // ⚙️ إعدادات الربط السحابي (Supabase) — ضع الرابط والمفتاح هنا مرة واحدة قبل الرفع
@@ -8108,7 +8382,7 @@ switchTab = function(id, btn, explicitSub) {
   if (btn && btn.getAttribute('data-tab') === targetMain) btn.classList.add('active');
   else document.querySelector(`.tab-btn[data-tab="${targetMain}"]`)?.classList.add('active');
 
-  if (targetSub && ['warehouse', 'accounts', 'subcontractors', 'matrix'].includes(targetMain)) {
+  if (targetSub && ['overview', 'warehouse', 'accounts', 'subcontractors', 'matrix'].includes(targetMain)) {
     switchSubTab(targetMain, targetSub);
   }
 
@@ -9767,16 +10041,7 @@ function printDailyReport() {
     </div>
   `;
 
-  document.body.classList.add('printing-daily-report');
-  const cleanup = () => {
-    document.body.classList.remove('printing-daily-report');
-    window.removeEventListener('afterprint', cleanup);
-  };
-  window.addEventListener('afterprint', cleanup);
-  setTimeout(() => {
-    window.print();
-    setTimeout(cleanup, 1200);
-  }, 140);
+  runSafeA4Print('printing-daily-report');
 }
 
 // ============================================================================
@@ -9813,7 +10078,120 @@ const APT_STAGE_CONFIG = [
 let activeIpcSheetCode = null;
 let activeAptStageFilter = 'ALL';
 
-// --- A) ITEMIZED SUBCONTRACTOR IPC SHEET ENGINE ---
+// --- A) ITEMIZED SUBCONTRACTOR IPC SHEET ENGINE (V7.4 DROPDOWNS + TAFQEET + CRISP PRINT) ---
+const IPC_STANDARD_TRADES = [
+  'أعمال حدادة مسلحة', 'أعمال نجارة مسلحة', 'أعمال مباني', 'أعمال بياض ومحارة',
+  'أعمال بند الكهرباء', 'أعمال سباكة وعزل', 'أعمال سيراميك وبورسلين',
+  'أعمال رخام وجرانيت', 'أعمال دهانات ونقاشة', 'أعمال جبس وكرانيش',
+  'أعمال ألوميتال وزجاج', 'أعمال نجارة أبواب', 'أعمال عزل مائي وحراري', 'أعمال مصاعد وكهروميكانيك'
+];
+const IPC_STANDARD_BUILDINGS = [
+  'عمارة رقم (5)', 'عمارة رقم (4)', 'عمارة رقم (5) — البدروم',
+  'عمارة رقم (5) — السطح', 'عمارة رقم (5) — الواجهات', 'الموقع العام'
+];
+const IPC_STANDARD_UNITS = ['م³', 'م²', 'م.ط', 'عدد', 'مقطوعية', 'طن', 'شكارة', 'لفة', 'نقطة', 'يوم'];
+
+function tafqeetUnder1000(n) {
+  const ones = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة',
+    'عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر',
+    'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
+  const tens = ['', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
+  const hundreds = ['', 'مائة', 'مائتان', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة'];
+  const parts = [];
+  const h = Math.floor(n / 100), rem = n % 100;
+  if (h) parts.push(hundreds[h]);
+  if (rem) {
+    if (rem < 20) parts.push(ones[rem]);
+    else {
+      const u = rem % 10, t = Math.floor(rem / 10);
+      parts.push(u ? `${ones[u]} و${tens[t]}` : tens[t]);
+    }
+  }
+  return parts.join(' و');
+}
+
+function tafqeetInt(n) {
+  if (!n) return 'صفر';
+  const parts = [];
+  const millions = Math.floor(n / 1000000);
+  const remM = n % 1000000;
+  const thousands = Math.floor(remM / 1000);
+  const rest = remM % 1000;
+
+  if (millions) {
+    if (millions === 1) parts.push('مليون');
+    else if (millions === 2) parts.push('مليونان');
+    else if (millions >= 3 && millions <= 10) parts.push(`${tafqeetUnder1000(millions)} ملايين`);
+    else parts.push(`${tafqeetUnder1000(millions)} مليوناً`);
+  }
+  if (thousands) {
+    if (thousands === 1) parts.push('ألف');
+    else if (thousands === 2) parts.push('ألفان');
+    else if (thousands >= 3 && thousands <= 10) parts.push(`${tafqeetUnder1000(thousands)} آلاف`);
+    else parts.push(`${tafqeetUnder1000(thousands)} ألفاً`);
+  }
+  if (rest) parts.push(tafqeetUnder1000(rest));
+  return parts.join(' و');
+}
+
+function tafqeetEGP(amount) {
+  const num = Number(amount || 0);
+  const isNeg = num < -0.005;
+  const val = Math.round(Math.abs(num) * 100) / 100;
+  let pounds = Math.floor(val);
+  let piastres = Math.round((val - pounds) * 100);
+  if (piastres === 100) { pounds += 1; piastres = 0; }
+  if (pounds === 0 && piastres === 0) return 'فقط صفر جنيه مصري لا غير.';
+
+  const poundUnit = (n) => {
+    const r = n % 100;
+    if (n === 1) return 'جنيه مصري';
+    if (n === 2) return 'جنيهان مصريان';
+    if (r >= 3 && r <= 10) return 'جنيهات مصرية';
+    if (r >= 11 && r <= 99) return 'جنيهاً مصرياً';
+    return 'جنيه مصري';
+  };
+  const piastreUnit = (n) => {
+    if (n === 1) return 'قرش واحد';
+    if (n === 2) return 'قرشان';
+    if (n >= 3 && n <= 10) return 'قروش';
+    return 'قرشاً';
+  };
+
+  const parts = [];
+  if (pounds > 0) {
+    if (pounds === 1) parts.push('جنيه مصري واحد');
+    else if (pounds === 2) parts.push('جنيهان مصريان');
+    else parts.push(`${tafqeetInt(pounds)} ${poundUnit(pounds)}`);
+  }
+  if (piastres > 0) {
+    if (piastres === 1 || piastres === 2) parts.push(piastreUnit(piastres));
+    else parts.push(`${tafqeetUnder1000(piastres)} ${piastreUnit(piastres)}`);
+  }
+  const txt = `فقط ${parts.join(' و')} لا غير.`;
+  return isNeg ? `تجاوز صرف (مديونية على المقاول): ${txt}` : txt;
+}
+
+// Universal Light-Theme Print Helper (guarantees 100% crisp dark text even when printing from Dark Mode!)
+function runSafeA4Print(bodyClass) {
+  const prevTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', 'light');
+  document.body.classList.add(bodyClass);
+  let cleaned = false;
+  const cleanup = () => {
+    if (cleaned) return;
+    cleaned = true;
+    document.body.classList.remove(bodyClass);
+    document.documentElement.setAttribute('data-theme', prevTheme);
+    window.removeEventListener('afterprint', cleanup);
+  };
+  window.addEventListener('afterprint', cleanup);
+  setTimeout(() => {
+    window.print();
+    setTimeout(cleanup, 1500);
+  }, 160);
+}
+
 function ensureIpcSheets() {
   if (!DB.ipcSheets || typeof DB.ipcSheets !== 'object') DB.ipcSheets = {};
 }
@@ -9881,6 +10259,45 @@ function computeIpcSheetTotals(sheet) {
   return { gross, ded, net, retPct, retVal, prevPaid, netDue };
 }
 
+function populateIpcMetaDropdown(selId, inpId, optionsArr, currentVal) {
+  const sel = document.getElementById(selId);
+  const inp = document.getElementById(inpId);
+  if (!sel || !inp) return;
+  const uniq = Array.from(new Set(optionsArr.map(v => String(v || '').trim()).filter(Boolean)));
+  const cur = String(currentVal || '').trim();
+  if (cur && !uniq.includes(cur)) uniq.unshift(cur);
+  sel.innerHTML = uniq.map(v => `<option value="${esc(v)}" ${v === cur ? 'selected' : ''}>${esc(v)}</option>`).join('')
+    + '<option value="__CUSTOM__">✏️ إدخال يدوي آخر...</option>';
+  inp.value = cur || (uniq[0] || '');
+  inp.style.display = 'none';
+}
+
+function onIpcMetaSelectChange(field) {
+  const map = {
+    contractor: ['ipcShContractorSel', 'ipcShContractor', 'contractorName'],
+    trade:      ['ipcShTradeSel',      'ipcShTrade',      'tradeDesc'],
+    building:   ['ipcShBuildingSel',   'ipcShBuilding',   'building']
+  };
+  const cfg = map[field];
+  if (!cfg) return;
+  const sel = document.getElementById(cfg[0]);
+  const inp = document.getElementById(cfg[1]);
+  const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
+  if (!sel || !inp || !sheet) return;
+  if (sel.value === '__CUSTOM__') {
+    inp.style.display = 'block';
+    inp.focus();
+  } else {
+    inp.style.display = 'none';
+    inp.value = sel.value;
+    sheet[cfg[2]] = sel.value;
+    if (field === 'building') {
+      const hp = document.getElementById('ipcSheetHeaderProject');
+      if (hp) hp.textContent = `المشروع: حياة مرسيليا — ${sel.value}`;
+    }
+  }
+}
+
 function renderIpcSheetView() {
   ensureIpcSheets();
   const bdg = document.getElementById('subBdgContracts');
@@ -9911,19 +10328,28 @@ function renderIpcSheetView() {
   const cObj = contracts.find(c => c.code === activeIpcSheetCode);
   const liveSub = (S?.subStats || []).find(x => x.code === activeIpcSheetCode);
 
+  if (!sheet.contractorName && cObj) sheet.contractorName = cObj.person || cObj.name || '';
+  if (!sheet.tradeDesc && cObj) sheet.tradeDesc = cObj.trade || cObj.name || '';
+  if (!sheet.building) sheet.building = 'عمارة رقم (5)';
+
   const setV = (id, v) => { const el = document.getElementById(id); if (el) el.value = v ?? ''; };
   const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v ?? ''; };
 
   setT('ipcSheetContractPill', `${activeIpcSheetCode} • ${cObj?.name || ''}`);
+  setT('ipcSheetHeaderProject', `المشروع: حياة مرسيليا — ${sheet.building}`);
   setV('ipcShNo', sheet.ipcNo);
   setV('ipcShKind', sheet.ipcKind || 'جاري');
   setV('ipcShDate', sheet.date || todayISO());
-  setV('ipcShContractor', sheet.contractorName);
-  setV('ipcShTrade', sheet.tradeDesc);
-  setV('ipcShBuilding', sheet.building || 'عمارة رقم (5)');
   setV('ipcShRetPct', sheet.retPct ?? 0);
   setV('ipcShPrevPaid', sheet.prevPaid ?? 0);
   setT('ipcLivePaidHint', `سجل الدفعات الفعلي: ${fmt(liveSub?.totalPaid || 0, 2)} ج.م`);
+
+  // Populate real visible Dropdowns for Contractor, Work Type (Trade), and Building!
+  const contractorOpts = contracts.flatMap(c => [c.person, c.name]).filter(Boolean);
+  const tradeOpts = [...contracts.map(c => c.trade).filter(Boolean), ...IPC_STANDARD_TRADES];
+  populateIpcMetaDropdown('ipcShContractorSel', 'ipcShContractor', contractorOpts, sheet.contractorName);
+  populateIpcMetaDropdown('ipcShTradeSel', 'ipcShTrade', tradeOpts, sheet.tradeDesc);
+  populateIpcMetaDropdown('ipcShBuildingSel', 'ipcShBuilding', IPC_STANDARD_BUILDINGS, sheet.building);
 
   const sigs = sheet.sigs || {};
   setV('ipcSigT1', sigs.t1 || 'إعداد ومراجعة الكميات'); setV('ipcSigN1', sigs.n1 || 'م / أحمد يسري');
@@ -9949,24 +10375,30 @@ function renderIpcSheetRows() {
     const rate = Number(r.rate) || 0;
     const val = totQ * (pct / 100) * rate;
     const isDed = r.kind === 'ded';
+    const curUnit = String(r.unit || 'م²').trim();
+    const uOpts = IPC_STANDARD_UNITS.includes(curUnit) ? IPC_STANDARD_UNITS : [curUnit, ...IPC_STANDARD_UNITS];
     return `
       <tr class="${isDed ? 'ipc-row-ded' : ''}">
         <td class="num" style="font-weight:700; color:var(--muted);">${i + 1}</td>
         <td>
           <select class="ipc-inp" style="font-weight:700; text-align:center;" onchange="updateIpcRowField(${i},'kind',this.value,true)">
-            <option value="add" ${!isDed?'selected':''}>إضافة أعمال ➕</option>
-            <option value="ded" ${isDed?'selected':''}>خصم خامات ➖</option>
+            <option value="add" ${!isDed?'selected':''}>إضافة أعمال +</option>
+            <option value="ded" ${isDed?'selected':''}>خصم خامات —</option>
           </select>
         </td>
         <td class="right"><input type="text" class="ipc-inp" style="font-weight:600;" value="${esc(r.desc)}" oninput="updateIpcRowField(${i},'desc',this.value,false)" placeholder="بيان البند أو الخصم..." /></td>
-        <td><input type="text" class="ipc-inp" style="text-align:center;" value="${esc(r.unit)}" oninput="updateIpcRowField(${i},'unit',this.value,false)" placeholder="م³ / م²" /></td>
+        <td>
+          <select class="ipc-inp" style="text-align:center; font-weight:600;" onchange="updateIpcRowField(${i},'unit',this.value,false)">
+            ${uOpts.map(u => `<option value="${esc(u)}" ${u === curUnit ? 'selected' : ''}>${esc(u)}</option>`).join('')}
+          </select>
+        </td>
         <td><input type="number" step="0.01" class="ipc-inp num" style="text-align:center;" value="${prevQ}" oninput="updateIpcRowField(${i},'prevQty',this.value,false)" /></td>
         <td><input type="number" step="0.01" class="ipc-inp num" style="text-align:center;" value="${currQ}" oninput="updateIpcRowField(${i},'currQty',this.value,false)" /></td>
         <td class="num" style="font-weight:700; background:var(--surface-2);" id="ipcRowTotQ-${i}">${fmt(totQ, totQ % 1 ? 2 : 0)}</td>
         <td><input type="number" step="1" min="0" max="100" class="ipc-inp num" style="text-align:center;" value="${pct}" oninput="updateIpcRowField(${i},'pct',this.value,false)" /></td>
         <td><input type="number" step="0.01" min="0" class="ipc-inp num" style="text-align:center;" value="${rate}" oninput="updateIpcRowField(${i},'rate',this.value,false)" /></td>
         <td class="num" style="font-weight:700;" id="ipcRowVal-${i}">${fmt(val, 2)}</td>
-        <td class="no-print"><button type="button" class="icon-btn del" onclick="removeIpcSheetRow(${i})" title="حذف السطر">✕</button></td>
+        <td class="no-print"><button type="button" class="icon-btn del" style="padding:1px 5px;" onclick="removeIpcSheetRow(${i})" title="حذف السطر">✕</button></td>
       </tr>
     `;
   }).join('');
@@ -10003,8 +10435,11 @@ function updateIpcSummaryDom() {
   setT('ipcSumNet', fmt(t.net, 2));
   setT('ipcSumRet', fmt(t.retVal, 2));
   setT('ipcSumDue', fmt(t.netDue, 2));
+  setT('ipcSumTafqeet', tafqeetEGP(t.netDue));
   const dueRow = document.getElementById('ipcSumDueRow');
+  const tafRow = document.getElementById('ipcTafqeetRow');
   if (dueRow) dueRow.classList.toggle('overpay', t.netDue < 0);
+  if (tafRow) tafRow.classList.toggle('overpay', t.netDue < 0);
 }
 
 function syncIpcMetaFromDom() {
@@ -10014,9 +10449,14 @@ function syncIpcMetaFromDom() {
   sheet.ipcNo = g('ipcShNo').trim() || '1';
   sheet.ipcKind = g('ipcShKind') || 'جاري';
   sheet.date = g('ipcShDate') || todayISO();
-  sheet.contractorName = g('ipcShContractor').trim();
-  sheet.tradeDesc = g('ipcShTrade').trim();
-  sheet.building = g('ipcShBuilding').trim() || 'عمارة رقم (5)';
+
+  const cSel = document.getElementById('ipcShContractorSel');
+  sheet.contractorName = (cSel && cSel.value !== '__CUSTOM__' ? cSel.value : g('ipcShContractor')).trim();
+  const tSel = document.getElementById('ipcShTradeSel');
+  sheet.tradeDesc = (tSel && tSel.value !== '__CUSTOM__' ? tSel.value : g('ipcShTrade')).trim();
+  const bSel = document.getElementById('ipcShBuildingSel');
+  sheet.building = (bSel && bSel.value !== '__CUSTOM__' ? bSel.value : g('ipcShBuilding')).trim() || 'عمارة رقم (5)';
+
   sheet.sigs = {
     t1: g('ipcSigT1').trim(), n1: g('ipcSigN1').trim(),
     t2: g('ipcSigT2').trim(), n2: g('ipcSigN2').trim(),
@@ -10154,6 +10594,7 @@ function printItemizedIpcSheet() {
   const sheet = getOrCreateIpcSheet(activeIpcSheetCode);
   if (!sheet) return;
   const t = computeIpcSheetTotals(sheet);
+  const tafqeetTxt = tafqeetEGP(t.netDue);
   const logos = getBrandLogos();
   const dtFmt = (sheet.date || '').split('-').reverse().join(' / ');
 
@@ -10162,109 +10603,107 @@ function printItemizedIpcSheet() {
     const pct = Number(r.pct) || 0, rate = Number(r.rate) || 0;
     const val = totQ * (pct / 100) * rate;
     const isDed = r.kind === 'ded';
-    const bg = isDed ? 'background:#FEF3F2; color:#B42318;' : (i % 2 ? 'background:#F8FAFC;' : '');
-    const tdBase = 'border:1px solid #CBD5E1; padding:4px 5px;';
+    const rowCls = isDed ? 'prt-red' : 'prt-ink';
+    const bg = isDed ? 'background:#FEF3F2;' : (i % 2 ? 'background:#F8FAFC;' : 'background:#FFFFFF;');
+    const tdBase = 'border:1px solid #CBD5E1; padding:3px 4px;';
     return `
-      <tr style="${bg}">
+      <tr class="${rowCls}" style="${bg}">
         <td style="${tdBase} text-align:center; font-weight:700;">${i + 1}</td>
         <td style="${tdBase} text-align:center; font-weight:700;">${isDed ? 'خصم خامات —' : 'إضافة أعمال +'}</td>
         <td style="${tdBase} text-align:right; font-weight:600;">${esc(r.desc)}</td>
         <td style="${tdBase} text-align:center;">${esc(r.unit)}</td>
-        <td style="${tdBase} text-align:center;" class="num">${prevQ ? fmt(prevQ, prevQ % 1 ? 2 : 0) : ''}</td>
-        <td style="${tdBase} text-align:center;" class="num">${currQ ? fmt(currQ, currQ % 1 ? 2 : 0) : ''}</td>
-        <td style="${tdBase} text-align:center; font-weight:700; color:${isDed ? '#B42318' : '#0E4D4E'};" class="num">${fmt(totQ, totQ % 1 ? 2 : 0)}</td>
-        <td style="${tdBase} text-align:center;" class="num">${pct}%</td>
-        <td style="${tdBase} text-align:center;" class="num">${fmt(rate, rate % 1 ? 2 : 0)}</td>
-        <td style="${tdBase} text-align:left; font-weight:700;" class="num">${fmt(val, 2)}</td>
+        <td style="${tdBase} text-align:center; font-variant-numeric:tabular-nums;">${prevQ ? fmt(prevQ, prevQ % 1 ? 2 : 0) : ''}</td>
+        <td style="${tdBase} text-align:center; font-variant-numeric:tabular-nums;">${currQ ? fmt(currQ, currQ % 1 ? 2 : 0) : ''}</td>
+        <td class="${isDed ? 'prt-red' : 'prt-brand'}" style="${tdBase} text-align:center; font-weight:700; font-variant-numeric:tabular-nums;">${fmt(totQ, totQ % 1 ? 2 : 0)}</td>
+        <td style="${tdBase} text-align:center; font-variant-numeric:tabular-nums;">${pct}%</td>
+        <td style="${tdBase} text-align:center; font-variant-numeric:tabular-nums;">${fmt(rate, rate % 1 ? 2 : 0)}</td>
+        <td style="${tdBase} text-align:left; font-weight:700; font-variant-numeric:tabular-nums;">${fmt(val, 2)}</td>
       </tr>
     `;
   }).join('');
 
   document.getElementById('printIpcSheetArea').innerHTML = `
-    <div style="font-family:'IBM Plex Sans Arabic','Cairo',sans-serif; color:#101828;">
-      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #0E4D4E; padding-bottom:8px; margin-bottom:10px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          ${logos.aobc ? `<img src="${logos.aobc}" style="height:48px; border-radius:6px;" />` : ''}
+    <div class="prt-ink" style="font-family:'IBM Plex Sans Arabic','Cairo',sans-serif; color:#101828; background:#FFFFFF;">
+      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #0E4D4E; padding-bottom:6px; margin-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          ${logos.aobc ? `<img src="${logos.aobc}" style="height:44px; border-radius:6px;" />` : ''}
           <div>
-            <div style="font-size:14px; font-weight:700; color:#0E4D4E;">المكتب العربي للتشييد والبناء (A.O.B.C) — سجل تجاري (174355)</div>
-            <div style="font-size:11.5px; color:#475467; font-weight:600;">المشروع: حياة مرسيليا — ${esc(sheet.building)}</div>
+            <div class="prt-brand" style="font-size:13.5px; font-weight:700;">المكتب العربي للتشييد والبناء (A.O.B.C) — سجل تجاري (174355)</div>
+            <div class="prt-muted" style="font-size:11px; font-weight:600;">المشروع: حياة مرسيليا — ${esc(sheet.building)}</div>
           </div>
         </div>
         <div style="text-align:left;">
-          <div style="background:#0E4D4E; color:#FFFFFF; padding:4px 12px; border-radius:6px; font-size:13px; font-weight:700;">مستخلص رقم / ${esc(sheet.ipcNo)} ${esc(sheet.ipcKind)}</div>
-          <div style="font-size:10.5px; color:#475467; margin-top:3px; font-weight:600;">التاريخ: ${esc(dtFmt)}</div>
+          <div class="prt-white" style="background:#0E4D4E; padding:4px 12px; border-radius:6px; font-size:12.5px; font-weight:700;">مستخلص رقم / ${esc(sheet.ipcNo)} ${esc(sheet.ipcKind)}</div>
+          <div class="prt-muted" style="font-size:10px; margin-top:2px; font-weight:600;">التاريخ: ${esc(dtFmt)}</div>
         </div>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; padding:8px 12px; background:#F7F8F9; border:1px solid #CBD5E1; border-radius:7px; font-size:11.5px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; padding:6px 10px; background:#F7F8F9; border:1px solid #CBD5E1; border-radius:6px; font-size:11px;">
         <div><strong>اسم المقاول:</strong> ${esc(sheet.contractorName)}</div>
         <div><strong>وصف العمل (البند):</strong> ${esc(sheet.tradeDesc)}</div>
       </div>
 
-      <table style="width:100%; border-collapse:collapse; font-size:10.5px; margin-bottom:10px;">
+      <table style="width:100%; border-collapse:collapse; font-size:9.4px; margin-bottom:8px;">
         <thead>
-          <tr style="background:#0E4D4E; color:#FFFFFF;">
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:26px;">م</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:82px;">نوع السطر</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; text-align:right;">بيان الأعمال التفصيلي</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:48px;">الوحدة</th>
-            <th colspan="3" style="border:1px solid #0E4D4E; padding:4px;">الكميات المنفذة</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:48px;">النسبة %</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:64px;">الفئة (جنيه)</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:5px; width:86px;">القيمة الإجمالية</th>
+          <tr class="prt-white" style="background:#0E4D4E;">
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:24px;">م</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:74px;">نوع السطر</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; text-align:right;">بيان الأعمال التفصيلي</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:44px;">الوحدة</th>
+            <th colspan="3" style="border:1px solid #0E4D4E; padding:3px;">الكميات المنفذة</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:42px;">النسبة</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:56px;">الفئة</th>
+            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:78px;">الإجمالي (ج.م)</th>
           </tr>
-          <tr style="background:#1F7A7B; color:#FFFFFF;">
-            <th style="border:1px solid #0E4D4E; padding:3px; width:54px;">سابقة</th>
-            <th style="border:1px solid #0E4D4E; padding:3px; width:54px;">حالية</th>
-            <th style="border:1px solid #0E4D4E; padding:3px; width:58px;">إجمالي</th>
+          <tr class="prt-white" style="background:#1F7A7B;">
+            <th style="border:1px solid #0E4D4E; padding:2.5px; width:48px;">سابقة</th>
+            <th style="border:1px solid #0E4D4E; padding:2.5px; width:48px;">حالية</th>
+            <th style="border:1px solid #0E4D4E; padding:2.5px; width:52px;">إجمالي</th>
           </tr>
         </thead>
         <tbody>${rowsHtml}</tbody>
       </table>
 
-      <div style="border:1.5px solid #0E4D4E; border-radius:7px; overflow:hidden; page-break-inside:avoid; font-size:11.5px;">
-        <div style="display:flex; justify-content:space-between; padding:6px 12px; background:#F1F5F9; border-bottom:1px solid #CBD5E1; font-weight:700;">
-          <span>إجمالي قيمة الأعمال المنفذة (بدون الخصومات) +</span><span class="num">${fmt(t.gross, 2)} ج.م</span>
+      <div style="border:1.5px solid #0E4D4E; border-radius:7px; overflow:hidden; page-break-inside:avoid; font-size:10.8px;">
+        <div class="prt-ink" style="display:flex; justify-content:space-between; padding:5px 11px; background:#F1F5F9; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>إجمالي قيمة الأعمال المنفذة (بدون الخصومات) +</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.gross, 2)} ج.م</span>
         </div>
-        <div style="display:flex; justify-content:space-between; padding:6px 12px; background:#FEF3F2; color:#B42318; border-bottom:1px solid #CBD5E1; font-weight:700;">
-          <span>يُخصم: إجمالي استقطاعات الخامات والمستلزمات —</span><span class="num">${fmt(t.ded, 2)} ج.م</span>
+        <div class="prt-red" style="display:flex; justify-content:space-between; padding:5px 11px; background:#FEF3F2; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>يُخصم: إجمالي استقطاعات الخامات والمستلزمات —</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.ded, 2)} ج.م</span>
         </div>
-        <div style="display:flex; justify-content:space-between; padding:6px 12px; background:#ECFDF3; color:#067647; border-bottom:1px solid #CBD5E1; font-weight:700;">
-          <span>صافي قيمة المستخلص المستحق (بعد خصم الخامات) ✓</span><span class="num">${fmt(t.net, 2)} ج.م</span>
+        <div class="prt-green" style="display:flex; justify-content:space-between; padding:5px 11px; background:#ECFDF3; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>صافي قيمة المستخلص المستحق (بعد خصم الخامات) ✓</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.net, 2)} ج.م</span>
         </div>
-        ${t.retPct > 0 ? `<div style="display:flex; justify-content:space-between; padding:6px 12px; background:#FFFAEB; color:#B54708; border-bottom:1px solid #CBD5E1; font-weight:700;"><span>يُخصم: تأمين أعمال (${t.retPct}%)</span><span class="num">${fmt(t.retVal, 2)} ج.م</span></div>` : ''}
-        <div style="display:flex; justify-content:space-between; padding:6px 12px; background:#FFFFFF; border-bottom:1px solid #CBD5E1; font-weight:600;">
-          <span>يُخصم: إجمالي الدفعات والأعمال السابقة المنصرفة</span><span class="num">${fmt(t.prevPaid, 2)} ج.م</span>
+        ${t.retPct > 0 ? `<div class="prt-amber" style="display:flex; justify-content:space-between; padding:5px 11px; background:#FFFAEB; border-bottom:1px solid #CBD5E1; font-weight:700;"><span>يُخصم: تأمين أعمال (${t.retPct}%)</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.retVal, 2)} ج.م</span></div>` : ''}
+        <div class="prt-ink" style="display:flex; justify-content:space-between; padding:5px 11px; background:#FFFFFF; border-bottom:1px solid #CBD5E1; font-weight:600;">
+          <span>يُخصم: إجمالي الدفعات والأعمال السابقة المنصرفة</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.prevPaid, 2)} ج.م</span>
         </div>
-        <div style="display:flex; justify-content:space-between; padding:8px 12px; background:${t.netDue < 0 ? '#B42318' : '#0E4D4E'}; color:#FFFFFF; font-size:13px; font-weight:700;">
-          <span>الصافي المستحق للصرف في هذه الدفعة (ج.م)</span><span class="num">${fmt(t.netDue, 2)} ج.م</span>
+        <div class="prt-white" style="display:flex; justify-content:space-between; padding:7px 11px; background:${t.netDue < 0 ? '#B42318' : '#0E4D4E'}; font-size:12.5px; font-weight:700;">
+          <span>الصافي المستحق للصرف في هذه الدفعة (ج.م)</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.netDue, 2)} ج.م</span>
+        </div>
+        <div class="${t.netDue < 0 ? 'prt-red' : 'prt-brand'}" style="padding:6px 11px; background:${t.netDue < 0 ? '#FEF3F2' : '#E8F3F3'}; border-top:1px solid #CBD5E1; font-size:11px; font-weight:700; text-align:right;">
+          المبلغ بالحروف (التفقيط): ${esc(tafqeetTxt)}
         </div>
       </div>
 
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px; text-align:center; page-break-inside:avoid;">
-        <div style="border:1px solid #CBD5E1; border-radius:7px; padding:8px;">
-          <div style="font-size:10.5px; font-weight:700; color:#0E4D4E;">${esc(sheet.sigs?.t1 || 'إعداد ومراجعة الكميات')}</div>
-          <div style="font-family:'Aref Ruqaa',serif; font-size:20px; margin:6px 0;">${esc(sheet.sigs?.n1 || 'م / أحمد يسري')}</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px; text-align:center; page-break-inside:avoid;">
+        <div style="border:1px solid #CBD5E1; border-radius:7px; padding:7px;">
+          <div class="prt-brand" style="font-size:10px; font-weight:700;">${esc(sheet.sigs?.t1 || 'إعداد ومراجعة الكميات')}</div>
+          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:19px; margin:5px 0;">${esc(sheet.sigs?.n1 || 'م / أحمد يسري')}</div>
         </div>
-        <div style="border:1px solid #CBD5E1; border-radius:7px; padding:8px;">
-          <div style="font-size:10.5px; font-weight:700; color:#0E4D4E;">${esc(sheet.sigs?.t2 || 'المكتب الفني والتنفيذ')}</div>
-          <div style="font-family:'Aref Ruqaa',serif; font-size:20px; margin:6px 0;">${esc(sheet.sigs?.n2 || 'م / ....................')}</div>
+        <div style="border:1px solid #CBD5E1; border-radius:7px; padding:7px;">
+          <div class="prt-brand" style="font-size:10px; font-weight:700;">${esc(sheet.sigs?.t2 || 'المكتب الفني والتنفيذ')}</div>
+          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:19px; margin:5px 0;">${esc(sheet.sigs?.n2 || 'م / ....................')}</div>
         </div>
-        <div style="border:1px solid #0E4D4E; border-radius:7px; padding:8px; background:#E8F3F3;">
-          <div style="font-size:10.5px; font-weight:700; color:#0E4D4E;">${esc(sheet.sigs?.t3 || 'اعتماد مدير المشروع')}</div>
-          <div style="font-family:'Aref Ruqaa',serif; font-size:20px; margin:6px 0;">${esc(sheet.sigs?.n3 || 'م / محمد السيد')}</div>
+        <div style="border:1px solid #0E4D4E; border-radius:7px; padding:7px; background:#E8F3F3;">
+          <div class="prt-brand" style="font-size:10px; font-weight:700;">${esc(sheet.sigs?.t3 || 'اعتماد مدير المشروع')}</div>
+          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:19px; margin:5px 0;">${esc(sheet.sigs?.n3 || 'م / محمد السيد')}</div>
         </div>
       </div>
     </div>
   `;
 
-  document.body.classList.add('printing-ipc-sheet');
-  const cleanup = () => {
-    document.body.classList.remove('printing-ipc-sheet');
-    window.removeEventListener('afterprint', cleanup);
-  };
-  window.addEventListener('afterprint', cleanup);
-  setTimeout(() => { window.print(); setTimeout(cleanup, 1200); }, 140);
+  runSafeA4Print('printing-ipc-sheet');
 }
 
 // --- B) APARTMENT DELIVERY & IR MATRIX + PRE-CODING GENERATOR + IR LOG ---
@@ -10880,13 +11319,409 @@ function printAptMatrixA4() {
     </div>
   `;
 
-  document.body.classList.add('printing-apt-matrix');
-  const cleanup = () => {
-    document.body.classList.remove('printing-apt-matrix');
-    window.removeEventListener('afterprint', cleanup);
-  };
-  window.addEventListener('afterprint', cleanup);
-  setTimeout(() => { window.print(); setTimeout(cleanup, 1200); }, 140);
+  runSafeA4Print('printing-apt-matrix');
+}
+
+// ============================================================================
+// 20. V7.4 EXECUTIVE BI ANALYTICS & CHARTS DASHBOARD (PURE SVG — LIGHT/DARK + A4)
+// ============================================================================
+function buildSvgDonut(segments, centerTop, centerSub, size = 166) {
+  const total = segments.reduce((s, x) => s + Math.max(0, Number(x.val) || 0), 0) || 1;
+  const r = 60, cx = 83, cy = 83, circ = 2 * Math.PI * r;
+  let offset = 0;
+  const arcs = segments.filter(s => s.val > 0).map(s => {
+    const frac = s.val / total;
+    const len = frac * circ;
+    const el = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="22" stroke-dasharray="${len.toFixed(2)} ${(circ - len).toFixed(2)}" stroke-dashoffset="${(-offset).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})"><title>${esc(s.label)}: ${fmt(s.val)} (${(frac*100).toFixed(1)}%)</title></circle>`;
+    offset += len;
+    return el;
+  }).join('');
+  return `
+    <svg viewBox="0 0 166 166" style="width:${size}px; height:${size}px; flex-shrink:0;">
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--surface-2)" stroke-width="22" />
+      ${arcs}
+      <text x="${cx}" y="${cy - 4}" text-anchor="middle" font-size="16" font-weight="700" fill="var(--text)" style="font-variant-numeric:tabular-nums;">${esc(centerTop)}</text>
+      <text x="${cx}" y="${cy + 15}" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--muted)">${esc(centerSub)}</text>
+    </svg>
+  `;
+}
+
+function renderExecutiveBiDashboard() {
+  if (!S) return;
+  if (typeof ensureIrAndAptMatrix === 'function') ensureIrAndAptMatrix();
+
+  const aptSum = computeAptMatrixSummary();
+  const irAll = DB.irLog || [];
+  const irA = irAll.filter(x => x.status === 'A').length;
+  const irB = irAll.filter(x => x.status === 'B').length;
+  const irOther = irAll.length - irA - irB;
+  const codeAPct = irAll.length ? (irA / irAll.length * 100) : 0;
+  const subDrawPct = S.totNetIpc > 0 ? (S.totSubPaid / S.totNetIpc * 100) : 0;
+  const invCovPct = S.trTotSpent > 0 ? (S.trInvVal / S.trTotSpent * 100) : 0;
+
+  const updEl = document.getElementById('biLastUpdatedPill');
+  if (updEl) updEl.textContent = `محدّث لحظياً • ${new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })}`;
+
+  // 1) Top 4 Executive KPI Cards (Single Hero Petrol Focal Card)
+  const kpiEl = document.getElementById('biTopKpis');
+  if (kpiEl) {
+    kpiEl.innerHTML = `
+      <div class="kpi-card hero-kpi">
+        <div class="kpi-label">إجمالي التكلفة الفعلية للمشروع</div>
+        <div class="kpi-val">${fmt(S.totalRealCost)} <small style="font-size:13px;">ج.م</small></div>
+        <div class="kpi-sub">مستخلصات ${fmt(S.totNetIpc)} + صافي خزينة ${fmt(S.trTotSpent - S.trSubAmt)}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">نسبة تسليم شقق عمارة 5 بالـ IR</div>
+        <div class="kpi-val">${aptSum.pct.toFixed(1)}%</div>
+        <div class="kpi-sub">${aptSum.deliveredUnits} / ${aptSum.totalUnits} وحدة معتمدة (متبقي ${aptSum.remUnits})</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">معدل السحب المالي للمقاولين</div>
+        <div class="kpi-val" style="color:${subDrawPct > 100 ? 'var(--red)' : 'var(--brand)'};">${subDrawPct.toFixed(1)}%</div>
+        <div class="kpi-sub">مدفوع ${fmt(S.totSubPaid)} من صافي ${fmt(S.totNetIpc)} ج.م</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">كفاءة الاعتماد الصافي (Code A)</div>
+        <div class="kpi-val" style="color:var(--green);">${codeAPct.toFixed(1)}%</div>
+        <div class="kpi-sub">${irA} Code A من ${irAll.length} IR • توثيق الفواتير ${invCovPct.toFixed(1)}%</div>
+      </div>
+    `;
+  }
+
+  // 2) Chart A: Project Cost Structure Donut
+  let trMat = 0, trLaborEquip = 0, trOther = 0;
+  (S.trByCat || []).forEach(c => {
+    if (c.cat.includes('مقاولين')) return;
+    if (c.cat.includes('تشوينات') || c.cat.includes('خامات') || c.cat.includes('نقل')) trMat += c.sum;
+    else if (c.cat.includes('أجور') || c.cat.includes('معدات')) trLaborEquip += c.sum;
+    else trOther += c.sum;
+  });
+  const costSegs = [
+    { label: 'مستخلصات مقاولي الباطن', val: S.totNetIpc, color: '#0E4D4E' },
+    { label: 'تشوينات وخامات ونقل (خزينة)', val: trMat, color: '#1F7A7B' },
+    { label: 'أجور ومعدات تشغيل', val: trLaborEquip, color: '#38B2AC' },
+    { label: 'مصاريف إدارية ومستهلكات', val: trOther, color: '#B54708' }
+  ];
+  const costTot = costSegs.reduce((s, x) => s + x.val, 0) || 1;
+  const subCostEl = document.getElementById('biCostTotalSub');
+  if (subCostEl) subCostEl.textContent = `الإجمالي: ${fmt(costTot)} ج.م`;
+  const chartCostEl = document.getElementById('biChartCostDonut');
+  if (chartCostEl) {
+    chartCostEl.innerHTML = `
+      <div class="bi-donut-wrap">
+        ${buildSvgDonut(costSegs, (costTot >= 1e6 ? (costTot/1e6).toFixed(2)+'M' : fmt(costTot)), 'جنيه مصري')}
+        <div class="bi-legend">
+          ${costSegs.map(s => `
+            <div class="bi-leg-item">
+              <div class="bi-leg-left"><span class="bi-swatch" style="background:${s.color};"></span><span>${s.label}</span></div>
+              <strong class="num">${fmt(s.val)} <small style="color:var(--muted);">(${(s.val/costTot*100).toFixed(1)}%)</small></strong>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // 3) Chart B: IR QA/QC Donut + Discipline Split
+  const irSegs = [
+    { label: 'معتمد صافي (Code A)', val: irA, color: '#067647' },
+    { label: 'معتمد بملاحظات (Code B)', val: irB, color: '#B54708' },
+    { label: 'إعادة / مراجعة (C / D / UR)', val: irOther, color: '#B42318' }
+  ];
+  const irStr = irAll.filter(x => x.disc === 'إنشائي').length;
+  const irArc = irAll.filter(x => x.disc === 'معماري').length;
+  const irElc = irAll.filter(x => x.disc === 'كهرباء').length;
+  const subIrEl = document.getElementById('biIrTotalSub');
+  if (subIrEl) subIrEl.textContent = `${irAll.length} طلب فحص واستلام`;
+  const chartIrEl = document.getElementById('biChartIrDonut');
+  if (chartIrEl) {
+    chartIrEl.innerHTML = `
+      <div class="bi-donut-wrap">
+        ${buildSvgDonut(irSegs, `${codeAPct.toFixed(1)}%`, 'Code A صافي')}
+        <div class="bi-legend">
+          ${irSegs.map(s => `
+            <div class="bi-leg-item">
+              <div class="bi-leg-left"><span class="bi-swatch" style="background:${s.color};"></span><span>${s.label}</span></div>
+              <strong class="num">${s.val} <small style="color:var(--muted);">(${irAll.length ? (s.val/irAll.length*100).toFixed(1) : '0.0'}%)</small></strong>
+            </div>
+          `).join('')}
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:4px;">
+            <div class="bi-stat-mini"><small>إنشائي</small><strong>${irStr}</strong></div>
+            <div class="bi-stat-mini"><small>معماري</small><strong>${irArc}</strong></div>
+            <div class="bi-stat-mini"><small>كهرباء</small><strong>${irElc}</strong></div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 4) Chart C: Monthly Burn Rate & Cumulative S-Curve (reuse live monthly aggregation)
+  const monthMap = {};
+  (DB.payments || []).forEach(p => {
+    const ym = String(p.date || '').slice(0, 7);
+    if (!/^\d{4}-\d{2}$/.test(ym)) return;
+    if (!monthMap[ym]) monthMap[ym] = { ym, pay: 0, tr: 0 };
+    monthMap[ym].pay += Number(p.amt || 0);
+  });
+  (DB.treasury || []).forEach(t => {
+    if ((t.cat || '').includes('مقاولين')) return;
+    const ym = String(t.date || '').slice(0, 7);
+    if (!/^\d{4}-\d{2}$/.test(ym)) return;
+    if (!monthMap[ym]) monthMap[ym] = { ym, pay: 0, tr: 0 };
+    monthMap[ym].tr += Number(t.amt || 0);
+  });
+  const months = Object.values(monthMap).sort((a, b) => a.ym.localeCompare(b.ym));
+  let cum = 0;
+  months.forEach(m => { m.tot = m.pay + m.tr; cum += m.tot; m.cum = cum; });
+  const scSub = document.getElementById('biSCurveSub');
+  if (scSub) scSub.textContent = months.length ? `${months.length} شهراً • تراكمي ${fmt(cum)} ج.م` : 'لا توجد بيانات شهرية';
+  const scBox = document.getElementById('biChartSCurve');
+  if (scBox) {
+    if (!months.length) {
+      scBox.innerHTML = '<div style="padding:20px; text-align:center; color:var(--muted);">ستظهر البيانات تلقائياً بمجرد تحميل سجلات الدفعات والخزينة.</div>';
+    } else {
+      const W = 820, H = 235, padL = 56, padR = 56, padT = 18, padB = 38;
+      const plotW = W - padL - padR, plotH = H - padT - padB;
+      const maxBar = Math.max(...months.map(m => m.tot), 1);
+      const maxCum = Math.max(cum, 1);
+      const step = plotW / months.length;
+      const bw = Math.min(28, Math.max(8, step * 0.56));
+      const yBar = v => padT + plotH - (v / maxBar) * plotH;
+      const yCum = v => padT + plotH - (v / maxCum) * plotH;
+
+      const gridLines = [0, 0.25, 0.5, 0.75, 1].map(f => {
+        const y = (padT + plotH * (1 - f)).toFixed(1);
+        const lv = Math.round(maxBar * f / 1000) + 'k';
+        const rv = (maxCum * f / 1e6).toFixed(1) + 'M';
+        return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-dasharray="3,3" />
+          <text x="${padL-6}" y="${Number(y)+3}" text-anchor="end" font-size="9.5" fill="var(--muted)">${lv}</text>
+          <text x="${W-padR+6}" y="${Number(y)+3}" text-anchor="start" font-size="9.5" fill="#B54708">${rv}</text>`;
+      }).join('');
+
+      const bars = months.map((m, i) => {
+        const cx = padL + step * (i + 0.5);
+        const x = (cx - bw / 2).toFixed(1);
+        const hPay = (m.pay / maxBar) * plotH;
+        const hTr  = (m.tr / maxBar) * plotH;
+        const yPay = padT + plotH - hPay;
+        const yTr  = yPay - hTr;
+        const lbl = (months.length <= 14 || i % 2 === 0 || i === months.length - 1) ? m.ym.slice(2) : '';
+        return `
+          <rect x="${x}" y="${yPay.toFixed(1)}" width="${bw.toFixed(1)}" height="${hPay.toFixed(1)}" rx="2" fill="#0E4D4E"><title>${m.ym} — دفعات مقاولين: ${fmt(m.pay)} ج.م</title></rect>
+          <rect x="${x}" y="${yTr.toFixed(1)}" width="${bw.toFixed(1)}" height="${hTr.toFixed(1)}" rx="2" fill="#38B2AC"><title>${m.ym} — صافي خزينة: ${fmt(m.tr)} ج.م</title></rect>
+          ${lbl ? `<text x="${cx.toFixed(1)}" y="${H-12}" text-anchor="middle" font-size="9.5" fill="var(--muted)">${lbl}</text>` : ''}
+        `;
+      }).join('');
+
+      const pts = months.map((m, i) => `${(padL + step * (i + 0.5)).toFixed(1)},${yCum(m.cum).toFixed(1)}`).join(' ');
+      const dots = months.map((m, i) => `<circle cx="${(padL + step * (i + 0.5)).toFixed(1)}" cy="${yCum(m.cum).toFixed(1)}" r="3.5" fill="#B54708" stroke="var(--card)" stroke-width="1.5"><title>${m.ym} — التراكمي: ${fmt(m.cum)} ج.م</title></circle>`).join('');
+
+      scBox.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="min-width:560px; height:235px;">${gridLines}${bars}<polyline fill="none" stroke="#B54708" stroke-width="2.5" points="${pts}" />${dots}</svg>`;
+    }
+  }
+
+  // 5) Chart D: Subcontractors Grouped Comparison
+  const subAvgEl = document.getElementById('biSubAvgSub');
+  const overCnt = (S.subStats || []).filter(x => x.radar === 'OVER').length;
+  if (subAvgEl) subAvgEl.textContent = `${(S.subStats||[]).length} عقود • ${overCnt} تجاوز صرف`;
+  const subChartEl = document.getElementById('biChartSubCompare');
+  if (subChartEl) {
+    const list = S.subStats || [];
+    const maxV = Math.max(...list.map(x => Math.max(x.netIpc, x.totalPaid)), 1);
+    subChartEl.innerHTML = list.length ? `<div class="bi-bar-list">${list.map(x => {
+      const pIpc = (x.netIpc / maxV * 100).toFixed(1);
+      const pPay = (x.totalPaid / maxV * 100).toFixed(1);
+      const payCol = x.radar === 'OVER' ? '#B42318' : (x.radar === 'NEAR' ? '#B54708' : '#38B2AC');
+      return `
+        <div class="bi-bar-item">
+          <div class="bi-bar-head">
+            <span>${esc(x.name)} <small style="color:var(--muted);">(${x.code})</small></span>
+            <span class="num">${fmt(x.totalPaid)} / ${fmt(x.netIpc)} <span class="pill ${x.pill}" style="padding:1px 7px !important; font-size:10px !important;">${x.netIpc > 0 ? (x.pct*100).toFixed(0)+'%' : 'بلا مستخلص'}</span></span>
+          </div>
+          <div class="dual-bar">
+            <div class="bi-bar-track" style="height:7px;" title="صافي المستخلص: ${fmt(x.netIpc)}"><div class="bi-bar-fill" style="width:${pIpc}%; background:#0E4D4E;"></div></div>
+            <div class="bi-bar-track" style="height:7px;" title="المدفوع فعلياً: ${fmt(x.totalPaid)}"><div class="bi-bar-fill" style="width:${pPay}%; background:${payCol};"></div></div>
+          </div>
+        </div>
+      `;
+    }).join('')}</div>` : '<div style="padding:18px; text-align:center; color:var(--muted);">لا توجد عقود مقاولين بعد.</div>';
+  }
+
+  // 6) Chart E: Weekly Treasury Cashflow (Last 12 Weeks)
+  const wks = (S.weekStats || []).slice(-12);
+  const wkSub = document.getElementById('biWkTrendSub');
+  const avgWk = wks.length ? wks.reduce((s, w) => s + w.spent, 0) / wks.length : 0;
+  if (wkSub) wkSub.textContent = `متوسط الإنفاق (آخر ${wks.length} أسبوعاً): ${fmt(avgWk)} ج.م`;
+  const wkBox = document.getElementById('biChartWeeklyCash');
+  if (wkBox) {
+    if (!wks.length) {
+      wkBox.innerHTML = '<div style="padding:18px; text-align:center; color:var(--muted);">لا توجد بيانات أسابيع خزينة.</div>';
+    } else {
+      const W = 540, H = 210, padL = 46, padR = 14, padT = 16, padB = 34;
+      const plotW = W - padL - padR, plotH = H - padT - padB;
+      const maxW = Math.max(...wks.map(w => Math.max(w.spent, w.fund)), 1);
+      const step = plotW / wks.length;
+      const bw = Math.min(14, Math.max(6, step * 0.34));
+      const yAvg = padT + plotH - (avgWk / maxW) * plotH;
+
+      const grid = [0, 0.5, 1].map(f => {
+        const y = (padT + plotH * (1 - f)).toFixed(1);
+        return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--border)" stroke-dasharray="3,3" />
+          <text x="${padL-6}" y="${Number(y)+3}" text-anchor="end" font-size="9.5" fill="var(--muted)">${Math.round(maxW*f/1000)}k</text>`;
+      }).join('');
+
+      const bars = wks.map((w, i) => {
+        const cx = padL + step * (i + 0.5);
+        const hF = (w.fund / maxW) * plotH;
+        const hS = (w.spent / maxW) * plotH;
+        return `
+          <rect x="${(cx - bw - 1).toFixed(1)}" y="${(padT + plotH - hF).toFixed(1)}" width="${bw.toFixed(1)}" height="${hF.toFixed(1)}" rx="2" fill="#0E4D4E"><title>${w.wk} — تمويل وارد: ${fmt(w.fund)} ج.م</title></rect>
+          <rect x="${(cx + 1).toFixed(1)}" y="${(padT + plotH - hS).toFixed(1)}" width="${bw.toFixed(1)}" height="${hS.toFixed(1)}" rx="2" fill="${w.spent > w.fund && w.fund > 0 ? '#B54708' : '#38B2AC'}"><title>${w.wk} — منصرف فعلي: ${fmt(w.spent)} ج.م (رصيد: ${fmt(w.rem)})</title></rect>
+          <text x="${cx.toFixed(1)}" y="${H-10}" text-anchor="middle" font-size="9" fill="var(--muted)">${w.wk.replace('W-','')}</text>
+        `;
+      }).join('');
+
+      wkBox.innerHTML = `
+        <div class="scurve-legend" style="margin-bottom:4px;">
+          <span><span class="leg-dot" style="background:#0E4D4E;"></span>التمويل الوارد</span>
+          <span><span class="leg-dot" style="background:#38B2AC;"></span>المنصرف الأسبوعي</span>
+          <span><span class="leg-dot" style="background:#B54708;"></span>متوسط الإنفاق</span>
+        </div>
+        <div class="bi-svg-box">
+          <svg viewBox="0 0 ${W} ${H}" style="min-width:360px; height:205px;">
+            ${grid}${bars}
+            <line x1="${padL}" y1="${yAvg.toFixed(1)}" x2="${W-padR}" y2="${yAvg.toFixed(1)}" stroke="#B54708" stroke-width="1.6" stroke-dasharray="5,4" />
+          </svg>
+        </div>
+      `;
+    }
+  }
+
+  // 7) Chart F: Building 5 Apartment Delivery Progress (Stages + 9 Floors Column Bars)
+  const aptSub = document.getElementById('biAptProgSub');
+  if (aptSub) aptSub.textContent = `${aptSum.deliveredUnits} / ${aptSum.totalUnits} وحدة (${aptSum.pct.toFixed(1)}%)`;
+  const aptBox = document.getElementById('biChartAptProgress');
+  if (aptBox) {
+    const stageBars = APT_STAGE_CONFIG.map(st => {
+      const s = aptSum.byStage[st.id];
+      const col = s.pct >= 99.9 ? '#067647' : (s.pct >= 85 ? '#0E4D4E' : '#B54708');
+      return `
+        <div class="bi-bar-item">
+          <div class="bi-bar-head">
+            <span>${st.label.replace(/^\d+\.\s*/, '')}</span>
+            <span class="num">${s.done} / ${s.tot} (${s.pct.toFixed(1)}%)</span>
+          </div>
+          <div class="bi-bar-track"><div class="bi-bar-fill" style="width:${s.pct.toFixed(1)}%; background:${col};"></div></div>
+        </div>
+      `;
+    }).join('');
+
+    const floorCols = APT_FLOORS.map(fl => {
+      let fTot = 0, fDone = 0;
+      APT_STAGE_CONFIG.forEach(st => {
+        st.units.forEach(u => {
+          fTot++;
+          const c = ((DB.aptMatrix[st.id] || {})[fl.id] || {})[u.id];
+          if (c && (c.status === 'A' || c.status === 'B')) fDone++;
+        });
+      });
+      const pct = fTot ? Math.round(fDone / fTot * 100) : 0;
+      const col = pct === 100 ? '#067647' : (pct >= 80 ? '#0E4D4E' : (pct >= 40 ? '#B54708' : '#B42318'));
+      return `
+        <div class="bi-fl-col" title="${fl.label}: ${fDone}/${fTot} (${pct}%)">
+          <span class="bi-fl-pct">${pct}%</span>
+          <div class="bi-fl-bar-wrap"><div class="bi-fl-bar" style="height:${pct}%; background:${col};"></div></div>
+          <span class="bi-fl-lbl">د${fl.num}</span>
+        </div>
+      `;
+    }).join('');
+
+    aptBox.innerHTML = `
+      <div class="bi-bar-list">${stageBars}</div>
+      <div style="border-top:1px solid var(--border); padding-top:8px;">
+        <div style="font-size:11.5px; font-weight:700; color:var(--muted); margin-bottom:4px;">نسبة التسليم الإجمالية لكل دور (الأول ← التاسع)</div>
+        <div class="bi-floor-bars">${floorCols}</div>
+      </div>
+    `;
+  }
+
+  // 8) Chart G: Cement Semi-Circle Gauge + Inventory Health
+  const cemPct = S.cementInBags > 0 ? Math.min(100, (S.cementOutBags / S.cementInBags) * 100) : 0;
+  const invOk = (S.invStats || []).filter(x => x.stKey === 'متوفر').length;
+  const invLow = (S.invStats || []).filter(x => x.stKey === 'إعادة طلب').length;
+  const invCust = (S.invStats || []).filter(x => x.stKey === 'بالعهدة').length;
+  const invZero = (S.invStats || []).filter(x => x.stKey === 'نفد').length;
+  const invSub = document.getElementById('biInvHealthSub');
+  if (invSub) invSub.textContent = `أسمنت متبقي: ${fmt(S.cementRemBags)} شكارة • المخزن: ${(DB.items||[]).length} صنف`;
+
+  const cemBox = document.getElementById('biChartCementInv');
+  if (cemBox) {
+    const r = 64, halfCirc = Math.PI * r;
+    const usedLen = (cemPct / 100) * halfCirc;
+    const gaugeCol = S.cementRemBags <= 100 ? '#B42318' : (cemPct > 80 ? '#B54708' : '#0E4D4E');
+
+    const byCat = {};
+    (DB.cement || []).forEach(c => { byCat[c.cat] = (byCat[c.cat] || 0) + c.bags; });
+    const topCem = Object.entries(byCat).sort((a, b) => b[1] - a[1]).slice(0, 4);
+    const maxC = Math.max(...topCem.map(x => x[1]), 1);
+
+    cemBox.innerHTML = `
+      <div style="display:flex; align-items:center; justify-content:space-around; gap:14px; flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <svg viewBox="0 0 180 105" style="width:175px; height:102px;">
+            <path d="M 26 90 A 64 64 0 0 1 154 90" fill="none" stroke="var(--surface-2)" stroke-width="16" stroke-linecap="round" />
+            <path d="M 26 90 A 64 64 0 0 1 154 90" fill="none" stroke="${gaugeCol}" stroke-width="16" stroke-linecap="round" stroke-dasharray="${usedLen.toFixed(1)} ${halfCirc.toFixed(1)}" />
+            <text x="90" y="72" text-anchor="middle" font-size="20" font-weight="700" fill="var(--text)" style="font-variant-numeric:tabular-nums;">${cemPct.toFixed(1)}%</text>
+            <text x="90" y="90" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--muted)">مستهلك من الأسمنت</text>
+          </svg>
+          <div style="font-size:11.5px; font-weight:700; color:${gaugeCol};">متبقي ${fmt(S.cementRemBags)} شكارة (${(S.cementRemBags/20).toFixed(2)} طن)</div>
+        </div>
+        <div class="bi-bar-list" style="flex:1; min-width:190px;">
+          ${topCem.map(([cat, bags]) => `
+            <div class="bi-bar-item">
+              <div class="bi-bar-head"><span>${esc(cat)}</span><span class="num">${fmt(bags)} ش</span></div>
+              <div class="bi-bar-track" style="height:8px;"><div class="bi-bar-fill" style="width:${(bags/maxC*100).toFixed(1)}%; background:#1F7A7B;"></div></div>
+            </div>
+          `).join('') || '<div style="font-size:12px; color:var(--muted);">لا توجد دفعات صرف أسمنت.</div>'}
+        </div>
+      </div>
+      <div class="bi-stat-strip" style="border-top:1px solid var(--border); padding-top:10px;">
+        <div class="bi-stat-mini"><small>متوفر بالمخزن</small><strong style="color:var(--green);">${invOk}</strong></div>
+        <div class="bi-stat-mini"><small>إعادة طلب</small><strong style="color:var(--amber);">${invLow}</strong></div>
+        <div class="bi-stat-mini"><small>بالعهدة بالخارج</small><strong style="color:var(--blue);">${invCust}</strong></div>
+        <div class="bi-stat-mini"><small>نفد الرصيد</small><strong style="color:var(--red);">${invZero}</strong></div>
+      </div>
+    `;
+  }
+}
+
+function printAnalyticsDashboard() {
+  renderExecutiveBiDashboard();
+  const logos = getBrandLogos();
+  const area = document.getElementById('printAnalyticsArea');
+  const biPane = document.getElementById('subpane-overview-analytics');
+  if (!area || !biPane) return;
+
+  const clone = biPane.cloneNode(true);
+  clone.querySelectorAll('.no-print').forEach(el => el.remove());
+
+  area.innerHTML = `
+    <div class="prt-ink" style="font-family:'IBM Plex Sans Arabic','Cairo',sans-serif; color:#101828;">
+      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #0E4D4E; padding-bottom:6px; margin-bottom:10px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          ${logos.aobc ? `<img src="${logos.aobc}" style="height:42px; border-radius:6px;" />` : ''}
+          <div>
+            <div class="prt-brand" style="font-size:14px; font-weight:700;">التقرير التحليلي والبياني الشامل — مشروع حياة مرسيليا (عمارة 5)</div>
+            <div class="prt-muted" style="font-size:10.5px;">المكتب العربي للتشييد والبناء (A.O.B.C) • تاريخ الإصدار: ${todayISO()}</div>
+          </div>
+        </div>
+        <div class="prt-white" style="background:#0E4D4E; padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">Executive BI Report</div>
+      </div>
+      <div>${clone.innerHTML}</div>
+    </div>
+  `;
+  runSafeA4Print('printing-analytics');
 }
 
 const _origRenderAll = renderAll;
@@ -10896,6 +11731,7 @@ renderAll = function() {
   renderIpcSheetView();
   renderAptDeliveryMatrices();
   renderIrLogTable();
+  renderExecutiveBiDashboard();
   const mk = document.querySelectorAll('#matrixKpis .kpi-card');
   if (mk[0]) mk[0].classList.add('hero-kpi');
   const tk = document.querySelectorAll('#tasksKpis .kpi-card');
