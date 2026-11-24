@@ -2481,6 +2481,206 @@
     }
   }
 
+
+  /* ============================================================================
+     V7.4.1: CRISP COMPACT A4 IPC PRINT TABLE (WORKS WITH OR WITHOUT BG GRAPHICS)
+     ============================================================================ */
+  #printIpcSheetArea .ipc-prt-wrap {
+    font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+    color: #101828 !important;
+    background: #FFFFFF !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    table-layout: fixed !important;
+    margin-bottom: 6px !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl thead th {
+    background: #E8F3F3 !important;
+    color: #0E4D4E !important;
+    border: 1px solid #0E4D4E !important;
+    padding: 3.5px 2px !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    line-height: 1.22 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    box-shadow: none !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl thead tr.sub-hdr th {
+    background: #F1F5F9 !important;
+    color: #101828 !important;
+    padding: 2.5px 2px !important;
+    font-size: 8.5px !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl tbody td {
+    padding: 2.5px 3px !important;
+    font-size: 9px !important;
+    line-height: 1.25 !important;
+    border: 1px solid #CBD5E1 !important;
+    color: #101828 !important;
+    background: #FFFFFF !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl tbody tr:nth-child(even) td {
+    background: #F8FAFC !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl tbody tr.ipc-prt-ded td {
+    background: #FEF3F2 !important;
+    color: #B42318 !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl tbody td.col-desc {
+    text-align: right !important;
+    font-weight: 600 !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl tbody td.col-num {
+    font-variant-numeric: tabular-nums !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl tbody td.col-totq {
+    font-weight: 700 !important;
+    color: #0E4D4E !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl tbody tr.ipc-prt-ded td.col-totq {
+    color: #B42318 !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl tbody td.col-val {
+    text-align: left !important;
+    font-weight: 700 !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+  /* Auto-dense mode when rows > 18 so 25-32 rows + summary + signatures fit cleanly on 1 A4 page */
+  #printIpcSheetArea .ipc-prt-tbl.dense thead th {
+    padding: 2.5px 2px !important;
+    font-size: 8.4px !important;
+  }
+  #printIpcSheetArea .ipc-prt-tbl.dense tbody td {
+    padding: 1.8px 3px !important;
+    font-size: 8.3px !important;
+    line-height: 1.18 !important;
+  }
+  #printAptMatrixArea table th,
+  #printAptMatrixArea table td {
+    padding: 3px 4px !important;
+    font-size: 8.8px !important;
+    line-height: 1.2 !important;
+  }
+  @media print {
+    body.printing-ipc-sheet #printIpcSheetArea {
+      padding: 2mm !important;
+    }
+  }
+
+
+  /* ============================================================================
+     V7.5: FREE AI BRIDGE (GEMINI / CLAUDE PROMPT & DATA SUMMARY BUILDER)
+     ============================================================================ */
+  .v75-ai-btn {
+    height: 36px; padding: 0 11px; border-radius: 8px;
+    border: 1px solid var(--brand); background: var(--brand-soft); color: var(--brand);
+    font-weight: 700; font-size: 12.5px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .v75-ai-btn:hover { background: var(--brand); color: #FFFFFF; }
+  [data-theme="dark"] .v75-ai-btn {
+    color: var(--brand-2); border-color: rgba(56, 178, 172, 0.45);
+    background: rgba(56, 178, 172, 0.14);
+  }
+  [data-theme="dark"] .v75-ai-btn:hover { background: var(--brand); color: #FFFFFF; border-color: var(--brand-2); }
+
+  .ai-drawer-bg {
+    position: fixed; inset: 0; background: rgba(16, 24, 40, 0.48); backdrop-filter: blur(2px);
+    z-index: 280; display: none;
+  }
+  .ai-drawer-bg.open { display: block; }
+  .ai-drawer {
+    position: fixed; top: 0; left: 0; bottom: 0; width: 540px; max-width: 96vw;
+    background: var(--card); border-right: 1px solid var(--border); z-index: 290;
+    transform: translateX(-104%); transition: transform 200ms ease;
+    display: flex; flex-direction: column; box-shadow: 12px 0 38px rgba(16, 24, 40, 0.22);
+  }
+  .ai-drawer.open { transform: translateX(0); }
+  .ai-drawer-hdr {
+    padding: 15px 18px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: var(--card);
+  }
+  .ai-drawer-hdr-title { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .ai-badge-ico {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: var(--brand); color: #FFFFFF;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .ai-drawer-body {
+    flex: 1; overflow-y: auto; padding: 14px 18px; display: flex; flex-direction: column; gap: 13px;
+  }
+  .ai-sec-lbl {
+    font-size: 12px; font-weight: 700; color: var(--text-2); margin-bottom: 6px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .ai-scope-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px;
+  }
+  .ai-scope-btn {
+    border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+    border-radius: 9px; padding: 8px 10px; text-align: right; cursor: pointer;
+    display: flex; flex-direction: column; gap: 2px;
+    transition: border-color 150ms ease, background 150ms ease;
+  }
+  .ai-scope-btn:hover { border-color: var(--brand); background: var(--brand-soft); }
+  .ai-scope-btn.active {
+    background: var(--brand); color: #FFFFFF; border-color: var(--brand);
+  }
+  .ai-scope-btn strong { font-size: 12.2px; font-weight: 700; line-height: 1.3; }
+  .ai-scope-btn small { font-size: 10.5px; opacity: 0.78; line-height: 1.25; }
+  .ai-scope-btn.active small { color: rgba(255, 255, 255, 0.88); opacity: 1; }
+
+  .ai-tpl-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .ai-tpl-chip {
+    padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--card); color: var(--text-2); font-size: 11.8px; font-weight: 600;
+    cursor: pointer; transition: all 150ms ease;
+  }
+  .ai-tpl-chip:hover { border-color: var(--brand); color: var(--brand); }
+  .ai-tpl-chip.active { background: var(--brand-soft); color: var(--brand); border-color: var(--brand); font-weight: 700; }
+  [data-theme="dark"] .ai-tpl-chip.active { color: var(--brand-2); border-color: var(--brand-2); }
+
+  .ai-preview-box {
+    width: 100%; min-height: 215px; max-height: 300px; resize: vertical;
+    padding: 10px 12px; border-radius: 9px; border: 1px solid var(--border-strong);
+    background: var(--surface-2); color: var(--text); font-family: 'IBM Plex Sans Arabic', 'Cairo', monospace;
+    font-size: 12px; line-height: 1.6; direction: rtl; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .ai-preview-box:focus { outline: none; border-color: var(--brand); background: var(--card); }
+
+  .ai-meta-strip {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+    font-size: 11.2px; color: var(--muted); padding: 6px 10px;
+    border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border);
+  }
+  .ai-drawer-foot {
+    padding: 12px 18px; border-top: 1px solid var(--border); background: var(--surface-2);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .ai-foot-row { display: flex; gap: 7px; flex-wrap: wrap; }
+  .ai-foot-row .btn { flex: 1; justify-content: center; min-height: 38px; }
+
+  @media (max-width: 520px) {
+    .v75-ai-btn span.v75-ai-txt { display: none; }
+    .v75-ai-btn { padding: 0 9px; }
+    .ai-scope-grid { grid-template-columns: 1fr; }
+    .ai-foot-row .btn { flex: 1 1 calc(50% - 6px); }
+  }
+  @media print {
+    .v75-ai-btn, .ai-drawer, .ai-drawer-bg { display: none !important; }
+  }
+
 </style>
 </head>
 <body class="locked">
@@ -2574,6 +2774,11 @@
       <span class="v6-p-txt">إضافة سريعة</span>
     </button>
 
+    <button class="v75-ai-btn" id="aiBridgeTopBtn" onclick="openAiBridgeDrawer()" title="جسر الذكاء الاصطناعي المجاني — تجهيز ونسخ ملخصات البيانات لـ Gemini و Claude (Alt+A)">
+      <svg class="ico" style="width:15px;height:15px;" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>
+      <span class="v75-ai-txt">جسر AI</span>
+    </button>
+
     <button class="v6-icon-btn" id="notifBellBtn" onclick="toggleNotifDrawer()" title="مركز الإشعارات والتنبيهات">
       <svg class="ico" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <span class="v6-notif-badge zero" id="notifBadge">0</span>
@@ -2601,6 +2806,7 @@
         </label>
         <button class="tools-item" onclick="closeToolsMenu(); exportExcelOrJson()">📊 تصدير Excel شامل (20 شيتاً)</button>
         <button class="tools-item" onclick="closeToolsMenu(); exportJsonBackup()">💾 حفظ نسخة JSON أرشيفية</button>
+        <button class="tools-item" style="color:var(--brand); font-weight:700;" onclick="closeToolsMenu(); openAiBridgeDrawer()">✨ جسر الذكاء الاصطناعي المجاني (AI Bridge)</button>
         <button class="tools-item" onclick="closeToolsMenu(); window.print()">🖨️ طباعة A4 / PDF</button>
         <div class="tools-sep"></div>
         <button class="tools-item" onclick="closeToolsMenu(); openCloudHistoryModal()">🕒 سجل النسخ السحابية</button>
@@ -2722,6 +2928,7 @@
         <button class="btn btn-light btn-sm" onclick="switchSubTab('overview','analytics'); renderExecutiveBiDashboard()">📊 فتح الداش بورد التحليلي (Charts)</button>
         <button class="btn btn-light btn-sm" onclick="switchTab('subcontractors', null, 'ipc-sheet')">📑 نموذج المستخلص التفصيلي</button>
         <button class="btn btn-light btn-sm" onclick="switchTab('daily-report')">📝 التقرير اليومي</button>
+        <button class="btn btn-light btn-sm" style="border-color:var(--brand); color:var(--brand);" onclick="openAiBridgeDrawer('executive')">✨ جسر الذكاء الاصطناعي المجاني</button>
       </div>
 
       <div class="kpi-grid" id="overviewKpis"></div>
@@ -4065,6 +4272,123 @@
   </button>
 </nav>
 
+
+<!-- ==================== V7.5 FREE AI BRIDGE DRAWER (GEMINI / CLAUDE) ==================== -->
+<div class="ai-drawer-bg" id="aiDrawerBg" onclick="closeAiBridgeDrawer()"></div>
+<aside class="ai-drawer no-print" id="aiDrawer" aria-label="جسر الذكاء الاصطناعي المجاني">
+  <div class="ai-drawer-hdr">
+    <div class="ai-drawer-hdr-title">
+      <div class="ai-badge-ico">
+        <svg class="ico" style="width:19px;height:19px;" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>
+      </div>
+      <div>
+        <h3 style="margin:0; font-size:15.5px; font-weight:700; color:var(--text);">جسر الذكاء الاصطناعي المجاني (AI Bridge)</h3>
+        <div style="font-size:11.5px; color:var(--muted);">تجهيز ونسخ ملخصات حية جاهزة للصق في Gemini أو Claude بدون API</div>
+      </div>
+    </div>
+    <button type="button" class="v6-icon-btn" style="width:32px;height:32px;" onclick="closeAiBridgeDrawer()" title="إغلاق">✕</button>
+  </div>
+
+  <div class="ai-drawer-body custom-scroll">
+    <!-- Step 1: Scope -->
+    <div>
+      <div class="ai-sec-lbl">
+        <span>1. اختر نطاق البيانات الحية من السيستم</span>
+        <span class="pill pill-plum" id="aiAutoContextHint">تلقائي حسب القسم المفتوح</span>
+      </div>
+      <div class="ai-scope-grid" id="aiScopeGrid">
+        <button type="button" class="ai-scope-btn active" data-scope="executive" onclick="selectAiScope('executive')">
+          <strong>🏛️ الملخص التنفيذي الشامل</strong>
+          <small>التكلفة، المقاولون، الخزينة، الأسمنت، الشقق</small>
+        </button>
+        <button type="button" class="ai-scope-btn" data-scope="subcontractors" onclick="selectAiScope('subcontractors')">
+          <strong>👷 المقاولون والمستخلصات</strong>
+          <small>الموقف المالي، التجاوزات، والمستخلص النشط</small>
+        </button>
+        <button type="button" class="ai-scope-btn" data-scope="treasury" onclick="selectAiScope('treasury')">
+          <strong>🗄️ الخزينة والعهدة الأسبوعية</strong>
+          <small>الرصيد، آخر الأسابيع، التصنيفات، الفواتير</small>
+        </button>
+        <button type="button" class="ai-scope-btn" data-scope="warehouse" onclick="selectAiScope('warehouse')">
+          <strong>📦 المخزن والأسمنت والسباكة</strong>
+          <small>الأسمنت، النواقص، العهد، وانحرافات السباكة</small>
+        </button>
+        <button type="button" class="ai-scope-btn" data-scope="matrix" onclick="selectAiScope('matrix')">
+          <strong>🏗️ مصفوفة الشقق وسجل الـ IR</strong>
+          <small>نسب التسليم، الشقق المتبقية، وأكواد B/C/UR</small>
+        </button>
+        <button type="button" class="ai-scope-btn" data-scope="daily" onclick="selectAiScope('daily')">
+          <strong>📝 التقرير اليومي والحضور</strong>
+          <small>الأعمال، العمالة، المعدات، وحضور الفريق</small>
+        </button>
+        <button type="button" class="ai-scope-btn" data-scope="tasks" onclick="selectAiScope('tasks')" style="grid-column: 1 / -1;">
+          <strong>✅ المهام المتأخرة والتذكيرات المفتوحة</strong>
+          <small>المهام العاجلة والمجدولة والمتكررة وخطة المتابعة</small>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Prompt Template -->
+    <div>
+      <div class="ai-sec-lbl">
+        <span>2. اختر نوع المهمة المطلوبة من الذكاء الاصطناعي</span>
+      </div>
+      <div class="ai-tpl-chips" id="aiTplChips">
+        <button type="button" class="ai-tpl-chip active" data-tpl="audit" onclick="selectAiTemplate('audit')">🔍 مراجعة رقابية ومخاطر</button>
+        <button type="button" class="ai-tpl-chip" data-tpl="exec_brief" onclick="selectAiTemplate('exec_brief')">📋 تقرير تنفيذي للإدارة</button>
+        <button type="button" class="ai-tpl-chip" data-tpl="consultant" onclick="selectAiTemplate('consultant')">✉️ خطاب رسمي للاستشاري</button>
+        <button type="button" class="ai-tpl-chip" data-tpl="action_plan" onclick="selectAiTemplate('action_plan')">🎯 خطة عمل 48 ساعة</button>
+        <button type="button" class="ai-tpl-chip" data-tpl="whatsapp" onclick="selectAiTemplate('whatsapp')">📲 ملخص واتساب</button>
+        <button type="button" class="ai-tpl-chip" data-tpl="raw" onclick="selectAiTemplate('raw')">📦 بيانات منظمة فقط</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Optional Custom Question & Detail Toggle -->
+    <div style="display:flex; flex-direction:column; gap:7px;">
+      <div class="ai-sec-lbl" style="margin-bottom:0;">
+        <span>3. سؤالك أو توجيهك الإضافي (اختياري)</span>
+        <label style="display:inline-flex; align-items:center; gap:5px; font-weight:600; cursor:pointer; color:var(--text);">
+          <input type="checkbox" id="aiIncludeDetailsChk" checked onchange="rebuildAiBridgePrompt()" />
+          تضمين الجداول التفصيلية
+        </label>
+      </div>
+      <input type="text" class="inp" id="aiCustomQuestion" placeholder="مثال: اقترح أولوية الدفعات هذا الأسبوع أو راجع انحرافات الخامات..." oninput="rebuildAiBridgePrompt()" />
+    </div>
+
+    <!-- Step 4: Live Editable Preview -->
+    <div style="display:flex; flex-direction:column; gap:6px;">
+      <div class="ai-sec-lbl" style="margin-bottom:0;">
+        <span>معاينة الملخص الجاهز للنسخ (قابل للتعديل المباشر)</span>
+        <button type="button" class="btn btn-light btn-sm" style="padding:2px 8px; font-size:11px;" onclick="rebuildAiBridgePrompt()">🔄 تحديث حي</button>
+      </div>
+      <textarea id="aiPreviewTextarea" class="ai-preview-box" spellcheck="false"></textarea>
+      <div class="ai-meta-strip">
+        <span id="aiStatsLabel" class="num">0 كلمة • 0 حرف</span>
+        <span>💡 لا يرسل أي بيانات تلقائياً — أنت فقط من تنسخ وتلصق</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-drawer-foot">
+    <div class="ai-foot-row">
+      <button type="button" class="btn btn-gold" id="aiCopyOnlyBtn" onclick="copyAiBridgePrompt('copy')">
+        📋 نسخ الملخص للحافظة
+      </button>
+      <button type="button" class="btn btn-light" onclick="downloadAiBridgeTxt()" title="تنزيل الملخص كملف نصي">
+        📥 تنزيل ملف TXT
+      </button>
+    </div>
+    <div class="ai-foot-row">
+      <button type="button" class="btn btn-light" style="border-color:var(--brand); color:var(--brand);" onclick="copyAiBridgePrompt('gemini')">
+        ✨ نسخ وفتح Gemini
+      </button>
+      <button type="button" class="btn btn-light" onclick="copyAiBridgePrompt('claude')">
+        🟠 نسخ وفتح Claude
+      </button>
+    </div>
+  </div>
+</aside>
+
 <!-- ==================== V7.0 SLIDE-OVER CONTRACTOR IPC REVIEW DRAWER ==================== -->
 <div class="ipc-drawer-bg" id="ipcDrawerBg" onclick="closeIpcDrawer()"></div>
 <aside class="ipc-drawer no-print" id="ipcDrawer">
@@ -4149,7 +4473,7 @@
 // ============================================================================
 // 1. CLEAN ZERO-DATA CLOUD SHELL (ALL REAL DATA LOADS ONLY FROM SUPABASE AFTER AUTH)
 // ============================================================================
-const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.4 — الداش بورد التحليلي الشامل + المستخلص بالتفقيط والقوائم المنسدلة", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
+const ORIGINAL_DB = {"meta": {"company": "المكتب العربي للتشييد والبناء (A.O.B.C)", "project": "مشروع حياة مرسيليا — عمارة 5", "version": "حياة ERP v7.5 — جسر الذكاء الاصطناعي المجاني (AI Bridge) + طباعة المستخلص A4", "updated": "2026-11-20"}, "contracts": [], "ipcs": [], "payments": [], "weeks": [], "treasury": [], "cement": [], "items": [], "pr": [], "grn": [], "moves": [], "wood": [], "plumbing": [], "apts": [], "attendance": [], "tasks": [], "dailyReports": []};
 
 // ============================================================================
 // ⚙️ إعدادات الربط السحابي (Supabase) — ضع الرابط والمفتاح هنا مرة واحدة قبل الرفع
@@ -10168,8 +10492,7 @@ function tafqeetEGP(amount) {
     if (piastres === 1 || piastres === 2) parts.push(piastreUnit(piastres));
     else parts.push(`${tafqeetUnder1000(piastres)} ${piastreUnit(piastres)}`);
   }
-  const txt = `فقط ${parts.join(' و')} لا غير.`;
-  return isNeg ? `تجاوز صرف (مديونية على المقاول): ${txt}` : txt;
+  return `فقط ${parts.join(' و')} لا غير.`;
 }
 
 // Universal Light-Theme Print Helper (guarantees 100% crisp dark text even when printing from Dark Mode!)
@@ -10439,7 +10762,7 @@ function updateIpcSummaryDom() {
   const dueRow = document.getElementById('ipcSumDueRow');
   const tafRow = document.getElementById('ipcTafqeetRow');
   if (dueRow) dueRow.classList.toggle('overpay', t.netDue < 0);
-  if (tafRow) tafRow.classList.toggle('overpay', t.netDue < 0);
+  if (tafRow) tafRow.classList.remove('overpay');
 }
 
 function syncIpcMetaFromDom() {
@@ -10598,106 +10921,119 @@ function printItemizedIpcSheet() {
   const logos = getBrandLogos();
   const dtFmt = (sheet.date || '').split('-').reverse().join(' / ');
 
-  const rowsHtml = sheet.rows.filter(r => (r.desc || '').trim() || Number(r.rate) > 0).map((r, i) => {
+  const validRows = sheet.rows.filter(r => (r.desc || '').trim() || Number(r.rate) > 0);
+  const isDense = validRows.length > 18;
+
+  const rowsHtml = validRows.map((r, i) => {
     const prevQ = Number(r.prevQty) || 0, currQ = Number(r.currQty) || 0, totQ = prevQ + currQ;
     const pct = Number(r.pct) || 0, rate = Number(r.rate) || 0;
     const val = totQ * (pct / 100) * rate;
     const isDed = r.kind === 'ded';
-    const rowCls = isDed ? 'prt-red' : 'prt-ink';
-    const bg = isDed ? 'background:#FEF3F2;' : (i % 2 ? 'background:#F8FAFC;' : 'background:#FFFFFF;');
-    const tdBase = 'border:1px solid #CBD5E1; padding:3px 4px;';
     return `
-      <tr class="${rowCls}" style="${bg}">
-        <td style="${tdBase} text-align:center; font-weight:700;">${i + 1}</td>
-        <td style="${tdBase} text-align:center; font-weight:700;">${isDed ? 'خصم خامات —' : 'إضافة أعمال +'}</td>
-        <td style="${tdBase} text-align:right; font-weight:600;">${esc(r.desc)}</td>
-        <td style="${tdBase} text-align:center;">${esc(r.unit)}</td>
-        <td style="${tdBase} text-align:center; font-variant-numeric:tabular-nums;">${prevQ ? fmt(prevQ, prevQ % 1 ? 2 : 0) : ''}</td>
-        <td style="${tdBase} text-align:center; font-variant-numeric:tabular-nums;">${currQ ? fmt(currQ, currQ % 1 ? 2 : 0) : ''}</td>
-        <td class="${isDed ? 'prt-red' : 'prt-brand'}" style="${tdBase} text-align:center; font-weight:700; font-variant-numeric:tabular-nums;">${fmt(totQ, totQ % 1 ? 2 : 0)}</td>
-        <td style="${tdBase} text-align:center; font-variant-numeric:tabular-nums;">${pct}%</td>
-        <td style="${tdBase} text-align:center; font-variant-numeric:tabular-nums;">${fmt(rate, rate % 1 ? 2 : 0)}</td>
-        <td style="${tdBase} text-align:left; font-weight:700; font-variant-numeric:tabular-nums;">${fmt(val, 2)}</td>
+      <tr class="${isDed ? 'ipc-prt-ded' : ''}">
+        <td style="font-weight:700;">${i + 1}</td>
+        <td style="font-weight:700; white-space:nowrap;">${isDed ? 'خصم خامات —' : 'إضافة أعمال +'}</td>
+        <td class="col-desc">${esc(r.desc)}</td>
+        <td>${esc(r.unit)}</td>
+        <td class="col-num">${prevQ ? fmt(prevQ, prevQ % 1 ? 2 : 0) : ''}</td>
+        <td class="col-num">${currQ ? fmt(currQ, currQ % 1 ? 2 : 0) : ''}</td>
+        <td class="col-totq">${fmt(totQ, totQ % 1 ? 2 : 0)}</td>
+        <td class="col-num">${pct}%</td>
+        <td class="col-num">${fmt(rate, rate % 1 ? 2 : 0)}</td>
+        <td class="col-val">${fmt(val, 2)}</td>
       </tr>
     `;
   }).join('');
 
   document.getElementById('printIpcSheetArea').innerHTML = `
-    <div class="prt-ink" style="font-family:'IBM Plex Sans Arabic','Cairo',sans-serif; color:#101828; background:#FFFFFF;">
-      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #0E4D4E; padding-bottom:6px; margin-bottom:8px;">
-        <div style="display:flex; align-items:center; gap:9px;">
-          ${logos.aobc ? `<img src="${logos.aobc}" style="height:44px; border-radius:6px;" />` : ''}
+    <div class="ipc-prt-wrap">
+      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:2.5px solid #0E4D4E; padding-bottom:5px; margin-bottom:6px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          ${logos.aobc ? `<img src="${logos.aobc}" style="height:38px; border-radius:5px;" />` : ''}
           <div>
-            <div class="prt-brand" style="font-size:13.5px; font-weight:700;">المكتب العربي للتشييد والبناء (A.O.B.C) — سجل تجاري (174355)</div>
-            <div class="prt-muted" style="font-size:11px; font-weight:600;">المشروع: حياة مرسيليا — ${esc(sheet.building)}</div>
+            <div class="prt-brand" style="font-size:13px; font-weight:700;">المكتب العربي للتشييد والبناء (A.O.B.C) — سجل تجاري (174355)</div>
+            <div class="prt-muted" style="font-size:10.5px; font-weight:600;">المشروع: حياة مرسيليا — ${esc(sheet.building)}</div>
           </div>
         </div>
         <div style="text-align:left;">
-          <div class="prt-white" style="background:#0E4D4E; padding:4px 12px; border-radius:6px; font-size:12.5px; font-weight:700;">مستخلص رقم / ${esc(sheet.ipcNo)} ${esc(sheet.ipcKind)}</div>
-          <div class="prt-muted" style="font-size:10px; margin-top:2px; font-weight:600;">التاريخ: ${esc(dtFmt)}</div>
+          <div class="prt-brand" style="background:#E8F3F3; border:1.5px solid #0E4D4E; padding:3px 10px; border-radius:6px; font-size:12px; font-weight:700;">مستخلص رقم / ${esc(sheet.ipcNo)} ${esc(sheet.ipcKind)}</div>
+          <div class="prt-muted" style="font-size:9.5px; margin-top:2px; font-weight:600;">التاريخ: ${esc(dtFmt)}</div>
         </div>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; padding:6px 10px; background:#F7F8F9; border:1px solid #CBD5E1; border-radius:6px; font-size:11px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:6px; padding:4.5px 9px; background:#F7F8F9; border:1px solid #CBD5E1; border-radius:5px; font-size:10.5px;">
         <div><strong>اسم المقاول:</strong> ${esc(sheet.contractorName)}</div>
         <div><strong>وصف العمل (البند):</strong> ${esc(sheet.tradeDesc)}</div>
       </div>
 
-      <table style="width:100%; border-collapse:collapse; font-size:9.4px; margin-bottom:8px;">
+      <table class="ipc-prt-tbl ${isDense ? 'dense' : ''}">
+        <colgroup>
+          <col style="width:3.5%;" />
+          <col style="width:11%;" />
+          <col style="width:34.5%;" />
+          <col style="width:6%;" />
+          <col style="width:6.5%;" />
+          <col style="width:6.5%;" />
+          <col style="width:7%;" />
+          <col style="width:5.5%;" />
+          <col style="width:7.5%;" />
+          <col style="width:12%;" />
+        </colgroup>
         <thead>
-          <tr class="prt-white" style="background:#0E4D4E;">
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:24px;">م</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:74px;">نوع السطر</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; text-align:right;">بيان الأعمال التفصيلي</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:44px;">الوحدة</th>
-            <th colspan="3" style="border:1px solid #0E4D4E; padding:3px;">الكميات المنفذة</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:42px;">النسبة</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:56px;">الفئة</th>
-            <th rowspan="2" style="border:1px solid #0E4D4E; padding:4px; width:78px;">الإجمالي (ج.م)</th>
+          <tr>
+            <th rowspan="2">م</th>
+            <th rowspan="2">نوع السطر</th>
+            <th rowspan="2" style="text-align:right !important; padding-right:5px !important;">بيان الأعمال التفصيلي</th>
+            <th rowspan="2">الوحدة</th>
+            <th colspan="3">الكميات المنفذة</th>
+            <th rowspan="2">النسبة</th>
+            <th rowspan="2">الفئة</th>
+            <th rowspan="2">القيمة (ج.م)</th>
           </tr>
-          <tr class="prt-white" style="background:#1F7A7B;">
-            <th style="border:1px solid #0E4D4E; padding:2.5px; width:48px;">سابقة</th>
-            <th style="border:1px solid #0E4D4E; padding:2.5px; width:48px;">حالية</th>
-            <th style="border:1px solid #0E4D4E; padding:2.5px; width:52px;">إجمالي</th>
+          <tr class="sub-hdr">
+            <th>سابقة</th>
+            <th>حالية</th>
+            <th>إجمالي</th>
           </tr>
         </thead>
         <tbody>${rowsHtml}</tbody>
       </table>
 
-      <div style="border:1.5px solid #0E4D4E; border-radius:7px; overflow:hidden; page-break-inside:avoid; font-size:10.8px;">
-        <div class="prt-ink" style="display:flex; justify-content:space-between; padding:5px 11px; background:#F1F5F9; border-bottom:1px solid #CBD5E1; font-weight:700;">
-          <span>إجمالي قيمة الأعمال المنفذة (بدون الخصومات) +</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.gross, 2)} ج.م</span>
+      <div style="border:1.5px solid #0E4D4E; border-radius:6px; overflow:hidden; page-break-inside:avoid; font-size:10px;">
+        <div class="prt-ink" style="display:flex; justify-content:space-between; padding:4px 10px; background:#F8FAFC; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>إجمالي قيمة الأعمال المنفذة (بدون الخصومات) +</span><span dir="ltr" style="font-variant-numeric:tabular-nums;">${fmt(t.gross, 2)} ج.م</span>
         </div>
-        <div class="prt-red" style="display:flex; justify-content:space-between; padding:5px 11px; background:#FEF3F2; border-bottom:1px solid #CBD5E1; font-weight:700;">
-          <span>يُخصم: إجمالي استقطاعات الخامات والمستلزمات —</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.ded, 2)} ج.م</span>
+        <div class="prt-red" style="display:flex; justify-content:space-between; padding:4px 10px; background:#FEF3F2; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>يُخصم: إجمالي استقطاعات الخامات والمستلزمات —</span><span dir="ltr" style="font-variant-numeric:tabular-nums;">${fmt(t.ded, 2)} ج.م</span>
         </div>
-        <div class="prt-green" style="display:flex; justify-content:space-between; padding:5px 11px; background:#ECFDF3; border-bottom:1px solid #CBD5E1; font-weight:700;">
-          <span>صافي قيمة المستخلص المستحق (بعد خصم الخامات) ✓</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.net, 2)} ج.م</span>
+        <div class="prt-green" style="display:flex; justify-content:space-between; padding:4px 10px; background:#ECFDF3; border-bottom:1px solid #CBD5E1; font-weight:700;">
+          <span>صافي قيمة المستخلص المستحق (بعد خصم الخامات) ✓</span><span dir="ltr" style="font-variant-numeric:tabular-nums;">${fmt(t.net, 2)} ج.م</span>
         </div>
-        ${t.retPct > 0 ? `<div class="prt-amber" style="display:flex; justify-content:space-between; padding:5px 11px; background:#FFFAEB; border-bottom:1px solid #CBD5E1; font-weight:700;"><span>يُخصم: تأمين أعمال (${t.retPct}%)</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.retVal, 2)} ج.م</span></div>` : ''}
-        <div class="prt-ink" style="display:flex; justify-content:space-between; padding:5px 11px; background:#FFFFFF; border-bottom:1px solid #CBD5E1; font-weight:600;">
-          <span>يُخصم: إجمالي الدفعات والأعمال السابقة المنصرفة</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.prevPaid, 2)} ج.م</span>
+        ${t.retPct > 0 ? `<div class="prt-amber" style="display:flex; justify-content:space-between; padding:4px 10px; background:#FFFAEB; border-bottom:1px solid #CBD5E1; font-weight:700;"><span>يُخصم: تأمين أعمال (${t.retPct}%)</span><span dir="ltr" style="font-variant-numeric:tabular-nums;">${fmt(t.retVal, 2)} ج.م</span></div>` : ''}
+        <div class="prt-ink" style="display:flex; justify-content:space-between; padding:4px 10px; background:#FFFFFF; border-bottom:1px solid #CBD5E1; font-weight:600;">
+          <span>يُخصم: إجمالي الدفعات والأعمال السابقة المنصرفة</span><span dir="ltr" style="font-variant-numeric:tabular-nums;">${fmt(t.prevPaid, 2)} ج.م</span>
         </div>
-        <div class="prt-white" style="display:flex; justify-content:space-between; padding:7px 11px; background:${t.netDue < 0 ? '#B42318' : '#0E4D4E'}; font-size:12.5px; font-weight:700;">
-          <span>الصافي المستحق للصرف في هذه الدفعة (ج.م)</span><span style="font-variant-numeric:tabular-nums;">${fmt(t.netDue, 2)} ج.م</span>
+        <div class="prt-brand" style="display:flex; justify-content:space-between; padding:5.5px 10px; background:#E8F3F3; border-top:1.5px solid #0E4D4E; border-bottom:1px solid #0E4D4E; font-size:11.5px; font-weight:700;">
+          <span>الصافي المستحق للصرف في هذه الدفعة (ج.م)</span>
+          <span style="font-variant-numeric:tabular-nums;"><span dir="ltr">${fmt(t.netDue, 2)}</span> ج.م</span>
         </div>
-        <div class="${t.netDue < 0 ? 'prt-red' : 'prt-brand'}" style="padding:6px 11px; background:${t.netDue < 0 ? '#FEF3F2' : '#E8F3F3'}; border-top:1px solid #CBD5E1; font-size:11px; font-weight:700; text-align:right;">
+        <div class="prt-ink" style="padding:5px 10px; background:#FFFFFF; font-size:10.5px; font-weight:700; text-align:right;">
           المبلغ بالحروف (التفقيط): ${esc(tafqeetTxt)}
         </div>
       </div>
 
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px; text-align:center; page-break-inside:avoid;">
-        <div style="border:1px solid #CBD5E1; border-radius:7px; padding:7px;">
-          <div class="prt-brand" style="font-size:10px; font-weight:700;">${esc(sheet.sigs?.t1 || 'إعداد ومراجعة الكميات')}</div>
-          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:19px; margin:5px 0;">${esc(sheet.sigs?.n1 || 'م / أحمد يسري')}</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px; text-align:center; page-break-inside:avoid;">
+        <div style="border:1px solid #CBD5E1; border-radius:6px; padding:5px;">
+          <div class="prt-brand" style="font-size:9.5px; font-weight:700;">${esc(sheet.sigs?.t1 || 'إعداد ومراجعة الكميات')}</div>
+          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:17px; margin:3px 0;">${esc(sheet.sigs?.n1 || 'م / أحمد يسري')}</div>
         </div>
-        <div style="border:1px solid #CBD5E1; border-radius:7px; padding:7px;">
-          <div class="prt-brand" style="font-size:10px; font-weight:700;">${esc(sheet.sigs?.t2 || 'المكتب الفني والتنفيذ')}</div>
-          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:19px; margin:5px 0;">${esc(sheet.sigs?.n2 || 'م / ....................')}</div>
+        <div style="border:1px solid #CBD5E1; border-radius:6px; padding:5px;">
+          <div class="prt-brand" style="font-size:9.5px; font-weight:700;">${esc(sheet.sigs?.t2 || 'المكتب الفني والتنفيذ')}</div>
+          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:17px; margin:3px 0;">${esc(sheet.sigs?.n2 || 'م / ....................')}</div>
         </div>
-        <div style="border:1px solid #0E4D4E; border-radius:7px; padding:7px; background:#E8F3F3;">
-          <div class="prt-brand" style="font-size:10px; font-weight:700;">${esc(sheet.sigs?.t3 || 'اعتماد مدير المشروع')}</div>
-          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:19px; margin:5px 0;">${esc(sheet.sigs?.n3 || 'م / محمد السيد')}</div>
+        <div style="border:1.5px solid #0E4D4E; border-radius:6px; padding:5px; background:#E8F3F3;">
+          <div class="prt-brand" style="font-size:9.5px; font-weight:700;">${esc(sheet.sigs?.t3 || 'اعتماد مدير المشروع')}</div>
+          <div class="prt-ink" style="font-family:'Aref Ruqaa',serif; font-size:17px; margin:3px 0;">${esc(sheet.sigs?.n3 || 'م / محمد السيد')}</div>
         </div>
       </div>
     </div>
@@ -11747,6 +12083,474 @@ renderSCurve = function() {
     .replaceAll('#596377', '#0E4D4E')
     .replaceAll('#C76A33', '#38B2AC');
 };
+
+
+// ============================================================================
+// V7.5: FREE AI BRIDGE ENGINE (ZERO-API LIVE SUMMARY & PROMPT BUILDER)
+// ============================================================================
+const aiBridgeState = {
+  scope: 'executive',
+  tpl: 'audit'
+};
+
+const AI_PROMPT_TEMPLATES = {
+  audit: {
+    label: 'مراجعة رقابية ومخاطر',
+    header: 'بصفتك مهندس مكتب فني ومراقب تكاليف مشاريع تشييد في مصر (وفق الكود المصري وأعراف المقاولات)، راجع البيانات الحية التالية لمشروع حياة مرسيليا — عمارة 5، وقدّم:',
+    bullets: [
+      '1. أخطر 3–5 ملاحظات رقابية أو مالية أو تنفيذية مرتبة حسب الأولوية القصوى.',
+      '2. أي تجاوزات في الصرف أو نقص مستندات أو انحرافات خامات أو اختناقات تسليم (IR) تستدعي قراراً فورياً.',
+      '3. توصيات عملية واضحة ومحددة بالأرقام لكل بند.'
+    ]
+  },
+  exec_brief: {
+    label: 'تقرير تنفيذي للإدارة',
+    header: 'بناءً على البيانات الحية التالية لمشروع حياة مرسيليا — عمارة 5 (المكتب العربي للتشييد والبناء A.O.B.C)، صُغ تقريراً تنفيذياً موجزاً واحترافياً باللغة العربية الفصحى موجهاً للإدارة العليا ومدير المشروع يشمل:',
+    bullets: [
+      '1. ملخص الموقف المالي والتنفيذي الحالي في نقاط محددة بالأرقام.',
+      '2. أبرز الإنجازات ونسب التسليم المحققة.',
+      '3. أهم التحديات والقرارات المطلوبة من الإدارة خلال الأسبوع الجاري.'
+    ]
+  },
+  consultant: {
+    label: 'خطاب رسمي للاستشاري',
+    header: 'بناءً على بيانات المشروع الحية أدناه، اكتب مسودة خطاب هندسي رسمي باللغة العربية موجه إلى المكتب الاستشاري (م / وليد — المكتب الاستشاري الأفريقي A.C.O) باسم المكتب العربي للتشييد والبناء (A.O.B.C) يتسم بالمهنية والاختصار ويعرض الموقف بدقة ويطلب الاعتماد/المتابعة اللازمة للبنود المفتوحة:',
+    bullets: []
+  },
+  action_plan: {
+    label: 'خطة عمل 48 ساعة',
+    header: 'بصفتك مدير تنفيذ موقع محترف، حوّل البيانات الحية التالية لمشروع حياة مرسيليا — عمارة 5 إلى خطة عمل عملية ومرتبة بالأولوية لليومين القادمين (48 ساعة):',
+    bullets: [
+      '1. أولويات عاجلة اليوم (توريدات، دفعات مقاولين، إغلاق ملاحظات IR، أو مهام متأخرة).',
+      '2. خطوات الغد والتنسيق المطلوب مع المقاولين والاستشاري.',
+      '3. قائمة تحقق سريعة للمهندس المشرف قبل نهاية اليوم.'
+    ]
+  },
+  whatsapp: {
+    label: 'ملخص واتساب',
+    header: 'لخّص البيانات الحية التالية لمشروع حياة مرسيليا — عمارة 5 في رسالة واتساب منظمة ومختصرة وواضحة بالأرقام والعناوين لتُرسل مباشرة على جروب متابعة الموقع:',
+    bullets: []
+  },
+  raw: {
+    label: 'بيانات منظمة فقط',
+    header: '',
+    bullets: []
+  }
+};
+
+function detectCurrentAiScope() {
+  const activeSec = document.querySelector('.section.active');
+  const id = activeSec ? activeSec.id : 'tab-overview';
+  if (id === 'tab-subcontractors') return 'subcontractors';
+  if (id === 'tab-accounts') return 'treasury';
+  if (id === 'tab-warehouse') return 'warehouse';
+  if (id === 'tab-matrix') return 'matrix';
+  if (id === 'tab-daily-report' || id === 'tab-hr') return 'daily';
+  if (id === 'tab-tasks') return 'tasks';
+  return 'executive';
+}
+
+function openAiBridgeDrawer(forcedScope) {
+  if (!S) S = computeStats();
+  const scope = forcedScope || detectCurrentAiScope();
+  aiBridgeState.scope = scope;
+  const hint = document.getElementById('aiAutoContextHint');
+  if (hint) {
+    hint.textContent = forcedScope ? 'نطاق محدد يدوياً' : 'تم الاختيار تلقائياً حسب شاشتك الحالية';
+  }
+  syncAiBridgeButtons();
+  rebuildAiBridgePrompt();
+  document.getElementById('aiDrawerBg')?.classList.add('open');
+  document.getElementById('aiDrawer')?.classList.add('open');
+}
+
+function closeAiBridgeDrawer() {
+  document.getElementById('aiDrawerBg')?.classList.remove('open');
+  document.getElementById('aiDrawer')?.classList.remove('open');
+}
+
+function selectAiScope(scope) {
+  aiBridgeState.scope = scope;
+  syncAiBridgeButtons();
+  rebuildAiBridgePrompt();
+}
+
+function selectAiTemplate(tpl) {
+  aiBridgeState.tpl = tpl;
+  syncAiBridgeButtons();
+  rebuildAiBridgePrompt();
+}
+
+function syncAiBridgeButtons() {
+  document.querySelectorAll('#aiScopeGrid .ai-scope-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.scope === aiBridgeState.scope);
+  });
+  document.querySelectorAll('#aiTplChips .ai-tpl-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tpl === aiBridgeState.tpl);
+  });
+}
+
+function buildAiDataPayload(scope, includeDetails) {
+  if (!S) S = computeStats();
+  if (typeof ensureIrAndAptMatrix === 'function') ensureIrAndAptMatrix();
+  if (typeof ensureDailyReports === 'function') ensureDailyReports();
+  if (typeof ensureIpcSheets === 'function') ensureIpcSheets();
+
+  const lines = [];
+  const dt = todayISO();
+  const aptSum = (typeof computeAptMatrixSummary === 'function') ? computeAptMatrixSummary() : null;
+  const cemPct = S.cementInBags > 0 ? (S.cementOutBags / S.cementInBags * 100).toFixed(1) : '0.0';
+  const trCov = S.trTotSpent > 0 ? (S.trInvVal / S.trTotSpent * 100).toFixed(1) : '0.0';
+  const outsideCust = (DB.moves || []).filter(m => (m.cstate || '').includes('بالخارج'));
+  const tasksAll = Array.isArray(DB.tasks) ? DB.tasks : [];
+  const openTasks = tasksAll.filter(t => !t.done);
+  const overdueTasks = openTasks.filter(t => t.type === 'scheduled' && t.dueDate && t.dueDate < dt);
+
+  lines.push(`=== بيانات حية من منظومة حياة ERP — المكتب العربي للتشييد والبناء (A.O.B.C) ===`);
+  lines.push(`المشروع: ${DB.meta?.project || 'مشروع حياة مرسيليا — عمارة 5'} | تاريخ الاستخراج: ${dt}`);
+  lines.push('');
+
+  if (scope === 'executive') {
+    const overList = S.subStats.filter(x => x.radar === 'OVER');
+    const nearList = S.subStats.filter(x => x.radar === 'NEAR');
+    const noIpcList = S.subStats.filter(x => x.radar === 'NOIPC');
+    const irLog = DB.irLog || [];
+    const irA = irLog.filter(x => x.status === 'A').length;
+    const irB = irLog.filter(x => x.status === 'B').length;
+    const irCD = irLog.filter(x => x.status === 'C' || x.status === 'D').length;
+    const irUR = irLog.filter(x => x.status === 'UR').length;
+
+    lines.push('【1. المؤشرات المالية الرئيسية】');
+    lines.push(`- إجمالي التكلفة المنفذة الفعلية: ${fmt(S.totalRealCost)} ج.م (صافي مستخلصات: ${fmt(S.totNetIpc)} ج.م + صافي خزينة بدون مقاولين: ${fmt(S.trTotSpent - S.trSubAmt)} ج.م)`);
+    lines.push(`- إجمالي دفعات المقاولين (${DB.payments.length} دفعة): ${fmt(S.totSubPaid)} ج.م (نسبة السحب: ${S.totNetIpc ? (S.totSubPaid / S.totNetIpc * 100).toFixed(1) : 0}%)`);
+    lines.push(`- المتاح للصرف للمقاولين بعد تأمين الأعمال: ${fmt(S.totAvailAfter)} ج.م (قبل التأمين: ${fmt(S.totRemBefore)} ج.م | إجمالي التأمين: ${fmt(S.totRet5)} ج.م)`);
+    lines.push(`- رصيد خزينة الموقع الحالي (${S.lastWeek.wk}): ${S.lastWeek.rem >= 0 ? '+' : ''}${fmt(S.lastWeek.rem)} ج.م | إجمالي منصرف ${DB.weeks.length} أسبوعاً: ${fmt(S.trTotSpent)} ج.م | تغطية الفواتير: ${trCov}% بالقيمة`);
+    lines.push('');
+
+    lines.push('【2. المخزن والأسمنت والعهد】');
+    lines.push(`- رصيد الأسمنت الأسود (42.5): متبقي ${fmt(S.cementRemBags)} شكارة (${(S.cementRemBags / 20).toFixed(2)} طن) من أصل وارد ${fmt(S.cementInBags)} شكارة — مستهلك ${cemPct}%`);
+    lines.push(`- أصناف المخزن (${DB.items.length} صنف): متوفر ${S.invStats.filter(x => x.stKey === 'متوفر').length} | إعادة طلب ${S.invStats.filter(x => x.stKey === 'إعادة طلب').length} | نفد ${S.invStats.filter(x => x.stKey === 'نفد').length} | عهد بالخارج: ${outsideCust.length}`);
+    lines.push('');
+
+    if (aptSum) {
+      lines.push('【3. التقدم الهندسي وتسليمات الشقق (IR)】');
+      lines.push(`- إجمالي تسليمات شقق عمارة 5 بالـ IR: ${aptSum.pct.toFixed(1)}% (${aptSum.deliveredUnits} من ${aptSum.totalUnits} وحدة | متبقي ${aptSum.remUnits} وحدة)`);
+      lines.push(`- سجل الـ IR (${irLog.length} معاملة): Code A=${irA} | Code B=${irB} | Code C/D=${irCD} | UR=${irUR}`);
+      lines.push('');
+    }
+
+    lines.push('【4. التنبيهات الحرجة والمهام】');
+    lines.push(`- عقود تجاوزت صافي المستخلص (${overList.length}): ${overList.length ? overList.map(x => `${x.name} (${(x.pct*100).toFixed(1)}% | فرق ${fmt(x.remBefore)} ج.م)`).join(' ، ') : 'لا يوجد'}`);
+    lines.push(`- عقود قاربت 100% (${nearList.length}): ${nearList.length ? nearList.map(x => `${x.name} (${(x.pct*100).toFixed(1)}%)`).join(' ، ') : 'لا يوجد'}`);
+    lines.push(`- عقود بدفعات بدون مستخلص (${noIpcList.length}): ${noIpcList.length ? noIpcList.map(x => `${x.name} (مدفوع ${fmt(x.totalPaid)} ج.م)`).join(' ، ') : 'لا يوجد'}`);
+    lines.push(`- المهام المفتوحة: ${openTasks.length} مهمة (منها ${overdueTasks.length} مهمة متأخرة عن الموعد)`);
+
+    if (includeDetails && S.subStats.length) {
+      lines.push('');
+      lines.push('【جدول مختصر للمقاولين】');
+      S.subStats.forEach(x => {
+        lines.push(`• ${x.code} | ${x.name}: مستخلص ${fmt(x.netIpc)} | مدفوع ${fmt(x.totalPaid)} | سحب ${x.netIpc > 0 ? (x.pct*100).toFixed(1)+'%' : '—'} | متاح بعد التأمين ${fmt(x.availAfter)} | الحالة: ${x.radarTxt}`);
+      });
+    }
+  }
+
+  else if (scope === 'subcontractors') {
+    lines.push('【ملخص عقود المقاولين والمستخلصات】');
+    lines.push(`- عدد العقود: ${S.subStats.length} | إجمالي صافي المستخلصات: ${fmt(S.totNetIpc)} ج.م | إجمالي المدفوع (${DB.payments.length} دفعة): ${fmt(S.totSubPaid)} ج.م`);
+    lines.push(`- إجمالي المتبقي قبل التأمين: ${fmt(S.totRemBefore)} ج.م | التأمين: ${fmt(S.totRet5)} ج.م | المتاح بعد التأمين: ${fmt(S.totAvailAfter)} ج.م`);
+    lines.push('');
+    lines.push('【تفصيل كل عقد】');
+    S.subStats.forEach((x, i) => {
+      lines.push(`${i+1}. [${x.code}] ${x.name} (${x.person}) — آخر مستخلص: #${x.ipcNo}`);
+      lines.push(`   صافي المستخلص: ${fmt(x.netIpc)} | مدفوع: ${fmt(x.totalPaid)} (${x.count} دفعة: شركة ${fmt(x.compPaid)} / عهدة ${fmt(x.sitePaid)} / سابق ${fmt(x.prevPaid)}) | السحب: ${x.netIpc>0?(x.pct*100).toFixed(1)+'%':'—'} | متاح بعد ${x.retRate}% تأمين: ${fmt(x.availAfter)} | الحالة: ${x.radarTxt}`);
+    });
+
+    if (includeDetails && activeIpcSheetCode && DB.ipcSheets?.[activeIpcSheetCode]) {
+      const sh = DB.ipcSheets[activeIpcSheetCode];
+      const t = (typeof computeIpcSheetTotals === 'function') ? computeIpcSheetTotals(sh) : null;
+      if (t) {
+        lines.push('');
+        lines.push(`【نموذج المستخلص التفصيلي المفتوح حالياً: مستخلص رقم ${sh.ipcNo} (${sh.ipcKind}) — ${sh.contractorName} / ${sh.tradeDesc}】`);
+        lines.push(`- إجمالي الأعمال (+): ${fmt(t.gross, 2)} ج.م | خصومات الخامات (—): ${fmt(t.ded, 2)} ج.م | صافي المستخلص: ${fmt(t.net, 2)} ج.م`);
+        lines.push(`- التأمين (${t.retPct}%): ${fmt(t.retVal, 2)} ج.م | الدفعات السابقة: ${fmt(t.prevPaid, 2)} ج.م | الصافي المستحق لهذه الدفعة: ${fmt(t.netDue, 2)} ج.م`);
+        const validRows = (sh.rows || []).filter(r => (r.desc || '').trim() || Number(r.rate) > 0);
+        lines.push(`- عدد بنود المستخلص: ${validRows.length} سطر:`);
+        validRows.slice(0, 35).forEach((r, idx) => {
+          const totQ = (Number(r.prevQty)||0) + (Number(r.currQty)||0);
+          const val = totQ * ((Number(r.pct)||0)/100) * (Number(r.rate)||0);
+          lines.push(`  ${idx+1}) [${r.kind==='ded'?'خصم —':'أعمال +'}] ${r.desc} | إجمالي كمية: ${fmt(totQ,2)} ${r.unit} | ${r.pct}% × فئة ${fmt(r.rate,2)} = ${fmt(val,2)} ج.م`);
+        });
+      }
+    }
+  }
+
+  else if (scope === 'treasury') {
+    const selWk = S.weekStats.find(w => w.wk === state.selectedWeek) || S.lastWeek;
+    lines.push('【ملخص خزينة الموقع والعهدة الأسبوعية】');
+    lines.push(`- إجمالي التمويل + تسويات العجز (${DB.weeks.length} أسبوعاً): ${fmt(S.totFund + S.totDefSettle)} ج.م`);
+    lines.push(`- إجمالي المنصرف (${DB.treasury.length} حركة): ${fmt(S.trTotSpent)} ج.م (متوسط أسبوعي: ${fmt(DB.weeks.length ? S.trTotSpent/DB.weeks.length : 0)} ج.م)`);
+    lines.push(`- الرصيد الحالي الفعلي (${S.lastWeek.wk}): ${S.lastWeek.rem >= 0 ? '+' : ''}${fmt(S.lastWeek.rem)} ج.م`);
+    lines.push(`- التغطية بالفواتير: ${trCov}% بالقيمة (${S.trInvCnt} حركة مرفقة من ${DB.treasury.length})`);
+    lines.push('');
+    lines.push('【توزيع المصروفات حسب التصنيف المحاسبي】');
+    S.trByCat.forEach(c => {
+      const sh = S.trTotSpent ? (c.sum / S.trTotSpent * 100).toFixed(1) : '0.0';
+      const cov = c.sum ? (c.invVal / c.sum * 100).toFixed(0) : '0';
+      lines.push(`• ${c.cat}: ${fmt(c.sum)} ج.م (${sh}% | ${c.n} حركة | تغطية فواتير ${cov}%)`);
+    });
+    lines.push('');
+    lines.push('【آخر 6 أسابيع للخزينة】');
+    S.weekStats.slice(-6).forEach(w => {
+      lines.push(`• ${w.wk} (${w.date}): سابق ${fmt(w.prev)} | تمويل ${fmt(w.fund)} | منصرف ${fmt(w.spent)} (${w.count} حركة) | رصيد ${w.rem>=0?'+':''}${fmt(w.rem)} ج.م`);
+    });
+    if (includeDetails && selWk) {
+      const wkRows = DB.treasury.filter(t => t.wk === selWk.wk);
+      lines.push('');
+      lines.push(`【تفاصيل مصروفات الأسبوع المختار (${selWk.wk} — ${selWk.date} | ${wkRows.length} حركة)】`);
+      wkRows.slice(0, 40).forEach(t => {
+        lines.push(`• ${t.date} | ${fmt(t.amt)} ج.م | ${t.desc} [${t.cat}] — فاتورة: ${t.doc?.path ? 'مرفق صورة/PDF' : t.inv}`);
+      });
+    }
+  }
+
+  else if (scope === 'warehouse') {
+    const lowItems = S.invStats.filter(x => x.stKey === 'نفد' || x.stKey === 'إعادة طلب' || x.stKey === 'عجز');
+    const nameByCode = Object.fromEntries((DB.items || []).map(i => [i.code, i.name]));
+    lines.push('【1. موقف الأسمنت الأسود (42.5)】');
+    lines.push(`- إجمالي الوارد: ${fmt(S.cementInBags)} شكارة (${(S.cementInBags/20).toFixed(2)} طن)`);
+    lines.push(`- إجمالي المنصرف (${DB.cement.length} دفعة): ${fmt(S.cementOutBags)} شكارة (${(S.cementOutBags/20).toFixed(2)} طن | ${cemPct}%)`);
+    lines.push(`- الرصيد المتبقي الآن: ${fmt(S.cementRemBags)} شكارة (${(S.cementRemBags/20).toFixed(2)} طن)`);
+    const cemByCat = {};
+    DB.cement.forEach(c => { cemByCat[c.cat] = (cemByCat[c.cat] || 0) + c.bags; });
+    Object.entries(cemByCat).sort((a,b) => b[1]-a[1]).forEach(([cat, bags]) => {
+      lines.push(`  • ${cat}: ${fmt(bags)} شكارة (${(bags/20).toFixed(2)} طن)`);
+    });
+    lines.push('');
+
+    lines.push(`【2. الأصناف النافدة أو عند حد إعادة الطلب (${lowItems.length} صنف)】`);
+    lowItems.slice(0, includeDetails ? 35 : 12).forEach(i => {
+      lines.push(`• [${i.code}] ${i.name} (${i.trade}): الرصيد ${fmt(i.bal, 1)} ${i.unit} | حد الطلب ${i.reorder} | الحالة: ${i.status}`);
+    });
+    lines.push('');
+
+    lines.push(`【3. عهد المعدات والأدوات بالخارج (${outsideCust.length} عهدة مفتوحة)】`);
+    outsideCust.slice(0, includeDetails ? 25 : 10).forEach(m => {
+      lines.push(`• ${m.date} | ${nameByCode[m.code] || m.code} | الكمية: ${m.qty} | المستلم: ${m.recvr} | الموقع: ${m.loc || '—'}`);
+    });
+    lines.push('');
+
+    const plumbIssues = (DB.plumbing || []).map(p => {
+      const act = typeof getPlumbingActual === 'function' ? getPlumbingActual(p) : (Number(p.bath||0)+Number(p.kit||0));
+      const diff = Number(p.outQ||0) - act;
+      return { ...p, act, diff };
+    }).filter(p => (p.outQ === 0 && p.act > 0) || (p.outQ > 0 && Math.round(p.diff * 100) !== 0));
+    lines.push(`【4. انحرافات مطابقة سباكة عمارة 5 (${plumbIssues.length} صنف به ملاحظة من أصل ${DB.plumbing.length})】`);
+    plumbIssues.slice(0, includeDetails ? 25 : 10).forEach(p => {
+      lines.push(`• ${p.name} (${p.unit}): وارد ${fmt(p.inQ,2)} | منصرف للمقاول ${fmt(p.outQ,2)} | حصر الـ ${DB.apts.length} شقة ${fmt(p.act,2)} | الفرق: ${fmt(p.diff,2)}`);
+    });
+  }
+
+  else if (scope === 'matrix') {
+    const irLog = DB.irLog || [];
+    const irA = irLog.filter(x => x.status === 'A').length;
+    const irB = irLog.filter(x => x.status === 'B');
+    const irCD = irLog.filter(x => x.status === 'C' || x.status === 'D');
+    const irUR = irLog.filter(x => x.status === 'UR');
+    lines.push('【1. ملخص مصفوفة تسليم شقق عمارة 5 بالـ IR】');
+    if (aptSum) {
+      lines.push(`- الإنجاز الإجمالي: ${aptSum.pct.toFixed(1)}% (${aptSum.deliveredUnits} من ${aptSum.totalUnits} وحدة مستلمة | متبقي ${aptSum.remUnits} وحدة)`);
+      APT_STAGE_CONFIG.forEach(st => {
+        const sObj = aptSum.byStage[st.id];
+        if (!sObj) return;
+        const p = sObj.tot ? (sObj.done / sObj.tot * 100).toFixed(1) : '0.0';
+        lines.push(`• ${st.label}: ${sObj.done}/${sObj.tot} (${p}%) — متبقي ${sObj.rem} وحدة`);
+      });
+    }
+    lines.push('');
+    lines.push(`【2. موقف سجل طلبات الفحص (IR Log — إجمالي ${irLog.length} معاملة)】`);
+    lines.push(`- Code A (معتمد صافي): ${irA} | Code B (بملاحظات): ${irB.length} | Code C/D (إعادة/رفض): ${irCD.length} | UR (تحت المراجعة): ${irUR.length}`);
+
+    if (includeDetails) {
+      if (irCD.length) {
+        lines.push('');
+        lines.push('• معاملات كود C / D (تحتاج إعادة تسليم عاجلة):');
+        irCD.slice(0, 20).forEach(r => lines.push(`  - [${r.code}] (${r.status}) ${r.desc} — الدور ${r.floor || '—'} (${r.subDate || ''})`));
+      }
+      if (irB.length) {
+        lines.push('');
+        lines.push(`• معاملات كود B (معتمدة بملاحظات — أحدث ${Math.min(20, irB.length)} من ${irB.length}):`);
+        irB.slice(-20).forEach(r => lines.push(`  - [${r.code}] ${r.desc} — الدور ${r.floor || '—'}`));
+      }
+      if (irUR.length) {
+        lines.push('');
+        lines.push('• معاملات تحت المراجعة (UR):');
+        irUR.slice(0, 20).forEach(r => lines.push(`  - [${r.code}] ${r.desc} — الدور ${r.floor || '—'} (${r.subDate || ''})`));
+      }
+    }
+  }
+
+  else if (scope === 'daily') {
+    const reps = DB.dailyReports || [];
+    const curDate = document.getElementById('drDateInput')?.value || dt;
+    const rep = reps.find(r => r.date === curDate) || reps[reps.length - 1];
+    lines.push('【1. بيانات التقرير اليومي للموقع】');
+    if (rep) {
+      const m = (typeof computeDsrMetrics === 'function') ? computeDsrMetrics(rep) : null;
+      lines.push(`- التقرير: ${rep.header?.reportCode || '—'} | التاريخ: ${rep.date} | المشروع: ${rep.header?.projectName || '—'}`);
+      lines.push(`- الطقس: ${rep.weather?.condition || '—'} (${rep.weather?.temp || '—'} | رياح ${rep.weather?.wind || '—'})`);
+      if (m) {
+        lines.push(`- متوسط إنجاز أعمال اليوم: ${m.avgProgress}% (${(rep.todayWorks||[]).length} بنود) | القوى العاملة: ${m.grandTotal} فرد (هندسي ${m.engTotal} + فني ${m.skilledTotal} + مساعد ${m.helperTotal}) | المعدات: ${m.equipTotal}`);
+      }
+      lines.push(`- السلامة المهنية (HSE): ${rep.safety?.status === 'alert' ? 'يوجد ملاحظة سلامة' : 'آمن (0 حوادث)'} — ${rep.safety?.notes || ''}`);
+      if (rep.generalNotes) lines.push(`- ملاحظات وتوجيهات عامة: ${rep.generalNotes}`);
+      if (includeDetails) {
+        if ((rep.todayWorks || []).length) {
+          lines.push('• أعمال اليوم:');
+          rep.todayWorks.forEach((w, i) => lines.push(`  ${i+1}) ${w.desc} (${w.loc || '—'} | ${w.trade || '—'}) — إنجاز ${w.pct || 0}% ${w.notes ? '| ' + w.notes : ''}`));
+        }
+        if ((rep.tomorrowWorks || []).length) {
+          lines.push('• خطة الغد:');
+          rep.tomorrowWorks.forEach((w, i) => lines.push(`  ${i+1}) ${w.desc} (${w.loc || '—'} | ${w.resp || '—'} | ${w.prio || ''})`));
+        }
+        if ((rep.inspections || []).length) {
+          lines.push('• طلبات فحص اليوم (IR):');
+          rep.inspections.forEach(ir => lines.push(`  - [${ir.code}] ${ir.desc} (${ir.loc || '—'}) => كود: ${ir.status} ${ir.notes ? '| ' + ir.notes : ''}`));
+        }
+      }
+    } else {
+      lines.push('- لا يوجد تقرير يومي محفوظ حتى الآن.');
+    }
+
+    lines.push('');
+    const ym = state.selectedAttMonth || dt.slice(0, 7);
+    const attList = DB.attendanceMonths?.[ym] || DB.attendance || [];
+    lines.push(`【2. ملخص حضور فريق الموقع لشهر (${ym}) — ${attList.length} موظف】`);
+    attList.forEach(emp => {
+      const days = emp.days || [];
+      const h = days.filter(d => d === 'ح').length;
+      const g = days.filter(d => d === 'غ').length;
+      const m = days.filter(d => d === 'م').length;
+      const n = days.filter(d => d === 'ن').length;
+      lines.push(`• ${emp.name} (${emp.role || 'فريق الموقع'}): حضور ${h} | غياب ${g} | مأمورية ${m} | نصف يوم ${n}`);
+    });
+  }
+
+  else if (scope === 'tasks') {
+    const doneTasks = tasksAll.filter(t => t.done);
+    lines.push(`【ملخص المهام والتذكيرات — إجمالي ${tasksAll.length} مهمة】`);
+    lines.push(`- مفتوحة: ${openTasks.length} | متأخرة عن الموعد: ${overdueTasks.length} | مكتملة: ${doneTasks.length}`);
+    lines.push('');
+    const prioRank = { high: 0, medium: 1, low: 2 };
+    const sorted = [...openTasks].sort((a, b) => (prioRank[a.priority] ?? 1) - (prioRank[b.priority] ?? 1));
+    if (!sorted.length) {
+      lines.push('لا توجد مهام مفتوحة حالياً.');
+    } else {
+      lines.push('【قائمة المهام المفتوحة مرتبة بالأولوية】');
+      sorted.forEach((t, i) => {
+        const pLbl = t.priority === 'high' ? 'عاجل' : (t.priority === 'low' ? 'عادي' : 'متوسط');
+        const due = t.type === 'scheduled' && t.dueDate ? `استحقاق: ${t.dueDate}${t.dueDate < dt ? ' (متأخرة!)' : ''}` : 'غير مجدولة';
+        const rec = t.recurrence && t.recurrence !== 'none' ? ` | تكرار: ${t.recurrence}` : '';
+        lines.push(`${i+1}. [${pLbl}] ${t.title} — ${due}${rec}${t.notes ? ' | ملاحظة: ' + t.notes : ''}`);
+      });
+    }
+  }
+
+  return lines.join('\n');
+}
+
+function rebuildAiBridgePrompt() {
+  const tplObj = AI_PROMPT_TEMPLATES[aiBridgeState.tpl] || AI_PROMPT_TEMPLATES.audit;
+  const includeDetails = document.getElementById('aiIncludeDetailsChk')?.checked !== false;
+  const customQ = (document.getElementById('aiCustomQuestion')?.value || '').trim();
+  const dataBlock = buildAiDataPayload(aiBridgeState.scope, includeDetails);
+
+  const out = [];
+  if (tplObj.header) {
+    out.push(tplObj.header);
+    if (tplObj.bullets.length) out.push(tplObj.bullets.join('\n'));
+    out.push('');
+  }
+  if (customQ) {
+    out.push(`📌 طلب/سؤال خاص إضافي: ${customQ}`);
+    out.push('');
+  }
+  out.push(dataBlock);
+
+  const finalTxt = out.join('\n');
+  const ta = document.getElementById('aiPreviewTextarea');
+  if (ta) ta.value = finalTxt;
+
+  const words = finalTxt.trim() ? finalTxt.trim().split(/\s+/).length : 0;
+  const chars = finalTxt.length;
+  const statsEl = document.getElementById('aiStatsLabel');
+  if (statsEl) {
+    statsEl.textContent = `${fmt(words)} كلمة • ${fmt(chars)} حرف • جاهز للنسخ`;
+  }
+}
+
+async function copyAiBridgePrompt(target) {
+  const ta = document.getElementById('aiPreviewTextarea');
+  const txt = ta ? ta.value : '';
+  if (!txt.trim()) {
+    showToast('⚠️ النص فارغ — اضغط تحديث حي أولاً.');
+    return;
+  }
+
+  let copied = false;
+  try {
+    await navigator.clipboard.writeText(txt);
+    copied = true;
+  } catch (e) {
+    try {
+      ta.focus();
+      ta.select();
+      copied = document.execCommand('copy');
+    } catch (e2) {}
+  }
+
+  if (target === 'gemini') {
+    showToast(copied ? '✅ تم نسخ الملخص! افتح Gemini واضغط Ctrl+V مباشرة.' : '✨ تم فتح Gemini — انسخ النص من المعاينة.');
+    window.open('https://gemini.google.com/app', '_blank', 'noopener,noreferrer');
+  } else if (target === 'claude') {
+    showToast(copied ? '✅ تم نسخ الملخص! افتح Claude واضغط Ctrl+V مباشرة.' : '🟠 تم فتح Claude — انسخ النص من المعاينة.');
+    window.open('https://claude.ai/new', '_blank', 'noopener,noreferrer');
+  } else {
+    const btn = document.getElementById('aiCopyOnlyBtn');
+    if (btn && copied) {
+      const old = btn.innerHTML;
+      btn.innerHTML = '✅ تم النسخ للحافظة!';
+      setTimeout(() => { btn.innerHTML = old; }, 1800);
+    }
+    showToast(copied ? '✅ تم نسخ ملخص البيانات للحافظة — الصقه الآن في Gemini أو Claude!' : '⚠️ تعذر النسخ التلقائي؛ حدّد النص واضغط Ctrl+C.');
+  }
+}
+
+function downloadAiBridgeTxt() {
+  const txt = document.getElementById('aiPreviewTextarea')?.value || '';
+  if (!txt.trim()) return;
+  const blob = new Blob(['\uFEFF' + txt], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Hayah_ERP_AI_${aiBridgeState.scope}_${todayISO()}.txt`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+  showToast('📥 تم تنزيل ملف الملخص النصي بنجاح!');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.altKey && (e.key === 'a' || e.key === 'A' || e.key === 'ش')) {
+    if (!document.body.classList.contains('locked')) {
+      e.preventDefault();
+      const dr = document.getElementById('aiDrawer');
+      if (dr && dr.classList.contains('open')) closeAiBridgeDrawer();
+      else openAiBridgeDrawer();
+    }
+  } else if (e.key === 'Escape') {
+    const dr = document.getElementById('aiDrawer');
+    if (dr && dr.classList.contains('open')) closeAiBridgeDrawer();
+  }
+});
+
 
 // Cloud Auth Bootstrap on Page Load
 (async function bootApp() {
